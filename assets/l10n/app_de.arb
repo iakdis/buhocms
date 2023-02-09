@@ -1,0 +1,362 @@
+{
+    "aboutBuhoCMS": "Über BuhoCMS",
+    "openSite": "Seite öffnen",
+    "currentSitePath": "Pfad der aktuellen Seite: {path}",
+     "@currentSitePath": {
+      "placeholders": {
+         "path": { "type": "String" }
+      }
+    },
+    "createSite": "Seite erstellen",
+    "createSite_Description": "Neue Hugo Seite erstellen",
+    "hugoThemes": "Hugo Themen",
+    "currentHugoThemes": "Aktuelles Hugo-Thema: {theme}. Select or download a Hugo theme",
+     "@currentHugoThemes": {
+      "placeholders": {
+         "theme": { "type": "String" }
+      }
+    },
+    "preferences": "Einstellungen",
+    "preferences_Description": "Exportiere deine Einstellungen als Datei, lade aus einer Datei oder setze die Enstellungen for BuhoCMS zurück",
+    "selectASavePath": "Wähle einen Speicherpfad",
+    "overrideFile": "Datei überschreiben?",
+    "overrideFile_Description": "Eine Datei mit dem Namen {file} existiert bereits in diesem Verzeichnis. Alte Datei überschreiben?",
+     "@overrideFile_Description": {
+      "placeholders": {
+         "file": { "type": "String" }
+      }
+    },
+    "cancel": "Abbrechen",
+    "yes": "Ja",
+    "export": "Exportieren",
+    "import": "Importieren",
+    "reset": "Zurücksetzen",
+    "editFrontmatterList": "Front matter Liste bearbeiten",
+    "editFrontmatterList_Description": "Bearbeite deine aktuelle Front matter Liste, um Einträge hinzuzufügen, zu bearbeiten, zu verschieben oder zu entfernen",
+    "editingPage": "Bearbeitungsseite",
+    "guiMode": "GUI-Modus",
+    "textMode": "Text-Modus",
+    "stopHugoServer": "Hugo Server stoppen",
+    "startHugoServer": "Hugo Server starten",
+    "openHugoServer": "Hugo Server öffnen",
+    "buildHugoSite": "Hugo Seite bauen",
+    "openPublicFolder": "Ordner \"public\" öffnen",
+    "sortBy": "Sortieren nach",
+    "parentFolderButton_Toolip": "Zum übergeordneten Ordner wechseln. Aktuell: {path}",
+    "@parentFolderButton_Toolip": {
+     "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "newPost": "Neuer Artikel",
+    "newFolder": "Neuer Ordner",
+    "error_RenameDirectory": "Fehler: Konnte Ordner {oldPath} nicht nach {newPath} umbenennen da ein Ordner mit dem selben Namen in diesem Verzeichnis existiert",
+    "@error_RenameDirectory": {
+     "placeholders": {
+        "oldPath": { "type": "String" },
+        "newPath": { "type": "String" }
+      }
+    },
+    "renamedDirectory": "Ordner {oldPath} nach {newPath} umbenannt",
+    "@renamedDirectory": {
+     "placeholders": {
+        "oldPath": { "type": "String" },
+        "newPath": { "type": "String" }
+      }
+    },
+    "deleteFolder": "Ordner löschen",
+    "deleteFolder_Description": "Bist du sicher, den Ordner zu löschen:\n",
+    "deletedFolder": "Ordner {path} gelöscht",
+    "@deletedFolder": {
+     "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "error_RenameFile": "Fehler: Konnte die Datei {oldPath} nicht nach {newPath} umbenennen da ein Ordner mit dem selben Namen in diesem Verzeichnis existiert",
+    "@error_RenameFile": {
+     "placeholders": {
+        "oldPath": { "type": "String" },
+        "newPath": { "type": "String" }
+      }
+    },
+    "renamedFile": "Datei {oldPath} nach {newPath} umbenannt",
+    "@renamedFile": {
+     "placeholders": {
+        "oldPath": { "type": "String" },
+        "newPath": { "type": "String" }
+      }
+    },
+    "deleteFile": "Datei löschen",
+    "deleteFile_Description": "Bist du sicher, die Datei zu löschen:\n",
+    "deletedFile": "Datei {path} gelöscht",
+    "@deletedFile": {
+     "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "alreadyAtHighestLevel": "Bereits im höchsten Ordner; Kann keinen Ordner über \"content\" öffnen",
+    "sortByName": "Nach Namen",
+    "sortByNameReversed": "Nach Namen (umgekehrt)",
+    "sortByDate": "Nach Datum",
+    "sortByDateReversed": "Nach Datum (umgekehrt)",
+    "sortBySize": "Nach Größe",
+    "sortBySizeReversed": "Nach Größe (umgekehrt)",
+    "sortByType": "Nach Dateityp",
+    "sortByTypeReversed": "Nach Dateityp (umgekehrt)",
+    "postCreated": "Artikel {post} erstellt in Pfad {path}",
+    "@postCreated": {
+     "placeholders": {
+        "post": { "type": "String" },
+        "path": { "type": "String" }
+      }
+    },
+    "createNewPostIn": "Neuen Artikel erstellen in:\n",
+    "name": "Name: ",
+    "nameCantBeEmpty": "Name kann nicht leer sein",
+    "error_fileAlreadyExists": "Datei mit dem Namen {name} existiert bereits im Ordner:\n{path}",
+    "@error_fileAlreadyExists": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "path": { "type": "String" }
+      }
+    },
+    "folderCreated": "Artikel {path} erstellt",
+    "@folderCreated": {
+     "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "createNewFolderIn": "Neuen Ordner erstellen in:\n",
+    "error_folderAlreadyExists": "Ordner mit dem Namen {name} existiert bereits im Ordner:\n{path}",
+    "@error_folderAlreadyExists": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "path": { "type": "String" }
+      }
+    },
+    "rename": "Umbenennen",
+    "openInFileExplorer": "Im Dateiordner öffnen",
+    "delete": "Löschen",
+    "file": "Datei",
+    "save": "Speichern",
+    "revertChanges": "Änderungen rückgängig machen",
+    "exit": "Beenden",
+    "edit": "Bearbeiten",
+    "refreshFiles": "Dateien aktualisieren",
+    "openCurrentFileInExplorer": "Aktuelle Datei im Dateiordner öffnen",
+    "help": "Hilfe",
+    "openHomepage": "Homepage öffnen",
+    "reportIssue": "Fehler melden",
+    "about": "Über",
+    "error_DirectoryDoesNotExist": "Ordner {path} existiert nicht. Bitte wähle einen gültigen Pfad.",
+    "@error_DirectoryDoesNotExist": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "error_DirectoryAlreadyExists": "Eine Seite mit dem Pfad {path} existiert bereits. Bitte benenne den existierenden Ordner um oder entferne ihn.",
+    "@error_DirectoryAlreadyExists": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "back": "ZURÜCK",
+    "next": "NÄCHSTE",
+    "continue2": "WEITER",
+    "create": "Erstellen",
+    "checkHugoInstalled": "Überprüfen, ob Hugo installiert ist",
+    "hugoExectutableNotFound": "Hugo Executable-Datei nicht gefunden. Stelle bitte sicher, dass Hugo korrekt installiert ist.",
+    "hugoExectutableFoundIn": "Hugo Executable-Datei gefunden in: {path}",
+    "@hugoExectutableFoundIn": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "createLocation": "Speicherort",
+    "choosePath": "Pfad auswählen",
+    "hugoSiteWillBeCreatedInFolder": "Die neue Hugo Seite wird im Ordner erstellt:",
+    "savePath": "Speicherpfad",
+    "siteName": "Name der Seite",
+    "finish": "Fertigstellen",
+    "createHugoSiteNamed": "Hugo Seite erstellen namens:\n",
+    "insideFolder": "Im Ordner:\n",
+    "open": "Open",
+    "checkHugoFolderStructure": "Hugo Ordner Struktur überprüfen",
+    "checkHugoFolderStructure_Description": "Stelle sicher, dass dein Ordner der korrekten Hugo Struktur mit einem content Ordner, einer config-Datei, etc. befolgt. Weitere Informationen findest du in der Hugo-Dokumentation. Wenn du sicher sein willst, dass deine Site der richtigen Ordnerstruktur folgt, kannst du eine neue Hugo-Site erstellen.",
+    "openHugoDocumentation": "Hugo-Dokumentation öffnen",
+    "selectSiteFolder": "Seitenordner auswählen",
+    "openHugoSite": "Hugo Seite öffnen:\n",
+    "error_ThemeAlreadyExists": "Ein Thema mit dem Namen {theme} existiert bereits im Themenordner. Bitte benenne den existierenden Ordner um oder entferne ihn.",
+    "@error_ThemeAlreadyExists": {
+      "placeholders": {
+        "theme": { "type": "String" }
+      }
+    },
+    "selectATheme": "Thema auswählen",
+    "none": "Keine",
+    "download": "Herunterladen",
+    "startOver": "Von vorne beginnen",
+    "checkGitInstalled": "Überprüfen, ob Git installiert ist",
+    "gitExecutableNotFound": "Git Executable-Datei nicht gefunden. Stelle bitte sicher, dass Git korrekt installiert ist.",
+    "gitExectutableFoundIn": "Git Executable-Datei gefunden in: {path}",
+    "@gitExectutableFoundIn": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "downloadTheme": "Thema herunterladen",
+    "repositoryInvalidURL": "Ungültige URL",
+    "themeRepository": "Themen-Repository",
+    "successfullyDownloadedHugoTheme": "Erfolgreich Hugo-Thema heruntergeladen aus:\n",
+    "nowSelectTheme": "\n\nNun kannst du das Thema {theme} in der Dropdown-Schaltfläche auswählen.",
+    "@nowSelectTheme": {
+      "placeholders": {
+        "theme": { "type": "String" }
+      }
+    },
+    "rememberToVisitDocs": "'\n\nDenke daran, die Dokumentation im Themen-Repository zu besuchen, um Details zur Implementierung der richtigen Konfigurationen zu erfahren.",
+    "welcomeToBuhoCMS": "Willkommen bei BuhoCMS",
+    "welcomeToBuhoCMS_Description": "BuhoCMS ist ein lokales Content Management System für Hugo.\nErstelle oder öffne eine Seite, installiere ein Thema, und beginne damit, neue Artikel zu erstellen.\n\nUm fortzufahren, erstelle oder öffne eine Hugo Seite.",
+    "hugoSiteSelected": "Ausgewählte Hugo Seite: {path}",
+    "@hugoSiteSelected": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "themes": "Themen",
+    "themes_Description": "Lade ein Hugo-Thema herunter und wähle es aus.\nDu kannst diesen Schritt auch überspringen ihn später in den Einstellungen beenden.",
+    "hugoThemeSelected": "Ausgewähltes Hugo-Theme: {path}",
+    "@hugoThemeSelected": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "allDone": "Das ist alles!",
+    "allDone_Description": "Herzlichen Glückwunsch, du bist nun bereit, BuhoCMS zu benutzen!",
+    "sitePath": "Seitenpfad: {path}",
+    "@sitePath": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "hugoTheme": "Hugo-Thema: {path}",
+    "@hugoTheme": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "getStarted": "Loslegen",
+    "revertChanges_Description": "Bist du sicher, die Änderungen in dieser Datei rückgängig zu machen? Alle ungespeicherten Änderungen nach der letzten Speicherung werden verloren.",
+    "quitWithUnsaved": "Beenden mit ungespeicherten Änderungen",
+    "quitWithUnsaved_Description": "Du hast ungespeicherten Änderungen. Möchtest du die Änderungen in dieser Datei speichern oder rückgängig machen, bevor das Programm beendet wird?",
+    "revertAndQuit": "Rückgängig machen & Beenden",
+    "saveAndQuit": "Speichern & Beenden",
+    "unsavedChanges": "Ungespeicherte Änderungen",
+    "unsavedChanges_Description": "Du hast ungespeicherten Änderungen. Möchtest du alle Änderungen speichern?",
+    "revert": "Rückgängig machen",
+    "save": "Speichern",
+    "createNewPost": "Neuen Artikel erstellen",
+    "createNewFolder": "Neuen Ordner erstellen",
+    "addNewFrontmatterToList": "Neue Front matter Einträge zur Liste hinzufügen",
+    "remove": "Entfernen",
+    "close": "Schließen",
+    "addFrontmatter": "Front matter hinzufügen",
+    "add": "Hinzufügen",
+    "addedFrontmatterToList": "Front matter zur Liste mit Namen {name} und Typ {type} hinzugefügt",
+    "@addedFrontmatterToList": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "type": { "type": "String" }
+      }
+    },
+    "frontmatterName": "Front matter Name: ",
+    "frontmatterType": "Front matter Typ: ",
+    "error_FrontmatterAlreadyContains": "Liste beinhaltet bereits einen Front Matter Eintrag mit dem selben Namen!",
+    "editFrontmatter": "Front matter bearbeiten",
+    "editedFrontmatterToList": "Eintrag in Front matter Liste vom Namen {oldName} zu {newName} und Typ {oldType} zu {newType} bearbeitet",
+    "@editedFrontmatterToList": {
+     "placeholders": {
+        "oldName": { "type": "String" },
+        "newName": { "type": "String" },
+        "oldType": { "type": "String" },
+        "newType": { "type": "String" }
+      }
+    },
+    "removedFrontmatterToList": "Front matter Eintrag aus Liste mit Namen {name} und Typ {type} entfernt",
+    "@removedFrontmatterToList": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "type": { "type": "String" }
+      }
+    },
+    "deleteFrontmatter": "Front matter löschen",
+    "areYouSureDeleteFrontmatter": "Bist du sicher, das Front matter zu löschen:\n",
+    "removedFrontmatter": "Front matter {name} mit Typ {type} entfernt",
+    "@removedFrontmatter": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "type": { "type": "String" }
+      }
+    },
+    "notFound": "Nicht gefunden",
+    "notFound_Description": "Front matter {name} nicht in deiner Liste gefunden. Bitte erstelle das Feld mit seinem Namen und Typ in deiner Front matter Liste oder entferne den Eintrag aus dem Text.",
+    "@notFound_Description": {
+     "placeholders": {
+        "name": { "type": "String" }
+      }
+    },
+    "restore": "Wiederherstellen",
+    "error_HugoExecutableNotFound": "Fehler: Hugo Executable-Datei nicht gefunden beim Ausführen des Befehls {command}",
+    "@error_HugoExecutableNotFound": {
+     "placeholders": {
+        "command": { "type": "String" }
+      }
+    },
+    "removeTag": "Tag {tag} entfernen",
+    "@removeTag": {
+     "placeholders": {
+        "tag": { "type": "String" }
+      }
+    },
+    "tag": "Tag",
+    "createYourFirstPost": "Erstelle deinen ersten Artikel",
+    "noFileSelected": "Keine Datei ausgewählt",
+    "content": "Inhalt",
+    "frontmatter": "Front matter",
+    "hide": "Verstecken",
+    "show": "Zeigen",
+    "draggableMode_Description": "Zu Verschiebbarem Modus wechseln. Es werden Griffe neben jedem Feld erscheinen",
+    "draggableModeLock": "Verschiebbaren Modus sperren",
+    "draggableModeOn": "Verschiebbarer Modus",
+    "content_Description": "Schreibe hier deinen Markdown Inhalt",
+    "resetBuhoCMS": "Einstellungen zurücksetzen",
+    "areYouSureResetBuhoCMS": "Bist du sicher, alle Einstellungen zurückzusetzen? Stelle sicher, deine aktuellen Einstellungen zur Wiederherstellung zu exportieren.",
+    "fullScreenInfo": "Drücke F11 oder ESC, um den Vollbildmodus zu verlassen",
+    "fullScreen": "Vollbildmodus",
+    "exitFullScreen": "Vollbildmodus verlassen",
+
+    "settings": "Einstellungen",
+    "appSettings": "APP EINSTELLUNGEN",
+    "site": "SEITE",
+    "hugoSettings": "HUGO EINSTELLUNGEN",
+
+    "language": "Sprache",
+    "language_description": "Sprache von BuhoCMS ändern",
+    "systemLanguage": "Systemsprache",
+    "theme": "Thema",
+    "theme_description": "Thema des Programms wechseln",
+    "themeSystem": "Thema des Systems",
+    "themeLight": "Helles Thema",
+    "themeDark": "Dunkles Thema",
+    "onboardingScreen": "Einführungsseite",
+    "onboardingScreen_description": "Einführungsseite öffnen",
+    "more": "MEHR",
+    "less": "WENIGER ANZEIGEN",
+    "version": "Version {versionNumber}",
+    "@version": {
+      "placeholders": {
+         "versionNumber": { "type": "String" }
+      }
+    },
+    "license": "Der Quellcode ist unter der GPLv3 lizenziert und auf GitHub (https://github.com/iakmds/buhocms) verfügbar. Wenn du einen Fehler melden, eine Funktion vorschlagen oder etwas verbessern möchtest, öffne gerne ein \"Issue\" auf GitHub. Danke!"
+}

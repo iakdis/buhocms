@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+X-AppImage-Version=0.1.0
+Type=Application
+
+Name=BuhoCMS
+Comment=A local CMS for Hugo static sites
+Categories=Office;
+Icon=buhocms
+
+Exec=buhocms
+Terminal=false
+StartupWMClass=buhocms

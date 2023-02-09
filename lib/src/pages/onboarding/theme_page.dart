@@ -1,0 +1,424 @@
+import 'dart:io';
+
+import 'package:buhocms/src/utils/globals.dart';
+import 'package:buhocms/src/utils/preferences.dart';
+import 'package:buhocms/src/widgets/snackbar.dart';
+import 'package:flutter/material.dart';
+import 'package:process_run/shell.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../provider/navigation/navigation_provider.dart';
+import '../../ssg/hugo.dart';
+import '../../ssg/themes.dart';
+
+class ThemePage extends StatefulWidget {
+  const ThemePage({super.key});
+
+  @override
+  State<ThemePage> createState() => _ThemePageState();
+}
+
+class _ThemePageState extends State<ThemePage> {
+  TextStyle style = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+
+  int currentStep = 0;
+  bool canContinue = false;
+  bool? gitInstalled;
+  String gitInstalledText = '';
+
+  String themeName = '';
+  bool themeNameError = false;
+
+  bool isDownloading = false;
+
+  void _updateConfig() {
+    final newThemeName =
+        Preferences.getHugoTheme().split(Platform.pathSeparator).last;
+    final sitePath = '${Preferences.getSitePath()}${Platform.pathSeparator}';
+    var config = File('${sitePath}config.toml');
+    final yaml = File('${sitePath}config.yaml');
+    final json = File('${sitePath}config.json');
+    if (yaml.existsSync()) config = yaml;
+    if (json.existsSync()) config = json;
+    var themeEntryExists = false;
+
+    var configLines = config.readAsLinesSync();
+    for (var i = 0; i < configLines.length; i++) {
+      if (yaml.existsSync()) {
+        if (configLines[i].startsWith('theme')) {
+          themeEntryExists = true;
+          configLines[i] = 'theme: $newThemeName';
+        }
+        break;
+      } else if (json.existsSync()) {
+        if (configLines[i].startsWith('"theme"')) {
+          themeEntryExists = true;
+          configLines[i] = '"theme": "$newThemeName"';
+        }
+        break;
+      } else {
+        if (configLines[i].startsWith('theme')) {
+          themeEntryExists = true;
+          configLines[i] = 'theme = "$newThemeName"';
+          break;
+        }
+      }
+    }
+    if (!themeEntryExists) {
+      if (yaml.existsSync()) {
+        configLines.add('theme: $newThemeName');
+      } else if (json.existsSync()) {
+        configLines.add('"theme": "$newThemeName"');
+      } else {
+        configLines.add('theme = "$newThemeName"');
+      }
+    }
+    config.writeAsStringSync(configLines.join('\n'));
+  }
+
+  void _download() async {
+    final theme = themeName.split('/').last;
+    final path = 'themes${Platform.pathSeparator}$theme';
+
+    if (themeName.isEmpty) {
+      setState(() => themeNameError = true);
+      return;
+    }
+    if (Directory('${Preferences.getSitePath()}${Platform.pathSeparator}$path')
+        .existsSync()) {
+      showSnackbar(
+        context: context,
+        text: AppLocalizations.of(context)!.error_ThemeAlreadyExists(themeName),
+        seconds: 4,
+      );
+      return;
+    }
+
+    final validURL = Uri.tryParse(themeName)?.hasAbsolutePath ?? false;
+    if (!validURL) {
+      setState(() {
+        themeNameError = true;
+      });
+      return;
+    } else {
+      setState(() {
+        themeNameError = false;
+      });
+    }
+
+    checkHugoInstalled(
+      context: context,
+      command: 'git clone $themeName $path --depth=1',
+    );
+    var shell = Shell(workingDirectory: Preferences.getSitePath());
+    setState(() => isDownloading = true);
+    await shell.run('''
+                      
+                                            echo Start!
+                      
+                                            # Download Hugo theme
+                                            git clone $themeName $path --depth=1
+                      
+                                        ''');
+    shell.kill();
+    setState(() => isDownloading = false);
+
+    await Preferences.setHugoTheme(
+        '${Preferences.getSitePath()}${Platform.pathSeparator}$path');
+    _updateConfig();
+
+    setState(() => currentStep++);
+
+    if (mounted) {
+      Provider.of<NavigationProvider>(context, listen: false)
+          .notifyAllListeners();
+    }
+    //git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1
+    //git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+    //git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder
+  }
+
+  Widget _selectTheme() {
+    return Column(
+      children: [
+        Text(AppLocalizations.of(context)!.selectATheme, style: style),
+        const SizedBox(height: 32),
+        FutureBuilder(
+          future: HugoThemes.findAllThemes(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+
+            var value = Preferences.getHugoTheme();
+            var buttonList = <DropdownMenuItem<String>>[];
+            buttonList.add(DropdownMenuItem(
+                value: '', child: Text(AppLocalizations.of(context)!.none)));
+            if (snapshot.hasData) {
+              if (snapshot.data!.isNotEmpty) {
+                buttonList.addAll(snapshot.data!.map((element) {
+                  return DropdownMenuItem(
+                    value: element.path,
+                    child:
+                        Text(element.path.split(Platform.pathSeparator).last),
+                  );
+                }).toList());
+              } else {
+                value = '';
+                Preferences.setHugoTheme('');
+              }
+            }
+            var themeExists = false;
+            for (var i = 0; i < buttonList.length; i++) {
+              if (buttonList[i].value == value) themeExists = true;
+            }
+            if (themeExists == false) {
+              value = '';
+              Preferences.setHugoTheme('');
+            }
+
+            return DropdownButton(
+              value: value,
+              items: buttonList,
+              onChanged: (option) async {
+                await Preferences.setHugoTheme(option ?? themeName);
+                _updateConfig();
+                setState(() {});
+                if (mounted) {
+                  Provider.of<NavigationProvider>(context, listen: false)
+                      .notifyAllListeners();
+                }
+              },
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _downloadTheme() {
+    return Column(
+      children: [
+        Text(AppLocalizations.of(context)!.downloadTheme, style: style),
+        const SizedBox(height: 32),
+        Stepper(
+          currentStep: currentStep,
+          onStepContinue: () async {
+            if (currentStep < 2) {
+              setState(() => currentStep++);
+            } else {
+              setState(() => currentStep = 1);
+            }
+          },
+          onStepCancel: () {
+            if (currentStep > 0) {
+              setState(() {
+                currentStep--;
+              });
+            }
+          },
+          controlsBuilder: (context, details) {
+            canContinue = gitInstalled == true &&
+                (details.stepIndex == 1 ? !themeNameError : true);
+
+            return Padding(
+              padding: const EdgeInsets.only(top: 32),
+              child: Row(
+                children: <Widget>[
+                  if (details.stepIndex == 0)
+                    ElevatedButton(
+                      onPressed: canContinue ? details.onStepContinue : null,
+                      child: Text(AppLocalizations.of(context)!.continue2),
+                    ),
+                  if (details.stepIndex == 1)
+                    ElevatedButton(
+                      onPressed: themeNameError || isDownloading
+                          ? null
+                          : () => _download(),
+                      child: Text(
+                          AppLocalizations.of(context)!.download.toUpperCase()),
+                    ),
+                  if (details.stepIndex == 2)
+                    ElevatedButton(
+                      onPressed: canContinue ? details.onStepContinue : null,
+                      child: Text(AppLocalizations.of(context)!
+                          .startOver
+                          .toUpperCase()),
+                    ),
+                  const SizedBox(width: 8),
+                  if (details.stepIndex < 2)
+                    TextButton(
+                      onPressed: details.stepIndex > 0 && !isDownloading
+                          ? details.onStepCancel
+                          : null,
+                      child: Text(AppLocalizations.of(context)!.back),
+                    ),
+                ],
+              ),
+            );
+          },
+          steps: [
+            Step(
+              isActive: currentStep >= 0,
+              title: Text(AppLocalizations.of(context)!.checkGitInstalled),
+              content: Column(
+                children: [
+                  Icon(
+                    gitInstalled == null
+                        ? Icons.question_mark
+                        : gitInstalled == true
+                            ? Icons.check
+                            : Icons.close,
+                    size: 64,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  const SizedBox(height: 32),
+                  ElevatedButton(
+                    onPressed: () async {
+                      var gitExectutable = await which('git');
+                      if (gitExectutable == null) {
+                        gitInstalled = false;
+                        if (mounted) {
+                          gitInstalledText = AppLocalizations.of(context)!
+                              .gitExecutableNotFound;
+                        }
+                        setState(() {});
+                      } else {
+                        gitInstalled = true;
+                        if (mounted) {
+                          gitInstalledText = AppLocalizations.of(context)!
+                              .gitExectutableFoundIn(gitExectutable);
+                        }
+                        setState(() {});
+                      }
+                    },
+                    child:
+                        Text(AppLocalizations.of(context)!.checkGitInstalled),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(gitInstalledText),
+                ],
+              ),
+            ),
+            Step(
+              isActive: currentStep >= 1,
+              title: Text(AppLocalizations.of(context)!.downloadTheme),
+              content: Column(
+                children: [
+                  const SizedBox(height: 16),
+                  Tooltip(
+                    message: 'https://themes.gohugo.io',
+                    child: ElevatedButton.icon(
+                      onPressed: () async {
+                        var url =
+                            Uri(scheme: 'https', path: 'themes.gohugo.io');
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        }
+                      },
+                      icon: const Icon(Icons.open_in_new),
+                      label: const Text('https://themes.gohugo.io'),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Wrap(
+                    spacing: 16.0,
+                    runSpacing: 16.0,
+                    children: [
+                      if (isDownloading) const CircularProgressIndicator(),
+                      SizedBox(
+                        width: 400,
+                        child: TextField(
+                          onChanged: (value) {
+                            themeName = value;
+                            themeNameError = false;
+                            setState(() {});
+                          },
+                          style: TextStyle(
+                              color: Colors.grey[600], fontSize: 17.0),
+                          decoration: InputDecoration(
+                            errorText: themeNameError
+                                ? AppLocalizations.of(context)!
+                                    .repositoryInvalidURL
+                                : null,
+                            border: const OutlineInputBorder(),
+                            labelText:
+                                AppLocalizations.of(context)!.themeRepository,
+                            isDense: true,
+                            hintText: 'https://github.com/user/hugo-theme',
+                            hintStyle: TextStyle(
+                              color: Colors.grey[500],
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Step(
+              isActive: currentStep >= 2,
+              title: Text(AppLocalizations.of(context)!.finish),
+              content: Column(
+                children: [
+                  SelectableText.rich(TextSpan(
+                      text: AppLocalizations.of(context)!
+                          .successfullyDownloadedHugoTheme,
+                      style: const TextStyle(fontSize: 20),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: themeName,
+                          style: const TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        TextSpan(
+                          text: AppLocalizations.of(context)!.nowSelectTheme(
+                              '"${themeName.split(Platform.pathSeparator).last}"'),
+                        ),
+                        TextSpan(
+                            text: AppLocalizations.of(context)!
+                                .rememberToVisitDocs),
+                      ])),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.hugoThemes),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 64.0),
+          child: MediaQuery.of(context).size.width > mobileWidth
+              ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: _selectTheme()),
+                    Expanded(child: _downloadTheme()),
+                  ],
+                )
+              : Column(
+                  children: [
+                    _selectTheme(),
+                    const SizedBox(height: 32.0),
+                    const Divider(),
+                    const SizedBox(height: 32.0),
+                    _downloadTheme(),
+                  ],
+                ),
+        ),
+      ),
+    );
+  }
+}

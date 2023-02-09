@@ -1,0 +1,122 @@
+SHORT PLAN:
+1
+2
+3
+5
+
+# bugs
+
+1-[] if empty hugo folder: fix
+
+# todo
+
+-[]siehe papier
+    -[] language filter?
+2-[]add tab on clicking openfile
+3-[]swap text w/ gui fields & texteditor/markdownviewer half/half
+4-[]refactor
+5-[]hugo installed check in hugo functions
+
+# nice to have
+
+5-[]better buttons/placing in filenavigationbar
+
+# future
+
+-[] Publish site: optional integration with git, etc?
+-[] Main config.toml/yaml etc. editor
+-[] Archetypes editor (https://gohugo.io/content-management/archetypes)
+
+# ideas
+
+-[] tab drag&drop from filenavbar
+-[] potential false hugo, string/bool info
+-[] adding date/lastmod: cuz the time is same, sometimes in the future -> not possible in hugo (maybe set time to datetime.now?) / remove time
+-[] (https://pub.dev/packages/contextual_menu for native context menu)
+
+# done
+-[x] set window size on onboarding too (maybe general main)
+-[x] scrollable/responsive onboarding pages
+-[x] open site/create site: when page close, update navigationProvider.notifyAll
+-[x]shortcuts on rightclicks
+-[x]tab view: -[x]flutter reorderable list row -[x]right click context menu -[x]middlemouse-click to open -[x]open in new tab: go into file
+-[x] focus on textfields not working, probably cuz of shortcuts requestFocus()
+-[x]shortcuts: strg+S save (Flutter Docs/https://github.com/leanflutter/hotkey_manager for shortcuts)
+-[x]refactor: add file/folder into files
+-[x] max constraints in editingpage, wenn window resize dann linke panels kleiner
+-[x] add folder, add/edit frontmattereditlist
+-[x] height responsive: add file/folder
+-[x]responsiveness stuff
+-[x]setTitle
+-[x] mimimum size dinge regeln
+-[x] use https://pub.dev/packages/window_manager for close preventing check ("Confirm before closing")
+-[x] draggable mode not working
+-[x]if selected file: show darker
+-[x]check unsaved in onTextMode: dont turn on at beginning
+-[x] if zero text, bug
+-[x] if empty folder: show folder_empty icon
+-[x]dont always use boilerplate editingProvider; use helper function
+-[x]if only text: dont make double cuz of frontmatter (when loading up and have no hugo structure (always need 2 --- ---)
+-[x] fix front matter potential issues: whitespace between fields and --- etc
+-[x] fix markdowns "---" interfering withfrontmatter
+-[x]sort mode "date" not working if an empty folder with nothing inside exists
+-[x] create/rename file and folder button: check if already exists with file name
+-[x] add frontmatter tolist: check+show already exists?
+-[x] fix tags: when [""] still work
+-[x]add/edit frontmatterlist: cant be empty
+-[x] editfrontmatterlist: dynamic height
+-[x] EXPERIMENTAL in settings: draggable front matter in GUI mode (z.B. durch button mode)
+-[x]fix: tags if [""] gui not working
+-[x] hugo widgets? not wrapping but horizontal scroll
+-[x]10.1 open parent folder button: have to click 2 twice sometimes (see bottom text + tooltips)
+-[x]somehow done: 10.3 bug: go into folder file, go outside file, futurebuilder bug (maybe get all files again?)
+-[x]create new post/folder: set default name in textfield, create button null if no name
+-[x]show current folder somewhere
+-[x]10.2 create new post button
+-[x]10.1 when creating new file: not just open file like now, but also **go into folder**
+-[x] folder open + go up structure, double click to open  folder: von content aus --> also add a create new post button at the top
+-[x] check unsaved reset in gui text editor
+-[x]9.2 different unsaved system for hugo widgets
+-[x]everywhere: update hugo widgets check (go to file with 1 more, get temp error)
+-[x] resize left 2 panels, snap if small
+
+
+
+
+
+
+
+# bugs
+
+-[x] kill terminal when closing app
+-[x] check if unsaved when closing app!
+-[x] check if hugo is running (nicht resetten wenn resize drawer etc)
+-[x] bei delete/add frontmatter und new post: check unsaved!
+
+# todo
+
+-[x] sort options: by language, creation date
+-[x] nested directories + files etc
+-[x] create directory, not just file
+-[x] create post with right click (think about addpostbutton)
+-[x] go inside post when creating
+-[x] go outside post when deleting file/folder
+-[x] when rename: update current
+-[x] Add color schemes: https://pub.dev/packages/flex_color_scheme
+-[x] revert are you sure dialog
+-[x] start/stop hugo server: snackbar
+-[x] add/remove front matter: snackbar
+-[x] frontmattereditlist: dont show snackbar, when adding: scroll to bottom
+
+# nice to have
+
+-[x] custom hugo frontmatter editors
+-[x] info button in frontmatter to go to hugo docs frontmatter
+-[x] open in folder/open as file
+-[x] ADDING frontmatter: Edit NAME + TYPE, Remove
+-[x] ordner distinguish system, was wozugehört
+-[x] when removing custom frontmatter from list, show error message in GUI frontmatterEdits that no entry was found, create one so that you can specify and edit with your type working
+-[x] Frontmatter List: Add/Remove/Edit/Draggable in ein Button und Panel mergen, jetziges Dropdown mit Buttons als nur zum einfügen (dropdown_search aber, bei full panel vllt auch)
+-[x] refresh file list button
+
+# ideas
