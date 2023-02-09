@@ -2,7 +2,7 @@
 name: Feature request
 about: Suggest an idea for BuhoCMS
 title: "[Feature request] Add amazing feature X..."
-labels: ''
+labels: feature request
 assignees: ''
 
 ---
