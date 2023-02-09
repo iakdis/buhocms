@@ -29,7 +29,7 @@
 
 <p align="center">
   <a href="https://github.com/iakmds/buhocms">
-    <img src="https://github.com/iakmds/buhocms/blob/master/assets/images/icon.png" alt="BuhoCMS app icon" width="200">
+    <img src="https://github.com/iakmds/buhocms/blob/main/assets/images/icon.png" alt="BuhoCMS app icon" width="200">
   </a>
 </p>
 
@@ -88,10 +88,10 @@ BuhoCMS is for you if you land in at least one of the following categories:
 
 # Screenshots
 <p float="left">
-  <img src="https://github.com/iakmds/buhocms/blob/master/.github/screenshot1.png" alt="Screenshot 1">
-  <img src="https://github.com/iakmds/buhocms/blob/master/.github/screenshot2.png" alt="Screenshot 2">
-  <img src="https://github.com/iakmds/buhocms/blob/master/.github/screenshot3.png" alt="Screenshot 3">
-  <img src="https://github.com/iakmds/buhocms/blob/master/.github/screenshot4.png" alt="Screenshot 4">
+  <img src="https://github.com/iakmds/buhocms/blob/main/.github/screenshot1.png" alt="Screenshot 1">
+  <img src="https://github.com/iakmds/buhocms/blob/main/.github/screenshot2.png" alt="Screenshot 2">
+  <img src="https://github.com/iakmds/buhocms/blob/main/.github/screenshot3.png" alt="Screenshot 3">
+  <img src="https://github.com/iakmds/buhocms/blob/main/.github/screenshot4.png" alt="Screenshot 4">
 </p>
 
 # Downloads
