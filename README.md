@@ -200,7 +200,7 @@ Feel free to send in a [pull request](https://github.com/iakmds/buhocms/pulls)! 
 
 **Project:**
   - [ ] [Jekyll](https://jekyllrb.com/) support
-  - [ ] More supported languages (See [#translate](#translate) below)
+  - [ ] More supported languages (See [#translating](#translating) above)
   - [ ] [Your features](https://github.com/iakmds/buhocms/issues)
 
 # Packages used
