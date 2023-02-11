@@ -29,7 +29,7 @@
 
 <p align="center">
   <a href="https://github.com/iakmds/buhocms">
-    <img src="https://github.com/iakmds/buhocms/blob/main/assets/images/icon.png" alt="BuhoCMS app icon" width="200">
+    <img src="https://github.com/iakmds/buhocms/blob/main/.github/icon.svg" alt="BuhoCMS app icon" width="200">
   </a>
 </p>
 
