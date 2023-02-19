@@ -1,14 +1,14 @@
 {
     "aboutBuhoCMS": "About BuhoCMS",
-    "openSite": "Open site",
-    "currentSitePath": "Current site path: {path}",
+    "openSite": "Open website",
+    "currentSitePath": "Current website path: {path}",
      "@currentSitePath": {
       "placeholders": {
          "path": { "type": "String" }
       }
     },
-    "createSite": "Create site",
-    "createSite_Description": "Create a new Hugo Site",
+    "createSite": "Create website",
+    "createSite_Description": "Create a new Hugo website",
     "hugoThemes": "Hugo themes",
     "currentHugoThemes": "Current Hugo theme: {theme}. Select or download a Hugo theme",
      "@currentHugoThemes": {
@@ -39,7 +39,7 @@
     "stopHugoServer": "Stop Hugo server",
     "startHugoServer": "Start Hugo server",
     "openHugoServer": "Open Hugo server",
-    "buildHugoSite": "Build Hugo site",
+    "buildHugoSite": "Build Hugo website",
     "openPublicFolder": "Open \"public\" folder",
     "sortBy": "Sort by",
     "parentFolderButton_Toolip": "Go to parent folder. Current: {path}",
@@ -154,7 +154,7 @@
         "path": { "type": "String" }
       }
     },
-    "error_DirectoryAlreadyExists": "A site with the path {path} already exists. Please rename or remove the existing folder.",
+    "error_DirectoryAlreadyExists": "A website with the path {path} already exists. Please rename or remove the existing folder.",
     "@error_DirectoryAlreadyExists": {
       "placeholders": {
         "path": { "type": "String" }
@@ -174,18 +174,18 @@
     },
     "createLocation": "Create location",
     "choosePath": "Choose path",
-    "hugoSiteWillBeCreatedInFolder": "The new Hugo site will be created inside this folder:",
+    "hugoSiteWillBeCreatedInFolder": "The new Hugo website will be created inside this folder:",
     "savePath": "Save path",
-    "siteName": "Site name",
+    "siteName": "Website name",
     "finish": "Finish",
-    "createHugoSiteNamed": "Create Hugo site named:\n",
+    "createHugoSiteNamed": "Create Hugo website named:\n",
     "insideFolder": "Inside folder:\n",
     "open": "Open",
     "checkHugoFolderStructure": "Check Hugo folder structure",
-    "checkHugoFolderStructure_Description": "Make sure your folder follows the correct Hugo structure with a content folder, config file, etc. Please refer to the Hugo documentation for more details. If you want to be sure your site follows the correct folder structure, feel free to create a new Hugo site.",
+    "checkHugoFolderStructure_Description": "Make sure your folder follows the correct Hugo structure with a content folder, config file, etc. Please refer to the Hugo documentation for more details. If you want to be sure your website follows the correct folder structure, feel free to create a new Hugo website.",
     "openHugoDocumentation": "Open Hugo Documentation",
-    "selectSiteFolder": "Select site folder",
-    "openHugoSite": "Open Hugo site:\n",
+    "selectSiteFolder": "Select website folder",
+    "openHugoSite": "Open Hugo website:\n",
     "error_ThemeAlreadyExists": "A theme folder with the name {theme} already exists inside the themes folder. Please rename or remove the existing folder.",
     "@error_ThemeAlreadyExists": {
       "placeholders": {
@@ -216,8 +216,8 @@
     },
     "rememberToVisitDocs": "'\n\nRemember to visit the documentation in the themes repository for details on implementing the correct configurations.",
     "welcomeToBuhoCMS": "Welcome to BuhoCMS",
-    "welcomeToBuhoCMS_Description": "BuhoCMS is a local Content Management System for Hugo.\nCreate or open a site, install a theme, and start creating new posts.\n\nTo proceed, create or open a Hugo site.",
-    "hugoSiteSelected": "Hugo site selected: {path}",
+    "welcomeToBuhoCMS_Description": "BuhoCMS is a local Content Management System for Hugo.\nCreate or open a website, install a theme, and start creating new posts.\n\nTo proceed, create or open a Hugo website.",
+    "hugoSiteSelected": "Hugo website selected: {path}",
     "@hugoSiteSelected": {
       "placeholders": {
         "path": { "type": "String" }
@@ -233,7 +233,7 @@
     },
     "allDone": "All done!",
     "allDone_Description": "Congratulations, you are ready to use BuhoCMS!",
-    "sitePath": "Site path: {path}",
+    "sitePath": "Website path: {path}",
     "@sitePath": {
       "placeholders": {
         "path": { "type": "String" }
@@ -337,7 +337,7 @@
 
     "settings": "Settings",
     "appSettings": "APP SETTINGS",
-    "site": "SITE",
+    "site": "WEBSITE",
     "hugoSettings": "HUGO SETTINGS",
 
     "language": "Language",
