@@ -189,6 +189,32 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           ),
           const MenuDivider(),
           MenuButton(
+            onPressed: () => addFile(
+              context: context,
+              mounted: mounted,
+              editingPageKey: widget.editingPageKey,
+            ),
+            icon: const Icon(Icons.add),
+            text: menuButtonText(AppLocalizations.of(context)!.newPost),
+            shortcut:
+                const SingleActivator(LogicalKeyboardKey.keyN, control: true),
+            shortcutText: 'Ctrl+N',
+          ),
+          MenuButton(
+            onPressed: () => addFolder(
+              context: context,
+              mounted: mounted,
+              setStateCallback: () {
+                Provider.of<NavigationProvider>(context, listen: false)
+                    .notifyAllListeners();
+              },
+              editingPageKey: widget.editingPageKey,
+            ),
+            icon: const Icon(Icons.create_new_folder_outlined),
+            text: menuButtonText(AppLocalizations.of(context)!.newFolder),
+          ),
+          const MenuDivider(),
+          MenuButton(
             onPressed: () => openHugoSite(context: context),
             icon: const Icon(Icons.folder_open),
             text: menuButtonText(AppLocalizations.of(context)!.openSite),
@@ -260,20 +286,6 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
             text: menuButtonText(
                 AppLocalizations.of(context)!.openCurrentFileInExplorer),
           ),
-          MenuButton(
-            onPressed: () => fullScreen(),
-            icon: const Icon(Icons.fullscreen),
-            text: menuButtonText(AppLocalizations.of(context)!.fullScreen),
-            shortcut: const SingleActivator(LogicalKeyboardKey.f11),
-            shortcutText: 'F11',
-          ),
-          MenuButton(
-            onPressed: () async => await windowManager.setFullScreen(false),
-            icon: const Icon(Icons.fullscreen_exit),
-            text: menuButtonText(AppLocalizations.of(context)!.exitFullScreen),
-            shortcut: const SingleActivator(LogicalKeyboardKey.escape),
-            shortcutText: 'ESC',
-          ),
           const MenuDivider(),
           MenuButton(
             onPressed: () => setGUIMode(
@@ -301,29 +313,18 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           ),
           const MenuDivider(),
           MenuButton(
-            onPressed: () => addFile(
-              context: context,
-              mounted: mounted,
-              editingPageKey: widget.editingPageKey,
-            ),
-            icon: const Icon(Icons.add),
-            text: menuButtonText(AppLocalizations.of(context)!.newPost),
-            shortcut:
-                const SingleActivator(LogicalKeyboardKey.keyN, control: true),
-            shortcutText: 'Ctrl+N',
+            onPressed: () => fullScreen(),
+            icon: const Icon(Icons.fullscreen),
+            text: menuButtonText(AppLocalizations.of(context)!.fullScreen),
+            shortcut: const SingleActivator(LogicalKeyboardKey.f11),
+            shortcutText: 'F11',
           ),
           MenuButton(
-            onPressed: () => addFolder(
-              context: context,
-              mounted: mounted,
-              setStateCallback: () {
-                Provider.of<NavigationProvider>(context, listen: false)
-                    .notifyAllListeners();
-              },
-              editingPageKey: widget.editingPageKey,
-            ),
-            icon: const Icon(Icons.create_new_folder_outlined),
-            text: menuButtonText(AppLocalizations.of(context)!.newFolder),
+            onPressed: () async => await windowManager.setFullScreen(false),
+            icon: const Icon(Icons.fullscreen_exit),
+            text: menuButtonText(AppLocalizations.of(context)!.exitFullScreen),
+            shortcut: const SingleActivator(LogicalKeyboardKey.escape),
+            shortcutText: 'ESC',
           ),
         ],
       ),
