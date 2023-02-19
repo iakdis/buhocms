@@ -1,14 +1,14 @@
 {
     "aboutBuhoCMS": "Über BuhoCMS",
-    "openSite": "Seite öffnen",
-    "currentSitePath": "Pfad der aktuellen Seite: {path}",
+    "openSite": "Webseite öffnen",
+    "currentSitePath": "Pfad der aktuellen Webseite: {path}",
      "@currentSitePath": {
       "placeholders": {
          "path": { "type": "String" }
       }
     },
-    "createSite": "Seite erstellen",
-    "createSite_Description": "Neue Hugo Seite erstellen",
+    "createSite": "Webseite erstellen",
+    "createSite_Description": "Neue Hugo Webseite erstellen",
     "hugoThemes": "Hugo Themen",
     "currentHugoThemes": "Aktuelles Hugo-Thema: {theme}. Select or download a Hugo theme",
      "@currentHugoThemes": {
@@ -39,7 +39,7 @@
     "stopHugoServer": "Hugo Server stoppen",
     "startHugoServer": "Hugo Server starten",
     "openHugoServer": "Hugo Server öffnen",
-    "buildHugoSite": "Hugo Seite bauen",
+    "buildHugoSite": "Hugo Webseite bauen",
     "openPublicFolder": "Ordner \"public\" öffnen",
     "sortBy": "Sortieren nach",
     "parentFolderButton_Toolip": "Zum übergeordneten Ordner wechseln. Aktuell: {path}",
@@ -154,7 +154,7 @@
         "path": { "type": "String" }
       }
     },
-    "error_DirectoryAlreadyExists": "Eine Seite mit dem Pfad {path} existiert bereits. Bitte benenne den existierenden Ordner um oder entferne ihn.",
+    "error_DirectoryAlreadyExists": "Eine Webseite mit dem Pfad {path} existiert bereits. Bitte benenne den existierenden Ordner um oder entferne ihn.",
     "@error_DirectoryAlreadyExists": {
       "placeholders": {
         "path": { "type": "String" }
@@ -174,18 +174,18 @@
     },
     "createLocation": "Speicherort",
     "choosePath": "Pfad auswählen",
-    "hugoSiteWillBeCreatedInFolder": "Die neue Hugo Seite wird im Ordner erstellt:",
+    "hugoSiteWillBeCreatedInFolder": "Die neue Hugo Webseite wird im Ordner erstellt:",
     "savePath": "Speicherpfad",
-    "siteName": "Name der Seite",
+    "siteName": "Name der Webseite",
     "finish": "Fertigstellen",
-    "createHugoSiteNamed": "Hugo Seite erstellen namens:\n",
+    "createHugoSiteNamed": "Hugo Webseite erstellen namens:\n",
     "insideFolder": "Im Ordner:\n",
     "open": "Open",
     "checkHugoFolderStructure": "Hugo Ordner Struktur überprüfen",
     "checkHugoFolderStructure_Description": "Stelle sicher, dass dein Ordner der korrekten Hugo Struktur mit einem content Ordner, einer config-Datei, etc. befolgt. Weitere Informationen findest du in der Hugo-Dokumentation. Wenn du sicher sein willst, dass deine Site der richtigen Ordnerstruktur folgt, kannst du eine neue Hugo-Site erstellen.",
     "openHugoDocumentation": "Hugo-Dokumentation öffnen",
-    "selectSiteFolder": "Seitenordner auswählen",
-    "openHugoSite": "Hugo Seite öffnen:\n",
+    "selectSiteFolder": "Webseitenordner auswählen",
+    "openHugoSite": "Hugo Webseite öffnen:\n",
     "error_ThemeAlreadyExists": "Ein Thema mit dem Namen {theme} existiert bereits im Themenordner. Bitte benenne den existierenden Ordner um oder entferne ihn.",
     "@error_ThemeAlreadyExists": {
       "placeholders": {
@@ -216,8 +216,8 @@
     },
     "rememberToVisitDocs": "'\n\nDenke daran, die Dokumentation im Themen-Repository zu besuchen, um Details zur Implementierung der richtigen Konfigurationen zu erfahren.",
     "welcomeToBuhoCMS": "Willkommen bei BuhoCMS",
-    "welcomeToBuhoCMS_Description": "BuhoCMS ist ein lokales Content Management System für Hugo.\nErstelle oder öffne eine Seite, installiere ein Thema, und beginne damit, neue Artikel zu erstellen.\n\nUm fortzufahren, erstelle oder öffne eine Hugo Seite.",
-    "hugoSiteSelected": "Ausgewählte Hugo Seite: {path}",
+    "welcomeToBuhoCMS_Description": "BuhoCMS ist ein lokales Content Management System für Hugo.\nErstelle oder öffne eine Webseite, installiere ein Thema, und beginne damit, neue Artikel zu erstellen.\n\nUm fortzufahren, erstelle oder öffne eine Hugo Seite.",
+    "hugoSiteSelected": "Ausgewählte Hugo Webseite: {path}",
     "@hugoSiteSelected": {
       "placeholders": {
         "path": { "type": "String" }
@@ -233,7 +233,7 @@
     },
     "allDone": "Das ist alles!",
     "allDone_Description": "Herzlichen Glückwunsch, du bist nun bereit, BuhoCMS zu benutzen!",
-    "sitePath": "Seitenpfad: {path}",
+    "sitePath": "Webseitenpfad: {path}",
     "@sitePath": {
       "placeholders": {
         "path": { "type": "String" }
@@ -337,7 +337,7 @@
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",
-    "site": "SEITE",
+    "site": "WEBSEITE",
     "hugoSettings": "HUGO EINSTELLUNGEN",
 
     "language": "Sprache",
