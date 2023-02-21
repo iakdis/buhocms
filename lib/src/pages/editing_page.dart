@@ -520,7 +520,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
 
   void setTitle(UnsavedTextProvider unsavedTextProvider) {
     var title =
-        '${(Preferences.getCurrentFile() ?? 'No file selected').split(Platform.pathSeparator).last} - Buho CMS';
+        '${(Preferences.getCurrentFile() ?? 'No file selected').split(Platform.pathSeparator).last} - BuhoCMS';
     var titleUnsaved = title;
     unsavedTextProvider.unsaved(globalKey: globalKey)
         ? titleUnsaved = '*$title'
