@@ -1,1 +1,15 @@
-{}
+{
+  "de": [
+    "refreshedFileList",
+    "fileSavedSuccessfully",
+    "nothingToSave",
+    "fileRevertedSuccessfully",
+    "nothingToRevert",
+    "alreadyStartedAHugoServer",
+    "startedHugoServer",
+    "stoppedHugoServer",
+    "noHugoServerRunning",
+    "builtHugoSite",
+    "addedFrontmatter"
+  ]
+}
