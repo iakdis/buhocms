@@ -55,6 +55,7 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
         '${Preferences.getSitePath()}${Platform.pathSeparator}content');
 
     setState(() {
+      sitePathError = false;
       sitePath = Preferences.getSitePath() ?? '';
       textController.text = sitePath;
       textController.selection = TextSelection(
