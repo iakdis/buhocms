@@ -57,8 +57,8 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
 
     showSnackbar(
       context: context,
-      text:
-          'Added Front Matter "$hugoFrontmatter" with type "${type.name.substring(4)}"',
+      text: AppLocalizations.of(context)!.addedFrontmatter(
+          '"$hugoFrontmatter"', '"${type.name.substring(4)}"'),
       seconds: 4,
     );
   }

@@ -334,6 +334,23 @@
     "fullScreenInfo": "Drücke F11 oder ESC, um den Vollbildmodus zu verlassen",
     "fullScreen": "Vollbildmodus",
     "exitFullScreen": "Vollbildmodus verlassen",
+    "refreshedFileList": "Dateien aktualisiert",
+    "fileSavedSuccessfully": "Datei erfolgreich gespeichert",
+    "nothingToSave": "Nichts zu speichern",
+    "fileRevertedSuccessfully": "Datei erfolgreich Rückgängig gemacht",
+    "nothingToRevert": "Nichts zum Rückgängig machen",
+    "alreadyStartedAHugoServer": "Bereits einen Hugo Server gestartet",
+    "startedHugoServer": "Hugo server gestartet",
+    "stoppedHugoServer": "Hugo server gestoppt",
+    "noHugoServerRunning": "Kein Hugo Server ist gerade aktiv",
+    "builtHugoSite": "Hugo Webseite gebaut",
+    "addedFrontmatter": "Front matter {name} mit Typ {type} hinzugefügt",
+    "@addedFrontmatter": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "type": { "type": "String" }
+      }
+    },
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",

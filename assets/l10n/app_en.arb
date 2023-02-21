@@ -262,7 +262,7 @@
     "close": "Close",
     "addFrontmatter": "Add Front matter",
     "add": "Add",
-    "addedFrontmatterToList": "Added Front matter to list with name {name} with type {type}",
+    "addedFrontmatterToList": "Added Front matter to list with name {name} and type {type}",
     "@addedFrontmatterToList": {
      "placeholders": {
         "name": { "type": "String" },
@@ -334,6 +334,23 @@
     "fullScreenInfo": "Press F11 or ESC to exit Full Screen mode",
     "fullScreen": "Full Screen",
     "exitFullScreen": "Exit Full Screen",
+    "refreshedFileList": "Refreshed file list",
+    "fileSavedSuccessfully": "File saved successfully",
+    "nothingToSave": "Nothing to save",
+    "fileRevertedSuccessfully": "File reverted successfully",
+    "nothingToRevert": "Nothing to revert",
+    "alreadyStartedAHugoServer": "Already started a Hugo server",
+    "startedHugoServer": "Started Hugo server",
+    "stoppedHugoServer": "Stopped Hugo Server",
+    "noHugoServerRunning": "No Hugo Server currently running",
+    "builtHugoSite": "Built Hugo site",
+    "addedFrontmatter": "Added Front matter {name} with type {type}",
+    "@addedFrontmatter": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "type": { "type": "String" }
+      }
+    },
 
     "settings": "Settings",
     "appSettings": "APP SETTINGS",

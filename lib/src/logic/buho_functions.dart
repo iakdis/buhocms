@@ -42,7 +42,7 @@ refreshFiles({required BuildContext context}) {
   Provider.of<NavigationProvider>(context, listen: false).notifyAllListeners();
   showSnackbar(
     context: context,
-    text: 'Refreshed file list',
+    text: AppLocalizations.of(context)!.refreshedFileList,
     seconds: 2,
   );
 }
@@ -92,14 +92,14 @@ save({
       !checkUnsaved) {
     showSnackbar(
       context: context,
-      text: 'File saved successfully',
+      text: AppLocalizations.of(context)!.fileSavedSuccessfully,
       seconds: 2,
     );
     editingPageKey.currentState?.saveFileAndFrontmatter();
   } else {
     showSnackbar(
       context: context,
-      text: 'Nothing to save',
+      text: AppLocalizations.of(context)!.nothingToSave,
       seconds: 1,
     );
   }
@@ -130,7 +130,7 @@ revert({
             onPressed: () async {
               showSnackbar(
                 context: context,
-                text: 'File reverted successfully',
+                text: AppLocalizations.of(context)!.fileRevertedSuccessfully,
                 seconds: 2,
               );
               await editingPageKey.currentState?.revertFileAndFrontmatter();
@@ -144,7 +144,7 @@ revert({
   } else {
     showSnackbar(
       context: context,
-      text: 'Nothing to revert',
+      text: AppLocalizations.of(context)!.nothingToRevert,
       seconds: 1,
     );
   }
@@ -180,8 +180,8 @@ void startHugoServer({
   showSnackbar(
     context: context,
     text: shellProvider.shellActive == true
-        ? 'Already started a Hugo server'
-        : 'Started Hugo server',
+        ? AppLocalizations.of(context)!.alreadyStartedAHugoServer
+        : AppLocalizations.of(context)!.startedHugoServer,
     seconds: 4,
   );
 
@@ -207,8 +207,8 @@ void stopHugoServer({
     showSnackbar(
       context: context,
       text: shellProvider.shellActive == true
-          ? 'Stopped Hugo Server'
-          : 'No Hugo Server currently running',
+          ? AppLocalizations.of(context)!.stoppedHugoServer
+          : AppLocalizations.of(context)!.noHugoServerRunning,
       seconds: 4,
     );
   }
@@ -225,7 +225,7 @@ void buildHugoSite({required BuildContext context}) async {
 
   showSnackbar(
     context: context,
-    text: 'Built Hugo site',
+    text: AppLocalizations.of(context)!.builtHugoSite,
     seconds: 4,
   );
 
