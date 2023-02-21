@@ -306,7 +306,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                           decoration: InputDecoration(
                             hintText: 'title',
                             errorText: empty
-                                ? AppLocalizations.of(context)!.nameCantBeEmpty
+                                ? AppLocalizations.of(context)!.cantBeEmpty
                                 : alreadyContains
                                     ? AppLocalizations.of(context)!
                                         .error_FrontmatterAlreadyContains

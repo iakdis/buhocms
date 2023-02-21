@@ -112,7 +112,7 @@
     },
     "createNewPostIn": "Create new post in:\n",
     "name": "Name: ",
-    "nameCantBeEmpty": "Name can't be empty",
+    "cantBeEmpty": "Can't be empty",
     "error_fileAlreadyExists": "File with name {name} already exists in folder:\n{path}",
     "@error_fileAlreadyExists": {
      "placeholders": {

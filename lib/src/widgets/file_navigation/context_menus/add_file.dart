@@ -206,7 +206,7 @@ class AddFile {
                                     hintText: 'my-post',
                                     errorText: empty
                                         ? AppLocalizations.of(context)!
-                                            .nameCantBeEmpty
+                                            .cantBeEmpty
                                         : fileAlreadyExists
                                             ? AppLocalizations.of(context)!
                                                 .error_fileAlreadyExists(

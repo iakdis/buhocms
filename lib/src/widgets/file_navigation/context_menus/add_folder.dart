@@ -109,7 +109,7 @@ class AddFolder {
                                     hintText: 'posts',
                                     errorText: empty
                                         ? AppLocalizations.of(context)!
-                                            .nameCantBeEmpty
+                                            .cantBeEmpty
                                         : folderAlreadyExists
                                             ? AppLocalizations.of(context)!
                                                 .error_folderAlreadyExists(

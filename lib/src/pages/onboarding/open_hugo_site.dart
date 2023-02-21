@@ -212,7 +212,7 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
                       style: TextStyle(color: Colors.grey[600], fontSize: 17.0),
                       decoration: InputDecoration(
                         errorText: sitePathError
-                            ? AppLocalizations.of(context)!.nameCantBeEmpty
+                            ? AppLocalizations.of(context)!.cantBeEmpty
                             : null,
                         border: const OutlineInputBorder(),
                         labelText: AppLocalizations.of(context)!.savePath,

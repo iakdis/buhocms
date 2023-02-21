@@ -112,7 +112,7 @@
     },
     "createNewPostIn": "Neuen Artikel erstellen in:\n",
     "name": "Name: ",
-    "nameCantBeEmpty": "Name kann nicht leer sein",
+    "cantBeEmpty": "Kann nicht leer sein",
     "error_fileAlreadyExists": "Datei mit dem Namen {name} existiert bereits im Ordner:\n{path}",
     "@error_fileAlreadyExists": {
      "placeholders": {
