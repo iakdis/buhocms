@@ -10,4 +10,4 @@ Icon=buhocms
 
 Exec=buhocms
 Terminal=false
-StartupWMClass=buhocms
+StartupWMClass=BuhoCMS
