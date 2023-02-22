@@ -22,6 +22,7 @@ class Preferences {
       const MapEntry(prefCurrentPath, ''),
       const MapEntry(prefCurrentFile, null),
       const MapEntry(prefIsGUIMode, true),
+      const MapEntry(prefIsFrontmatterGUIMode, true),
       MapEntry(prefSortMode, SortMode.name.name),
       MapEntry(
           prefFrontMatterAddList, json.encode(defaultFrontMatterAddList())),
@@ -139,6 +140,12 @@ class Preferences {
   static Future setIsGUIMode(bool isGUIMode) async =>
       await setPreferences(prefIsGUIMode, isGUIMode);
   static bool getIsGUIMode() => getPreferencesEntry(prefIsGUIMode);
+
+  //Front matter GUI Mode
+  static Future setIsFrontmatterGUIMode(bool isFrontmatterGUIMode) async =>
+      await setPreferences(prefIsFrontmatterGUIMode, isFrontmatterGUIMode);
+  static bool getIsFrontmatterGUIMode() =>
+      getPreferencesEntry(prefIsFrontmatterGUIMode);
 
   //Sort Mode
   static Future setSortMode(SortMode sortMode) async =>

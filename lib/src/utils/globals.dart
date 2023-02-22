@@ -10,6 +10,7 @@ const String prefSitePath = 'sitePostPath';
 const String prefCurrentPath = 'currentPath';
 const String prefCurrentFile = 'currentFile';
 const String prefIsGUIMode = 'isGUIMode';
+const String prefIsFrontmatterGUIMode = 'isFrontmatterGUIMode';
 const String prefSortMode = 'sortMode';
 
 const String prefFrontMatterAddList = 'frontMatterAddList';
