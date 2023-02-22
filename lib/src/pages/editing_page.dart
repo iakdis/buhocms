@@ -315,6 +315,25 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     );
   }
 
+  Widget _draggableFrontmatterButton() {
+    return Tooltip(
+      message: AppLocalizations.of(context)!.draggableMode_Description,
+      child: ElevatedButton.icon(
+        onPressed: () {
+          checkUnsavedBeforeFunction(
+              editingPageKey: widget.editingPageKey,
+              function: () =>
+                  setState(() => draggableFrontMatter = !draggableFrontMatter));
+        },
+        icon: Icon(
+            draggableFrontMatter ? Icons.lock_outline : Icons.drag_indicator),
+        label: Text(draggableFrontMatter
+            ? AppLocalizations.of(context)!.draggableModeLock
+            : AppLocalizations.of(context)!.draggableModeOn),
+      ),
+    );
+  }
+
   Widget guiFrontMatterAndTextEditor({required List<String> finalLines}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -345,24 +364,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                 runSpacing: 8.0,
                 children: [
                   AddFrontmatterButton(editingPageKey: widget.editingPageKey),
-                  Tooltip(
-                    message:
-                        AppLocalizations.of(context)!.draggableMode_Description,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        checkUnsavedBeforeFunction(
-                            editingPageKey: widget.editingPageKey,
-                            function: () => setState(() =>
-                                draggableFrontMatter = !draggableFrontMatter));
-                      },
-                      icon: Icon(draggableFrontMatter
-                          ? Icons.lock_outline
-                          : Icons.drag_indicator),
-                      label: Text(draggableFrontMatter
-                          ? AppLocalizations.of(context)!.draggableModeLock
-                          : AppLocalizations.of(context)!.draggableModeOn),
-                    ),
-                  ),
+                  _draggableFrontmatterButton(),
                 ],
               ),
               const SizedBox(height: 16.0),
