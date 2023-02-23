@@ -7,6 +7,7 @@ class FileNavigationProvider extends ChangeNotifier {
   int _fileNavigationIndex = -1;
 
   final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controllerFrontmatter = TextEditingController();
   String _initialText = '';
   String _markdownTextContent = '';
   String _frontMatterText = '';
@@ -22,27 +23,16 @@ class FileNavigationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String get initialText {
-    return _initialText;
-  }
+  String get initialText => _initialText;
 
-  String get markdownTextContent {
-    return _markdownTextContent;
-  }
+  String get markdownTextContent => _markdownTextContent;
 
-  String get frontMatterText {
-    return _frontMatterText;
-  }
+  String get frontMatterText => _frontMatterText;
 
-  void setMarkdownTextContent(String text) {
-    _markdownTextContent = text.trim();
-    //notifyListeners();
-  }
+  void setMarkdownTextContent(String text) =>
+      _markdownTextContent = text.trim();
 
-  void setFrontMatterText(String text) {
-    _frontMatterText = text;
-    //notifyListeners();
-  }
+  void setFrontMatterText(String text) => _frontMatterText = text;
 
   Future<void> setInitialTexts({bool dontExecute = false}) async {
     var allFiles = await getAllFiles();
@@ -77,6 +67,10 @@ class FileNavigationProvider extends ChangeNotifier {
   TextEditingController get controller {
     //setInitialTexts();
     return _controller;
+  }
+
+  TextEditingController get controllerFrontmatter {
+    return _controllerFrontmatter;
   }
 
   void addListenerController(Function() function) {

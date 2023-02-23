@@ -19,6 +19,7 @@ import '../provider/navigation/navigation_size_provider.dart';
 import '../provider/editing/unsaved_text_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
+import '../widgets/tooltip.dart';
 
 class EditingPage extends StatefulWidget {
   const EditingPage({
@@ -86,6 +87,10 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         .setSavedText(fileNavigationProvider.markdownTextContent);
     unsavedTextProvider
         .setUnsavedText(fileNavigationProvider.markdownTextContent);
+    unsavedTextProvider
+        .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
+    unsavedTextProvider
+        .setUnsavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 
     editingProvider
         .setMarkdownViewerText(fileNavigationProvider.controller.text);
@@ -93,6 +98,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         fileNavigationProvider.controller.addListener(addListenerContent);
+        fileNavigationProvider.controllerFrontmatter
+            .addListener(addListenerContentFrontmatter);
       },
     );
 
@@ -103,11 +110,6 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     print('Hugo widgets update!');
 
     await fileNavigationProvider.setInitialTexts();
-
-    unsavedTextProvider
-        .setSavedText(fileNavigationProvider.markdownTextContent);
-    unsavedTextProvider
-        .setUnsavedText(fileNavigationProvider.markdownTextContent);
 
     var frontMatterText = '---\n---';
     if (fileNavigationProvider.initialText.isNotEmpty &&
@@ -126,10 +128,16 @@ class EditingPageState extends State<EditingPage> with WindowListener {
             fileNavigationProvider.markdownTextContent
         : fileNavigationProvider.controller.text =
             '${fileNavigationProvider.frontMatterText}\n\n${fileNavigationProvider.markdownTextContent}';
+    fileNavigationProvider.controllerFrontmatter.text =
+        fileNavigationProvider.frontMatterText;
     unsavedTextProvider
         .setSavedText(fileNavigationProvider.markdownTextContent);
     unsavedTextProvider
         .setUnsavedText(fileNavigationProvider.markdownTextContent);
+    unsavedTextProvider
+        .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
+    unsavedTextProvider
+        .setUnsavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 
     fileNavigationProvider.controller.selection =
         TextSelection(baseOffset: baseOffset, extentOffset: extentOffset);
@@ -173,6 +181,18 @@ class EditingPageState extends State<EditingPage> with WindowListener {
             .setMarkdownViewerText(fileNavigationProvider.controller.text);
         unsavedTextProvider
             .setUnsavedText(fileNavigationProvider.markdownTextContent);
+      },
+    );
+  }
+
+  void addListenerContentFrontmatter() {
+    fileNavigationProvider
+        .setFrontMatterText(fileNavigationProvider.controllerFrontmatter.text);
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        unsavedTextProvider
+            .setUnsavedTextFrontmatter(fileNavigationProvider.frontMatterText);
       },
     );
   }
@@ -253,6 +273,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     if (editingProvider.isGUIMode) {
       fileNavigationProvider
           .setMarkdownTextContent(unsavedTextProvider.savedText);
+      fileNavigationProvider
+          .setFrontMatterText(unsavedTextProvider.savedTextFrontmatter);
     } else {
       var frontMatterText = unsavedTextProvider.savedText
           .substring(0, unsavedTextProvider.savedText.indexOf('---', 1) + 3)
@@ -266,6 +288,10 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         fileNavigationProvider.markdownTextContent;
     unsavedTextProvider
         .setSavedText(fileNavigationProvider.markdownTextContent);
+    fileNavigationProvider.controllerFrontmatter.text =
+        fileNavigationProvider.frontMatterText;
+    unsavedTextProvider
+        .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 
     setState(() {});
   }
@@ -278,6 +304,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
 
     unsavedTextProvider
         .setSavedText(fileNavigationProvider.markdownTextContent);
+    unsavedTextProvider
+        .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 
     widget.editingPageKey.currentState?.updateHugoWidgets();
   }
@@ -315,8 +343,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     );
   }
 
-  Widget _draggableFrontmatterButton() {
-    return Tooltip(
+  Widget draggableFrontmatterButton() {
+    return CustomTooltip(
       message: AppLocalizations.of(context)!.draggableMode_Description,
       child: ElevatedButton.icon(
         onPressed: () {
@@ -331,6 +359,105 @@ class EditingPageState extends State<EditingPage> with WindowListener {
             ? AppLocalizations.of(context)!.draggableModeLock
             : AppLocalizations.of(context)!.draggableModeOn),
       ),
+    );
+  }
+
+  Widget textFrontmatterButton() {
+    return CustomTooltip(
+      message: editingProvider.isFrontmatterGUIMode
+          ? AppLocalizations.of(context)!.textMode
+          : AppLocalizations.of(context)!.guiMode,
+      child: ElevatedButton.icon(
+        onPressed: () {
+          checkUnsavedBeforeFunction(
+              editingPageKey: widget.editingPageKey,
+              function: () => setState(() =>
+                  editingProvider.setFrontmatterGUIMode(
+                      !editingProvider.isFrontmatterGUIMode)));
+        },
+        icon: Icon(editingProvider.isFrontmatterGUIMode
+            ? Icons.text_snippet_outlined
+            : Icons.table_chart),
+        label: Text(editingProvider.isFrontmatterGUIMode
+            ? AppLocalizations.of(context)!.textMode
+            : AppLocalizations.of(context)!.guiMode),
+      ),
+    );
+  }
+
+  Widget guiFrontmatter({required List<String> finalLines}) {
+    return Consumer<UnsavedTextProvider>(builder: (_, __, ___) {
+      return ReorderableListView(
+        shrinkWrap: true,
+        buildDefaultDragHandles: false,
+        onReorder: (oldIndex, newIndex) {
+          if (newIndex > oldIndex) newIndex--;
+
+          final finalLine = finalLines.removeAt(oldIndex);
+          finalLines.insert(newIndex, finalLine);
+          var newLines = [for (var v in finalLines) v];
+          newLines.insert(0, '---');
+          newLines.insert(finalLines.length + 1, '---');
+          var newFinalLines = newLines.join('\n');
+
+          fileNavigationProvider.setFrontMatterText(newFinalLines);
+
+          final oldHugoWidget = hugoWidgets.removeAt(oldIndex);
+          hugoWidgets.insert(newIndex, oldHugoWidget);
+
+          saveFileAndFrontmatter();
+        },
+        onReorderStart: (index) {
+          checkUnsavedBeforeFunction(
+              editingPageKey: widget.editingPageKey, function: () {});
+        },
+        children: [
+          for (var index = 0; index < hugoWidgets.length; index++)
+            Column(
+              key: ValueKey(index),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: 16.0,
+                  children: [
+                    if (draggableFrontMatter)
+                      SizedBox(
+                        //width: 64,
+                        child: ReorderableDragStartListener(
+                          index: index,
+                          child: Icon(
+                            Icons.drag_handle,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ),
+                    hugoWidgets[index],
+                  ],
+                ),
+                const Divider(),
+              ],
+            )
+        ],
+      );
+    });
+  }
+
+  Widget textFrontmatter() {
+    return Consumer<FileNavigationProvider>(
+      builder: (context, value, _) {
+        return TextField(
+          controller: value.controllerFrontmatter,
+          minLines: 5,
+          maxLines: null,
+          decoration: InputDecoration(
+            hintText: AppLocalizations.of(context)!.frontmatter,
+            labelText: AppLocalizations.of(context)!.frontmatter,
+            alignLabelWithHint: true,
+            border: const OutlineInputBorder(),
+          ),
+        );
+      },
     );
   }
 
@@ -364,68 +491,22 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                 runSpacing: 8.0,
                 children: [
                   AddFrontmatterButton(editingPageKey: widget.editingPageKey),
-                  _draggableFrontmatterButton(),
+                  Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: [
+                      textFrontmatterButton(),
+                      draggableFrontmatterButton(),
+                    ],
+                  ),
                 ],
               ),
               const SizedBox(height: 16.0),
               const Divider(),
               const SizedBox(height: 16.0),
-              Consumer<UnsavedTextProvider>(builder: (_, __, ___) {
-                return ReorderableListView(
-                  shrinkWrap: true,
-                  buildDefaultDragHandles: false,
-                  onReorder: (oldIndex, newIndex) {
-                    if (newIndex > oldIndex) newIndex--;
-
-                    final finalLine = finalLines.removeAt(oldIndex);
-                    finalLines.insert(newIndex, finalLine);
-                    var newLines = [for (var v in finalLines) v];
-                    newLines.insert(0, '---');
-                    newLines.insert(finalLines.length + 1, '---');
-                    var newFinalLines = newLines.join('\n');
-
-                    fileNavigationProvider.setFrontMatterText(newFinalLines);
-
-                    final oldHugoWidget = hugoWidgets.removeAt(oldIndex);
-                    hugoWidgets.insert(newIndex, oldHugoWidget);
-
-                    saveFileAndFrontmatter();
-                  },
-                  onReorderStart: (index) {
-                    checkUnsavedBeforeFunction(
-                        editingPageKey: widget.editingPageKey, function: () {});
-                  },
-                  children: [
-                    for (var index = 0; index < hugoWidgets.length; index++)
-                      Column(
-                        key: ValueKey(index),
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            spacing: 16.0,
-                            children: [
-                              if (draggableFrontMatter)
-                                SizedBox(
-                                  //width: 64,
-                                  child: ReorderableDragStartListener(
-                                    index: index,
-                                    child: Icon(
-                                      Icons.drag_handle,
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                    ),
-                                  ),
-                                ),
-                              hugoWidgets[index],
-                            ],
-                          ),
-                          const Divider(),
-                        ],
-                      )
-                  ],
-                );
-              }),
+              editingProvider.isFrontmatterGUIMode
+                  ? guiFrontmatter(finalLines: finalLines)
+                  : textFrontmatter(),
             ],
           ),
       ],
@@ -444,7 +525,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (unsavedTextProvider.savedText !=
-                unsavedTextProvider.unsavedText)
+                    unsavedTextProvider.unsavedText ||
+                unsavedTextProvider.savedTextFrontmatter !=
+                    unsavedTextProvider.unsavedTextFrontmatter)
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text('*', style: TextStyle(fontSize: 24)),

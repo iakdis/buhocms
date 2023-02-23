@@ -15,6 +15,19 @@ class EditingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _isFrontmatterGUIMode = true;
+
+  bool get isFrontmatterGUIMode {
+    _isFrontmatterGUIMode = Preferences.getIsFrontmatterGUIMode();
+    return _isFrontmatterGUIMode;
+  }
+
+  void setFrontmatterGUIMode(bool isFrontmatterGUIMode) {
+    Preferences.setIsFrontmatterGUIMode(isFrontmatterGUIMode);
+    _isFrontmatterGUIMode = isFrontmatterGUIMode;
+    notifyListeners();
+  }
+
   String _markdownViewerText = 'Markdown viewer text';
 
   String get markdownViewerText {

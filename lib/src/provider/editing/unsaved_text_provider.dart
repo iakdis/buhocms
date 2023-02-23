@@ -4,26 +4,32 @@ import '../../ssg/hugo.dart';
 
 class UnsavedTextProvider extends ChangeNotifier {
   bool _unsaved = false;
-  String _unsavedText = 'UnsavedText';
-  String _savedText = 'SavedText';
+  String _unsavedText = '';
+  String _savedText = '';
+  String _unsavedTextFrontmatter = '';
+  String _savedTextFrontmatter = '';
 
-  String get unsavedText {
-    return _unsavedText;
-  }
+  String get unsavedText => _unsavedText;
 
   void setUnsavedText(String text) {
     _unsavedText = text;
     notifyListeners();
   }
 
-  String get savedText {
-    return _savedText;
+  String get savedText => _savedText;
+
+  void setSavedText(String text) => _savedText = text;
+
+  String get unsavedTextFrontmatter => _unsavedTextFrontmatter;
+
+  void setUnsavedTextFrontmatter(String text) {
+    _unsavedTextFrontmatter = text;
+    notifyListeners();
   }
 
-  void setSavedText(String text) {
-    _savedText = text;
-    //notifyListeners();
-  }
+  String get savedTextFrontmatter => _savedTextFrontmatter;
+
+  void setSavedTextFrontmatter(String text) => _savedTextFrontmatter = text;
 
   void setUnsaved(bool unsaved) {
     _unsaved = unsaved;
@@ -37,7 +43,8 @@ class UnsavedTextProvider extends ChangeNotifier {
           globalKey[i].currentState?.frontmatter.value ?? HugoType.typeString);
       if (saved == true) _unsaved = true;
     }
-    if (savedText != unsavedText) _unsaved = true;
+    if (savedText != unsavedText ||
+        savedTextFrontmatter != unsavedTextFrontmatter) _unsaved = true;
 
     /*final fileNavigationProvider = Provider.of<FileNavigationProvider>(context, listen: false);
     if (fileNavigationProvider.fileNavigationIndex == -1) {
