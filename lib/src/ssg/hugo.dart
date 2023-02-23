@@ -462,52 +462,70 @@ class HugoWidgetState extends State<HugoWidget> {
       children: [
         Text('$labelText: '), //$formattedDate
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
+          constraints: const BoxConstraints(maxWidth: 360),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 400),
-                child: TextFormField(
-                  controller: listController,
-                  focusNode: listFocusNode,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    //labelText: 'Tags',
-                    prefixIcon: const Icon(Icons.tag),
-                    hintText: AppLocalizations.of(context)!.tag,
-                  ),
-                  autovalidateMode: AutovalidateMode.always,
-                  onFieldSubmitted: ((value) {
-                    if (value.isNotEmpty) {
-                      setState(() => unsavedList.add(value));
-                    }
-                    listController.clear();
-                    listFocusNode.requestFocus();
-                  }),
-                  onChanged: (value) {
-                    if (value == ' ') {
-                      listController.clear();
-                      return;
-                    }
-                    if (value == ',') {
-                      listController.clear();
-                      return;
-                    }
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 282),
+                    child: TextFormField(
+                      controller: listController,
+                      focusNode: listFocusNode,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        //labelText: 'Tags',
+                        prefixIcon: const Icon(Icons.tag),
+                        hintText: AppLocalizations.of(context)!.tag,
+                      ),
+                      autovalidateMode: AutovalidateMode.always,
+                      onFieldSubmitted: ((value) {
+                        if (value.isNotEmpty) {
+                          setState(() => unsavedList.add(value));
+                        }
+                        listController.clear();
+                        listFocusNode.requestFocus();
+                      }),
+                      onChanged: (value) {
+                        if (value == ' ') {
+                          listController.clear();
+                          return;
+                        }
+                        if (value == ',') {
+                          listController.clear();
+                          return;
+                        }
 
-                    if (value.contains(' ')) {
-                      value = value.substring(0, value.indexOf(' '));
-                      setState(() => unsavedList.add(value));
+                        if (value.contains(' ')) {
+                          value = value.substring(0, value.indexOf(' '));
+                          setState(() => unsavedList.add(value));
+                          listController.clear();
+                          listFocusNode.requestFocus();
+                        } else if (value.contains(',')) {
+                          value = value.substring(0, value.indexOf(','));
+                          setState(() => unsavedList.add(value));
+                          listController.clear();
+                          listFocusNode.requestFocus();
+                        }
+                      },
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      var value = listController.text;
+                      if (value.isNotEmpty) {
+                        setState(() => unsavedList.add(value));
+                      }
                       listController.clear();
                       listFocusNode.requestFocus();
-                    } else if (value.contains(',')) {
-                      value = value.substring(0, value.indexOf(','));
-                      setState(() => unsavedList.add(value));
-                      listController.clear();
-                      listFocusNode.requestFocus();
-                    }
-                  },
-                ),
+                    },
+                    style: const ButtonStyle(
+                        fixedSize: MaterialStatePropertyAll(Size(50, 50))),
+                    child: const Icon(Icons.add),
+                  ),
+                ],
               ),
               Container(
                 padding:
