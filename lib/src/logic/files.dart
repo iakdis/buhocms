@@ -15,7 +15,6 @@ Future<void> openInFolder(
       ? path = path
       : path = path.substring(
           0, path.indexOf(path.split(Platform.pathSeparator).last));
-  if (!await canLaunchUrl(Uri(path: path, scheme: 'file'))) return;
   await launchUrl(Uri(path: path, scheme: 'file'));
 }
 

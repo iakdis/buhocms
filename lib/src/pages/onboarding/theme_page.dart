@@ -312,11 +312,9 @@ class _ThemePageState extends State<ThemePage> {
                     message: 'https://themes.gohugo.io',
                     child: ElevatedButton.icon(
                       onPressed: () async {
-                        var url =
+                        final url =
                             Uri(scheme: 'https', path: 'themes.gohugo.io');
-                        if (await canLaunchUrl(url)) {
-                          await launchUrl(url);
-                        }
+                        await launchUrl(url);
                       },
                       icon: const Icon(Icons.open_in_new),
                       label: const Text('https://themes.gohugo.io'),

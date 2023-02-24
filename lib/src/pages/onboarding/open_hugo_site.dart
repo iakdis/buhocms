@@ -165,13 +165,11 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
                         'https://gohugo.io/getting-started/directory-structure/',
                     child: ElevatedButton.icon(
                       onPressed: () async {
-                        var url = Uri(
+                        final url = Uri(
                             scheme: 'https',
                             path:
                                 'gohugo.io/getting-started/directory-structure/');
-                        if (await canLaunchUrl(url)) {
-                          await launchUrl(url);
-                        }
+                        await launchUrl(url);
                       },
                       icon: const Icon(Icons.open_in_new),
                       label: Text(
