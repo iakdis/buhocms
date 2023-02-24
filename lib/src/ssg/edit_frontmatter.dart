@@ -62,11 +62,13 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                           'https://gohugo.io/content-management/front-matter/',
                       child: TextButton.icon(
                         onPressed: () async {
-                          final url = Uri(
+                          var url = Uri(
                               scheme: 'https',
                               path:
                                   'gohugo.io/content-management/front-matter/');
-                          await launchUrl(url);
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url);
+                          }
                         },
                         icon: const Icon(Icons.open_in_new),
                         label: Text(AppLocalizations.of(context)!

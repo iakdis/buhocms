@@ -13,8 +13,10 @@ class MarkdownViewer extends StatelessWidget {
     String? href,
     String title,
   ) async {
-    final url = Uri.parse(href ?? '#');
-    await launchUrl(url);
+    var url = Uri.parse(href ?? '#');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    }
   }
 
   @override

@@ -11,8 +11,10 @@ class OpenLocalhostButton extends StatelessWidget {
   final bool isExtended;
 
   Future<void> _openLocalhost() async {
-    final url = Uri.parse('http://localhost:1313');
-    await launchUrl(url);
+    var url = Uri.parse('http://localhost:1313');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    }
   }
 
   Widget _openLocalhostButton() {

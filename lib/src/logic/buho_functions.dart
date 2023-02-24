@@ -310,13 +310,17 @@ void exit({
 }
 
 void openHomepage() async {
-  final url = Uri(scheme: 'https', path: 'github.com/iakmds/buhocms');
-  await launchUrl(url);
+  var url = Uri(scheme: 'https', path: 'github.com/iakmds/buhocms');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  }
 }
 
 void reportIssue() async {
-  final url = Uri(scheme: 'https', path: 'github.com/iakmds/buhocms/issues');
-  await launchUrl(url);
+  var url = Uri(scheme: 'https', path: 'github.com/iakmds/buhocms/issues');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  }
 }
 
 void about({required BuildContext context}) {
