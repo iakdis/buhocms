@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,8 +13,8 @@ class OpenLocalhostButton extends StatelessWidget {
   final bool isExtended;
 
   Future<void> _openLocalhost() async {
-    var url = Uri.parse('http://localhost:1313');
-    if (await canLaunchUrl(url)) {
+    final url = Uri.parse('http://localhost:1313');
+    if (await canLaunchUrl(url) || Platform.isLinux) {
       await launchUrl(url);
     }
   }

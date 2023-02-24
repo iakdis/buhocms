@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:buhocms/src/provider/editing/editing_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -13,8 +15,8 @@ class MarkdownViewer extends StatelessWidget {
     String? href,
     String title,
   ) async {
-    var url = Uri.parse(href ?? '#');
-    if (await canLaunchUrl(url)) {
+    final url = Uri.parse(href ?? '#');
+    if (await canLaunchUrl(url) || Platform.isLinux) {
       await launchUrl(url);
     }
   }

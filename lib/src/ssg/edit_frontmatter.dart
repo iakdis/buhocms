@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -62,11 +64,11 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                           'https://gohugo.io/content-management/front-matter/',
                       child: TextButton.icon(
                         onPressed: () async {
-                          var url = Uri(
+                          final url = Uri(
                               scheme: 'https',
                               path:
                                   'gohugo.io/content-management/front-matter/');
-                          if (await canLaunchUrl(url)) {
+                          if (await canLaunchUrl(url) || Platform.isLinux) {
                             await launchUrl(url);
                           }
                         },
