@@ -281,14 +281,14 @@ class _ThemePageState extends State<ThemePage> {
                         gitInstalled = false;
                         if (mounted) {
                           gitInstalledText = AppLocalizations.of(context)!
-                              .gitExecutableNotFound;
+                              .executableNotFound('Git');
                         }
                         setState(() {});
                       } else {
                         gitInstalled = true;
                         if (mounted) {
                           gitInstalledText = AppLocalizations.of(context)!
-                              .gitExectutableFoundIn(gitExectutable);
+                              .executableFoundIn('Git', gitExectutable);
                         }
                         setState(() {});
                       }

@@ -165,10 +165,16 @@
     "continue2": "CONTINUE",
     "create": "Create",
     "checkHugoInstalled": "Check, if Hugo is installed",
-    "hugoExectutableNotFound": "Hugo executable not found. Please make sure that Hugo is installed correctly.",
-    "hugoExectutableFoundIn": "Hugo executable found in: {path}",
-    "@hugoExectutableFoundIn": {
+    "executableNotFound": "{program} executable not found. Please make sure that {program} is installed correctly.",
+    "@executableNotFound": {
       "placeholders": {
+        "program": { "type": "String" }
+      }
+    },
+    "executableFoundIn": "{program} executable found in: {path}",
+    "@executableFoundIn": {
+      "placeholders": {
+        "program": { "type": "String" },
         "path": { "type": "String" }
       }
     },
@@ -197,13 +203,6 @@
     "download": "Download",
     "startOver": "Start over",
     "checkGitInstalled": "Check, if Git is installed",
-    "gitExecutableNotFound": "Git executable not found. Please make sure that Hugo is installed correctly.",
-    "gitExectutableFoundIn": "Git executable found in: {path}",
-    "@gitExectutableFoundIn": {
-      "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "downloadTheme": "Download theme",
     "repositoryInvalidURL": "Invalid URL",
     "themeRepository": "Theme repository",
@@ -306,9 +305,10 @@
       }
     },
     "restore": "Restore",
-    "error_HugoExecutableNotFound": "Error: Hugo executable not found while running command {command}",
-    "@error_HugoExecutableNotFound": {
+    "error_executableNotFound": "Error: {program} executable not found while running command {command}",
+    "@error_executableNotFound": {
      "placeholders": {
+        "program": { "type": "String" },
         "command": { "type": "String" }
       }
     },
