@@ -4,7 +4,6 @@ import 'package:buhocms/src/pages/editing_page.dart';
 import 'package:buhocms/src/provider/editing/unsaved_text_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:process_run/which.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -12,21 +11,6 @@ import '../provider/navigation/file_navigation_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
 import '../widgets/snackbar.dart';
-
-void checkHugoInstalled({
-  required BuildContext context,
-  required String command,
-}) async {
-  final hugoExectutable = whichSync('hugo');
-  if (hugoExectutable == null) {
-    showSnackbar(
-      text: AppLocalizations.of(context)!
-          .error_HugoExecutableNotFound('"$command"'),
-      seconds: 5,
-    );
-    return;
-  }
-}
 
 enum HugoType {
   typeString,
