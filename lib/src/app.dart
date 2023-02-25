@@ -28,6 +28,9 @@ class App extends StatefulWidget {
   State<App> createState() => _AppState();
 }
 
+final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
+
 class _AppState extends State<App> with WindowListener {
   Key key = UniqueKey();
 
@@ -64,6 +67,7 @@ class _AppState extends State<App> with WindowListener {
           return Consumer2<LocaleProvider, ThemeProvider>(
             builder: (_, localeProvider, themeProvider, __) {
               return MaterialApp(
+                scaffoldMessengerKey: rootScaffoldMessengerKey,
                 title: 'BuhoCMS',
                 debugShowCheckedModeBanner: false,
                 themeMode: themeProvider.themeMode(),
