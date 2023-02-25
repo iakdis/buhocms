@@ -1,16 +1,16 @@
 import 'dart:io';
 
 import 'package:buhocms/src/provider/app/shell_provider.dart';
+import 'package:buhocms/src/utils/terminal_command.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:process_run/shell.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../logic/buho_functions.dart';
 import '../../provider/navigation/navigation_provider.dart';
-import '../../ssg/hugo.dart';
 import '../../utils/preferences.dart';
+import '../../utils/program_installed.dart';
 import '../../widgets/snackbar.dart';
 
 class CreateHugoSite extends StatefulWidget {
@@ -71,6 +71,30 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
     });
   }
 
+  void checkHugoExecutableInstalled() {
+    checkProgramInstalled(
+      context: context,
+      executable: 'hugo',
+      notFound: () {
+        hugoInstalled = false;
+        if (mounted) {
+          hugoInstalledText =
+              AppLocalizations.of(context)!.executableNotFound('Hugo');
+        }
+        setState(() {});
+      },
+      found: (finalExecutable) {
+        hugoInstalled = true;
+        if (mounted) {
+          hugoInstalledText = AppLocalizations.of(context)!
+              .executableFoundIn('Hugo', finalExecutable);
+        }
+        setState(() {});
+      },
+      showErrorSnackbar: false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,20 +145,19 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
               setState(() => currentStep++);
             } else {
               print('CREATE');
-              checkHugoInstalled(
+              final shellProvider =
+                  Provider.of<ShellProvider>(context, listen: false);
+              checkProgramInstalled(
                 context: context,
                 command: 'hugo new site $siteName',
+                executable: 'hugo',
               );
-              var shell = Shell(workingDirectory: sitePath);
-              await shell.run('''
-
-              echo Start!
-
-              # Create Hugo site
-              hugo new site $siteName
-
-          ''');
-              shell.kill();
+              final commandToRun = 'hugo new site $siteName';
+              await runTerminalCommand(
+                context: context,
+                workingDirectory: sitePath,
+                command: commandToRun,
+              );
 
               Preferences.clearPreferences();
               Preferences.setOnBoardingComplete(true);
@@ -202,24 +225,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                   ),
                   const SizedBox(height: 32),
                   ElevatedButton(
-                    onPressed: () async {
-                      var hugoExectutable = await which('hugo');
-                      if (hugoExectutable == null) {
-                        hugoInstalled = false;
-                        if (mounted) {
-                          hugoInstalledText = AppLocalizations.of(context)!
-                              .hugoExectutableNotFound;
-                        }
-                        setState(() {});
-                      } else {
-                        hugoInstalled = true;
-                        if (mounted) {
-                          hugoInstalledText = AppLocalizations.of(context)!
-                              .hugoExectutableFoundIn(hugoExectutable);
-                        }
-                        setState(() {});
-                      }
-                    },
+                    onPressed: () => checkHugoExecutableInstalled(),
                     child:
                         Text(AppLocalizations.of(context)!.checkHugoInstalled),
                   ),
