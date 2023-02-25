@@ -210,7 +210,6 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
 
         if (mounted) {
           showSnackbar(
-            context: context,
             text: AppLocalizations.of(context)!.addedFrontmatterToList(
                 '"$name"', '"${type.name.substring(4)}"'),
             seconds: 4,
@@ -407,7 +406,6 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
 
         if (mounted) {
           showSnackbar(
-            context: context,
             text: AppLocalizations.of(context)!.editedFrontmatterToList(
                 '"$oldName"',
                 '"$name"',
@@ -435,7 +433,6 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
 
     if (mounted) {
       showSnackbar(
-        context: context,
         text: AppLocalizations.of(context)!
             .removedFrontmatterToList('"${element.key}"', '"${element.value}"'),
         seconds: 4,

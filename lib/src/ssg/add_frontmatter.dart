@@ -56,7 +56,6 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
 
     showSnackbar(
-      context: context,
       text: AppLocalizations.of(context)!.addedFrontmatter(
           '"$hugoFrontmatter"', '"${type.name.substring(4)}"'),
       seconds: 4,

@@ -20,7 +20,6 @@ void checkHugoInstalled({
   final hugoExectutable = whichSync('hugo');
   if (hugoExectutable == null) {
     showSnackbar(
-      context: context,
       text: AppLocalizations.of(context)!
           .error_HugoExecutableNotFound('"$command"'),
       seconds: 5,
@@ -631,7 +630,6 @@ class HugoWidgetState extends State<HugoWidget> {
               fileNavigationProvider.setFrontMatterText(newFrontmatterText);
 
               showSnackbar(
-                context: context,
                 text: AppLocalizations.of(context)!.removedFrontmatter(
                     '"${frontmatter.key}"',
                     '"${frontmatter.value.name.substring(4)}"'),

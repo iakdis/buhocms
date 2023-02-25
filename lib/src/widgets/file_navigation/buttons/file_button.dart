@@ -86,7 +86,6 @@ class _FileButtonState extends State<FileButton> {
       if (allFiles[i].path == newPath) {
         if (mounted) {
           showSnackbar(
-            context: context,
             text: AppLocalizations.of(context)!.error_RenameFile(
                 '"${file.path.split(Platform.pathSeparator).last}"',
                 '"${newPath.split(Platform.pathSeparator).last}"'),
@@ -102,7 +101,6 @@ class _FileButtonState extends State<FileButton> {
 
     if (mounted) {
       showSnackbar(
-        context: context,
         text: AppLocalizations.of(context)!.renamedFile(
             '"${file.path.split(Platform.pathSeparator).last}"',
             '"${newPath.split(Platform.pathSeparator).last}"'),
@@ -238,7 +236,6 @@ class _FileButtonState extends State<FileButton> {
 
                 if (mounted) {
                   showSnackbar(
-                    context: context,
                     text: AppLocalizations.of(context)!
                         .deletedFile('"${widget.path}"'),
                     seconds: 4,

@@ -91,7 +91,6 @@ class _DirectoryButtonState extends State<DirectoryButton> {
       if (allFiles[i].path == newPath) {
         if (mounted) {
           showSnackbar(
-            context: context,
             text: AppLocalizations.of(context)!.error_RenameDirectory(
                 '"${directory.path.split(Platform.pathSeparator).last}"',
                 '"${newPath.split(Platform.pathSeparator).last}"'),
@@ -109,7 +108,6 @@ class _DirectoryButtonState extends State<DirectoryButton> {
 
     if (mounted) {
       showSnackbar(
-        context: context,
         text: AppLocalizations.of(context)!.renamedDirectory(
             '"${directory.path.split(Platform.pathSeparator).last}"',
             '"${newPath.split(Platform.pathSeparator).last}"'),
@@ -177,7 +175,6 @@ class _DirectoryButtonState extends State<DirectoryButton> {
 
                 if (mounted) {
                   showSnackbar(
-                    context: context,
                     text: AppLocalizations.of(context)!
                         .deletedFolder('"${widget.path}"'),
                     seconds: 4,

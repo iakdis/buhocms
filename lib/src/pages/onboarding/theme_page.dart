@@ -89,7 +89,6 @@ class _ThemePageState extends State<ThemePage> {
     if (Directory('${Preferences.getSitePath()}${Platform.pathSeparator}$path')
         .existsSync()) {
       showSnackbar(
-        context: context,
         text: AppLocalizations.of(context)!.error_ThemeAlreadyExists(themeName),
         seconds: 4,
       );

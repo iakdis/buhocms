@@ -90,7 +90,6 @@ class AddFile {
     if (empty) return;
 
     showSnackbar(
-      context: context,
       text: AppLocalizations.of(context)!.postCreated('"$name"', '"$path"'),
       seconds: 4,
     );

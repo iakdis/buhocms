@@ -90,7 +90,6 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
               }
               if (!Directory(sitePath).existsSync()) {
                 showSnackbar(
-                  context: context,
                   text: AppLocalizations.of(context)!
                       .error_DirectoryDoesNotExist('"$sitePath"'),
                   seconds: 4,

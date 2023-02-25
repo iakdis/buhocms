@@ -145,7 +145,6 @@ class AddFolder {
                                     '$path${Platform.pathSeparator}$folderName';
 
                                 showSnackbar(
-                                  context: context,
                                   text: AppLocalizations.of(context)!
                                       .folderCreated('"$finalPath"'),
                                   seconds: 4,

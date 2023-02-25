@@ -96,7 +96,6 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
               }
               if (!Directory(sitePath).existsSync()) {
                 showSnackbar(
-                  context: context,
                   text: AppLocalizations.of(context)!
                       .error_DirectoryDoesNotExist('"$sitePath"'),
                   seconds: 4,
@@ -112,7 +111,6 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
               }
               if (Directory(path).existsSync()) {
                 showSnackbar(
-                  context: context,
                   text: AppLocalizations.of(context)!
                       .error_DirectoryAlreadyExists('"$path"'),
                   seconds: 4,

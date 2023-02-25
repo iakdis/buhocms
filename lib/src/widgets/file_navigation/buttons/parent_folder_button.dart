@@ -73,7 +73,6 @@ class ParentFolderButton extends StatelessWidget {
           onTap: () {
             if (savePathSplit.contains('content')) {
               showSnackbar(
-                context: context,
                 text: AppLocalizations.of(context)!.alreadyAtHighestLevel,
                 seconds: 2,
               );

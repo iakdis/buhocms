@@ -133,7 +133,6 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
       await windowManager.setFullScreen(true);
       if (mounted) {
         showSnackbar(
-          context: context,
           text: AppLocalizations.of(context)!.fullScreenInfo,
           seconds: 3,
         );

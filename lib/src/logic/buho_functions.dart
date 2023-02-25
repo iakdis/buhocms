@@ -41,7 +41,6 @@ setGUIMode({
 refreshFiles({required BuildContext context}) {
   Provider.of<NavigationProvider>(context, listen: false).notifyAllListeners();
   showSnackbar(
-    context: context,
     text: AppLocalizations.of(context)!.refreshedFileList,
     seconds: 2,
   );
@@ -91,14 +90,12 @@ save({
           true ||
       !checkUnsaved) {
     showSnackbar(
-      context: context,
       text: AppLocalizations.of(context)!.fileSavedSuccessfully,
       seconds: 2,
     );
     editingPageKey.currentState?.saveFileAndFrontmatter();
   } else {
     showSnackbar(
-      context: context,
       text: AppLocalizations.of(context)!.nothingToSave,
       seconds: 1,
     );
@@ -129,7 +126,6 @@ revert({
           TextButton(
             onPressed: () async {
               showSnackbar(
-                context: context,
                 text: AppLocalizations.of(context)!.fileRevertedSuccessfully,
                 seconds: 2,
               );
@@ -143,7 +139,6 @@ revert({
     );
   } else {
     showSnackbar(
-      context: context,
       text: AppLocalizations.of(context)!.nothingToRevert,
       seconds: 1,
     );
@@ -178,7 +173,6 @@ void startHugoServer({
   );
 
   showSnackbar(
-    context: context,
     text: shellProvider.shellActive == true
         ? AppLocalizations.of(context)!.alreadyStartedAHugoServer
         : AppLocalizations.of(context)!.startedHugoServer,
@@ -205,7 +199,6 @@ void stopHugoServer({
 
   if (snackbar) {
     showSnackbar(
-      context: context,
       text: shellProvider.shellActive == true
           ? AppLocalizations.of(context)!.stoppedHugoServer
           : AppLocalizations.of(context)!.noHugoServerRunning,
@@ -224,7 +217,6 @@ void buildHugoSite({required BuildContext context}) async {
   );
 
   showSnackbar(
-    context: context,
     text: AppLocalizations.of(context)!.builtHugoSite,
     seconds: 4,
   );
