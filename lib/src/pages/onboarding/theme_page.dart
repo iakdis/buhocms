@@ -2,16 +2,16 @@ import 'dart:io';
 
 import 'package:buhocms/src/utils/globals.dart';
 import 'package:buhocms/src/utils/preferences.dart';
+import 'package:buhocms/src/utils/program_installed.dart';
 import 'package:buhocms/src/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:process_run/shell.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../provider/navigation/navigation_provider.dart';
-import '../../ssg/hugo.dart';
 import '../../ssg/themes.dart';
+import '../../utils/terminal_command.dart';
 
 class ThemePage extends StatefulWidget {
   const ThemePage({super.key});
@@ -107,21 +107,13 @@ class _ThemePageState extends State<ThemePage> {
       });
     }
 
-    checkHugoInstalled(
-      context: context,
-      command: 'git clone $themeName $path --depth=1',
-    );
-    var shell = Shell(workingDirectory: Preferences.getSitePath());
     setState(() => isDownloading = true);
-    await shell.run('''
-                      
-                                            echo Start!
-                      
-                                            # Download Hugo theme
-                                            git clone $themeName $path --depth=1
-                      
-                                        ''');
-    shell.kill();
+    final commandToRun = 'git clone $themeName $path --depth=1';
+    await runTerminalCommand(
+      context: context,
+      workingDirectory: Preferences.getSitePath(),
+      command: commandToRun,
+    );
     setState(() => isDownloading = false);
 
     await Preferences.setHugoTheme(
@@ -137,6 +129,30 @@ class _ThemePageState extends State<ThemePage> {
     //git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1
     //git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
     //git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder
+  }
+
+  void checkGitExecutableInstalled() {
+    checkProgramInstalled(
+      context: context,
+      executable: 'git',
+      notFound: () {
+        gitInstalled = false;
+        if (mounted) {
+          gitInstalledText =
+              AppLocalizations.of(context)!.executableNotFound('Git');
+        }
+        setState(() {});
+      },
+      found: (finalExecutable) {
+        gitInstalled = true;
+        if (mounted) {
+          gitInstalledText = AppLocalizations.of(context)!
+              .executableFoundIn('Git', finalExecutable);
+        }
+        setState(() {});
+      },
+      showErrorSnackbar: false,
+    );
   }
 
   Widget _selectTheme() {
@@ -275,24 +291,7 @@ class _ThemePageState extends State<ThemePage> {
                   ),
                   const SizedBox(height: 32),
                   ElevatedButton(
-                    onPressed: () async {
-                      var gitExectutable = await which('git');
-                      if (gitExectutable == null) {
-                        gitInstalled = false;
-                        if (mounted) {
-                          gitInstalledText = AppLocalizations.of(context)!
-                              .executableNotFound('Git');
-                        }
-                        setState(() {});
-                      } else {
-                        gitInstalled = true;
-                        if (mounted) {
-                          gitInstalledText = AppLocalizations.of(context)!
-                              .executableFoundIn('Git', gitExectutable);
-                        }
-                        setState(() {});
-                      }
-                    },
+                    onPressed: () => checkGitExecutableInstalled(),
                     child:
                         Text(AppLocalizations.of(context)!.checkGitInstalled),
                   ),
