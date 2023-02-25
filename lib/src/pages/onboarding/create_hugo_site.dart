@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:buhocms/src/provider/app/shell_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:process_run/shell.dart';
@@ -142,6 +143,9 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                   '$sitePath${Platform.pathSeparator}$siteName');
               Preferences.setCurrentPath(
                   '${Preferences.getSitePath()}${Platform.pathSeparator}content');
+
+              shellProvider.updateShell();
+
               if (mounted) {
                 stopHugoServer(context: context, snackbar: false);
 

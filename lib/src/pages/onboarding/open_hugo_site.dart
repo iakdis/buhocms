@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../provider/app/shell_provider.dart';
 import '../../provider/navigation/navigation_provider.dart';
 import '../../utils/preferences.dart';
 
@@ -106,6 +107,9 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
               Preferences.setSitePath(sitePath);
               Preferences.setCurrentPath(
                   '${Preferences.getSitePath()}${Platform.pathSeparator}content');
+
+              Provider.of<ShellProvider>(context, listen: false).updateShell();
+
               if (mounted) {
                 Navigator.of(context).pop();
                 Provider.of<NavigationProvider>(context, listen: false)
