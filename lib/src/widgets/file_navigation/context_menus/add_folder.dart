@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:buhocms/src/logic/buho_functions.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
-import 'package:process_run/shell.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../logic/files.dart';
@@ -21,7 +20,6 @@ class AddFolder {
   final bool mounted;
   final GlobalKey<EditingPageState> editingPageKey;
 
-  Shell newPostShell = Shell(workingDirectory: Preferences.getSitePath());
   String folderName = 'posts';
   final TextEditingController folderNameController = TextEditingController();
 
@@ -142,7 +140,7 @@ class AddFolder {
                                 if (empty) return;
 
                                 var finalPath =
-                                    '$path${Platform.pathSeparator}$folderName';
+                                    '${Preferences.getCurrentPath()}${Platform.pathSeparator}$folderName';
 
                                 showSnackbar(
                                   text: AppLocalizations.of(context)!
