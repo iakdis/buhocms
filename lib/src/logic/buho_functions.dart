@@ -15,8 +15,9 @@ import '../pages/onboarding/open_hugo_site.dart';
 import '../provider/editing/editing_provider.dart';
 import '../provider/navigation/file_navigation_provider.dart';
 import '../provider/navigation/navigation_provider.dart';
-import '../ssg/hugo.dart';
 import '../utils/preferences.dart';
+import '../utils/program_installed.dart';
+import '../utils/terminal_command.dart';
 import '../utils/unsaved_check.dart';
 import '../widgets/file_navigation/context_menus/add_file.dart';
 import '../widgets/file_navigation/context_menus/add_folder.dart';
@@ -163,13 +164,12 @@ void openHugoThemes({required BuildContext context, Function? setState}) {
       .then((value) => setState?.call());
 }
 
-void startHugoServer({
-  required BuildContext context,
-}) async {
+void startHugoServer({required BuildContext context}) {
   final shellProvider = Provider.of<ShellProvider>(context, listen: false);
-  checkHugoInstalled(
+  checkProgramInstalled(
     context: context,
     command: 'hugo server',
+    executable: 'hugo',
   );
 
   showSnackbar(
@@ -179,22 +179,16 @@ void startHugoServer({
     seconds: 4,
   );
 
-  shellProvider.run('''
-
-          echo Start!
-
-          echo ${Preferences.getCurrentPath()}
-
-          # Start hugo server
-          hugo server
-
-          ''');
+  const commandToRun = 'hugo server';
+  runTerminalCommandWithShell(
+    context: context,
+    shell: shellProvider.shell,
+    successFunction: () => shellProvider.setShellActive(true),
+    command: commandToRun,
+  );
 }
 
-void stopHugoServer({
-  required BuildContext context,
-  bool snackbar = true,
-}) {
+void stopHugoServer({required BuildContext context, bool snackbar = true}) {
   final shellProvider = Provider.of<ShellProvider>(context, listen: false);
 
   if (snackbar) {
@@ -210,10 +204,10 @@ void stopHugoServer({
 }
 
 void buildHugoSite({required BuildContext context}) async {
-  final shellProvider = Provider.of<ShellProvider>(context, listen: false);
-  checkHugoInstalled(
+  checkProgramInstalled(
     context: context,
     command: 'hugo',
+    executable: 'hugo',
   );
 
   showSnackbar(
@@ -221,16 +215,12 @@ void buildHugoSite({required BuildContext context}) async {
     seconds: 4,
   );
 
-  await shellProvider.runBuild('''
-
-          echo Start!
-
-          # Start hugo server
-          hugo
-
-          ''');
-
-  shellProvider.killBuild();
+  const commandToRun = 'hugo';
+  await runTerminalCommand(
+    context: context,
+    workingDirectory: Preferences.getSitePath(),
+    command: commandToRun,
+  );
 }
 
 void openHugoPublicFolder({required BuildContext context}) {
