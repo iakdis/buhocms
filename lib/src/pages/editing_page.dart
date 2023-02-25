@@ -692,16 +692,22 @@ class EditingPageState extends State<EditingPage> with WindowListener {
 
                   if (snapshot.hasData) {
                     if (snapshot.data!.isEmpty) {
+                      final directoryExists =
+                          Directory(Preferences.getCurrentPath()).existsSync();
                       return Center(
                         child: SingleChildScrollView(
                           child: Padding(
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(64.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  AppLocalizations.of(context)!
-                                      .createYourFirstPost,
+                                  directoryExists
+                                      ? AppLocalizations.of(context)!
+                                          .createYourFirstPost
+                                      : AppLocalizations.of(context)!
+                                          .error_DirectoryDoesNotExist(
+                                              '"${Preferences.getCurrentPath()}"'),
                                   style: TextStyle(
                                     fontSize: 36.0,
                                     fontWeight: FontWeight.bold,
@@ -709,35 +715,44 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                                         Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
-                                const SizedBox(height: 32.0),
-                                ElevatedButton.icon(
-                                  onPressed: () => addFile(
-                                      context: context,
-                                      mounted: mounted,
-                                      editingPageKey: widget.editingPageKey),
-                                  icon: const Icon(Icons.text_snippet),
-                                  label: Text(AppLocalizations.of(context)!
-                                      .createNewPost),
-                                  style: const ButtonStyle(
-                                    fixedSize: MaterialStatePropertyAll(
-                                        Size(double.infinity, 40.0)),
+                                if (directoryExists)
+                                  Column(
+                                    children: [
+                                      const SizedBox(height: 32.0),
+                                      ElevatedButton.icon(
+                                        onPressed: () => addFile(
+                                            context: context,
+                                            mounted: mounted,
+                                            editingPageKey:
+                                                widget.editingPageKey),
+                                        icon: const Icon(Icons.text_snippet),
+                                        label: Text(
+                                            AppLocalizations.of(context)!
+                                                .createNewPost),
+                                        style: const ButtonStyle(
+                                          fixedSize: MaterialStatePropertyAll(
+                                              Size(double.infinity, 40.0)),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 24.0),
+                                      ElevatedButton.icon(
+                                        onPressed: () => addFolder(
+                                            context: context,
+                                            mounted: mounted,
+                                            setStateCallback: () {},
+                                            editingPageKey:
+                                                widget.editingPageKey),
+                                        icon: const Icon(Icons.folder_outlined),
+                                        label: Text(
+                                            AppLocalizations.of(context)!
+                                                .createNewFolder),
+                                        style: const ButtonStyle(
+                                          fixedSize: MaterialStatePropertyAll(
+                                              Size(double.infinity, 40.0)),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                const SizedBox(height: 24.0),
-                                ElevatedButton.icon(
-                                  onPressed: () => addFolder(
-                                      context: context,
-                                      mounted: mounted,
-                                      setStateCallback: () {},
-                                      editingPageKey: widget.editingPageKey),
-                                  icon: const Icon(Icons.folder_outlined),
-                                  label: Text(AppLocalizations.of(context)!
-                                      .createNewFolder),
-                                  style: const ButtonStyle(
-                                    fixedSize: MaterialStatePropertyAll(
-                                        Size(double.infinity, 40.0)),
-                                  ),
-                                ),
                               ],
                             ),
                           ),

@@ -75,7 +75,9 @@ Future<List<File>> getAllFiles({BuildContext? context}) async {
   Directory fileDirectory = Directory(Preferences.getCurrentPath()
       .substring(0, Preferences.getCurrentPath().indexOf('content') + 7));
 
-  var subscription =
+  if (!fileDirectory.existsSync()) return [];
+
+  final subscription =
       fileDirectory.list(recursive: true, followLinks: false).listen(
     (FileSystemEntity entity) {
       if (entity is File) {
@@ -92,6 +94,9 @@ Future<List<File>> getAllFiles({BuildContext? context}) async {
 Future<List<FileSystemEntity>> getAllFilesAndDirectoriesInDirectory(
     {required bool recursive, required String path}) async {
   final fileDirectory = Directory(path);
+
+  if (!fileDirectory.existsSync()) return [];
+
   final filesAndDirectories = <FileSystemEntity>[];
 
   final subscription =
