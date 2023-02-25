@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:buhocms/src/logic/buho_functions.dart';
-import 'package:buhocms/src/ssg/hugo.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
-import 'package:process_run/shell.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,6 +12,8 @@ import '../../../provider/editing/tabs_provider.dart';
 import '../../../provider/navigation/file_navigation_provider.dart';
 import '../../../provider/navigation/navigation_provider.dart';
 import '../../../utils/preferences.dart';
+import '../../../utils/program_installed.dart';
+import '../../../utils/terminal_command.dart';
 import '../../../utils/unsaved_check.dart';
 import '../../snackbar.dart';
 
@@ -28,7 +28,6 @@ class AddFile {
   final GlobalKey<EditingPageState> editingPageKey;
   final FileNavigationProvider fileNavigationProvider;
 
-  Shell newPostShell = Shell(workingDirectory: Preferences.getSitePath());
   String name = 'my-post';
   final TextEditingController nameController = TextEditingController();
   bool empty = false;
@@ -59,21 +58,18 @@ class AddFile {
       finalPathAndName = '$name.md';
     }
 
-    checkHugoInstalled(
+    checkProgramInstalled(
       context: context,
       command: 'hugo new $finalPathAndName',
+      executable: 'hugo',
     );
 
-    await newPostShell.run('''
-
-          echo Start!
-
-          # Add new hugo content
-          hugo new $finalPathAndName
-
-          ''');
-
-    newPostShell.kill();
+    final commandToRun = 'hugo new $finalPathAndName';
+    await runTerminalCommand(
+      context: context,
+      workingDirectory: Preferences.getSitePath(),
+      command: commandToRun,
+    );
 
     if (mounted) refreshFiles(context: context);
   }
