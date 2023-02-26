@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CommandDialog extends StatelessWidget {
+class CommandDialog extends StatefulWidget {
   const CommandDialog({
     super.key,
     required this.title,
@@ -9,54 +9,59 @@ class CommandDialog extends StatelessWidget {
     required this.expansionIcon,
     required this.expansionTitle,
     required this.yes,
-    required this.children,
+    required this.dialogChildren,
+    required this.expansionChildren,
   });
 
   final Widget title;
   final IconData icon;
   final IconData expansionIcon;
   final String expansionTitle;
-  final Function yes;
-  final List<Widget> children;
+  final Function? yes;
+  final List<Widget> dialogChildren;
+  final List<Widget> expansionChildren;
 
+  @override
+  State<CommandDialog> createState() => _CommandDialogState();
+}
+
+class _CommandDialogState extends State<CommandDialog> {
   Widget commandDialog() {
-    return LayoutBuilder(builder: (context, constraints) {
-      return StatefulBuilder(builder: (context, setState) {
-        return SimpleDialog(
-          contentPadding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 12.0),
+    return SimpleDialog(
+      contentPadding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 12.0),
+      children: [
+        Column(
           children: [
-            Column(
-              children: [
-                Icon(icon, size: 64.0),
-                const SizedBox(height: 16.0),
-                title,
-              ],
+            Icon(widget.icon, size: 64.0),
+            const SizedBox(height: 16.0),
+            widget.title,
+          ],
+        ),
+        const SizedBox(height: 32.0),
+        Column(children: widget.dialogChildren),
+        ExpansionTile(
+          maintainState: true,
+          leading: Icon(widget.expansionIcon),
+          title: Text(widget.expansionTitle),
+          expandedAlignment: Alignment.topLeft,
+          children: widget.expansionChildren,
+        ),
+        const SizedBox(height: 100),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
-            const SizedBox(height: 32.0),
-            ExpansionTile(
-              leading: Icon(expansionIcon),
-              title: Text(expansionTitle),
-              expandedAlignment: Alignment.topLeft,
-              children: children,
-            ),
-            const SizedBox(height: 100),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(AppLocalizations.of(context)!.cancel),
-                ),
-                TextButton(
-                  onPressed: () => yes(),
-                  child: Text(AppLocalizations.of(context)!.yes),
-                ),
-              ],
+            TextButton(
+              onPressed: () => widget.yes?.call(),
+              child: Text(AppLocalizations.of(context)!.yes),
             ),
           ],
-        );
-      });
-    });
+        ),
+      ],
+    );
   }
 
   @override
