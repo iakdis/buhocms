@@ -31,6 +31,7 @@ class AddFile {
   String name = 'my-post';
   final TextEditingController nameController = TextEditingController();
   bool empty = false;
+  String flags = '';
 
   Future<void> _addNew({required String path}) async {
     if (path == null) return;
@@ -58,13 +59,13 @@ class AddFile {
       finalPathAndName = '$name.md';
     }
 
+    final commandToRun = 'hugo new $finalPathAndName $flags';
     checkProgramInstalled(
       context: context,
-      command: 'hugo new $finalPathAndName',
+      command: commandToRun,
       executable: 'hugo',
     );
 
-    final commandToRun = 'hugo new $finalPathAndName';
     await runTerminalCommand(
       context: context,
       workingDirectory: Preferences.getSitePath(),
@@ -118,6 +119,35 @@ class AddFile {
         fileNavigationIndex: fileNavigationProvider.fileNavigationIndex);
   }
 
+  Widget textField({
+    Widget? leading,
+    BoxConstraints constraints = const BoxConstraints(),
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    Function(String)? onChanged,
+    String? prefixText,
+    String? suffixText,
+    String? hintText,
+    String? errorText,
+  }) {
+    return ConstrainedBox(
+      constraints: constraints,
+      child: TextField(
+        controller: controller,
+        focusNode: focusNode,
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          icon: leading,
+          prefixText: prefixText,
+          suffixText: suffixText,
+          hintText: hintText,
+          errorText: errorText,
+          errorMaxLines: 5,
+        ),
+      ),
+    );
+  }
+
   void _newFileDialog({required String path}) async {
     nameController.text = name;
     var allFiles = await getAllFiles();
@@ -162,51 +192,72 @@ class AddFile {
                     ],
                   ),
                   const SizedBox(height: 32.0),
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      Text(AppLocalizations.of(context)!.name,
-                          style: textStyle),
-                      ConstrainedBox(
-                        constraints:
-                            const BoxConstraints(minWidth: 200, maxWidth: 300),
-                        child: IntrinsicWidth(
-                          child: TextField(
-                            controller: nameController,
-                            focusNode: nameFocusNode,
-                            onChanged: (value) {
-                              setState(() {
-                                name = value;
-                                empty = name.isEmpty;
+                  textField(
+                    leading: Text(AppLocalizations.of(context)!.name,
+                        style: textStyle),
+                    controller: nameController,
+                    focusNode: nameFocusNode,
+                    onChanged: (value) {
+                      setState(() {
+                        name = value;
+                        empty = name.isEmpty;
 
-                                for (var i = 0; i < allFiles.length; i++) {
-                                  if (allFiles[i].path ==
-                                      '$path${Platform.pathSeparator}$name.md') {
-                                    fileAlreadyExists = true;
-                                    return;
-                                  }
-                                }
-                                fileAlreadyExists = false;
-                              });
-                            },
-                            decoration: InputDecoration(
-                              suffixText: '             .md',
-                              hintText: 'my-post',
-                              errorText: empty
-                                  ? AppLocalizations.of(context)!.cantBeEmpty
-                                  : fileAlreadyExists
-                                      ? AppLocalizations.of(context)!
-                                          .error_fileAlreadyExists('"$name"',
-                                              '"${path.substring(path.indexOf('content'))}"')
-                                      : null,
-                              errorMaxLines: 5,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                        for (var i = 0; i < allFiles.length; i++) {
+                          if (allFiles[i].path ==
+                              '$path${Platform.pathSeparator}$name.md') {
+                            fileAlreadyExists = true;
+                            return;
+                          }
+                        }
+                        fileAlreadyExists = false;
+                      });
+                    },
+                    suffixText: '             .md',
+                    hintText: 'my-post',
+                    errorText: empty
+                        ? AppLocalizations.of(context)!.cantBeEmpty
+                        : fileAlreadyExists
+                            ? AppLocalizations.of(context)!
+                                .error_fileAlreadyExists('"$name"',
+                                    '"${path.substring(path.indexOf('content'))}"')
+                            : null,
                   ),
-                        ),
+                  const SizedBox(height: 16),
+                  ExpansionTile(
+                    leading: const Icon(Icons.terminal),
+                    title: Text(AppLocalizations.of(context)!.terminal),
+                    expandedAlignment: Alignment.topLeft,
+                    children: [
+                      textField(
+                        leading: Text(AppLocalizations.of(context)!.command),
+                        controller: nameController,
+                        onChanged: (value) {
+                          setState(() {
+                            name = value;
+                            empty = name.isEmpty;
+
+                            for (var i = 0; i < allFiles.length; i++) {
+                              if (allFiles[i].path ==
+                                  '$path${Platform.pathSeparator}$name.md') {
+                                fileAlreadyExists = true;
+                                return;
+                              }
+                            }
+                            fileAlreadyExists = false;
+                          });
+                        },
+                        prefixText: 'hugo new ',
+                        hintText: 'my-post',
+                      ),
+                      const SizedBox(height: 12),
+                      textField(
+                        leading: Text(AppLocalizations.of(context)!.flags),
+                        onChanged: (value) {
+                          setState(() {
+                            flags = value;
+                          });
+                        },
+                        hintText: '--force',
                       ),
                     ],
                   ),
@@ -219,7 +270,7 @@ class AddFile {
                         child: Text(AppLocalizations.of(context)!.cancel),
                       ),
                       TextButton(
-                        onPressed: empty || fileAlreadyExists
+                        onPressed: empty
                             ? null
                             : () => _create(
                                   path: path,

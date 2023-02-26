@@ -351,6 +351,9 @@
         "type": { "type": "String" }
       }
     },
+    "terminal": "Terminal",
+    "command": "Command:",
+    "flags": "Flags:",
 
     "settings": "Settings",
     "appSettings": "APP SETTINGS",

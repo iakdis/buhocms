@@ -351,6 +351,9 @@
         "type": { "type": "String" }
       }
     },
+    "terminal": "Kommandozeile",
+    "command": "Befehl:",
+    "flags": "Optionen:",
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",
