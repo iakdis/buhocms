@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:buhocms/src/logic/buho_functions.dart';
+import 'package:buhocms/src/widgets/text_field.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -119,35 +120,6 @@ class AddFile {
         fileNavigationIndex: fileNavigationProvider.fileNavigationIndex);
   }
 
-  Widget textField({
-    Widget? leading,
-    BoxConstraints constraints = const BoxConstraints(),
-    TextEditingController? controller,
-    FocusNode? focusNode,
-    Function(String)? onChanged,
-    String? prefixText,
-    String? suffixText,
-    String? hintText,
-    String? errorText,
-  }) {
-    return ConstrainedBox(
-      constraints: constraints,
-      child: TextField(
-        controller: controller,
-        focusNode: focusNode,
-        onChanged: onChanged,
-        decoration: InputDecoration(
-          icon: leading,
-          prefixText: prefixText,
-          suffixText: suffixText,
-          hintText: hintText,
-          errorText: errorText,
-          errorMaxLines: 5,
-        ),
-      ),
-    );
-  }
-
   void _newFileDialog({required String path}) async {
     nameController.text = name;
     var allFiles = await getAllFiles();
@@ -192,7 +164,7 @@ class AddFile {
                     ],
                   ),
                   const SizedBox(height: 32.0),
-                  textField(
+                  CustomTextField(
                     leading: Text(AppLocalizations.of(context)!.name,
                         style: textStyle),
                     controller: nameController,
@@ -228,7 +200,7 @@ class AddFile {
                     title: Text(AppLocalizations.of(context)!.terminal),
                     expandedAlignment: Alignment.topLeft,
                     children: [
-                      textField(
+                      CustomTextField(
                         leading: Text(AppLocalizations.of(context)!.command),
                         controller: nameController,
                         onChanged: (value) {
@@ -250,7 +222,7 @@ class AddFile {
                         hintText: 'my-post',
                       ),
                       const SizedBox(height: 12),
-                      textField(
+                      CustomTextField(
                         leading: Text(AppLocalizations.of(context)!.flags),
                         onChanged: (value) {
                           setState(() {
