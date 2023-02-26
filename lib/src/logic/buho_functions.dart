@@ -22,7 +22,7 @@ import '../utils/unsaved_check.dart';
 import '../widgets/file_navigation/context_menus/add_file.dart';
 import '../widgets/file_navigation/context_menus/add_folder.dart';
 import '../widgets/snackbar.dart';
-import '../widgets/text_field.dart';
+import '../widgets/command_dialog.dart';
 
 setGUIMode({
   required BuildContext context,

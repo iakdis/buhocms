@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:buhocms/src/logic/buho_functions.dart';
-import 'package:buhocms/src/widgets/text_field.dart';
+import 'package:buhocms/src/widgets/command_dialog.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
