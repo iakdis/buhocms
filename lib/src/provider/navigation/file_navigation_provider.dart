@@ -42,7 +42,9 @@ class FileNavigationProvider extends ChangeNotifier {
 
     //_initialText = allFiles[fileNavigationIndex ?? 0].readAsStringSync();
     if ((fileNavigationIndex) != -1) {
-      _initialText = await allFiles[fileNavigationIndex].readAsString();
+      _initialText = allFiles.isEmpty
+          ? ''
+          : await allFiles[fileNavigationIndex].readAsString();
     }
 
     if (dontExecute == true) {
