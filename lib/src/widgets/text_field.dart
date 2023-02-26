@@ -8,9 +8,11 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.focusNode,
     this.onChanged,
+    this.readOnly = false,
+    this.initialText,
     this.prefixText,
     this.suffixText,
-    this.hintText,
+    this.helperText,
     this.errorText,
   });
 
@@ -19,23 +21,28 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final Function(String)? onChanged;
+  final bool readOnly;
+  final String? initialText;
   final String? prefixText;
   final String? suffixText;
-  final String? hintText;
+  final String? helperText;
   final String? errorText;
 
   Widget textField() {
+    if (initialText != null) controller?.text = initialText!;
+
     return ConstrainedBox(
       constraints: constraints,
       child: TextField(
         controller: controller,
         focusNode: focusNode,
         onChanged: onChanged,
+        readOnly: readOnly,
         decoration: InputDecoration(
           icon: leading,
           prefixText: prefixText,
           suffixText: suffixText,
-          hintText: hintText,
+          helperText: helperText,
           errorText: errorText,
           errorMaxLines: 5,
         ),
