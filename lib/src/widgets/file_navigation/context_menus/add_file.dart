@@ -185,7 +185,7 @@ class AddFile {
                       });
                     },
                     suffixText: '             .md',
-                    hintText: 'my-post',
+                    helperText: '"my-post"',
                     errorText: empty
                         ? AppLocalizations.of(context)!.cantBeEmpty
                         : fileAlreadyExists
@@ -219,7 +219,7 @@ class AddFile {
                           });
                         },
                         prefixText: 'hugo new ',
-                        hintText: 'my-post',
+                        helperText: '"hugo new my-post"',
                       ),
                       const SizedBox(height: 12),
                       CustomTextField(
@@ -229,7 +229,7 @@ class AddFile {
                             flags = value;
                           });
                         },
-                        hintText: '--force',
+                        helperText: '"--force"',
                       ),
                     ],
                   ),
