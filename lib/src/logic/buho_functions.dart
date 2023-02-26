@@ -249,22 +249,67 @@ void stopHugoServer({required BuildContext context, bool snackbar = true}) {
 }
 
 void buildHugoSite({required BuildContext context}) async {
-  checkProgramInstalled(
-    context: context,
-    command: 'hugo',
-    executable: 'hugo',
-  );
+  var flags = '';
+  final hugoController = TextEditingController();
 
-  showSnackbar(
-    text: AppLocalizations.of(context)!.builtHugoSite,
-    seconds: 4,
-  );
+  build() async {
+    final commandToRun = 'hugo $flags';
 
-  const commandToRun = 'hugo';
-  await runTerminalCommand(
+    checkProgramInstalled(
+      context: context,
+      command: commandToRun,
+      executable: 'hugo',
+    );
+
+    showSnackbar(
+      text: AppLocalizations.of(context)!.builtHugoSite,
+      seconds: 4,
+    );
+
+    runTerminalCommand(
+      context: context,
+      workingDirectory: Preferences.getSitePath(),
+      command: commandToRun,
+    );
+
+    Navigator.pop(context);
+  }
+
+  showDialog(
     context: context,
-    workingDirectory: Preferences.getSitePath(),
-    command: commandToRun,
+    builder: (context) {
+      return StatefulBuilder(builder: (context, setState) {
+        return CommandDialog(
+          title: Text(
+            AppLocalizations.of(context)!.buildHugoSite,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          ),
+          icon: Icons.web,
+          expansionIcon: Icons.terminal,
+          expansionTitle: AppLocalizations.of(context)!.terminal,
+          yes: () => build(),
+          dialogChildren: const [],
+          expansionChildren: [
+            CustomTextField(
+              readOnly: true,
+              controller: hugoController,
+              leading: Text(AppLocalizations.of(context)!.command),
+              initialText: 'hugo',
+            ),
+            const SizedBox(height: 12),
+            CustomTextField(
+              leading: Text(AppLocalizations.of(context)!.flags),
+              onChanged: (value) {
+                setState(() {
+                  flags = value;
+                });
+              },
+              helperText: '"--buildDrafts"',
+            ),
+          ],
+        );
+      });
+    },
   );
 }
 
