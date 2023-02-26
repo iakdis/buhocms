@@ -22,6 +22,7 @@ import '../utils/unsaved_check.dart';
 import '../widgets/file_navigation/context_menus/add_file.dart';
 import '../widgets/file_navigation/context_menus/add_folder.dart';
 import '../widgets/snackbar.dart';
+import '../widgets/text_field.dart';
 
 setGUIMode({
   required BuildContext context,
@@ -165,26 +166,97 @@ void openHugoThemes({required BuildContext context, Function? setState}) {
 }
 
 void startHugoServer({required BuildContext context}) {
-  final shellProvider = Provider.of<ShellProvider>(context, listen: false);
-  checkProgramInstalled(
-    context: context,
-    command: 'hugo server',
-    executable: 'hugo',
-  );
+  var flags = '';
+  final hugoServerController = TextEditingController();
 
-  showSnackbar(
-    text: shellProvider.shellActive == true
-        ? AppLocalizations.of(context)!.alreadyStartedAHugoServer
-        : AppLocalizations.of(context)!.startedHugoServer,
-    seconds: 4,
-  );
+  start() {
+    final commandToRun = 'hugo server $flags';
+    final shellProvider = Provider.of<ShellProvider>(context, listen: false);
+    checkProgramInstalled(
+      context: context,
+      command: commandToRun,
+      executable: 'hugo',
+    );
 
-  const commandToRun = 'hugo server';
-  runTerminalCommandWithShell(
+    showSnackbar(
+      text: shellProvider.shellActive == true
+          ? AppLocalizations.of(context)!.alreadyStartedAHugoServer
+          : AppLocalizations.of(context)!.startedHugoServer,
+      seconds: 4,
+    );
+
+    runTerminalCommandWithShell(
+      context: context,
+      shell: shellProvider.shell,
+      successFunction: () => shellProvider.setShellActive(true),
+      command: commandToRun,
+    );
+
+    Navigator.pop(context);
+  }
+
+  showDialog(
     context: context,
-    shell: shellProvider.shell,
-    successFunction: () => shellProvider.setShellActive(true),
-    command: commandToRun,
+    builder: (context) {
+      return LayoutBuilder(builder: (context, constraints) {
+        return StatefulBuilder(builder: (context, setState) {
+          return SimpleDialog(
+            contentPadding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 12.0),
+            children: [
+              Column(
+                children: [
+                  const Icon(Icons.miscellaneous_services, size: 64.0),
+                  const SizedBox(height: 16.0),
+                  Text(
+                    AppLocalizations.of(context)!.startHugoServer,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32.0),
+              ExpansionTile(
+                leading: const Icon(Icons.terminal),
+                title: Text(AppLocalizations.of(context)!.terminal),
+                expandedAlignment: Alignment.topLeft,
+                children: [
+                  CustomTextField(
+                    readOnly: true,
+                    controller: hugoServerController,
+                    leading: Text(AppLocalizations.of(context)!.command),
+                    initialText: 'hugo server',
+                  ),
+                  const SizedBox(height: 12),
+                  CustomTextField(
+                    leading: Text(AppLocalizations.of(context)!.flags),
+                    onChanged: (value) {
+                      setState(() {
+                        flags = value;
+                      });
+                    },
+                    helperText: '"--theme hugo-PaperMod"',
+                  ),
+                ],
+              ),
+              const SizedBox(height: 100),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(AppLocalizations.of(context)!.cancel),
+                  ),
+                  TextButton(
+                    onPressed: () => start(),
+                    child: Text(AppLocalizations.of(context)!.yes),
+                  ),
+                ],
+              ),
+            ],
+          );
+        });
+      });
+    },
   );
 }
 
