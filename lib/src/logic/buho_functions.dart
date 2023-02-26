@@ -198,63 +198,36 @@ void startHugoServer({required BuildContext context}) {
   showDialog(
     context: context,
     builder: (context) {
-      return LayoutBuilder(builder: (context, constraints) {
-        return StatefulBuilder(builder: (context, setState) {
-          return SimpleDialog(
-            contentPadding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 12.0),
-            children: [
-              Column(
-                children: [
-                  const Icon(Icons.miscellaneous_services, size: 64.0),
-                  const SizedBox(height: 16.0),
-                  Text(
-                    AppLocalizations.of(context)!.startHugoServer,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 32.0),
-              ExpansionTile(
-                leading: const Icon(Icons.terminal),
-                title: Text(AppLocalizations.of(context)!.terminal),
-                expandedAlignment: Alignment.topLeft,
-                children: [
-                  CustomTextField(
-                    readOnly: true,
-                    controller: hugoServerController,
-                    leading: Text(AppLocalizations.of(context)!.command),
-                    initialText: 'hugo server',
-                  ),
-                  const SizedBox(height: 12),
-                  CustomTextField(
-                    leading: Text(AppLocalizations.of(context)!.flags),
-                    onChanged: (value) {
-                      setState(() {
-                        flags = value;
-                      });
-                    },
-                    helperText: '"--theme hugo-PaperMod"',
-                  ),
-                ],
-              ),
-              const SizedBox(height: 100),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: Text(AppLocalizations.of(context)!.cancel),
-                  ),
-                  TextButton(
-                    onPressed: () => start(),
-                    child: Text(AppLocalizations.of(context)!.yes),
-                  ),
-                ],
-              ),
-            ],
-          );
-        });
+      return StatefulBuilder(builder: (context, setState) {
+        return CommandDialog(
+          title: Text(
+            AppLocalizations.of(context)!.startHugoServer,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          ),
+          icon: Icons.miscellaneous_services,
+          expansionIcon: Icons.terminal,
+          expansionTitle: AppLocalizations.of(context)!.terminal,
+          yes: () => start(),
+          dialogChildren: const [],
+          expansionChildren: [
+            CustomTextField(
+              readOnly: true,
+              controller: hugoServerController,
+              leading: Text(AppLocalizations.of(context)!.command),
+              initialText: 'hugo server',
+            ),
+            const SizedBox(height: 12),
+            CustomTextField(
+              leading: Text(AppLocalizations.of(context)!.flags),
+              onChanged: (value) {
+                setState(() {
+                  flags = value;
+                });
+              },
+              helperText: '"--theme hugo-PaperMod"',
+            ),
+          ],
+        );
       });
     },
   );
