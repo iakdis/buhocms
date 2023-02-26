@@ -1,4 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class CommandDialog extends StatelessWidget {
+  const CommandDialog({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.expansionIcon,
+    required this.expansionTitle,
+    required this.yes,
+    required this.children,
+  });
+
+  final Widget title;
+  final IconData icon;
+  final IconData expansionIcon;
+  final String expansionTitle;
+  final Function yes;
+  final List<Widget> children;
+
+  Widget commandDialog() {
+    return LayoutBuilder(builder: (context, constraints) {
+      return StatefulBuilder(builder: (context, setState) {
+        return SimpleDialog(
+          contentPadding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 12.0),
+          children: [
+            Column(
+              children: [
+                Icon(icon, size: 64.0),
+                const SizedBox(height: 16.0),
+                title,
+              ],
+            ),
+            const SizedBox(height: 32.0),
+            ExpansionTile(
+              leading: Icon(expansionIcon),
+              title: Text(expansionTitle),
+              expandedAlignment: Alignment.topLeft,
+              children: children,
+            ),
+            const SizedBox(height: 100),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(AppLocalizations.of(context)!.cancel),
+                ),
+                TextButton(
+                  onPressed: () => yes(),
+                  child: Text(AppLocalizations.of(context)!.yes),
+                ),
+              ],
+            ),
+          ],
+        );
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => commandDialog();
+}
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -51,7 +114,5 @@ class CustomTextField extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return textField();
-  }
+  Widget build(BuildContext context) => textField();
 }
