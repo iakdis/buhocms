@@ -139,8 +139,10 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     unsavedTextProvider
         .setUnsavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 
-    fileNavigationProvider.controller.selection =
-        TextSelection(baseOffset: baseOffset, extentOffset: extentOffset);
+    final textLength = fileNavigationProvider.controller.text.length;
+    fileNavigationProvider.controller.selection = TextSelection(
+        baseOffset: textLength >= baseOffset ? baseOffset : 0,
+        extentOffset: textLength >= extentOffset ? extentOffset : 0);
 
     var finalLines = <String>[];
     var frontMatterLines = fileNavigationProvider.frontMatterText.split('\n');
