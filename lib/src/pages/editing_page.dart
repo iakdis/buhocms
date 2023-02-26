@@ -701,7 +701,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                SelectableText(
                                   directoryExists
                                       ? AppLocalizations.of(context)!
                                           .createYourFirstPost
