@@ -162,58 +162,50 @@ class AddFile {
                     ],
                   ),
                   const SizedBox(height: 32.0),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      Flexible(
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            Text(AppLocalizations.of(context)!.name,
-                                style: textStyle),
-                            ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                  minWidth: 200, maxWidth: 300),
-                              child: IntrinsicWidth(
-                                child: TextField(
-                                  controller: nameController,
-                                  focusNode: nameFocusNode,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      name = value;
-                                      empty = name.isEmpty;
+                      Text(AppLocalizations.of(context)!.name,
+                          style: textStyle),
+                      ConstrainedBox(
+                        constraints:
+                            const BoxConstraints(minWidth: 200, maxWidth: 300),
+                        child: IntrinsicWidth(
+                          child: TextField(
+                            controller: nameController,
+                            focusNode: nameFocusNode,
+                            onChanged: (value) {
+                              setState(() {
+                                name = value;
+                                empty = name.isEmpty;
 
-                                      for (var i = 0;
-                                          i < allFiles.length;
-                                          i++) {
-                                        if (allFiles[i].path ==
-                                            '$path${Platform.pathSeparator}$name.md') {
-                                          fileAlreadyExists = true;
-                                          return;
-                                        }
-                                      }
-                                      fileAlreadyExists = false;
-                                    });
-                                  },
-                                  decoration: InputDecoration(
-                                    suffixText: '             .md',
-                                    hintText: 'my-post',
-                                    errorText: empty
-                                        ? AppLocalizations.of(context)!
-                                            .cantBeEmpty
-                                        : fileAlreadyExists
-                                            ? AppLocalizations.of(context)!
-                                                .error_fileAlreadyExists(
-                                                    '"$name"',
-                                                    '"${path.substring(path.indexOf('content'))}"')
-                                            : null,
-                                    errorMaxLines: 5,
-                                  ),
-                                ),
-                              ),
+                                for (var i = 0; i < allFiles.length; i++) {
+                                  if (allFiles[i].path ==
+                                      '$path${Platform.pathSeparator}$name.md') {
+                                    fileAlreadyExists = true;
+                                    return;
+                                  }
+                                }
+                                fileAlreadyExists = false;
+                              });
+                            },
+                            decoration: InputDecoration(
+                              suffixText: '             .md',
+                              hintText: 'my-post',
+                              errorText: empty
+                                  ? AppLocalizations.of(context)!.cantBeEmpty
+                                  : fileAlreadyExists
+                                      ? AppLocalizations.of(context)!
+                                          .error_fileAlreadyExists('"$name"',
+                                              '"${path.substring(path.indexOf('content'))}"')
+                                      : null,
+                              errorMaxLines: 5,
                             ),
-                          ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                         ),
                       ),
                     ],
