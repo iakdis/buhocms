@@ -154,7 +154,7 @@
         "path": { "type": "String" }
       }
     },
-    "error_DirectoryAlreadyExists": "A website with the path {path} already exists. Please rename or remove the existing folder.",
+    "error_DirectoryAlreadyExists": "A directory with the path {path} already exists. Please rename or remove the existing folder.",
     "@error_DirectoryAlreadyExists": {
       "placeholders": {
         "path": { "type": "String" }

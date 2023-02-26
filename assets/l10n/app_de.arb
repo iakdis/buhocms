@@ -154,7 +154,7 @@
         "path": { "type": "String" }
       }
     },
-    "error_DirectoryAlreadyExists": "Eine Webseite mit dem Pfad {path} existiert bereits. Bitte benenne den existierenden Ordner um oder entferne ihn.",
+    "error_DirectoryAlreadyExists": "Ein Verzeichnis mit dem Pfad {path} existiert bereits. Bitte benenne den existierenden Ordner um oder entferne ihn.",
     "@error_DirectoryAlreadyExists": {
       "placeholders": {
         "path": { "type": "String" }
