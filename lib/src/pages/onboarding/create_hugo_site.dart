@@ -11,6 +11,7 @@ import '../../logic/buho_functions.dart';
 import '../../provider/navigation/navigation_provider.dart';
 import '../../utils/preferences.dart';
 import '../../utils/program_installed.dart';
+import '../../widgets/command_dialog.dart';
 import '../../widgets/snackbar.dart';
 
 class CreateHugoSite extends StatefulWidget {
@@ -28,10 +29,13 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
   String hugoInstalledText = '';
 
   String sitePath = Preferences.getSitePath() ?? '';
+  String path = '';
   bool sitePathError = false;
   TextEditingController textController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   String siteName = '';
   bool siteNameError = false;
+  bool directoryAlreadyExists = false;
 
   @override
   void initState() {
@@ -45,6 +49,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
   @override
   void dispose() {
     textController.dispose();
+    nameController.dispose();
     super.dispose();
   }
 
@@ -95,6 +100,21 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
     );
   }
 
+  void onChangedText({
+    required Function setState,
+    required String value,
+  }) {
+    siteName = value;
+    siteNameError = false;
+
+    path = '$sitePath${Platform.pathSeparator}$siteName';
+
+    directoryAlreadyExists = Directory(path).existsSync();
+    if (siteName.isEmpty) siteNameError = true;
+
+    setState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,53 +149,109 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
               }
               setState(() => currentStep++);
             } else if (currentStep == 2) {
-              final path = '$sitePath${Platform.pathSeparator}$siteName';
-              if (siteName.isEmpty) {
-                setState(() => siteNameError = true);
-                return;
-              }
-              if (Directory(path).existsSync()) {
-                showSnackbar(
-                  text: AppLocalizations.of(context)!
-                      .error_DirectoryAlreadyExists('"$path"'),
-                  seconds: 4,
+              path = '$sitePath${Platform.pathSeparator}$siteName';
+              var flags = '';
+
+              create() async {
+                path = '$sitePath${Platform.pathSeparator}$siteName';
+
+                final shellProvider =
+                    Provider.of<ShellProvider>(context, listen: false);
+                final commandToRun = 'hugo new site $siteName $flags';
+
+                checkProgramInstalled(
+                  context: context,
+                  command: commandToRun,
+                  executable: 'hugo',
                 );
-                return;
+                await runTerminalCommand(
+                  context: context,
+                  workingDirectory: sitePath,
+                  command: commandToRun,
+                );
+
+                Preferences.clearPreferences();
+                Preferences.setOnBoardingComplete(true);
+
+                Preferences.setSitePath(
+                    '$sitePath${Platform.pathSeparator}$siteName');
+                Preferences.setCurrentPath(
+                    '${Preferences.getSitePath()}${Platform.pathSeparator}content');
+
+                shellProvider.updateShell();
+
+                if (mounted) {
+                  stopHugoServer(context: context, snackbar: false);
+
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  Provider.of<NavigationProvider>(context, listen: false)
+                      .notifyAllListeners();
+                }
               }
-              setState(() => currentStep++);
-            } else {
-              print('CREATE');
-              final shellProvider =
-                  Provider.of<ShellProvider>(context, listen: false);
-              checkProgramInstalled(
+
+              await showDialog(
                 context: context,
-                command: 'hugo new site $siteName',
-                executable: 'hugo',
+                builder: (context) {
+                  directoryAlreadyExists = Directory(path).existsSync();
+
+                  return StatefulBuilder(builder: (context, setState) {
+                    return CommandDialog(
+                      title: SelectableText.rich(TextSpan(
+                          text:
+                              AppLocalizations.of(context)!.createHugoSiteNamed,
+                          style: const TextStyle(fontSize: 20),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: '$siteName\n\n',
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                            TextSpan(
+                                text:
+                                    AppLocalizations.of(context)!.insideFolder),
+                            TextSpan(
+                              text: sitePath,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                          ])),
+                      icon: Icons.create_new_folder,
+                      expansionIcon: Icons.terminal,
+                      expansionTitle: AppLocalizations.of(context)!.terminal,
+                      yes: () => create(),
+                      dialogChildren: const [],
+                      expansionChildren: [
+                        CustomTextField(
+                          leading: Text(AppLocalizations.of(context)!.command),
+                          controller: nameController,
+                          onChanged: (value) => onChangedText(
+                            setState: () => setState(() {}),
+                            value: value,
+                          ),
+                          prefixText: 'hugo new site ',
+                          helperText: '"hugo new site my-website"',
+                          errorText: siteNameError
+                              ? AppLocalizations.of(context)!.cantBeEmpty
+                              : directoryAlreadyExists
+                                  ? AppLocalizations.of(context)!
+                                      .error_DirectoryAlreadyExists('"$path"')
+                                  : null,
+                        ),
+                        const SizedBox(height: 12),
+                        CustomTextField(
+                          leading: Text(AppLocalizations.of(context)!.flags),
+                          onChanged: (value) {
+                            setState(() => flags = value);
+                          },
+                          helperText: '"--force"',
+                        ),
+                      ],
+                    );
+                  });
+                },
               );
-              final commandToRun = 'hugo new site $siteName';
-              await runTerminalCommand(
-                context: context,
-                workingDirectory: sitePath,
-                command: commandToRun,
-              );
-
-              Preferences.clearPreferences();
-              Preferences.setOnBoardingComplete(true);
-
-              Preferences.setSitePath(
-                  '$sitePath${Platform.pathSeparator}$siteName');
-              Preferences.setCurrentPath(
-                  '${Preferences.getSitePath()}${Platform.pathSeparator}content');
-
-              shellProvider.updateShell();
-
-              if (mounted) {
-                stopHugoServer(context: context, snackbar: false);
-
-                Navigator.of(context).pop();
-                Provider.of<NavigationProvider>(context, listen: false)
-                    .notifyAllListeners();
-              }
+              setState(() {});
             }
           },
           onStepCancel: () {
@@ -186,7 +262,11 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
           controlsBuilder: (context, details) {
             canContinue = hugoInstalled == true &&
                 (details.stepIndex == 1 ? !sitePathError : true) &&
-                (details.stepIndex == 2 ? !siteNameError : true);
+                (details.stepIndex == 2
+                    ? !siteNameError &&
+                        siteName.isNotEmpty &&
+                        !directoryAlreadyExists
+                    : true);
 
             return Padding(
               padding: const EdgeInsets.only(top: 32),
@@ -270,6 +350,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                         errorText: sitePathError
                             ? AppLocalizations.of(context)!.cantBeEmpty
                             : null,
+                        errorMaxLines: 5,
                         border: const OutlineInputBorder(),
                         labelText: AppLocalizations.of(context)!.savePath,
                         isDense: true,
@@ -289,7 +370,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
               ),
             ),
             Step(
-              isActive: currentStep >= 3,
+              isActive: currentStep >= 2,
               title: Text(AppLocalizations.of(context)!.siteName),
               content: Column(
                 children: [
@@ -297,16 +378,21 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                   SizedBox(
                     width: 400,
                     child: TextField(
-                      onChanged: (value) {
-                        siteName = value;
-                        siteNameError = false;
-                        setState(() {});
-                      },
+                      controller: nameController,
+                      onChanged: (value) => onChangedText(
+                        setState: () => setState(() {}),
+                        value: value,
+                      ),
                       style: TextStyle(color: Colors.grey[600], fontSize: 17.0),
                       decoration: InputDecoration(
                         errorText: siteNameError
                             ? AppLocalizations.of(context)!.cantBeEmpty
-                            : null,
+                            : directoryAlreadyExists
+                                ? AppLocalizations.of(context)!
+                                    .error_DirectoryAlreadyExists(
+                                        '"$sitePath${Platform.pathSeparator}$siteName"')
+                                : null,
+                        errorMaxLines: 5,
                         border: const OutlineInputBorder(),
                         labelText: AppLocalizations.of(context)!.siteName,
                         isDense: true,
@@ -318,29 +404,6 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-            Step(
-              isActive: currentStep >= 4,
-              title: Text(AppLocalizations.of(context)!.finish),
-              content: Column(
-                children: [
-                  SelectableText.rich(TextSpan(
-                      text: AppLocalizations.of(context)!.createHugoSiteNamed,
-                      style: const TextStyle(fontSize: 20),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '"$siteName"\n\n',
-                          style: const TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        TextSpan(
-                            text: AppLocalizations.of(context)!.insideFolder),
-                        TextSpan(
-                          text: '"$sitePath"',
-                          style: const TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                      ])),
                 ],
               ),
             ),
