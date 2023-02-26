@@ -83,18 +83,20 @@ class AddFile {
     final tabsProvider = Provider.of<TabsProvider>(context, listen: false);
     final navigationProvider =
         Provider.of<NavigationProvider>(context, listen: false);
+    final snackbarText =
+        AppLocalizations.of(context)!.postCreated('"$name"', '"$path"');
 
     setState(() => empty = name.isEmpty);
     if (empty) return;
 
-    showSnackbar(
-      text: AppLocalizations.of(context)!.postCreated('"$name"', '"$path"'),
-      seconds: 4,
-    );
-
     Navigator.pop(context);
 
     await _addNew(path: path);
+
+    showSnackbar(
+      text: snackbarText,
+      seconds: 4,
+    );
 
     var allFiles = await getAllFiles();
     var finalPath = '$path${Platform.pathSeparator}$name.md';
@@ -139,122 +141,95 @@ class AddFile {
             }
           }
 
-          return LayoutBuilder(builder: (context, constraints) {
-            return StatefulBuilder(builder: (context, setState) {
-              return SimpleDialog(
-                contentPadding:
-                    const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 12.0),
-                children: [
-                  Column(
-                    children: [
-                      const Icon(Icons.note_add, size: 64.0),
-                      const SizedBox(height: 16.0),
-                      SelectableText.rich(TextSpan(
-                          text: AppLocalizations.of(context)!.createNewPostIn,
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: path.substring(path.indexOf('content')),
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                            ),
-                          ])),
-                    ],
-                  ),
-                  const SizedBox(height: 32.0),
-                  CustomTextField(
-                    leading: Text(AppLocalizations.of(context)!.name,
-                        style: textStyle),
-                    controller: nameController,
-                    focusNode: nameFocusNode,
-                    onChanged: (value) {
-                      setState(() {
-                        name = value;
-                        empty = name.isEmpty;
+          return StatefulBuilder(builder: (context, setState) {
+            return CommandDialog(
+              title: SelectableText.rich(TextSpan(
+                  text: AppLocalizations.of(context)!.createNewPostIn,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w500),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: path.substring(path.indexOf('content')),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ])),
+              icon: Icons.note_add,
+              expansionIcon: Icons.terminal,
+              expansionTitle: AppLocalizations.of(context)!.terminal,
+              yes: empty
+                  ? null
+                  : () => _create(
+                        path: path,
+                        setState: setState,
+                      ),
+              dialogChildren: [
+                CustomTextField(
+                  leading: Text(AppLocalizations.of(context)!.name,
+                      style: textStyle),
+                  controller: nameController,
+                  focusNode: nameFocusNode,
+                  onChanged: (value) {
+                    setState(() {
+                      name = value;
+                      empty = name.isEmpty;
 
-                        for (var i = 0; i < allFiles.length; i++) {
-                          if (allFiles[i].path ==
-                              '$path${Platform.pathSeparator}$name.md') {
-                            fileAlreadyExists = true;
-                            return;
-                          }
+                      for (var i = 0; i < allFiles.length; i++) {
+                        if (allFiles[i].path ==
+                            '$path${Platform.pathSeparator}$name.md') {
+                          fileAlreadyExists = true;
+                          return;
                         }
-                        fileAlreadyExists = false;
-                      });
-                    },
-                    suffixText: '             .md',
-                    helperText: '"my-post"',
-                    errorText: empty
-                        ? AppLocalizations.of(context)!.cantBeEmpty
-                        : fileAlreadyExists
-                            ? AppLocalizations.of(context)!
-                                .error_fileAlreadyExists('"$name"',
-                                    '"${path.substring(path.indexOf('content'))}"')
-                            : null,
-                  ),
-                  const SizedBox(height: 16),
-                  ExpansionTile(
-                    leading: const Icon(Icons.terminal),
-                    title: Text(AppLocalizations.of(context)!.terminal),
-                    expandedAlignment: Alignment.topLeft,
-                    children: [
-                      CustomTextField(
-                        leading: Text(AppLocalizations.of(context)!.command),
-                        controller: nameController,
-                        onChanged: (value) {
-                          setState(() {
-                            name = value;
-                            empty = name.isEmpty;
+                      }
+                      fileAlreadyExists = false;
+                    });
+                  },
+                  suffixText: '             .md',
+                  helperText: '"my-post"',
+                  errorText: empty
+                      ? AppLocalizations.of(context)!.cantBeEmpty
+                      : fileAlreadyExists
+                          ? AppLocalizations.of(context)!
+                              .error_fileAlreadyExists('"$name"',
+                                  '"${path.substring(path.indexOf('content'))}"')
+                          : null,
+                )
+              ],
+              expansionChildren: [
+                CustomTextField(
+                  leading: Text(AppLocalizations.of(context)!.command),
+                  controller: nameController,
+                  onChanged: (value) {
+                    setState(() {
+                      name = value;
+                      empty = name.isEmpty;
 
-                            for (var i = 0; i < allFiles.length; i++) {
-                              if (allFiles[i].path ==
-                                  '$path${Platform.pathSeparator}$name.md') {
-                                fileAlreadyExists = true;
-                                return;
-                              }
-                            }
-                            fileAlreadyExists = false;
-                          });
-                        },
-                        prefixText: 'hugo new ',
-                        helperText: '"hugo new my-post"',
-                      ),
-                      const SizedBox(height: 12),
-                      CustomTextField(
-                        leading: Text(AppLocalizations.of(context)!.flags),
-                        onChanged: (value) {
-                          setState(() {
-                            flags = value;
-                          });
-                        },
-                        helperText: '"--force"',
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 100),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: Text(AppLocalizations.of(context)!.cancel),
-                      ),
-                      TextButton(
-                        onPressed: empty
-                            ? null
-                            : () => _create(
-                                  path: path,
-                                  setState: setState,
-                                ),
-                        child: Text(AppLocalizations.of(context)!.yes),
-                      ),
-                    ],
-                  ),
-                ],
-              );
-            });
+                      for (var i = 0; i < allFiles.length; i++) {
+                        if (allFiles[i].path ==
+                            '$path${Platform.pathSeparator}$name.md') {
+                          fileAlreadyExists = true;
+                          return;
+                        }
+                      }
+                      fileAlreadyExists = false;
+                    });
+                  },
+                  prefixText: 'hugo new ',
+                  helperText: '"hugo new my-post"',
+                ),
+                const SizedBox(height: 12),
+                CustomTextField(
+                  leading: Text(AppLocalizations.of(context)!.flags),
+                  onChanged: (value) {
+                    setState(() {
+                      flags = value;
+                    });
+                  },
+                  helperText: '"--force"',
+                ),
+              ],
+            );
           });
         },
       );
