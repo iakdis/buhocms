@@ -38,19 +38,21 @@ void runTerminalCommandWithShell({
   required String command,
 }) async {
   // Try to run command
-  shell.run(command).then((value) {
-    // Command found, run it
-  }).catchError((object) async {
+  try {
+    await shell.run(command);
+  } catch (e) {
     // If error, check for Linux Flatpak sandbox issue
     if (Platform.isLinux) {
-      await shell.run('flatpak-spawn --host $command').then((value) {
-        // If platform is Flatpak and no error, command working
-      }).catchError((object) {
+      try {
+        await shell.run('flatpak-spawn --host $command');
+      } catch (_) {
         // Finally, if platform is Flatpak but still error, command not working
-        return;
-      });
+        showSnackbar(text: e.toString(), seconds: 10);
+      }
+    } else {
+      showSnackbar(text: e.toString(), seconds: 10);
     }
-    return;
-  });
+  }
+
   successFunction();
 }
