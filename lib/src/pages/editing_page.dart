@@ -497,8 +497,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                     spacing: 8.0,
                     runSpacing: 8.0,
                     children: [
+                      if (editingProvider.isFrontmatterGUIMode)
+                        draggableFrontmatterButton(),
                       textFrontmatterButton(),
-                      draggableFrontmatterButton(),
                     ],
                   ),
                 ],
