@@ -354,6 +354,7 @@
     "terminal": "Kommandozeile",
     "command": "Befehl:",
     "flags": "Optionen:",
+    "search": "Suchen",
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",

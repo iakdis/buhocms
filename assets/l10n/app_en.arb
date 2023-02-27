@@ -354,6 +354,7 @@
     "terminal": "Terminal",
     "command": "Command:",
     "flags": "Flags:",
+    "search": "Search",
 
     "settings": "Settings",
     "appSettings": "APP SETTINGS",

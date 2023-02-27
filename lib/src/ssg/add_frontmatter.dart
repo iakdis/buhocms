@@ -84,7 +84,13 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
           fit: FlexFit.loose,
           constraints: BoxConstraints.tight(const Size(double.infinity, 512)),
           searchDelay: Duration.zero,
-          searchFieldProps: const TextFieldProps(autofocus: true),
+          searchFieldProps: TextFieldProps(
+            autofocus: true,
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context)!.search,
+              border: const OutlineInputBorder(),
+            ),
+          ),
           itemBuilder: (context, item, isSelected) {
             return ListTile(
               title: Text(item.key),
