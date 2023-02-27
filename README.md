@@ -101,7 +101,7 @@ BuhoCMS is for you if you land in at least one of the following categories:
 
 ### Windows
 
-Download and execute the **BuhoCMS-Windows.exe** file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page.
+Download and execute the [BuhoCMS-Windows.exe](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Windows.exe) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page.
 
 ### macOS
 
@@ -124,7 +124,7 @@ macOS support is planned. Unfortunately I do not currently own a macOS device; t
     alt="Download as an AppImage"
     height="80">](https://github.com/iakmds/buhocms/releases)
 
-To install BuhoCMS as an **AppImage**, download the **BuhoCMS-Linux.AppImage** file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page, make it executable and run it. For better desktop integration consider using [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher).
+To install BuhoCMS as an **AppImage**, download the [BuhoCMS-Linux.AppImage](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.AppImage) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page, make it executable and run it. For better desktop integration consider using [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher).
 
 # Features
 
