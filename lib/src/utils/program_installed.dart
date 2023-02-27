@@ -19,21 +19,31 @@ void checkProgramInstalled({
   final errorText = AppLocalizations.of(context)!.error_executableNotFound(
       '${executable[0].toUpperCase()}${executable.substring(1)}', '"$command"');
 
-  // Try to get executable
-  await shell.run('which $executable').then((value) {
-    // Executable found, set it
-    finalExecutable = value.outText;
-  }).catchError((object) async {
-    // If no executable found, check for Linux Flatpak sandbox issue
-    if (Platform.isLinux) {
-      await shell.run('flatpak-spawn --host which $executable').then((value) {
-        // If platform is Flatpak and no error, executable found
-        finalExecutable = value.outText;
-      }).catchError((object) {
-        // If platform is Flatpak but still not found, not installed
-      });
-    }
-  });
+  if (Platform.isWindows) {
+    // Try to get executable
+    await which(executable).then((value) {
+      // Executable found, set it
+      finalExecutable = value ?? '';
+    }).catchError((object) async {
+      // Not installed
+    });
+  } else {
+    // Try to get executable
+    await shell.run('which $executable').then((value) {
+      // Executable found, set it
+      finalExecutable = value.outText;
+    }).catchError((object) async {
+      // If no executable found, check for Linux Flatpak sandbox issue
+      if (Platform.isLinux) {
+        await shell.run('flatpak-spawn --host which $executable').then((value) {
+          // If platform is Flatpak and no error, executable found
+          finalExecutable = value.outText;
+        }).catchError((object) {
+          // If platform is Flatpak but still not found, not installed
+        });
+      }
+    });
+  }
 
   if (finalExecutable.isEmpty) {
     notFound?.call();
