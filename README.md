@@ -122,7 +122,7 @@ macOS support is planned. Unfortunately I do not currently own a macOS device; t
 
 [<img src=".github/appimage-badge.svg"
     alt="Download as an AppImage"
-    height="80">](https://github.com/iakmds/buhocms/releases)
+    height="80">](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.AppImage)
 
 To install BuhoCMS as an **AppImage**, download the [BuhoCMS-Linux.AppImage](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.AppImage) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page, make it executable and run it. For better desktop integration consider using [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher).
 
