@@ -22,6 +22,7 @@ class ThemePage extends StatefulWidget {
 
 class _ThemePageState extends State<ThemePage> {
   TextStyle style = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+  TextStyle smallerStyle = const TextStyle(fontSize: 16);
 
   int currentStep = 0;
   bool canContinue = false;
@@ -156,60 +157,66 @@ class _ThemePageState extends State<ThemePage> {
   }
 
   Widget _selectTheme() {
-    return Column(
-      children: [
-        Text(AppLocalizations.of(context)!.selectATheme, style: style),
-        const SizedBox(height: 32),
-        FutureBuilder(
-          future: HugoThemes.findAllThemes(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            }
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
+      child: Column(
+        children: [
+          Text(AppLocalizations.of(context)!.selectATheme, style: style),
+          const SizedBox(height: 32),
+          SelectableText(AppLocalizations.of(context)!.rememberToVisitDocs,
+              style: smallerStyle),
+          const SizedBox(height: 32),
+          FutureBuilder(
+            future: HugoThemes.findAllThemes(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              }
 
-            var value = Preferences.getHugoTheme();
-            var buttonList = <DropdownMenuItem<String>>[];
-            buttonList.add(DropdownMenuItem(
-                value: '', child: Text(AppLocalizations.of(context)!.none)));
-            if (snapshot.hasData) {
-              if (snapshot.data!.isNotEmpty) {
-                buttonList.addAll(snapshot.data!.map((element) {
-                  return DropdownMenuItem(
-                    value: element.path,
-                    child:
-                        Text(element.path.split(Platform.pathSeparator).last),
-                  );
-                }).toList());
-              } else {
+              var value = Preferences.getHugoTheme();
+              var buttonList = <DropdownMenuItem<String>>[];
+              buttonList.add(DropdownMenuItem(
+                  value: '', child: Text(AppLocalizations.of(context)!.none)));
+              if (snapshot.hasData) {
+                if (snapshot.data!.isNotEmpty) {
+                  buttonList.addAll(snapshot.data!.map((element) {
+                    return DropdownMenuItem(
+                      value: element.path,
+                      child:
+                          Text(element.path.split(Platform.pathSeparator).last),
+                    );
+                  }).toList());
+                } else {
+                  value = '';
+                  Preferences.setHugoTheme('');
+                }
+              }
+              var themeExists = false;
+              for (var i = 0; i < buttonList.length; i++) {
+                if (buttonList[i].value == value) themeExists = true;
+              }
+              if (themeExists == false) {
                 value = '';
                 Preferences.setHugoTheme('');
               }
-            }
-            var themeExists = false;
-            for (var i = 0; i < buttonList.length; i++) {
-              if (buttonList[i].value == value) themeExists = true;
-            }
-            if (themeExists == false) {
-              value = '';
-              Preferences.setHugoTheme('');
-            }
 
-            return DropdownButton(
-              value: value,
-              items: buttonList,
-              onChanged: (option) async {
-                await Preferences.setHugoTheme(option ?? themeName);
-                _updateConfig();
-                setState(() {});
-                if (mounted) {
-                  Provider.of<NavigationProvider>(context, listen: false)
-                      .notifyAllListeners();
-                }
-              },
-            );
-          },
-        ),
-      ],
+              return DropdownButton(
+                value: value,
+                items: buttonList,
+                onChanged: (option) async {
+                  await Preferences.setHugoTheme(option ?? themeName);
+                  _updateConfig();
+                  setState(() {});
+                  if (mounted) {
+                    Provider.of<NavigationProvider>(context, listen: false)
+                        .notifyAllListeners();
+                  }
+                },
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 
@@ -376,9 +383,6 @@ class _ThemePageState extends State<ThemePage> {
                           text: AppLocalizations.of(context)!.nowSelectTheme(
                               '"${themeName.split(Platform.pathSeparator).last}"'),
                         ),
-                        TextSpan(
-                            text: AppLocalizations.of(context)!
-                                .rememberToVisitDocs),
                       ])),
                 ],
               ),

@@ -213,7 +213,7 @@
         "theme": { "type": "String" }
       }
     },
-    "rememberToVisitDocs": "'\n\nDenke daran, die Dokumentation im Themen-Repository zu besuchen, um Details zur Implementierung der richtigen Konfigurationen zu erfahren.",
+    "rememberToVisitDocs": "Denke daran, die Dokumentation im Themen-Repository zu besuchen, um Details zur Implementierung der richtigen Konfigurationen zu erfahren.",
     "welcomeToBuhoCMS": "Willkommen bei BuhoCMS",
     "welcomeToBuhoCMS_Description": "BuhoCMS ist ein lokales Content Management System für Hugo.\nErstelle oder öffne eine Webseite, installiere ein Thema, und beginne damit, neue Artikel zu erstellen.\n\nUm fortzufahren, erstelle oder öffne eine Hugo Seite.",
     "hugoSiteSelected": "Ausgewählte Hugo Webseite: {path}",
