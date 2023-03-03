@@ -178,18 +178,18 @@ void startHugoServer({required BuildContext context}) {
       executable: 'hugo',
     );
 
-    showSnackbar(
-      text: shellProvider.shellActive == true
-          ? AppLocalizations.of(context)!.alreadyStartedAHugoServer
-          : AppLocalizations.of(context)!.startedHugoServer,
-      seconds: 4,
-    );
-
-    runTerminalCommandWithShell(
+    runTerminalCommandServer(
       context: context,
       shell: shellProvider.shell,
       successFunction: () => shellProvider.setShellActive(true),
+      errorFunction: () => shellProvider.setShellActive(false),
       command: commandToRun,
+      snackbarFunction: () => showSnackbar(
+        text: shellProvider.shellActive == true
+            ? AppLocalizations.of(context)!.alreadyStartedAHugoServer
+            : AppLocalizations.of(context)!.startedHugoServer,
+        seconds: 4,
+      ),
     );
 
     Navigator.pop(context);

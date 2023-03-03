@@ -37,28 +37,49 @@ Future<void> runTerminalCommand({
   shell.kill();
 }
 
-void runTerminalCommandWithShell({
+void runTerminalCommandServer({
   required BuildContext context,
   required Shell shell,
   required Function successFunction,
+  required Function errorFunction,
   required String command,
+  required Function snackbarFunction,
 }) async {
-  // Try to run command
+  snackbarFunction();
+  successFunction();
+
   try {
-    shell.run(command);
+    await shell.run(command).then((value) {
+      return;
+    });
   } catch (e) {
-    // If error, check for Linux Flatpak sandbox issue
-    if (Platform.isLinux) {
-      try {
-        shell.run('flatpak-spawn --host $command');
-      } catch (_) {
-        // Finally, if platform is Flatpak but still error, command not working
-        showSnackbar(text: e.toString(), seconds: 10);
-      }
-    } else {
+    if (e.toString() != 'ShellException(Killed by framework)') {
       showSnackbar(text: e.toString(), seconds: 10);
+      errorFunction();
     }
   }
 
-  successFunction();
+  /*try {
+    await shell.run(command);
+  } catch (e) {
+    if (!Platform.isLinux) {
+      catchFunction(e);
+    } else {
+      // If Linux error, check for Linux Flatpak sandbox issue
+      try {
+        // Check if platform is Flatpak
+        await shell.run('flatpak-spawn --host ls');
+
+        try {
+          await shell.run('flatpak-spawn --host $command');
+        } catch (_) {
+          // Finally, if platform is Linux Flatpak but still error, command not working
+          catchFunction(e);
+        }
+      } catch (_) {
+        // Not Flatpak, show no error
+        catchFunction(e);
+      }
+    }
+  }*/
 }
