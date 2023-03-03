@@ -17,7 +17,7 @@ import '../logic/buho_functions.dart';
 import '../widgets/buttons/language_dropdown.dart';
 import '../widgets/theme_selector.dart';
 import 'editing_page.dart';
-import 'onboarding/onboarding_page.dart';
+import 'onboarding_page.dart';
 
 class SettingsButton extends StatelessWidget {
   const SettingsButton({
