@@ -685,12 +685,11 @@ class HugoWidgetState extends State<HugoWidget> {
         child: Row(
           children: [
             TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.error),
-                label: Text(AppLocalizations.of(context)!.notFound)),
+                icon: const Icon(Icons.auto_awesome),
+                label: Text(AppLocalizations.of(context)!.detect)),
             const SizedBox(width: 8.0),
             SizedBox(
-              width: 500,
+              width: 800,
               child: SelectableText(AppLocalizations.of(context)!
                   .notFound_Description('"${frontmatter.key}"')),
             ),

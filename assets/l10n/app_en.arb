@@ -297,8 +297,8 @@
         "type": { "type": "String" }
       }
     },
-    "notFound": "Not found",
-    "notFound_Description": "Front matter {name} not found in your list. Please create the field with its name in your Front matter list or remove it from the source text.",
+    "detect": "Detect",
+    "notFound_Description": "{name} not found in the BuhoCMS list. Please create the field with its name in your BuhoCMS Front matter list (Settings → Hugo Settings → Edit Front matter list) or remove it from the source text",
     "@notFound_Description": {
      "placeholders": {
         "name": { "type": "String" }
