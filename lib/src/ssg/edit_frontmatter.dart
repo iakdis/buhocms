@@ -4,11 +4,146 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../logic/files.dart';
 import '../pages/editing_page.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
 import '../widgets/snackbar.dart';
 import 'hugo.dart';
+
+Future<Map<String, HugoType>> automaticallyDetectFrontmatter() async {
+  final getFiles = await getAllFiles();
+  final typeMap = <String, HugoType>{};
+
+  for (var i = 0; i < getFiles.length; i++) {
+    final allLines = getFiles[i].readAsLinesSync();
+    final frontmatterLines = <String>[];
+
+    var start = 0;
+    var end = 0;
+
+    // Get first Front matter dashes
+    for (var i = 0; i < allLines.length; i++) {
+      if (allLines[i] == '---') {
+        start = i;
+        break;
+      }
+    }
+
+    // Get last Front matter dashes
+    for (var i = start + 1; i < allLines.length; i++) {
+      if (allLines[i] == '---') {
+        end = i;
+        break;
+      }
+    }
+
+    // Set actual Front matter entries without dashes
+    for (var i = start + 1; i < end; i++) {
+      frontmatterLines.add(allLines[i]);
+    }
+
+    // Add Front matter entries to a map with key and value pairs
+    final map = <String, String>{};
+    for (var i = 0; i < frontmatterLines.length; i++) {
+      final key =
+          frontmatterLines[i].substring(0, frontmatterLines[i].indexOf(':'));
+      final value =
+          frontmatterLines[i].substring(frontmatterLines[i].indexOf(':') + 1);
+      map.addEntries([MapEntry(key.trim(), value.trim())]);
+    }
+
+    // Detect type for each key
+    final keySet = <String>{};
+    for (var i = 0; i < map.entries.length; i++) {
+      final key = map.keys.toList()[i];
+      final value = map.values.toList()[i];
+
+      if (value == 'true' || value == 'false') {
+        if (!keySet.contains(key)) {
+          typeMap.addEntries([MapEntry(key, HugoType.typeBool)]);
+        }
+      } else if (value.contains('[') && value.contains(']')) {
+        if (!keySet.contains(key)) {
+          typeMap.addEntries([MapEntry(key, HugoType.typeList)]);
+        }
+      } else if (DateTime.tryParse(value) != null) {
+        if (!keySet.contains(key)) {
+          typeMap.addEntries([MapEntry(key, HugoType.typeDate)]);
+        }
+      } else {
+        if (!keySet.contains(key)) {
+          typeMap.addEntries([MapEntry(key, HugoType.typeString)]);
+        }
+      }
+
+      keySet.add(key);
+    }
+  }
+
+  return typeMap;
+}
+
+void showAutoDialog({
+  required BuildContext context,
+  required bool mounted,
+  Function? setStateFunction,
+}) async {
+  final typeMap = await automaticallyDetectFrontmatter();
+
+  if (mounted) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return SimpleDialog(
+            contentPadding: const EdgeInsets.fromLTRB(24.0, 24.0, 12.0, 12.0),
+            children: [
+              Column(
+                children: [
+                  const Icon(Icons.auto_awesome, size: 64.0),
+                  const SizedBox(height: 16.0),
+                  SelectableText(
+                    AppLocalizations.of(context)!.autoFrontmatterList,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 16.0),
+                  SizedBox(
+                    width: 400,
+                    child: SelectableText(
+                      AppLocalizations.of(context)!
+                          .areYouSureAutoFrontmatterList,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 64.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(AppLocalizations.of(context)!.cancel),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Preferences.setFrontMatterAddList(typeMap);
+                      setStateFunction?.call();
+                      Navigator.pop(context);
+                    },
+                    child: Text(AppLocalizations.of(context)!.yes),
+                  ),
+                ],
+              ),
+            ],
+          );
+        });
+      },
+    );
+  }
+}
 
 class EditFrontmatterListButton extends StatefulWidget {
   const EditFrontmatterListButton({Key? key, required this.editingPageKey})
@@ -34,6 +169,67 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
     nameController.dispose();
     scrollController.dispose();
     super.dispose();
+  }
+
+  void showResetDialog({required Function setStateFunction}) async {
+    final map = Preferences.defaultFrontMatterAddList();
+    final typeMap = <String, HugoType>{};
+    for (var i = 0; i < map.entries.length; i++) {
+      final entry = map.entries.toList()[i];
+      typeMap.addEntries(
+          [MapEntry(entry.key, HugoType.values.byName(entry.value))]);
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return SimpleDialog(
+            contentPadding: const EdgeInsets.fromLTRB(24.0, 24.0, 12.0, 12.0),
+            children: [
+              Column(
+                children: [
+                  const Icon(Icons.restore, size: 64.0),
+                  const SizedBox(height: 16.0),
+                  SelectableText(
+                    AppLocalizations.of(context)!.resetFrontmatterList,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 16.0),
+                  SizedBox(
+                    width: 300,
+                    child: SelectableText(
+                      AppLocalizations.of(context)!
+                          .areYouSureResetFrontmatterList,
+                      style: textStyle,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 64.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(AppLocalizations.of(context)!.cancel),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Preferences.setFrontMatterAddList(typeMap);
+                      setStateFunction();
+                      Navigator.pop(context);
+                    },
+                    child: Text(AppLocalizations.of(context)!.yes),
+                  ),
+                ],
+              ),
+            ],
+          );
+        });
+      },
+    );
   }
 
   void editFrontMatterList() {
@@ -79,16 +275,13 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                     ),
                     const SizedBox(height: 16.0),
                     ElevatedButton.icon(
-                      onPressed: () {
-                        checkUnsavedBeforeFunction(
-                          editingPageKey: widget.editingPageKey,
-                          function: () => addNewFrontMatterTypes(
-                              setStateFunction: setStateFunction),
-                        );
-                      },
-                      icon: const Icon(Icons.add),
-                      label: Text(AppLocalizations.of(context)!
-                          .addNewFrontmatterToList),
+                      onPressed: () => showAutoDialog(
+                        context: context,
+                        mounted: mounted,
+                        setStateFunction: setStateFunction,
+                      ),
+                      icon: const Icon(Icons.auto_awesome),
+                      label: const Text('Automatically detect Front matter'),
                     ),
                   ],
                 ),
@@ -178,6 +371,32 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                   ),
                 ),
                 const SizedBox(height: 16.0),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 8.0,
+                  runSpacing: 8.0,
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        checkUnsavedBeforeFunction(
+                          editingPageKey: widget.editingPageKey,
+                          function: () => addNewFrontMatterTypes(
+                              setStateFunction: setStateFunction),
+                        );
+                      },
+                      icon: const Icon(Icons.add),
+                      label: Text(AppLocalizations.of(context)!
+                          .addNewFrontmatterToList),
+                    ),
+                    TextButton.icon(
+                      onPressed: () =>
+                          showResetDialog(setStateFunction: setStateFunction),
+                      icon: const Icon(Icons.restore),
+                      label: const Text('Reset Front matter list'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 32.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

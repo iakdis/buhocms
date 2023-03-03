@@ -11,6 +11,7 @@ import '../provider/navigation/file_navigation_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
 import '../widgets/snackbar.dart';
+import 'edit_frontmatter.dart';
 
 enum HugoType {
   typeString,
@@ -685,6 +686,10 @@ class HugoWidgetState extends State<HugoWidget> {
         child: Row(
           children: [
             TextButton.icon(
+                onPressed: () => showAutoDialog(
+                    context: context,
+                    mounted: mounted,
+                    setStateFunction: widget.setStateCallback),
                 icon: const Icon(Icons.auto_awesome),
                 label: Text(AppLocalizations.of(context)!.detect)),
             const SizedBox(width: 8.0),
