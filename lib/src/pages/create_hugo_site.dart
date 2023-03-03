@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../logic/buho_functions.dart';
-import '../../provider/navigation/navigation_provider.dart';
-import '../../utils/preferences.dart';
-import '../../utils/program_installed.dart';
-import '../../widgets/command_dialog.dart';
-import '../../widgets/snackbar.dart';
+import '../logic/buho_functions.dart';
+import '../provider/navigation/navigation_provider.dart';
+import '../utils/preferences.dart';
+import '../utils/program_installed.dart';
+import '../widgets/command_dialog.dart';
+import '../widgets/snackbar.dart';
 
 class CreateHugoSite extends StatefulWidget {
   const CreateHugoSite({super.key});

@@ -10,7 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../pages/editing_page.dart';
-import '../pages/onboarding/create_hugo_site.dart';
+import '../pages/create_hugo_site.dart';
 import '../pages/open_hugo_site.dart';
 import '../provider/editing/editing_provider.dart';
 import '../provider/navigation/file_navigation_provider.dart';
