@@ -8,6 +8,7 @@ Future<void> runTerminalCommand({
   required BuildContext context,
   required String? workingDirectory,
   required String command,
+  Function? successFunction,
 }) async {
   final shell = Shell(workingDirectory: workingDirectory);
 
@@ -22,12 +23,17 @@ Future<void> runTerminalCommand({
       } catch (_) {
         // Finally, if platform is Flatpak but still error, command not working
         showSnackbar(text: e.toString(), seconds: 10);
+        shell.kill();
+        return;
       }
     } else {
       showSnackbar(text: e.toString(), seconds: 10);
+      shell.kill();
+      return;
     }
   }
 
+  successFunction?.call();
   shell.kill();
 }
 

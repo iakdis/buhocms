@@ -261,15 +261,14 @@ void buildHugoSite({required BuildContext context}) async {
       executable: 'hugo',
     );
 
-    showSnackbar(
-      text: AppLocalizations.of(context)!.builtHugoSite,
-      seconds: 4,
-    );
-
     runTerminalCommand(
       context: context,
       workingDirectory: Preferences.getSitePath(),
       command: commandToRun,
+      successFunction: () => showSnackbar(
+        text: AppLocalizations.of(context)!.builtHugoSite,
+        seconds: 4,
+      ),
     );
 
     Navigator.pop(context);

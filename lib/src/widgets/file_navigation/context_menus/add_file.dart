@@ -40,6 +40,8 @@ class AddFile {
 
     print('Add Post at: $path');
 
+    final snackbarText =
+        AppLocalizations.of(context)!.postCreated('"$name"', '"$path"');
     var postDirectory = '';
     var finalPathAndName = '';
 
@@ -71,9 +73,14 @@ class AddFile {
       context: context,
       workingDirectory: Preferences.getSitePath(),
       command: commandToRun,
+      successFunction: () {
+        showSnackbar(
+          text: snackbarText,
+          seconds: 4,
+        );
+        if (mounted) refreshFiles(context: context);
+      },
     );
-
-    if (mounted) refreshFiles(context: context);
   }
 
   void _create({
@@ -83,8 +90,6 @@ class AddFile {
     final tabsProvider = Provider.of<TabsProvider>(context, listen: false);
     final navigationProvider =
         Provider.of<NavigationProvider>(context, listen: false);
-    final snackbarText =
-        AppLocalizations.of(context)!.postCreated('"$name"', '"$path"');
 
     setState(() => empty = name.isEmpty);
     if (empty) return;
@@ -92,11 +97,6 @@ class AddFile {
     Navigator.pop(context);
 
     await _addNew(path: path);
-
-    showSnackbar(
-      text: snackbarText,
-      seconds: 4,
-    );
 
     var allFiles = await getAllFiles();
     var finalPath = '$path${Platform.pathSeparator}$name.md';
