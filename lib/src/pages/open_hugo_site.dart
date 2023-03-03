@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../provider/app/shell_provider.dart';
-import '../../provider/navigation/navigation_provider.dart';
-import '../../utils/preferences.dart';
+import '../provider/app/shell_provider.dart';
+import '../provider/navigation/navigation_provider.dart';
+import '../utils/preferences.dart';
 
 class OpenHugoSite extends StatefulWidget {
   const OpenHugoSite({super.key});
