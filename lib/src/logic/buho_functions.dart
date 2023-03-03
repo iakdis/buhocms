@@ -24,7 +24,7 @@ import '../widgets/file_navigation/context_menus/add_folder.dart';
 import '../widgets/snackbar.dart';
 import '../widgets/command_dialog.dart';
 
-setGUIMode({
+void setGUIMode({
   required BuildContext context,
   required GlobalKey<EditingPageState> editingPageKey,
   required bool isGUIMode,
@@ -40,7 +40,7 @@ setGUIMode({
   );
 }
 
-refreshFiles({required BuildContext context}) {
+void refreshFiles({required BuildContext context}) {
   Provider.of<NavigationProvider>(context, listen: false).notifyAllListeners();
   showSnackbar(
     text: AppLocalizations.of(context)!.refreshedFileList,
@@ -48,12 +48,12 @@ refreshFiles({required BuildContext context}) {
   );
 }
 
-openCurrentPathInFolder(
+void openCurrentPathInFolder(
     {required String path, required bool keepPathTrailing}) {
   openInFolder(path: path, keepPathTrailing: keepPathTrailing);
 }
 
-addFile({
+void addFile({
   required BuildContext context,
   required bool mounted,
   required GlobalKey<EditingPageState> editingPageKey,
@@ -66,7 +66,7 @@ addFile({
   );
 }
 
-addFolder({
+void addFolder({
   required BuildContext context,
   required bool mounted,
   required Function setStateCallback,
@@ -78,7 +78,7 @@ addFolder({
   );
 }
 
-save({
+void save({
   required BuildContext context,
   required GlobalKey<EditingPageState> editingPageKey,
   bool checkUnsaved = true,
@@ -104,7 +104,7 @@ save({
   }
 }
 
-revert({
+void revert({
   required BuildContext context,
   required GlobalKey<EditingPageState> editingPageKey,
   required bool mounted,
