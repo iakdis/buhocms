@@ -39,12 +39,12 @@ void runTerminalCommandWithShell({
 }) async {
   // Try to run command
   try {
-    await shell.run(command);
+    shell.run(command);
   } catch (e) {
     // If error, check for Linux Flatpak sandbox issue
     if (Platform.isLinux) {
       try {
-        await shell.run('flatpak-spawn --host $command');
+        shell.run('flatpak-spawn --host $command');
       } catch (_) {
         // Finally, if platform is Flatpak but still error, command not working
         showSnackbar(text: e.toString(), seconds: 10);
