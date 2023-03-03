@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:buhocms/src/logic/files.dart';
-import 'package:buhocms/src/pages/onboarding/theme_page.dart';
+import 'package:buhocms/src/pages/theme_page.dart';
 import 'package:buhocms/src/provider/app/shell_provider.dart';
 import 'package:buhocms/src/provider/editing/unsaved_text_provider.dart';
 import 'package:flutter/material.dart';

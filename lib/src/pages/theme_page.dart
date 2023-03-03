@@ -9,9 +9,9 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../provider/navigation/navigation_provider.dart';
-import '../../ssg/themes.dart';
-import '../../utils/terminal_command.dart';
+import '../provider/navigation/navigation_provider.dart';
+import '../ssg/themes.dart';
+import '../utils/terminal_command.dart';
 
 class ThemePage extends StatefulWidget {
   const ThemePage({super.key});
