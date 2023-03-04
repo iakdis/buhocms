@@ -1,0 +1,387 @@
+{
+    "aboutBuhoCMS": "About BuhoCMS",
+    "openSite": "Open website",
+    "currentSitePath": "Current website path: {path}",
+     "@currentSitePath": {
+      "placeholders": {
+         "path": { "type": "String" }
+      }
+    },
+    "createSite": "Create website",
+    "createSite_Description": "Create a new Hugo website",
+    "hugoThemes": "Hugo themes",
+    "currentHugoThemes": "Current Hugo theme: {theme}. Select or download a Hugo theme",
+     "@currentHugoThemes": {
+      "placeholders": {
+         "theme": { "type": "String" }
+      }
+    },
+    "preferences": "Preferences",
+    "preferences_Description": "Export your preferences to a file, load from a file or reset the preferences for BuhoCMS",
+    "selectASavePath": "Select a save path",
+    "overrideFile": "Override file?",
+    "overrideFile_Description": "A file named {file} already exists in this directory. Override the old file?",
+     "@overrideFile_Description": {
+      "placeholders": {
+         "file": { "type": "String" }
+      }
+    },
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "export": "Export",
+    "import": "Import",
+    "reset": "Reset",
+    "editFrontmatterList": "Edit Front matter list",
+    "editFrontmatterList_Description": "Edit your current Front matter list to add, edit, rearrange or remove entries",
+    "editingPage": "Editing Page",
+    "guiMode": "GUI Mode",
+    "textMode": "Text Mode",
+    "stopHugoServer": "Stop Hugo server",
+    "startHugoServer": "Start Hugo server",
+    "openHugoServer": "Open Hugo server",
+    "buildHugoSite": "Build Hugo website",
+    "openPublicFolder": "Open \"public\" folder",
+    "sortBy": "Sort by",
+    "parentFolderButton_Toolip": "Go to parent folder. Current: {path}",
+    "@parentFolderButton_Toolip": {
+     "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "newPost": "New post",
+    "newFolder": "New folder",
+    "error_RenameDirectory": "Error: Could not rename folder {oldPath} to {newPath} as a folder with the same name already exists in this directory",
+    "@error_RenameDirectory": {
+     "placeholders": {
+        "oldPath": { "type": "String" },
+        "newPath": { "type": "String" }
+      }
+    },
+    "renamedDirectory": "Renamed folder {oldPath} to {newPath}",
+    "@renamedDirectory": {
+     "placeholders": {
+        "oldPath": { "type": "String" },
+        "newPath": { "type": "String" }
+      }
+    },
+    "deleteFolder": "Delete folder",
+    "deleteFolder_Description": "Are you sure you want to delete the folder:\n",
+    "deletedFolder": "Deleted folder {path}",
+    "@deletedFolder": {
+     "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "error_RenameFile": "Error: Could not rename file {oldPath} to {newPath} as a file with the same name already exists in this directory",
+    "@error_RenameFile": {
+     "placeholders": {
+        "oldPath": { "type": "String" },
+        "newPath": { "type": "String" }
+      }
+    },
+    "renamedFile": "Renamed file {oldPath} to {newPath}",
+    "@renamedFile": {
+     "placeholders": {
+        "oldPath": { "type": "String" },
+        "newPath": { "type": "String" }
+      }
+    },
+    "deleteFile": "Delete file",
+    "deleteFile_Description": "Are you sure you want to delete the file:\n",
+    "deletedFile": "Deleted file {path}",
+    "@deletedFile": {
+     "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "alreadyAtHighestLevel": "Already at highest level; Cannot open folder above \"content\" folder",
+    "sortByName": "By name",
+    "sortByNameReversed": "By name (reversed)",
+    "sortByDate": "By date",
+    "sortByDateReversed": "By date (reversed)",
+    "sortBySize": "By size",
+    "sortBySizeReversed": "By size (reversed)",
+    "sortByType": "By type",
+    "sortByTypeReversed": "By type (reversed)",
+    "postCreated": "Post {post} created in path {path}",
+    "@postCreated": {
+     "placeholders": {
+        "post": { "type": "String" },
+        "path": { "type": "String" }
+      }
+    },
+    "createNewPostIn": "Create new post in:\n",
+    "name": "Name: ",
+    "cantBeEmpty": "Can't be empty",
+    "error_fileAlreadyExists": "File with name {name} already exists in folder:\n{path}",
+    "@error_fileAlreadyExists": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "path": { "type": "String" }
+      }
+    },
+    "folderCreated": "Post {path} created",
+    "@folderCreated": {
+     "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "createNewFolderIn": "Create new folder in:\n",
+    "error_folderAlreadyExists": "Folder with name {name} already exists in folder:\n{path}",
+    "@error_folderAlreadyExists": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "path": { "type": "String" }
+      }
+    },
+    "rename": "Rename",
+    "openInFileExplorer": "Open in file explorer",
+    "delete": "Delete",
+    "file": "File",
+    "save": "Save",
+    "revertChanges": "Revert changes",
+    "exit": "Exit",
+    "edit": "Edit",
+    "refreshFiles": "Refresh files",
+    "openCurrentFileInExplorer": "Open current file in file explorer",
+    "help": "Help",
+    "openHomepage": "Open Homepage",
+    "reportIssue": "Report issue",
+    "about": "About",
+    "error_DirectoryDoesNotExist": "Directory {path} does not exist. Please select a valid directory path.",
+    "@error_DirectoryDoesNotExist": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "error_DirectoryAlreadyExists": "A directory with the path {path} already exists. Please rename or remove the existing folder.",
+    "@error_DirectoryAlreadyExists": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "back": "BACK",
+    "next": "NEXT",
+    "continue2": "CONTINUE",
+    "create": "Create",
+    "checkHugoInstalled": "Check, if Hugo is installed",
+    "executableNotFound": "{program} executable not found. Please make sure that {program} is installed correctly.",
+    "@executableNotFound": {
+      "placeholders": {
+        "program": { "type": "String" }
+      }
+    },
+    "executableFoundIn": "{program} executable found in: {path}",
+    "@executableFoundIn": {
+      "placeholders": {
+        "program": { "type": "String" },
+        "path": { "type": "String" }
+      }
+    },
+    "createLocation": "Create location",
+    "choosePath": "Choose path",
+    "hugoSiteWillBeCreatedInFolder": "The new Hugo website will be created inside this folder:",
+    "savePath": "Save path",
+    "siteName": "Website name",
+    "finish": "Finish",
+    "createHugoSiteNamed": "Create Hugo website named:\n",
+    "insideFolder": "Inside folder:\n",
+    "open": "Open",
+    "checkHugoFolderStructure": "Check Hugo folder structure",
+    "checkHugoFolderStructure_Description": "Make sure your folder follows the correct Hugo structure with a content folder, config file, etc. Please refer to the Hugo documentation for more details. If you want to be sure your website follows the correct folder structure, feel free to create a new Hugo website.",
+    "openHugoDocumentation": "Open Hugo Documentation",
+    "selectSiteFolder": "Select website folder",
+    "openHugoSite": "Open Hugo website:\n",
+    "error_ThemeAlreadyExists": "A theme folder with the name {theme} already exists inside the themes folder. Please rename or remove the existing folder.",
+    "@error_ThemeAlreadyExists": {
+      "placeholders": {
+        "theme": { "type": "String" }
+      }
+    },
+    "selectATheme": "Select a theme",
+    "none": "None",
+    "download": "Download",
+    "startOver": "Start over",
+    "checkGitInstalled": "Check, if Git is installed",
+    "downloadTheme": "Download theme",
+    "repositoryInvalidURL": "Invalid URL",
+    "themeRepository": "Theme repository",
+    "successfullyDownloadedHugoTheme": "Successfully downloaded Hugo theme from:\n",
+    "nowSelectTheme": "\n\nYou can now select the theme {theme} in the Dropdown button.",
+    "@nowSelectTheme": {
+      "placeholders": {
+        "theme": { "type": "String" }
+      }
+    },
+    "rememberToVisitDocs": "Remember to visit the documentation in the themes repository for details on implementing the correct configurations.",
+    "welcomeToBuhoCMS": "Welcome to BuhoCMS",
+    "welcomeToBuhoCMS_Description": "BuhoCMS is a local Content Management System for Hugo.\nCreate or open a website, install a theme, and start creating new posts.\n\nTo proceed, create or open a Hugo website.",
+    "hugoSiteSelected": "Hugo website selected: {path}",
+    "@hugoSiteSelected": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "themes": "Themes",
+    "themes_Description": "Download and select a Hugo theme.\nYou can also skip this step and do it later via Settings.",
+    "hugoThemeSelected": "Hugo theme selected: {path}",
+    "@hugoThemeSelected": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "allDone": "All done!",
+    "allDone_Description": "Congratulations, you are ready to use BuhoCMS!",
+    "sitePath": "Website path: {path}",
+    "@sitePath": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "hugoTheme": "Hugo theme: {path}",
+    "@hugoTheme": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "getStarted": "Get started",
+    "revertChanges_Description": "Are you sure to revert this file? All unsaved work after the last save will be lost.",
+    "quitWithUnsaved": "Quit with unsaved changes",
+    "quitWithUnsaved_Description": "You have unsaved changes. Do you want to save or revert everything before you quit?",
+    "revertAndQuit": "Revert & Quit",
+    "saveAndQuit": "Save & Quit",
+    "unsavedChanges": "Unsaved changes",
+    "unsavedChanges_Description": "You have unsaved changes. Do you want to save everything?",
+    "revert": "Revert",
+    "save": "Save",
+    "createNewPost": "Create new post",
+    "createNewFolder": "Create new folder",
+    "addNewFrontmatterToList": "Add new Front matter to list",
+    "remove": "Remove",
+    "close": "Close",
+    "addFrontmatter": "Add Front matter",
+    "add": "Add",
+    "addedFrontmatterToList": "Added Front matter to list with name {name} and type {type}",
+    "@addedFrontmatterToList": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "type": { "type": "String" }
+      }
+    },
+    "frontmatterName": "Front matter name: ",
+    "frontmatterType": "Front matter type: ",
+    "error_FrontmatterAlreadyContains": "List already contains a Front Matter item with the same name!",
+    "editFrontmatter": "Edit Front matter",
+    "editedFrontmatterToList": "Edited Front matter in list from name {oldName} to {newName} and type {oldType} to {newType}",
+    "@editedFrontmatterToList": {
+     "placeholders": {
+        "oldName": { "type": "String" },
+        "newName": { "type": "String" },
+        "oldType": { "type": "String" },
+        "newType": { "type": "String" }
+      }
+    },
+    "removedFrontmatterToList": "Removed Front matter from list with name {name} and type {type}",
+    "@removedFrontmatterToList": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "type": { "type": "String" }
+      }
+    },
+    "deleteFrontmatter": "Delete front matter",
+    "areYouSureDeleteFrontmatter": "Are you sure you want to delete front matter:\n",
+    "removedFrontmatter": "Removed Front Matter {name} with type {type}",
+    "@removedFrontmatter": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "type": { "type": "String" }
+      }
+    },
+    "detect": "Detect",
+    "notFound_Description": "{name} not found in the BuhoCMS list. Please create the field with its name in your BuhoCMS Front matter list (Settings → Hugo Settings → Edit Front matter list) or remove it from the source text",
+    "@notFound_Description": {
+     "placeholders": {
+        "name": { "type": "String" }
+      }
+    },
+    "restore": "Restore",
+    "error_executableNotFound": "Error: {program} executable not found while running command {command}",
+    "@error_executableNotFound": {
+     "placeholders": {
+        "program": { "type": "String" },
+        "command": { "type": "String" }
+      }
+    },
+    "removeTag": "Remove tag {tag}",
+    "@removeTag": {
+     "placeholders": {
+        "tag": { "type": "String" }
+      }
+    },
+    "tag": "Tag",
+    "createYourFirstPost": "Create your first post",
+    "noFileSelected": "No file selected",
+    "content": "Content",
+    "frontmatter": "Front matter",
+    "hide": "Hide",
+    "show": "Show",
+    "draggableMode_Description": "Switch to Draggable Mode. Drag handles will appear on each field",
+    "draggableModeLock": "Lock draggable mode",
+    "draggableModeOn": "Draggable Mode",
+    "content_Description": "Write your markdown content here",
+    "resetBuhoCMS": "Reset preferences",
+    "areYouSureResetBuhoCMS": "Are you sure to reset all preferences? Make sure to export your current preferences to be able to restore your settings.",
+    "fullScreenInfo": "Press F11 or ESC to exit Full Screen mode",
+    "fullScreen": "Full Screen",
+    "exitFullScreen": "Exit Full Screen",
+    "refreshedFileList": "Refreshed file list",
+    "fileSavedSuccessfully": "File saved successfully",
+    "nothingToSave": "Nothing to save",
+    "fileRevertedSuccessfully": "File reverted successfully",
+    "nothingToRevert": "Nothing to revert",
+    "alreadyStartedAHugoServer": "Already started a Hugo server",
+    "startedHugoServer": "Started Hugo server",
+    "stoppedHugoServer": "Stopped Hugo Server",
+    "noHugoServerRunning": "No Hugo Server currently running",
+    "builtHugoSite": "Built Hugo site",
+    "addedFrontmatter": "Added Front matter {name} with type {type}",
+    "@addedFrontmatter": {
+     "placeholders": {
+        "name": { "type": "String" },
+        "type": { "type": "String" }
+      }
+    },
+    "terminal": "Terminal",
+    "command": "Command:",
+    "flags": "Flags:",
+    "search": "Search",
+    "autoFrontmatterList": "Automatically detect Front matter list",
+    "areYouSureAutoFrontmatterList": "Automatically detect your BuhoCMS Front matter list from all files? The previous list will be overridden.",
+    "resetFrontmatterList": "Reset Front matter list",
+    "areYouSureResetFrontmatterList": "Are you sure to reset your Front matter list to the default list? The default list contains \"title\", \"date\", \"draft\" and \"tags\".",
+
+    "settings": "Settings",
+    "appSettings": "APP SETTINGS",
+    "site": "WEBSITE",
+    "hugoSettings": "HUGO SETTINGS",
+
+    "language": "Language",
+    "language_description": "Change the language of BuhoCMS",
+    "systemLanguage": "System language",
+    "theme": "Theme",
+    "theme_description": "Change the app theme",
+    "themeSystem": "System theme",
+    "themeLight": "Light theme",
+    "themeDark": "Dark theme",
+    "onboardingScreen": "Onboarding screen",
+    "onboardingScreen_description": "Open the initial onboarding screen",
+    "more": "MORE",
+    "less": "SHOW LESS",
+    "version": "Version {versionNumber}",
+    "@version": {
+      "placeholders": {
+         "versionNumber": { "type": "String" }
+      }
+    },
+    "license": "The code is licensed under the GPLv3 on GitHub (https://github.com/iakmds/buhocms). If you want to report a bug, request or improve a feature, please open an issue on GitHub. Thanks!"
+}
