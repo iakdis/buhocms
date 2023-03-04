@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../i18n/l10n.dart';
 import '../../provider/app/locale_provider.dart';
+import '../../utils/preferences.dart';
 
 class LanguageDropdown extends StatefulWidget {
   const LanguageDropdown({super.key});
@@ -15,28 +16,28 @@ class LanguageDropdown extends StatefulWidget {
 class _LanguageDropdownState extends State<LanguageDropdown> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<LocaleProvider>(builder: (context, value, _) {
-      return DropdownButton(
+    return Consumer<LocaleProvider>(builder: (context, localeProvider, _) {
+      return DropdownButton<String>(
         icon: const Icon(Icons.language),
-        value: value.locale,
+        value: Preferences.getLanguage().isNotEmpty
+            ? Preferences.getLanguage()
+            : null,
         items: Localization.supportedLocales.map(
           (locale) {
-            final name = Localization.getName(locale.languageCode);
+            final name = Localization.getName(locale);
 
             return DropdownMenuItem(
-              value: locale,
-              onTap: () => Provider.of<LocaleProvider>(context, listen: false)
-                  .setLocale(locale),
+              value: locale.toLanguageTag(),
+              onTap: () => localeProvider.setLocale(locale),
               child: Text(name),
             );
           },
         ).toList()
           ..insert(
             0,
-            DropdownMenuItem<Locale>(
+            DropdownMenuItem<String>(
               value: null,
-              onTap: () => Provider.of<LocaleProvider>(context, listen: false)
-                  .clearLocale(),
+              onTap: () => localeProvider.clearLocale(),
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: Text(AppLocalizations.of(context)!.systemLanguage),

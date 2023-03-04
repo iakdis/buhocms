@@ -7,8 +7,8 @@ class Localization {
     const Locale('de', ''),
   ];
 
-  static String getName(String code) {
-    switch (code) {
+  static String getName(Locale locale) {
+    switch (locale.languageCode) {
       case 'de':
         return 'Deutsch';
       case 'en':
