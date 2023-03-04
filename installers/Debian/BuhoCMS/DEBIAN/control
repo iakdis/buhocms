@@ -1,0 +1,8 @@
+Package: buhocms
+Version: 0.2.0
+Architecture: all
+Essential: no
+Priority: optional
+Depends: libgtk-3-0,libblkid1,liblzma5
+Maintainer: Andreas Iakeimiadis
+Description: A local CMS for Hugo static sites
