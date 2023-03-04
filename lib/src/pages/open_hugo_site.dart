@@ -197,17 +197,15 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
                     width: 400,
                     child: TextField(
                       onChanged: (value) {
+                        var end = textController.text.length;
                         if (textController.text.isNotEmpty &&
                             textController
                                     .text[textController.text.length - 1] ==
                                 Platform.pathSeparator) {
-                          textController.text = textController.text
-                              .substring(0, textController.text.length - 1);
-                          textController.selection = TextSelection(
-                              baseOffset: textController.text.length,
-                              extentOffset: textController.text.length);
+                          end = textController.text.length - 1;
                         }
-                        sitePath = textController.text;
+                        sitePath =
+                            sitePath = textController.text.substring(0, end);
                         sitePathError = false;
                         setState(() {});
                       },
