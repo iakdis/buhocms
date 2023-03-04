@@ -1,48 +1,48 @@
 {
-    "aboutBuhoCMS": "About BuhoCMS",
-    "openSite": "Open website",
-    "currentSitePath": "Current website path: {path}",
+    "aboutBuhoCMS": "关于 BuhoCMS",
+    "openSite": "打开网站",
+    "currentSitePath": "当前网站路径: {path}",
      "@currentSitePath": {
       "placeholders": {
          "path": { "type": "String" }
       }
     },
-    "createSite": "Create website",
-    "createSite_Description": "Create a new Hugo website",
-    "hugoThemes": "Hugo themes",
-    "currentHugoThemes": "Current Hugo theme: {theme}. Select or download a Hugo theme",
+    "createSite": "创建网站",
+    "createSite_Description": "创建一个新的雨果网站",
+    "hugoThemes": "Hugo 主题",
+    "currentHugoThemes": "当前的雨果主题: {theme}. 选择或下载一个雨果主题",
      "@currentHugoThemes": {
       "placeholders": {
          "theme": { "type": "String" }
       }
     },
-    "preferences": "Preferences",
-    "preferences_Description": "Export your preferences to a file, load from a file or reset the preferences for BuhoCMS",
-    "selectASavePath": "Select a save path",
-    "overrideFile": "Override file?",
-    "overrideFile_Description": "A file named {file} already exists in this directory. Override the old file?",
+#"德语翻译为-设置" "preferences": "首选项",
+    "preferences_Description": "将你的偏好导出到文件中，从文件中加载或重新设定BuhoCMS的偏好",
+    "selectASavePath": "选择一个保存路径",
+    "overrideFile": "覆盖文件？",
+    "overrideFile_Description": "这个目录中已经存在一个名为{file}的文件,要覆盖旧文件吗？",
      "@overrideFile_Description": {
       "placeholders": {
          "file": { "type": "String" }
       }
     },
-    "cancel": "Cancel",
-    "yes": "Yes",
-    "export": "Export",
-    "import": "Import",
-    "reset": "Reset",
-    "editFrontmatterList": "Edit Front matter list",
-    "editFrontmatterList_Description": "Edit your current Front matter list to add, edit, rearrange or remove entries",
-    "editingPage": "Editing Page",
-    "guiMode": "GUI Mode",
-    "textMode": "Text Mode",
-    "stopHugoServer": "Stop Hugo server",
-    "startHugoServer": "Start Hugo server",
-    "openHugoServer": "Open Hugo server",
-    "buildHugoSite": "Build Hugo website",
-    "openPublicFolder": "Open \"public\" folder",
-    "sortBy": "Sort by",
-    "parentFolderButton_Toolip": "Go to parent folder. Current: {path}",
+    "cancel": "取消",
+    "yes": "是",
+#"进口" "export": "Export",
+#"出口" "import": "Import",
+    "reset": "重置",
+#"编辑正面内容列表" "editFrontmatterList": "Edit Front matter list",
+    "editFrontmatterList_Description": "编辑你当前的前言列表，以添加、编辑、重新排列或删除条目",
+    "editingPage": "编辑页面",
+    "guiMode": "GUI模式",
+    "textMode": "文本模式",
+    "stopHugoServer": "停止 Hugo Server",
+    "startHugoServer": "启动 Hugo Server",
+    "openHugoServer": "打开 Hugo Server",
+    "buildHugoSite": "建立 Hugo 网页",
+    "openPublicFolder": "打开 \"public\" 文件夹",
+    "sortBy": "排序方式",
+#"回到上一级文件夹。当前:{path}"    "parentFolderButton_Toolip": "Go to parent folder. Current: {path}",
     "@parentFolderButton_Toolip": {
      "placeholders": {
         "path": { "type": "String" }
