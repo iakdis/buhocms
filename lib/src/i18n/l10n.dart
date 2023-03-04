@@ -13,7 +13,7 @@ class Localization {
       case 'de':
         return 'Deutsch';
       case 'zh':
-        return '简化字';
+        return '中文';
       case 'en':
       default:
         return 'English';
