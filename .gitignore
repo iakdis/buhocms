@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/release
 
 # Custom
-/installers/appimagetool-x86_64.AppImage
+/installers/AppImage/appimagetool-x86_64.AppImage
