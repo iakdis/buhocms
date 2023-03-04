@@ -26,7 +26,7 @@ if [ -f $EXECUTABLE ]; then
     rm $EXECUTABLE
 fi
 
-# Go to installers directory
+# Go to installers/AppImage directory
 cd ..
 
 # Specify the final app name

@@ -7,7 +7,7 @@ APPDIR=BuhoCMS.AppDir
 DATA=data
 LIB=lib
 EXECUTABLE=buhocms
-INSTALLERS=installers
+INSTALLERS=installers/AppImage
 
 # Go to the AppImage data directory 
 cd $APPDIR
@@ -27,8 +27,8 @@ if [ -f $EXECUTABLE ]; then
     rm $EXECUTABLE
 fi
 
-# Go to Flutter project directory
-cd ../..
+# Go to Flutter project directory (AppImage/installers/buhocms)
+cd ../../..
 
 # Build Linux app
 flutter build linux
