@@ -38,6 +38,7 @@ class _AppState extends State<App> with WindowListener {
   void initState() {
     windowManager.addListener(this);
     windowManager.setMinimumSize(const Size(400, 200));
+    windowManager.setTitle('BuhoCMS');
     super.initState();
   }
 
