@@ -606,21 +606,29 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     );
   }
 
-  void setTitle(UnsavedTextProvider unsavedTextProvider) {
-    var title =
-        '${(Preferences.getCurrentFile() ?? 'No file selected').split(Platform.pathSeparator).last} - BuhoCMS';
-    var titleUnsaved = title;
-    unsavedTextProvider.unsaved(globalKey: globalKey)
-        ? titleUnsaved = '*$title'
-        : titleUnsaved = title;
-    windowManager.setTitle(titleUnsaved);
+  void setTitle() {
+    final fileNavigationProvider =
+        Provider.of<FileNavigationProvider>(context, listen: false);
+    final unsavedTextProvider =
+        Provider.of<UnsavedTextProvider>(context, listen: false);
+
+    final fileName = fileNavigationProvider.fileNavigationIndex == -1
+        ? 'No file selected'
+        : Preferences.getCurrentFile()?.split(Platform.pathSeparator).last ??
+            'No file selected';
+    final title = '$fileName - BuhoCMS';
+
+    final finalTitle =
+        unsavedTextProvider.unsaved(globalKey: globalKey) ? '*$title' : title;
+
+    windowManager.setTitle(finalTitle);
   }
 
   AppBar _appBar() {
     return AppBar(
-      title: Consumer<UnsavedTextProvider>(
-          builder: (context, unsavedTextProvider, _) {
-        setTitle(unsavedTextProvider);
+      title: Consumer2<UnsavedTextProvider, FileNavigationProvider>(
+          builder: (context, _, __, ___) {
+        setTitle();
 
         return Row(
           children: [
