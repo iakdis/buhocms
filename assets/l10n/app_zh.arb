@@ -8,9 +8,9 @@
       }
     },
     "createSite": "创建网站",
-    "createSite_Description": "创建一个新的雨果网站",
+    "createSite_Description": "创建一个新的Hugo网站",
     "hugoThemes": "Hugo 主题",
-    "currentHugoThemes": "当前的雨果主题: {theme} 选择或下载一个雨果主题",
+    "currentHugoThemes": "当前Hugo主题：{theme}，点击左侧按钮选择或下载一个Hugo主题",
      "@currentHugoThemes": {
       "placeholders": {
          "theme": { "type": "String" }
@@ -27,19 +27,19 @@
       }
     },
     "cancel": "取消",
-    "yes": "是",
-    "export": "输出",
-    "import": "输入",
+    "yes": "确认",
+    "export": "导出",
+    "import": "导入",
     "reset": "重置",
     "editFrontmatterList": "编辑Front Matter列表",
-    "editFrontmatterList_Description": "编辑你当前的Front Matter列表，以添加、编辑、重新排列或删除条目",
+    "editFrontmatterList_Description": "编辑当前Front Matter列表，以添加、编辑、重新排列或删除条目",
     "editingPage": "编辑页面",
     "guiMode": "GUI模式",
     "textMode": "文本模式",
     "stopHugoServer": "停止 Hugo Server",
     "startHugoServer": "启动 Hugo Server",
     "openHugoServer": "打开 Hugo Server",
-    "buildHugoSite": "建立 Hugo 网页",
+    "buildHugoSite": "组建 Hugo 网页",
     "openPublicFolder": "打开 \"public\" 文件夹",
     "sortBy": "排序方式",
     "parentFolderButton_Toolip": "回到上一级文件夹 当前:{path}",
@@ -94,7 +94,7 @@
         "path": { "type": "String" }
       }
     },
-    "alreadyAtHighestLevel": "已经处于最高级 无法打开 \"content\" 文件夹上方的文件夹",
+    "alreadyAtHighestLevel": "已经处于最高级文件夹，无法打开 \"content\" 的上一级文件夹",
     "sortByName": "By name",
     "sortByNameReversed": "By name (reversed)",
     "sortByDate": "By date",
@@ -145,7 +145,7 @@
     "refreshFiles": "更新文件",
     "openCurrentFileInExplorer": "在文件资源管理器中打开当前文件",
     "help": "帮助",
-    "openHomepage": "打开主页",
+    "openHomepage": "打开项目主页",
     "reportIssue": "反馈问题",
     "about": "关于",
     "error_DirectoryDoesNotExist": "目录 {path} 不存在 请选择一个有效的目录路径",
@@ -164,7 +164,7 @@
     "next": "下一步",
     "continue2": "继续",
     "create": "创建",
-    "checkHugoInstalled": "检查是否安装了Hugo",
+    "checkHugoInstalled": "检查是否已安装Hugo",
     "executableNotFound": "没有找到 {program} 可执行文件 请确保 {program} 已正确安装",
     "@executableNotFound": {
       "placeholders": {
@@ -180,7 +180,7 @@
     },
     "createLocation": "创建位置",
     "choosePath": "选择路径",
-    "hugoSiteWillBeCreatedInFolder": "新的Hugo网站将在这个文件夹中创建:",
+    "hugoSiteWillBeCreatedInFolder": "新的Hugo网站将在此文件夹中创建:",
     "savePath": "保存路径",
     "siteName": "网站名称",
     "finish": "完成",
@@ -201,37 +201,37 @@
     "selectATheme": "请选择一个主题",
     "none": "空",
     "download": "下载",
-    "startOver": "重新开始",
-    "checkGitInstalled": "检查是否安装了Git",
+    "startOver": "重新下载主题",
+    "checkGitInstalled": "检查是否已安装Git",
     "downloadTheme": "下载主题",
     "repositoryInvalidURL": "无效的URL",
-    "themeRepository": "主题库",
-    "successfullyDownloadedHugoTheme": "成功下载了Hugo主题 从:\n",
-    "nowSelectTheme": "\n\n你现在可以在下拉按钮中选择主题 {theme} 了.",
+    "themeRepository": "主题下载链接",
+    "successfullyDownloadedHugoTheme": "已成功下载Hugo主题来自:\n",
+    "nowSelectTheme": "\n\n现在, 你可以在左侧的下拉按钮中选择主题 {theme} 了\n点击左上角返回以继续",
     "@nowSelectTheme": {
       "placeholders": {
         "theme": { "type": "String" }
       }
     },
-    "rememberToVisitDocs": "记得访问主题库中的文档以了解实施正确配置的细节",
+    "rememberToVisitDocs": "记得查看主题当中的文档以了解正确配置主题的细节",
     "welcomeToBuhoCMS": "欢迎来到 BuhoCMS",
-    "welcomeToBuhoCMS_Description": "BuhoCMS是Hugo的本地内容管理系统\n创建或打开一个网站, 安装一个主题, 并开始创建新帖子\n\n要继续, 创建或打开Hugo网站",
-    "hugoSiteSelected": "选定Hugo网站: {path}",
+    "welcomeToBuhoCMS_Description": "BuhoCMS是Hugo的本地内容管理系统\n你可以用它创建或打开一个网站, 安装主题并开始创建新帖子\n\n继续创建或打开Hugo网站 →",
+    "hugoSiteSelected": "选择Hugo网站：{path}",
     "@hugoSiteSelected": {
       "placeholders": {
         "path": { "type": "String" }
       }
     },
     "themes": "主题",
-    "themes_Description": "下载并选择一个Hugo主题.\n你也可以跳过这一步，稍后通过设置进行操作.",
-    "hugoThemeSelected": "选择Hugo主题: {path}",
+    "themes_Description": "下载并选择一个Hugo主题。\n你也可以跳过这一步，稍后通过设置选择主题。",
+    "hugoThemeSelected": "已选择Hugo主题: {path}",
     "@hugoThemeSelected": {
       "placeholders": {
         "path": { "type": "String" }
       }
     },
     "allDone": "全部完成!",
-    "allDone_Description": "恭喜, 您已准备好使用BuhoCMS了!",
+    "allDone_Description": "恭喜，您已准备好使用BuhoCMS了!",
     "sitePath": "网站路径: {path}",
     "@sitePath": {
       "placeholders": {
@@ -254,8 +254,8 @@
     "unsavedChanges_Description": "你有未保存的修改。是否要保存所有内容？",
     "revert": "恢复",
     "save": "保存",
-    "createNewPost": "创建新帖子",
-    "createNewFolder": "创建新文件夹",
+    "createNewPost": "新建文章",
+    "createNewFolder": "新建文件夹",
     "addNewFrontmatterToList": "Add new Front matter to list",
     "remove": "移除",
     "close": "关闭",
@@ -330,7 +330,7 @@
     "draggableModeOn": "可拖曳模式",
     "content_Description": "在这里写下你的markdown内容",
     "resetBuhoCMS": "重置首选项",
-    "areYouSureResetBuhoCMS": "你确定要重置所有的偏好吗? 请确保导出您当前的偏好，以便能够恢复您的设置。",
+    "areYouSureResetBuhoCMS": "确定要重置所有的偏好设置吗？请确保导出当前的偏好，以便能够恢复您的设置。",
     "fullScreenInfo": "按F11或ESC键退出全屏模式",
     "fullScreen": "全屏显示",
     "exitFullScreen": "退出全屏显示",
@@ -343,7 +343,7 @@
     "startedHugoServer": "Hugo server 已开启",
     "stoppedHugoServer": "Hugo Server 已停止",
     "noHugoServerRunning": "目前没有运行的Hugo Server",
-    "builtHugoSite": "建立 Hugo 站点",
+    "builtHugoSite": "组建 Hugo 站点",
     "addedFrontmatter": "添加了类型为 {type} 的Front matter {name}",
     "@addedFrontmatter": {
      "placeholders": {
@@ -353,7 +353,7 @@
     },
     "terminal": "终端",
     "command": "命令:",
-    "flags": "Flags:",
+    "flags": "可选参数:",
     "search": "查找",
     "autoFrontmatterList": "自动检测 Front matter list",
     "areYouSureAutoFrontmatterList": "从所有的文件中自动检测你的BuhoCMS Front matter list？之前的列表将被覆盖。",
@@ -361,7 +361,7 @@
     "areYouSureResetFrontmatterList": "你确定要将你的 Front matter list 重置为 default list 吗？default list包含 \"title\", \"date\", \"draft\" and \"tags\".",
 
     "settings": "设置",
-    "appSettings": "应用程序设置",
+    "appSettings": "应用设置",
     "site": "网站",
     "hugoSettings": "HUGO 设置",
 
@@ -369,19 +369,19 @@
     "language_description": "更改 BuhoCMS 的语言",
     "systemLanguage": "系统语言",
     "theme": "主题",
-    "theme_description": "改变应用程序的主题",
+    "theme_description": "改变应用主题",
     "themeSystem": "系统主题",
     "themeLight": "亮色主题",
     "themeDark": "暗色主题",
-    "onboardingScreen": "Onboarding screen",
-    "onboardingScreen_description": "Open the initial onboarding screen",
+    "onboardingScreen": "开始页面",
+    "onboardingScreen_description": "点击以打开初始设置界面",
     "more": "更多",
-    "less": "SHOW LESS",
-    "version": "版本 {versionNumber}",
+    "less": "其他选项",
+    "version": "当前版本 {versionNumber}",
     "@version": {
       "placeholders": {
          "versionNumber": { "type": "String" }
       }
     },
-    "license": "该代码在GitHub上以GPLv3的形式授权(https://github.com/iakmds/buhocms). 如果你想报告一个bug, 要求或改进功能, 请在GitHub上发布一个issue. 谢谢!"
+    "license": "该代码在GitHub上以GPLv3的形式授权(https://github.com/iakmds/buhocms)。如果你想报告一个Bug，请求添加或改进功能，请在GitHub上发布一个issue。谢谢!"
 }
