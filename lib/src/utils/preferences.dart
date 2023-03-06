@@ -40,11 +40,11 @@ class Preferences {
     return const JsonEncoder.withIndent('  ').convert(object);
   }
 
-  static Future setAllPreferences(String preferences) async {
+  static Future<void> setAllPreferences(String preferences) async {
     await _preferences!.setString(prefPreferences, preferences);
   }
 
-  static Future setPreferences(String key, dynamic value) async {
+  static Future<void> setPreferences(String key, dynamic value) async {
     final preferences = getPreferences();
     preferences[key] = value;
 
@@ -76,58 +76,58 @@ class Preferences {
 
   static SharedPreferences? _preferences;
 
-  static Future init() async =>
+  static Future<void> init() async =>
       _preferences = await SharedPreferences.getInstance();
 
   //Language
-  static Future setLanguage(String locale) async =>
+  static Future<void> setLanguage(String locale) async =>
       await setPreferences(prefLanguage, locale);
   static String getLanguage() => getPreferencesEntry(prefLanguage);
 
   //Theme Mode
-  static Future setThemeMode(String theme) async =>
+  static Future<void> setThemeMode(String theme) async =>
       await setPreferences(prefThemeMode, theme);
   static String getThemeMode() => getPreferencesEntry(prefThemeMode);
 
   //Color Scheme Index
-  static Future setColorSchemeIndex(int index) async =>
+  static Future<void> setColorSchemeIndex(int index) async =>
       await setPreferences(prefColorScheme, index);
   static int getColorSchemeIndex() => getPreferencesEntry(prefColorScheme);
 
   //Page Index
-  static Future setPageIndex(int index) async =>
+  static Future<void> setPageIndex(int index) async =>
       await setPreferences(prefPageIndex, index);
   static int getPageIndex() => getPreferencesEntry(prefPageIndex);
 
   //File Index
-  static Future setFileIndex(int index) async =>
+  static Future<void> setFileIndex(int index) async =>
       await setPreferences(prefCurrentFileIndex, index);
   static int getFileIndex() => getPreferencesEntry(prefCurrentFileIndex);
 
   //Navigation Panel Size
-  static Future setNavigationSize(double index) async =>
+  static Future<void> setNavigationSize(double index) async =>
       await setPreferences(prefNavigationSize, index);
   static double getNavigationSize() => getPreferencesEntry(prefNavigationSize);
 
   //File Navigation Panel Size
-  static Future setFileNavigationSize(double index) async =>
+  static Future<void> setFileNavigationSize(double index) async =>
       await setPreferences(prefFileNavigationSize, index);
   static double getFileNavigationSize() =>
       getPreferencesEntry(prefFileNavigationSize);
 
   //Onboarding
-  static Future setOnBoardingComplete(bool complete) async =>
+  static Future<void> setOnBoardingComplete(bool complete) async =>
       await setPreferences(prefOnboardingCompleted, complete);
   static bool getOnBoardingComplete() =>
       getPreferencesEntry(prefOnboardingCompleted);
 
   //Site Path
-  static Future setSitePath(String path) async =>
+  static Future<void> setSitePath(String path) async =>
       await setPreferences(prefSitePath, path);
   static String? getSitePath() => getPreferencesEntry(prefSitePath);
 
   //Save Path
-  static Future setCurrentPath(String path) async =>
+  static Future<void> setCurrentPath(String path) async =>
       await setPreferences(prefCurrentPath, path);
   static String getCurrentPath() => getPreferencesEntry(prefCurrentPath);
 
@@ -137,23 +137,24 @@ class Preferences {
   static String? getCurrentFile() => getPreferencesEntry(prefCurrentFile);
 
   //GUI Mode
-  static Future setIsGUIMode(bool isGUIMode) async =>
+  static Future<void> setIsGUIMode(bool isGUIMode) async =>
       await setPreferences(prefIsGUIMode, isGUIMode);
   static bool getIsGUIMode() => getPreferencesEntry(prefIsGUIMode);
 
   //Front matter GUI Mode
-  static Future setIsFrontmatterGUIMode(bool isFrontmatterGUIMode) async =>
+  static Future<void> setIsFrontmatterGUIMode(
+          bool isFrontmatterGUIMode) async =>
       await setPreferences(prefIsFrontmatterGUIMode, isFrontmatterGUIMode);
   static bool getIsFrontmatterGUIMode() =>
       getPreferencesEntry(prefIsFrontmatterGUIMode);
 
   //Sort Mode
-  static Future setSortMode(SortMode sortMode) async =>
+  static Future<void> setSortMode(SortMode sortMode) async =>
       await setPreferences(prefSortMode, sortMode.name);
   static String getSortMode() => getPreferencesEntry(prefSortMode);
 
   //Front Matter Add list
-  static Future setFrontMatterAddList(
+  static Future<void> setFrontMatterAddList(
       Map<String, HugoType> frontMatterAddList) async {
     Map<String, String> addListWithTypesStrings = {};
     addListWithTypesStrings.addEntries(
@@ -190,7 +191,7 @@ class Preferences {
   }
 
   //Tabs
-  static Future setTabs(List<MapEntry<String, int>> tabs) async {
+  static Future<void> setTabs(List<MapEntry<String, int>> tabs) async {
     Map<String, int> tabsMap = {};
     tabsMap.addEntries(tabs.map((e) => e));
 
@@ -212,7 +213,7 @@ class Preferences {
   }
 
   //Hugo Theme
-  static Future setHugoTheme(String theme) async =>
+  static Future<void> setHugoTheme(String theme) async =>
       await setPreferences(prefHugoTheme, theme);
   static String getHugoTheme() => getPreferencesEntry(prefHugoTheme);
 }
