@@ -1,278 +1,278 @@
 {
-    "aboutBuhoCMS": "About BuhoCMS",
-    "openSite": "Open website",
-    "currentSitePath": "Current website path: {path}",
+    "aboutBuhoCMS": "关于 BuhoCMS",
+    "openSite": "打开网站",
+    "currentSitePath": "当前网站路径：{path}",
      "@currentSitePath": {
       "placeholders": {
          "path": { "type": "String" }
       }
     },
-    "createSite": "Create website",
-    "createSite_Description": "Create a new Hugo website",
-    "hugoThemes": "Hugo themes",
-    "currentHugoThemes": "Current Hugo theme: {theme}. Select or download a Hugo theme",
+    "createSite": "创建网站",
+    "createSite_Description": "创建一个新的Hugo网站",
+    "hugoThemes": "Hugo 主题",
+    "currentHugoThemes": "当前Hugo主题：{theme}，点击左侧按钮选择或下载一个Hugo主题。",
      "@currentHugoThemes": {
       "placeholders": {
          "theme": { "type": "String" }
       }
     },
-    "preferences": "Preferences",
-    "preferences_Description": "Export your preferences to a file, load from a file or reset the preferences for BuhoCMS",
-    "selectASavePath": "Select a save path",
-    "overrideFile": "Override file?",
-    "overrideFile_Description": "A file named {file} already exists in this directory. Override the old file?",
+    "preferences": "首选项",
+    "preferences_Description": "将你的偏好设置导出至文件，从文件中加载或重新设定BuhoCMS的偏好设置。",
+    "selectASavePath": "选择一个保存路径",
+    "overrideFile": "覆盖文件？",
+    "overrideFile_Description": "这个目录中已经存在一个名为 {file} 的文件，要覆盖旧文件吗？",
      "@overrideFile_Description": {
       "placeholders": {
          "file": { "type": "String" }
       }
     },
-    "cancel": "Cancel",
-    "yes": "Yes",
-    "export": "Export",
-    "import": "Import",
-    "reset": "Reset",
-    "editFrontmatterList": "Edit Front matter list",
-    "editFrontmatterList_Description": "Edit your current Front matter list to add, edit, rearrange or remove entries",
-    "editingPage": "Editing Page",
-    "guiMode": "GUI Mode",
-    "textMode": "Text Mode",
-    "stopHugoServer": "Stop Hugo server",
-    "startHugoServer": "Start Hugo server",
-    "openHugoServer": "Open Hugo server",
-    "buildHugoSite": "Build Hugo website",
-    "openPublicFolder": "Open \"public\" folder",
-    "sortBy": "Sort by",
-    "parentFolderButton_Toolip": "Go to parent folder. Current: {path}",
+    "cancel": "取消",
+    "yes": "确认",
+    "export": "导出",
+    "import": "导入",
+    "reset": "重置",
+    "editFrontmatterList": "编辑目录列表",
+    "editFrontmatterList_Description": "编辑当前目录列表，以添加、编辑、重新排列或删除条目。",
+    "editingPage": "编辑页面",
+    "guiMode": "GUI模式",
+    "textMode": "文本模式",
+    "stopHugoServer": "停止 Hugo Server",
+    "startHugoServer": "启动 Hugo Server",
+    "openHugoServer": "打开 Hugo Server",
+    "buildHugoSite": "组建 Hugo Page",
+    "openPublicFolder": "打开 \"public\" 文件夹",
+    "sortBy": "排序方式",
+    "parentFolderButton_Toolip": "回到上一级文件夹，当前：{path}",
     "@parentFolderButton_Toolip": {
      "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "newPost": "New post",
-    "newFolder": "New folder",
-    "error_RenameDirectory": "Error: Could not rename folder {oldPath} to {newPath} as a folder with the same name already exists in this directory",
+    "newPost": "新建文章",
+    "newFolder": "新建文件夹",
+    "error_RenameDirectory": "错误：无法将文件夹 {oldPath} 重命名为 {newPath} ，因为这个目录中已经存在一个同名的文件夹。",
     "@error_RenameDirectory": {
      "placeholders": {
         "oldPath": { "type": "String" },
         "newPath": { "type": "String" }
       }
     },
-    "renamedDirectory": "Renamed folder {oldPath} to {newPath}",
+    "renamedDirectory": "将文件夹 {oldPath} 重命名为 {newPath}",
     "@renamedDirectory": {
      "placeholders": {
         "oldPath": { "type": "String" },
         "newPath": { "type": "String" }
       }
     },
-    "deleteFolder": "Delete folder",
-    "deleteFolder_Description": "Are you sure you want to delete the folder:\n",
-    "deletedFolder": "Deleted folder {path}",
+    "deleteFolder": "删除文件夹",
+    "deleteFolder_Description": "你确定要删除这个文件夹吗：\n",
+    "deletedFolder": "删除文件夹 {path}",
     "@deletedFolder": {
      "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "error_RenameFile": "Error: Could not rename file {oldPath} to {newPath} as a file with the same name already exists in this directory",
+    "error_RenameFile": "错误：无法将文件 {oldPath} 重命名为 {newPath} ，因为这个目录中已经存在一个同名的文件。",
     "@error_RenameFile": {
      "placeholders": {
         "oldPath": { "type": "String" },
         "newPath": { "type": "String" }
       }
     },
-    "renamedFile": "Renamed file {oldPath} to {newPath}",
+    "renamedFile": "将文件 {oldPath} 重命名为 {newPath}",
     "@renamedFile": {
      "placeholders": {
         "oldPath": { "type": "String" },
         "newPath": { "type": "String" }
       }
     },
-    "deleteFile": "Delete file",
-    "deleteFile_Description": "Are you sure you want to delete the file:\n",
-    "deletedFile": "Deleted file {path}",
+    "deleteFile": "删除文件",
+    "deleteFile_Description": "你确定要删除这个文件吗：\n",
+    "deletedFile": "删除文件 {path}",
     "@deletedFile": {
      "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "alreadyAtHighestLevel": "Already at highest level; Cannot open folder above \"content\" folder",
-    "sortByName": "By name",
-    "sortByNameReversed": "By name (reversed)",
-    "sortByDate": "By date",
-    "sortByDateReversed": "By date (reversed)",
-    "sortBySize": "By size",
-    "sortBySizeReversed": "By size (reversed)",
-    "sortByType": "By type",
-    "sortByTypeReversed": "By type (reversed)",
-    "postCreated": "Post {post} created in path {path}",
+    "alreadyAtHighestLevel": "已经处于最高级文件夹，无法打开 \"content\" 的上一级文件夹。",
+    "sortByName": "按文件名排序",
+    "sortByNameReversed": "按文件名排序 (倒序)",
+    "sortByDate": "按日期排序",
+    "sortByDateReversed": "按日期排序 (倒序)",
+    "sortBySize": "按文件大小排序",
+    "sortBySizeReversed": "按文件大小排序 (倒序)",
+    "sortByType": "按类型排序",
+    "sortByTypeReversed": "按类型排序 (倒序)",
+    "postCreated": "在路径 {path} 中创建的帖子 {post}",
     "@postCreated": {
      "placeholders": {
         "post": { "type": "String" },
         "path": { "type": "String" }
       }
     },
-    "createNewPostIn": "Create new post in:\n",
+    "createNewPostIn": "新建文章：\n",
     "name": "Name: ",
-    "cantBeEmpty": "Can't be empty",
-    "error_fileAlreadyExists": "File with name {name} already exists in folder:\n{path}",
+    "cantBeEmpty": "不能为空",
+    "error_fileAlreadyExists": "文件名为 {name} 的文件已经存在于文件夹：\n {path}",
     "@error_fileAlreadyExists": {
      "placeholders": {
         "name": { "type": "String" },
         "path": { "type": "String" }
       }
     },
-    "folderCreated": "Post {path} created",
+    "folderCreated": "创建的帖子路径 {path}",
     "@folderCreated": {
      "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "createNewFolderIn": "Create new folder in:\n",
-    "error_folderAlreadyExists": "Folder with name {name} already exists in folder:\n{path}",
+    "createNewFolderIn": "创建新的文件夹在：\n",
+    "error_folderAlreadyExists": "文件夹中已经存在名称为 {name} 的文件夹：\n{path}",
     "@error_folderAlreadyExists": {
      "placeholders": {
         "name": { "type": "String" },
         "path": { "type": "String" }
       }
     },
-    "rename": "Rename",
-    "openInFileExplorer": "Open in file explorer",
-    "delete": "Delete",
-    "file": "File",
-    "save": "Save",
-    "revertChanges": "Revert changes",
-    "exit": "Exit",
-    "edit": "Edit",
-    "refreshFiles": "Refresh files",
-    "openCurrentFileInExplorer": "Open current file in file explorer",
-    "help": "Help",
-    "openHomepage": "Open Homepage",
-    "reportIssue": "Report issue",
-    "about": "About",
-    "error_DirectoryDoesNotExist": "Directory {path} does not exist. Please select a valid directory path.",
+    "rename": "重命名",
+    "openInFileExplorer": "在文件管理器中打开",
+    "delete": "删除",
+    "file": "文件",
+    "save": "保存",
+    "revertChanges": "撤销更改",
+    "exit": "退出",
+    "edit": "编辑",
+    "refreshFiles": "更新文件",
+    "openCurrentFileInExplorer": "在文件管理器中打开",
+    "help": "帮助",
+    "openHomepage": "打开项目主页",
+    "reportIssue": "反馈问题",
+    "about": "关于",
+    "error_DirectoryDoesNotExist": "目录 {path} 不存在，请选择一个有效的目录路径。",
     "@error_DirectoryDoesNotExist": {
       "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "error_DirectoryAlreadyExists": "A directory with the path {path} already exists. Please rename or remove the existing folder.",
+    "error_DirectoryAlreadyExists": "一个路径为 {path} 的目录已经存在了，请重新命名或删除现有文件夹。",
     "@error_DirectoryAlreadyExists": {
       "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "back": "BACK",
-    "next": "NEXT",
-    "continue2": "CONTINUE",
-    "create": "Create",
-    "checkHugoInstalled": "Check, if Hugo is installed",
-    "executableNotFound": "{program} executable not found. Please make sure that {program} is installed correctly.",
+    "back": "返回",
+    "next": "下一步",
+    "continue2": "继续",
+    "create": "创建",
+    "checkHugoInstalled": "检查是否已安装Hugo",
+    "executableNotFound": "没有找到 {program} 可执行文件，请确保 {program} 已正确安装。",
     "@executableNotFound": {
       "placeholders": {
         "program": { "type": "String" }
       }
     },
-    "executableFoundIn": "{program} executable found in: {path}",
+    "executableFoundIn": "发现 {program} 可执行文件在：{path}",
     "@executableFoundIn": {
       "placeholders": {
         "program": { "type": "String" },
         "path": { "type": "String" }
       }
     },
-    "createLocation": "Create location",
-    "choosePath": "Choose path",
-    "hugoSiteWillBeCreatedInFolder": "The new Hugo website will be created inside this folder:",
-    "savePath": "Save path",
-    "siteName": "Website name",
-    "finish": "Finish",
-    "createHugoSiteNamed": "Create Hugo website named:\n",
-    "insideFolder": "Inside folder:\n",
-    "open": "Open",
-    "checkHugoFolderStructure": "Check Hugo folder structure",
-    "checkHugoFolderStructure_Description": "Make sure your folder follows the correct Hugo structure with a content folder, config file, etc. Please refer to the Hugo documentation for more details. If you want to be sure your website follows the correct folder structure, feel free to create a new Hugo website.",
-    "openHugoDocumentation": "Open Hugo Documentation",
-    "selectSiteFolder": "Select website folder",
-    "openHugoSite": "Open Hugo website:\n",
-    "error_ThemeAlreadyExists": "A theme folder with the name {theme} already exists inside the themes folder. Please rename or remove the existing folder.",
+    "createLocation": "创建位置",
+    "choosePath": "选择路径",
+    "hugoSiteWillBeCreatedInFolder": "新的Hugo网站将在此文件夹中创建：",
+    "savePath": "保存路径",
+    "siteName": "网站名称",
+    "finish": "完成",
+    "createHugoSiteNamed": "创建Hugo网站，命名为：\n",
+    "insideFolder": "内部文件夹:\n",
+    "open": "打开",
+    "checkHugoFolderStructure": "检查Hugo文件夹结构",
+    "checkHugoFolderStructure_Description": "确保你的文件夹遵循正确的Hugo结构，有一个内容文件夹、配置文件等。请参考Hugo文档以了解更多细节。如果你想确保你的网站遵循正确的文件夹结构，请随时创建一个新的Hugo网站。",
+    "openHugoDocumentation": "打开Hugo文档",
+    "selectSiteFolder": "选择网站文件夹",
+    "openHugoSite": "打开Hugo网站:\n",
+    "error_ThemeAlreadyExists": "主题文件夹中已经存在一个名称为 {theme} 的主题文件夹，请重新命名或删除现有文件夹。",
     "@error_ThemeAlreadyExists": {
       "placeholders": {
         "theme": { "type": "String" }
       }
     },
-    "selectATheme": "Select a theme",
-    "none": "None",
-    "download": "Download",
-    "startOver": "Start over",
-    "checkGitInstalled": "Check, if Git is installed",
-    "downloadTheme": "Download theme",
-    "repositoryInvalidURL": "Invalid URL",
-    "themeRepository": "Theme repository",
-    "successfullyDownloadedHugoTheme": "Successfully downloaded Hugo theme from:\n",
-    "nowSelectTheme": "\n\nYou can now select the theme {theme} in the Dropdown button.",
+    "selectATheme": "请选择一个主题",
+    "none": "空",
+    "download": "下载",
+    "startOver": "重新下载主题",
+    "checkGitInstalled": "检查是否已安装Git",
+    "downloadTheme": "下载主题",
+    "repositoryInvalidURL": "无效的URL",
+    "themeRepository": "主题下载链接",
+    "successfullyDownloadedHugoTheme": "已成功下载Hugo主题来自：\n",
+    "nowSelectTheme": "\n\n现在, 你可以在左侧的下拉按钮中选择主题 {theme} 了\n\n↖ 点击左上角的返回以继续",
     "@nowSelectTheme": {
       "placeholders": {
         "theme": { "type": "String" }
       }
     },
-    "rememberToVisitDocs": "Remember to visit the documentation in the themes repository for details on implementing the correct configurations.",
-    "welcomeToBuhoCMS": "Welcome to BuhoCMS",
-    "welcomeToBuhoCMS_Description": "BuhoCMS is a local Content Management System for Hugo.\nCreate or open a website, install a theme, and start creating new posts.\n\nTo proceed, create or open a Hugo website.",
-    "hugoSiteSelected": "Hugo website selected: {path}",
+    "rememberToVisitDocs": "记得查看主题文档以了解正确配置主题的一些细节",
+    "welcomeToBuhoCMS": "欢迎来到 BuhoCMS",
+    "welcomeToBuhoCMS_Description": "BuhoCMS是Hugo的本地内容管理系统\n你可以用它创建或打开一个网站，安装主题并开始创建新帖子\n\n继续创建或打开Hugo网站 →",
+    "hugoSiteSelected": "选择Hugo网站：{path}",
     "@hugoSiteSelected": {
       "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "themes": "Themes",
-    "themes_Description": "Download and select a Hugo theme.\nYou can also skip this step and do it later via Settings.",
-    "hugoThemeSelected": "Hugo theme selected: {path}",
+    "themes": "主题",
+    "themes_Description": "下载并选择一个Hugo主题\n你也可以跳过这一步，稍后通过设置选择主题。",
+    "hugoThemeSelected": "已选择Hugo主题：{path}",
     "@hugoThemeSelected": {
       "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "allDone": "All done!",
-    "allDone_Description": "Congratulations, you are ready to use BuhoCMS!",
-    "sitePath": "Website path: {path}",
+    "allDone": "全部完成!",
+    "allDone_Description": "恭喜，您已准备好使用BuhoCMS了!",
+    "sitePath": "网站路径: {path}",
     "@sitePath": {
       "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "hugoTheme": "Hugo theme: {path}",
+    "hugoTheme": "Hugo主题：{path}",
     "@hugoTheme": {
       "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "getStarted": "Get started",
-    "revertChanges_Description": "Are you sure to revert this file? All unsaved work after the last save will be lost.",
-    "quitWithUnsaved": "Quit with unsaved changes",
-    "quitWithUnsaved_Description": "You have unsaved changes. Do you want to save or revert everything before you quit?",
-    "revertAndQuit": "Revert & Quit",
-    "saveAndQuit": "Save & Quit",
-    "unsavedChanges": "Unsaved changes",
-    "unsavedChanges_Description": "You have unsaved changes. Do you want to save everything?",
-    "revert": "Revert",
-    "save": "Save",
-    "createNewPost": "Create new post",
-    "createNewFolder": "Create new folder",
-    "addNewFrontmatterToList": "Add new Front matter to list",
-    "remove": "Remove",
-    "close": "Close",
-    "addFrontmatter": "Add Front matter",
-    "add": "Add",
-    "addedFrontmatterToList": "Added Front matter to list with name {name} and type {type}",
+    "getStarted": "开始",
+    "revertChanges_Description": "确认要还原此文件？自上次保存后当前所有未保存的工作都将丢失。",
+    "quitWithUnsaved": "退出并保存更改",
+    "quitWithUnsaved_Description": "你有未保存的修改，你想在退出前保存或恢复所有内容吗？",
+    "revertAndQuit": "还原并退出",
+    "saveAndQuit": "保存并退出",
+    "unsavedChanges": "未保存的更改",
+    "unsavedChanges_Description": "你有未保存的修改，是否要保存所有内容？",
+    "revert": "恢复",
+    "save": "保存",
+    "createNewPost": "新建文章",
+    "createNewFolder": "新建文件夹",
+    "addNewFrontmatterToList": "在列表中添加新的目录",
+    "remove": "移除",
+    "close": "关闭",
+    "addFrontmatter": "添加目录",
+    "add": "添加",
+    "addedFrontmatterToList": "在列表中添加了名称为 {name} 和类型为 {type} 的目录",
     "@addedFrontmatterToList": {
      "placeholders": {
         "name": { "type": "String" },
         "type": { "type": "String" }
       }
     },
-    "frontmatterName": "Front matter name: ",
-    "frontmatterType": "Front matter type: ",
-    "error_FrontmatterAlreadyContains": "List already contains a Front Matter item with the same name!",
-    "editFrontmatter": "Edit Front matter",
-    "editedFrontmatterToList": "Edited Front matter in list from name {oldName} to {newName} and type {oldType} to {newType}",
+    "frontmatterName": "目录名称：",
+    "frontmatterType": "目录类型：",
+    "error_FrontmatterAlreadyContains": "列表已包含同名的目录项目！",
+    "editFrontmatter": "编辑目录",
+    "editedFrontmatterToList": "编辑了列表中的目录，将名称 {oldName} 改为 {newName}，类型 {oldType} 改为 {newType}。",
     "@editedFrontmatterToList": {
      "placeholders": {
         "oldName": { "type": "String" },
@@ -281,16 +281,16 @@
         "newType": { "type": "String" }
       }
     },
-    "removedFrontmatterToList": "Removed Front matter from list with name {name} and type {type}",
+    "removedFrontmatterToList": "从名称为 {name} 和类型为 {type} 的列表中删除了目录",
     "@removedFrontmatterToList": {
      "placeholders": {
         "name": { "type": "String" },
         "type": { "type": "String" }
       }
     },
-    "deleteFrontmatter": "Delete front matter",
-    "areYouSureDeleteFrontmatter": "Are you sure you want to delete front matter:\n",
-    "removedFrontmatter": "Removed Front Matter {name} with type {type}",
+    "deleteFrontmatter": "删除目录",
+    "areYouSureDeleteFrontmatter": "你确定要删除目录：\n",
+    "removedFrontmatter": "移除了类型为 {type} 的目录 {name}",
     "@removedFrontmatter": {
      "placeholders": {
         "name": { "type": "String" },
@@ -298,90 +298,90 @@
       }
     },
     "detect": "Detect",
-    "notFound_Description": "{name} not found in the BuhoCMS list. Please create the field with its name in your BuhoCMS Front matter list (Settings → Hugo Settings → Edit Front matter list) or remove it from the source text",
+    "notFound_Description": "在BuhoCMS的列表中找不到 {name}，请在你的BuhoCMS目录中创建带有其名称的字段（设置→雨果设置→编辑目录）或从源文本中删除它。",
     "@notFound_Description": {
      "placeholders": {
         "name": { "type": "String" }
       }
     },
-    "restore": "Restore",
-    "error_executableNotFound": "Error: {program} executable not found while running command {command}",
+    "restore": "恢复",
+    "error_executableNotFound": "错误：运行命令 {command} 时未发现可执行文件 {program}",
     "@error_executableNotFound": {
      "placeholders": {
         "program": { "type": "String" },
         "command": { "type": "String" }
       }
     },
-    "removeTag": "Remove tag {tag}",
+    "removeTag": "移除 {tag} 标签",
     "@removeTag": {
      "placeholders": {
         "tag": { "type": "String" }
       }
     },
-    "tag": "Tag",
-    "createYourFirstPost": "Create your first post",
-    "noFileSelected": "No file selected",
-    "content": "Content",
-    "frontmatter": "Front matter",
-    "hide": "Hide",
-    "show": "Show",
-    "draggableMode_Description": "Switch to Draggable Mode. Drag handles will appear on each field",
-    "draggableModeLock": "Lock draggable mode",
-    "draggableModeOn": "Draggable Mode",
-    "content_Description": "Write your markdown content here",
-    "resetBuhoCMS": "Reset preferences",
-    "areYouSureResetBuhoCMS": "Are you sure to reset all preferences? Make sure to export your current preferences to be able to restore your settings.",
-    "fullScreenInfo": "Press F11 or ESC to exit Full Screen mode",
-    "fullScreen": "Full Screen",
-    "exitFullScreen": "Exit Full Screen",
-    "refreshedFileList": "Refreshed file list",
-    "fileSavedSuccessfully": "File saved successfully",
-    "nothingToSave": "Nothing to save",
-    "fileRevertedSuccessfully": "File reverted successfully",
-    "nothingToRevert": "Nothing to revert",
-    "alreadyStartedAHugoServer": "Already started a Hugo server",
-    "startedHugoServer": "Started Hugo server",
-    "stoppedHugoServer": "Stopped Hugo Server",
-    "noHugoServerRunning": "No Hugo Server currently running",
-    "builtHugoSite": "Built Hugo site",
-    "addedFrontmatter": "Added Front matter {name} with type {type}",
+    "tag": "标签",
+    "createYourFirstPost": "创建你的第一篇文章",
+    "noFileSelected": "没有选定文件",
+    "content": "内容",
+    "frontmatter": "目录",
+    "hide": "隐藏",
+    "show": "显示",
+    "draggableMode_Description": "切换到可拖曳模式，拖曳控制柄将出现在每个字段上。",
+    "draggableModeLock": "锁定可拖曳模式",
+    "draggableModeOn": "可拖曳模式",
+    "content_Description": "在这里写下你的MarkDown内容",
+    "resetBuhoCMS": "重置首选项",
+    "areYouSureResetBuhoCMS": "确定要重置所有的偏好设置吗？请确保导出当前的偏好，以便能够恢复您的设置。",
+    "fullScreenInfo": "按F11或ESC键退出全屏模式",
+    "fullScreen": "全屏显示",
+    "exitFullScreen": "退出全屏显示",
+    "refreshedFileList": "已更新文件列表",
+    "fileSavedSuccessfully": "文件已成功保存",
+    "nothingToSave": "没有内容被保存",
+    "fileRevertedSuccessfully": "文件已成功还原",
+    "nothingToRevert": "没有内容被还原",
+    "alreadyStartedAHugoServer": "已启动 Hugo Server",
+    "startedHugoServer": "Hugo server 已开启",
+    "stoppedHugoServer": "Hugo Server 已停止",
+    "noHugoServerRunning": "目前没有运行的 Hugo Server",
+    "builtHugoSite": "已组建Hugo Page",
+    "addedFrontmatter": "添加了类型为 {type} 的目录 {name}",
     "@addedFrontmatter": {
      "placeholders": {
         "name": { "type": "String" },
         "type": { "type": "String" }
       }
     },
-    "terminal": "Terminal",
-    "command": "Command:",
-    "flags": "Flags:",
-    "search": "Search",
-    "autoFrontmatterList": "Automatically detect Front matter list",
-    "areYouSureAutoFrontmatterList": "Automatically detect your BuhoCMS Front matter list from all files? The previous list will be overridden.",
-    "resetFrontmatterList": "Reset Front matter list",
-    "areYouSureResetFrontmatterList": "Are you sure to reset your Front matter list to the default list? The default list contains \"title\", \"date\", \"draft\" and \"tags\".",
+    "terminal": "终端",
+    "command": "命令:",
+    "flags": "可选参数:",
+    "search": "查找",
+    "autoFrontmatterList": "自动检测目录列表",
+    "areYouSureAutoFrontmatterList": "从所有的文件中自动检测你的BuhoCMS目录列表？之前的列表将被覆盖。",
+    "resetFrontmatterList": "重置目录列表",
+    "areYouSureResetFrontmatterList": "你确定要将你的目录列表重置为默认列表吗？默认列表包含 \"title\", \"date\", \"draft\" and \"tags\".",
 
-    "settings": "Settings",
-    "appSettings": "APP SETTINGS",
-    "site": "WEBSITE",
-    "hugoSettings": "HUGO SETTINGS",
+    "settings": "设置",
+    "appSettings": "应用设置",
+    "site": "网站",
+    "hugoSettings": "HUGO 设置",
 
-    "language": "Language",
-    "language_description": "Change the language of BuhoCMS",
-    "systemLanguage": "System language",
-    "theme": "Theme",
-    "theme_description": "Change the app theme",
-    "themeSystem": "System theme",
-    "themeLight": "Light theme",
-    "themeDark": "Dark theme",
-    "onboardingScreen": "Onboarding screen",
-    "onboardingScreen_description": "Open the initial onboarding screen",
-    "more": "MORE",
-    "less": "SHOW LESS",
-    "version": "Version {versionNumber}",
+    "language": "语言",
+    "language_description": "更改BuhoCMS的语言",
+    "systemLanguage": "系统语言",
+    "theme": "主题",
+    "theme_description": "改变应用主题",
+    "themeSystem": "系统主题",
+    "themeLight": "亮色主题",
+    "themeDark": "暗色主题",
+    "onboardingScreen": "开始页面",
+    "onboardingScreen_description": "点击以打开初始设置界面",
+    "more": "更多",
+    "less": "更多",
+    "version": "当前版本 {versionNumber}",
     "@version": {
       "placeholders": {
          "versionNumber": { "type": "String" }
       }
     },
-    "license": "The code is licensed under the GPLv3 on GitHub (https://github.com/iakmds/buhocms). If you want to report a bug, request or improve a feature, please open an issue on GitHub. Thanks!"
+    "license": "该代码在GitHub上以GPLv3的形式授权(https://github.com/iakmds/buhocms)。如果你想报告一个Bug，请求添加或改进功能，请在GitHub上发布一个issue。谢谢!"
 }
