@@ -65,6 +65,33 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
     });
   }
 
+  void open({required String sitePath}) {
+    stopHugoServer(context: context, snackbar: false);
+
+    Preferences.clearPreferencesSite();
+    Preferences.setOnBoardingComplete(true);
+
+    Preferences.setSitePath(sitePath);
+    Preferences.setCurrentPath(
+        '${Preferences.getSitePath()}${Platform.pathSeparator}content');
+    final recentPaths = Preferences.getRecentSitePaths();
+
+    if (recentPaths.contains(sitePath)) {
+      for (var i = 0; i < recentPaths.length; i++) {
+        if (recentPaths[i] == sitePath) {
+          recentPaths.removeAt(i);
+        }
+      }
+    }
+    Preferences.setRecentSitePaths(recentPaths..insert(0, sitePath));
+
+    Provider.of<ShellProvider>(context, listen: false).updateShell();
+
+    Navigator.of(context).pop();
+    Provider.of<NavigationProvider>(context, listen: false)
+        .notifyAllListeners();
+  }
+
   Widget stepper() {
     return Stepper(
       currentStep: currentStep,
@@ -93,22 +120,7 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
           }
           setState(() => currentStep++);
         } else {
-          stopHugoServer(context: context, snackbar: false);
-
-          Preferences.clearPreferences();
-          Preferences.setOnBoardingComplete(true);
-
-          Preferences.setSitePath(sitePath);
-          Preferences.setCurrentPath(
-              '${Preferences.getSitePath()}${Platform.pathSeparator}content');
-
-          Provider.of<ShellProvider>(context, listen: false).updateShell();
-
-          if (mounted) {
-            Navigator.of(context).pop();
-            Provider.of<NavigationProvider>(context, listen: false)
-                .notifyAllListeners();
-          }
+          open(sitePath: sitePath);
         }
       },
       onStepCancel: () {
@@ -243,6 +255,67 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
     );
   }
 
+  Widget recentSitePathTile({required String text, required int index}) {
+    return Material(
+      child: InkWell(
+        onTap: () => open(sitePath: text),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(child: Text(text, style: const TextStyle(fontSize: 16))),
+              IconButton(
+                splashRadius: 20,
+                constraints: const BoxConstraints(minHeight: 48),
+                onPressed: () {
+                  Preferences.setRecentSitePaths(
+                      Preferences.getRecentSitePaths()..removeAt(index));
+                  setState(() {});
+                },
+                icon: const Icon(Icons.close),
+                padding: EdgeInsets.zero,
+                iconSize: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget recentSitePaths() {
+    final paths = Preferences.getRecentSitePaths();
+
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.restore),
+              const SizedBox(width: 8.0),
+              Text(AppLocalizations.of(context)!.recentlyOpenedWebsites,
+                  style: const TextStyle(fontSize: 20.0)),
+            ],
+          ),
+          const SizedBox(height: 16.0),
+          SizedBox(
+            width: 600,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (var i = 0; i < paths.length; i++)
+                  recentSitePathTile(text: paths[i], index: i),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -250,7 +323,13 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
         title: Text(AppLocalizations.of(context)!.openSite),
       ),
       body: Center(
-        child: stepper(),
+        child: ListView(
+          children: [
+            recentSitePaths(),
+            const Divider(),
+            stepper(),
+          ],
+        ),
       ),
     );
   }

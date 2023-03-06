@@ -359,6 +359,7 @@
     "areYouSureAutoFrontmatterList": "Automatically detect your BuhoCMS Front matter list from all files? The previous list will be overridden.",
     "resetFrontmatterList": "Reset Front matter list",
     "areYouSureResetFrontmatterList": "Are you sure to reset your Front matter list to the default list? The default list contains \"title\", \"date\", \"draft\" and \"tags\".",
+    "recentlyOpenedWebsites": "Recently opened websites:",
 
     "settings": "Settings",
     "appSettings": "APP SETTINGS",

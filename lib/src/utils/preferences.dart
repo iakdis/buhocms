@@ -19,6 +19,7 @@ class Preferences {
       const MapEntry(prefFileNavigationSize, 64.0),
       const MapEntry(prefOnboardingCompleted, false),
       const MapEntry(prefSitePath, null),
+      const MapEntry(prefRecentSitePaths, null),
       const MapEntry(prefCurrentPath, ''),
       const MapEntry(prefCurrentFile, null),
       const MapEntry(prefIsGUIMode, true),
@@ -32,7 +33,30 @@ class Preferences {
     ]);
   }
 
-  static Future clearPreferences() => _preferences!.clear();
+  static Future<void> clearPreferences() async => await _preferences!.clear();
+
+  static Future<void> clearPreferencesSite() async {
+    final defaultPrefs = defaultPreferences();
+    final prefs = getPreferences();
+    final deleteKeys = [
+      prefCurrentFileIndex,
+      prefCurrentPath,
+      prefCurrentFile,
+      prefTabs
+    ];
+
+    for (var i = 0; i < prefs.keys.length; i++) {
+      final key = prefs.keys.toList()[i];
+      for (var j = 0; j < deleteKeys.length; j++) {
+        if (key == deleteKeys[j]) {
+          prefs[key] = defaultPrefs[key];
+        }
+      }
+    }
+
+    String fromJson = json.encode(prefs);
+    await _preferences!.setString(prefPreferences, fromJson);
+  }
 
   static String getAllPreferences() {
     //https://gist.github.com/kasperpeulen/d61029fc0bc6cd104602
@@ -125,6 +149,18 @@ class Preferences {
   static Future<void> setSitePath(String path) async =>
       await setPreferences(prefSitePath, path);
   static String? getSitePath() => getPreferencesEntry(prefSitePath);
+
+  //Recently opened site paths
+  static Future<void> setRecentSitePaths(List paths) async {
+    String listToStr = json.encode(paths);
+    await setPreferences(prefRecentSitePaths, listToStr);
+  }
+
+  static List getRecentSitePaths() {
+    List strToList = json.decode(
+        getPreferencesEntry(prefRecentSitePaths) ?? json.encode(['none']));
+    return strToList;
+  }
 
   //Save Path
   static Future<void> setCurrentPath(String path) async =>

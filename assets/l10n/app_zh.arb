@@ -359,6 +359,7 @@
     "areYouSureAutoFrontmatterList": "从所有的文件中自动检测你的BuhoCMS目录列表？之前的列表将被覆盖。",
     "resetFrontmatterList": "重置目录列表",
     "areYouSureResetFrontmatterList": "你确定要将你的目录列表重置为默认列表吗？默认列表包含 \"title\", \"date\", \"draft\" and \"tags\".",
+    "recentlyOpenedWebsites": "最近打开的网站:",
 
     "settings": "设置",
     "appSettings": "应用设置",
