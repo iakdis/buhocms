@@ -207,13 +207,13 @@
     "repositoryInvalidURL": "无效的URL",
     "themeRepository": "主题下载链接",
     "successfullyDownloadedHugoTheme": "已成功下载Hugo主题来自：\n",
-    "nowSelectTheme": "\n\n现在, 你可以在左侧的下拉按钮中选择主题 {theme} 了\n\n点击左上角返回以继续",
+    "nowSelectTheme": "\n\n现在, 你可以在左侧的下拉按钮中选择主题 {theme} 了\n\n↖ 点击左上角的返回以继续",
     "@nowSelectTheme": {
       "placeholders": {
         "theme": { "type": "String" }
       }
     },
-    "rememberToVisitDocs": "记得查看主题当中的文档以了解正确配置主题的细节",
+    "rememberToVisitDocs": "记得查看主题文档以了解正确配置主题的一些细节",
     "welcomeToBuhoCMS": "欢迎来到 BuhoCMS",
     "welcomeToBuhoCMS_Description": "BuhoCMS是Hugo的本地内容管理系统\n你可以用它创建或打开一个网站，安装主题并开始创建新帖子\n\n继续创建或打开Hugo网站 →",
     "hugoSiteSelected": "选择Hugo网站：{path}",
@@ -376,7 +376,7 @@
     "onboardingScreen": "开始页面",
     "onboardingScreen_description": "点击以打开初始设置界面",
     "more": "更多",
-    "less": "其他选项",
+    "less": "更多",
     "version": "当前版本 {versionNumber}",
     "@version": {
       "placeholders": {
