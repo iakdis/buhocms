@@ -10,14 +10,14 @@
     "createSite": "创建网站",
     "createSite_Description": "创建一个新的Hugo网站",
     "hugoThemes": "Hugo 主题",
-    "currentHugoThemes": "当前Hugo主题：{theme}，点击左侧按钮选择或下载一个Hugo主题",
+    "currentHugoThemes": "当前Hugo主题：{theme}，点击左侧按钮选择或下载一个Hugo主题。",
      "@currentHugoThemes": {
       "placeholders": {
          "theme": { "type": "String" }
       }
     },
     "preferences": "首选项",
-    "preferences_Description": "将你的偏好导出到文件中，从文件中加载或重新设定BuhoCMS的偏好",
+    "preferences_Description": "将你的偏好设置导出至文件，从文件中加载或重新设定BuhoCMS的偏好设置。",
     "selectASavePath": "选择一个保存路径",
     "overrideFile": "覆盖文件？",
     "overrideFile_Description": "这个目录中已经存在一个名为 {file} 的文件，要覆盖旧文件吗？",
@@ -32,7 +32,7 @@
     "import": "导入",
     "reset": "重置",
     "editFrontmatterList": "编辑目录列表",
-    "editFrontmatterList_Description": "编辑当前目录列表，以添加、编辑、重新排列或删除条目",
+    "editFrontmatterList_Description": "编辑当前目录列表，以添加、编辑、重新排列或删除条目。",
     "editingPage": "编辑页面",
     "guiMode": "GUI模式",
     "textMode": "文本模式",
@@ -42,15 +42,15 @@
     "buildHugoSite": "组建 Hugo Page",
     "openPublicFolder": "打开 \"public\" 文件夹",
     "sortBy": "排序方式",
-    "parentFolderButton_Toolip": "回到上一级文件夹，当前:{path}",
+    "parentFolderButton_Toolip": "回到上一级文件夹，当前：{path}",
     "@parentFolderButton_Toolip": {
      "placeholders": {
         "path": { "type": "String" }
       }
     },
     "newPost": "新建文章",
-    "newFolder": "新文件夹",
-    "error_RenameDirectory": "错误：无法将文件夹 {oldPath} 重命名为 {newPath} ，因为这个目录中已经存在一个同名的文件夹",
+    "newFolder": "新建文件夹",
+    "error_RenameDirectory": "错误：无法将文件夹 {oldPath} 重命名为 {newPath} ，因为这个目录中已经存在一个同名的文件夹。",
     "@error_RenameDirectory": {
      "placeholders": {
         "oldPath": { "type": "String" },
@@ -72,7 +72,7 @@
         "path": { "type": "String" }
       }
     },
-    "error_RenameFile": "错误：无法将文件 {oldPath} 重命名为 {newPath} ，因为这个目录中已经存在一个同名的文件",
+    "error_RenameFile": "错误：无法将文件 {oldPath} 重命名为 {newPath} ，因为这个目录中已经存在一个同名的文件。",
     "@error_RenameFile": {
      "placeholders": {
         "oldPath": { "type": "String" },
@@ -94,7 +94,7 @@
         "path": { "type": "String" }
       }
     },
-    "alreadyAtHighestLevel": "已经处于最高级文件夹，无法打开 \"content\" 的上一级文件夹",
+    "alreadyAtHighestLevel": "已经处于最高级文件夹，无法打开 \"content\" 的上一级文件夹。",
     "sortByName": "按文件名排序",
     "sortByNameReversed": "按文件名排序 (倒序)",
     "sortByDate": "按日期排序",
@@ -142,19 +142,19 @@
     "revertChanges": "撤销更改",
     "exit": "退出",
     "edit": "编辑",
-    "refreshFiles": "刷新文件",
-    "openCurrentFileInExplorer": "在文件管理器中打开当前文件",
+    "refreshFiles": "更新文件",
+    "openCurrentFileInExplorer": "在文件管理器中打开",
     "help": "帮助",
     "openHomepage": "打开项目主页",
     "reportIssue": "反馈问题",
     "about": "关于",
-    "error_DirectoryDoesNotExist": "目录 {path} 不存在，请选择一个有效的目录路径",
+    "error_DirectoryDoesNotExist": "目录 {path} 不存在，请选择一个有效的目录路径。",
     "@error_DirectoryDoesNotExist": {
       "placeholders": {
         "path": { "type": "String" }
       }
     },
-    "error_DirectoryAlreadyExists": "一个路径为 {path} 的目录已经存在了，请重新命名或删除现有文件夹",
+    "error_DirectoryAlreadyExists": "一个路径为 {path} 的目录已经存在了，请重新命名或删除现有文件夹。",
     "@error_DirectoryAlreadyExists": {
       "placeholders": {
         "path": { "type": "String" }
@@ -165,7 +165,7 @@
     "continue2": "继续",
     "create": "创建",
     "checkHugoInstalled": "检查是否已安装Hugo",
-    "executableNotFound": "没有找到 {program} 可执行文件 请确保 {program} 已正确安装",
+    "executableNotFound": "没有找到 {program} 可执行文件，请确保 {program} 已正确安装。",
     "@executableNotFound": {
       "placeholders": {
         "program": { "type": "String" }
@@ -192,7 +192,7 @@
     "openHugoDocumentation": "打开Hugo文档",
     "selectSiteFolder": "选择网站文件夹",
     "openHugoSite": "打开Hugo网站:\n",
-    "error_ThemeAlreadyExists": "主题文件夹中已经存在一个名称为 {theme} 的主题文件夹 请重新命名或删除现有文件夹",
+    "error_ThemeAlreadyExists": "主题文件夹中已经存在一个名称为 {theme} 的主题文件夹，请重新命名或删除现有文件夹。",
     "@error_ThemeAlreadyExists": {
       "placeholders": {
         "theme": { "type": "String" }
@@ -223,7 +223,7 @@
       }
     },
     "themes": "主题",
-    "themes_Description": "下载并选择一个Hugo主题。\n你也可以跳过这一步，稍后通过设置选择主题。",
+    "themes_Description": "下载并选择一个Hugo主题\n你也可以跳过这一步，稍后通过设置选择主题。",
     "hugoThemeSelected": "已选择Hugo主题：{path}",
     "@hugoThemeSelected": {
       "placeholders": {
@@ -298,7 +298,7 @@
       }
     },
     "detect": "Detect",
-    "notFound_Description": "在BuhoCMS的列表中找不到 {name}。请在你的BuhoCMS 目录中创建带有其名称的字段（设置→雨果设置→编辑目录）或从源文本中删除它。",
+    "notFound_Description": "在BuhoCMS的列表中找不到 {name}，请在你的BuhoCMS目录中创建带有其名称的字段（设置→雨果设置→编辑目录）或从源文本中删除它。",
     "@notFound_Description": {
      "placeholders": {
         "name": { "type": "String" }
@@ -325,7 +325,7 @@
     "frontmatter": "目录",
     "hide": "隐藏",
     "show": "显示",
-    "draggableMode_Description": "切换到可拖曳模式，拖曳控制柄将出现在每个字段上",
+    "draggableMode_Description": "切换到可拖曳模式，拖曳控制柄将出现在每个字段上。",
     "draggableModeLock": "锁定可拖曳模式",
     "draggableModeOn": "可拖曳模式",
     "content_Description": "在这里写下你的MarkDown内容",
@@ -339,11 +339,11 @@
     "nothingToSave": "没有内容被保存",
     "fileRevertedSuccessfully": "文件已成功还原",
     "nothingToRevert": "没有内容被还原",
-    "alreadyStartedAHugoServer": "已启动Hugo Server",
+    "alreadyStartedAHugoServer": "已启动 Hugo Server",
     "startedHugoServer": "Hugo server 已开启",
     "stoppedHugoServer": "Hugo Server 已停止",
-    "noHugoServerRunning": "目前没有运行的Hugo Server",
-    "builtHugoSite": "已组建 Hugo Page",
+    "noHugoServerRunning": "目前没有运行的 Hugo Server",
+    "builtHugoSite": "已组建Hugo Page",
     "addedFrontmatter": "添加了类型为 {type} 的目录 {name}",
     "@addedFrontmatter": {
      "placeholders": {
@@ -356,7 +356,7 @@
     "flags": "可选参数:",
     "search": "查找",
     "autoFrontmatterList": "自动检测目录列表",
-    "areYouSureAutoFrontmatterList": "从所有的文件中自动检测你的 BuhoCMS 目录列表？之前的列表将被覆盖。",
+    "areYouSureAutoFrontmatterList": "从所有的文件中自动检测你的BuhoCMS目录列表？之前的列表将被覆盖。",
     "resetFrontmatterList": "重置目录列表",
     "areYouSureResetFrontmatterList": "你确定要将你的目录列表重置为默认列表吗？默认列表包含 \"title\", \"date\", \"draft\" and \"tags\".",
 
@@ -366,7 +366,7 @@
     "hugoSettings": "HUGO 设置",
 
     "language": "语言",
-    "language_description": "更改 BuhoCMS 的语言",
+    "language_description": "更改BuhoCMS的语言",
     "systemLanguage": "系统语言",
     "theme": "主题",
     "theme_description": "改变应用主题",
