@@ -51,28 +51,28 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    var windowWidth = MediaQuery.of(context).size.width;
-    var navigationSizeProvider = Provider.of<NavigationSizeProvider>(context);
-    var navigationSize = navigationSizeProvider.navigationWidth;
-    var fileNavigationSize = navigationSizeProvider.fileNavigationWidth;
-    var editingPageSize = windowWidth - (navigationSize + fileNavigationSize);
-
-    var finalSize = navigationSize;
-    if (editingPageSize < 250 || windowWidth < mobileWidth) {
-      if (navigationSize > 64) {
-        finalSize = 200.0;
-        lastWidth = 200;
-        navigationSizeProvider.setNavigationWidth(200, notify: false);
-      } else {
-        finalSize = 64.0;
-      }
-    } else {
-      finalSize = navigationSize;
-    }
-
     return LayoutBuilder(builder: (context, constraints) {
       return Consumer<NavigationSizeProvider>(
           builder: (context, navigationSizeProvider, _) {
+        final windowWidth = MediaQuery.of(context).size.width;
+        final navigationSize = navigationSizeProvider.navigationWidth;
+        final fileNavigationSize = navigationSizeProvider.fileNavigationWidth;
+        final editingPageSize =
+            windowWidth - (navigationSize + fileNavigationSize);
+
+        var finalSize = navigationSize;
+        if (editingPageSize < 250 || windowWidth < mobileWidth) {
+          if (navigationSize > 64) {
+            finalSize = 200.0;
+            lastWidth = 200;
+            navigationSizeProvider.setNavigationWidth(200, notify: false);
+          } else {
+            finalSize = 64.0;
+          }
+        } else {
+          finalSize = navigationSize;
+        }
+
         return Stack(
           children: [
             Container(
@@ -239,13 +239,6 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                 onDrag: (dx, dy) {
                   var newWidth = navigationSizeProvider.navigationWidth + dx;
                   lastWidth = newWidth;
-
-                  var windowWidth = MediaQuery.of(context).size.width;
-                  var navigationSize = navigationSizeProvider.navigationWidth;
-                  var fileNavigationSize =
-                      navigationSizeProvider.fileNavigationWidth;
-                  var editingPageSize =
-                      windowWidth - (navigationSize + fileNavigationSize);
 
                   if (windowWidth > mobileWidth &&
                       editingPageSize < 300 &&
