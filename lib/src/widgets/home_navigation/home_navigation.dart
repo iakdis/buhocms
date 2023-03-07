@@ -47,6 +47,8 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
     super.initState();
   }
 
+  Widget divider() => Divider(color: Theme.of(context).colorScheme.onSecondary);
+
   @override
   Widget build(BuildContext context) {
     var windowWidth = MediaQuery.of(context).size.width;
@@ -138,10 +140,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                     ),
                                   ),
                                 ),
-                                Divider(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                divider(),
                                 CustomTooltip(
                                   message:
                                       AppLocalizations.of(context)!.editingPage,
@@ -155,10 +154,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                     index: 0,
                                   ),
                                 ),
-                                Divider(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                divider(),
                                 CustomTooltip(
                                   message:
                                       AppLocalizations.of(context)!.guiMode,
@@ -175,10 +171,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                       isGUIMode: false,
                                       editingPageKey: widget.editingPageKey),
                                 ),
-                                Divider(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                divider(),
                                 CustomTooltip(
                                   message: Provider.of<ShellProvider>(context)
                                               .shellActive ==
@@ -196,10 +189,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                   child: OpenLocalhostButton(
                                       isExtended: isExtended),
                                 ),
-                                Divider(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                divider(),
                                 CustomTooltip(
                                   message: AppLocalizations.of(context)!
                                       .buildHugoSite,
@@ -216,10 +206,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                             ),
                             Column(
                               children: [
-                                Divider(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
+                                divider(),
                                 CustomTooltip(
                                   message:
                                       AppLocalizations.of(context)!.settings,
