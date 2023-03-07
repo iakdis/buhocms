@@ -1,6 +1,7 @@
 import 'package:buhocms/src/i18n/l10n.dart';
 import 'package:buhocms/src/pages/home_page.dart';
 import 'package:buhocms/src/pages/onboarding_page.dart';
+import 'package:buhocms/src/provider/app/output_provider.dart';
 import 'package:buhocms/src/provider/app/shell_provider.dart';
 import 'package:buhocms/src/provider/editing/editing_provider.dart';
 import 'package:buhocms/src/provider/navigation/file_navigation_provider.dart';
@@ -54,6 +55,7 @@ class _AppState extends State<App> with WindowListener {
       key: key,
       child: MultiProvider(
         providers: [
+          ChangeNotifierProvider(create: (context) => OutputProvider()),
           ChangeNotifierProvider(create: (context) => ShellProvider()),
           ChangeNotifierProvider(create: (context) => TabsProvider()),
           ChangeNotifierProvider(create: (context) => NavigationSizeProvider()),
