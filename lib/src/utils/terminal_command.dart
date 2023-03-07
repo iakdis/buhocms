@@ -1,8 +1,8 @@
-import 'dart:io';
-
+import 'package:buhocms/src/provider/app/output_provider.dart';
 import 'package:buhocms/src/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:process_run/shell_run.dart';
+import 'package:provider/provider.dart';
 
 Future<void> runTerminalCommand({
   required BuildContext context,
@@ -10,7 +10,17 @@ Future<void> runTerminalCommand({
   required String command,
   Function? successFunction,
 }) async {
-  final shell = Shell(workingDirectory: workingDirectory);
+  final controller = ShellLinesController();
+  final shell = Shell(
+    workingDirectory: workingDirectory,
+    stdout: controller.sink,
+    stderr: controller.sink,
+  );
+  final outputProvider = Provider.of<OutputProvider>(context, listen: false);
+
+  controller.stream.listen((event) {
+    outputProvider.setOutput('${outputProvider.output}\n$event');
+  });
 
   // Try to run command
   try {
