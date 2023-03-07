@@ -360,6 +360,8 @@
     "resetFrontmatterList": "Front matter Liste zurücksetzen",
     "areYouSureResetFrontmatterList": "Bist du sicher, deine Front matter Liste zur Standardliste zurückzusetzen? Die Standardliste beinhaltet \"title\", \"date\", \"draft\" und \"tags\".",
     "recentlyOpenedWebsites": "Kürzlich geöffnete Webseiten:",
+    "showTerminalOutput": "Kommandozeilen-Ausgabe zeigen",
+    "hideTerminalOutput": "Kommandozeilen-Ausgabe verstecken",
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",
