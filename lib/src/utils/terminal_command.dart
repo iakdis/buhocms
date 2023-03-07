@@ -18,7 +18,7 @@ Future<void> runTerminalCommand({
   );
   final outputProvider = Provider.of<OutputProvider>(context, listen: false);
 
-  controller.stream.listen((event) {
+  controller.stream.asBroadcastStream().listen((event) {
     outputProvider.setOutput('${outputProvider.output}\n$event');
   });
 
@@ -37,6 +37,7 @@ Future<void> runTerminalCommand({
 
 void runTerminalCommandServer({
   required BuildContext context,
+  required ShellLinesController controller,
   required Shell shell,
   required Function successFunction,
   required Function errorFunction,
@@ -45,6 +46,12 @@ void runTerminalCommandServer({
 }) async {
   snackbarFunction();
   successFunction();
+
+  final outputProvider = Provider.of<OutputProvider>(context, listen: false);
+
+  controller.stream.asBroadcastStream().listen((event) {
+    outputProvider.setOutput('${outputProvider.output}\n$event');
+  });
 
   try {
     await shell.run(command).then((value) {

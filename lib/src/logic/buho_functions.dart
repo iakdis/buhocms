@@ -180,7 +180,8 @@ void startHugoServer({required BuildContext context}) {
 
     runTerminalCommandServer(
       context: context,
-      shell: shellProvider.shell,
+      shell: shellProvider.shell(),
+      controller: shellProvider.controller,
       successFunction: () => shellProvider.setShellActive(true),
       errorFunction: () => shellProvider.setShellActive(false),
       command: commandToRun,

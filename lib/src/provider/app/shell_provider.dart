@@ -3,18 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:process_run/shell.dart';
 
 class ShellProvider extends ChangeNotifier {
+  final ShellLinesController _controller = ShellLinesController();
+  ShellLinesController get controller => _controller;
+
   bool _shellActive = false;
-  Shell _shell = Shell(workingDirectory: Preferences.getSitePath());
 
-  Shell get shell => _shell;
+  Shell? _shell;
 
-  bool? get shellActive {
-    return _shellActive;
+  Shell shell() {
+    _shell?.kill();
+    _shell = Shell(
+      workingDirectory: Preferences.getSitePath(),
+      stdout: _controller.sink,
+      stderr: _controller.sink,
+    );
+    return _shell!;
   }
 
+  bool? get shellActive => _shellActive;
+
   void updateShell() {
-    _shell.kill();
-    _shell = Shell(workingDirectory: Preferences.getSitePath());
+    _shell?.kill();
+    _shell = Shell(
+      workingDirectory: Preferences.getSitePath(),
+      stdout: _controller.sink,
+      stderr: _controller.sink,
+    );
     notifyListeners();
   }
 
@@ -24,7 +38,7 @@ class ShellProvider extends ChangeNotifier {
   }
 
   void kill() {
-    if (_shellActive == true) _shell.kill();
+    if (_shellActive == true) _shell?.kill();
     _shellActive = false;
     notifyListeners();
   }
