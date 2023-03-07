@@ -360,6 +360,7 @@
     "resetFrontmatterList": "重置目录列表",
     "areYouSureResetFrontmatterList": "你确定要将你的目录列表重置为默认列表吗？默认列表包含 \"title\", \"date\", \"draft\" and \"tags\".",
     "recentlyOpenedWebsites": "最近打开的网站:",
+    "terminalOutput": "终端输出",
     "showTerminalOutput": "显示终端输出",
     "hideTerminalOutput": "隐藏终端输出",
 

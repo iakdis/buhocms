@@ -360,6 +360,7 @@
     "resetFrontmatterList": "Reset Front matter list",
     "areYouSureResetFrontmatterList": "Are you sure to reset your Front matter list to the default list? The default list contains \"title\", \"date\", \"draft\" and \"tags\".",
     "recentlyOpenedWebsites": "Recently opened websites:",
+    "terminalOutput": "Terminal output",
     "showTerminalOutput": "Show Terminal output",
     "hideTerminalOutput": "Hide Terminal output",
 
