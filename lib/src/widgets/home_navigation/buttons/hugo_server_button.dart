@@ -20,6 +20,9 @@ class HugoServerButton extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             borderRadius: BorderRadius.circular(50),
+            onTap: shellProvider.shellActive == false
+                ? () => startHugoServer(context: context)
+                : () => stopHugoServer(context: context),
             child: Padding(
               padding: isExtended
                   ? const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0)
@@ -54,9 +57,6 @@ class HugoServerButton extends StatelessWidget {
                 ],
               ),
             ),
-            onTap: () => shellProvider.shellActive == false
-                ? () => startHugoServer(context: context)
-                : () => stopHugoServer(context: context),
           ),
         );
       });
