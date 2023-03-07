@@ -16,21 +16,9 @@ Future<void> runTerminalCommand({
   try {
     await shell.run(command);
   } catch (e) {
-    // If error, check for Linux Flatpak sandbox issue
-    if (Platform.isLinux) {
-      try {
-        await shell.run('flatpak-spawn --host $command');
-      } catch (_) {
-        // Finally, if platform is Flatpak but still error, command not working
-        showSnackbar(text: e.toString(), seconds: 10);
-        shell.kill();
-        return;
-      }
-    } else {
-      showSnackbar(text: e.toString(), seconds: 10);
-      shell.kill();
-      return;
-    }
+    showSnackbar(text: e.toString(), seconds: 10);
+    shell.kill();
+    return;
   }
 
   successFunction?.call();
