@@ -12,14 +12,14 @@ class OpenLocalhostButton extends StatelessWidget {
 
   final bool isExtended;
 
-  Future<void> _openLocalhost() async {
+  Future<void> openLocalhost() async {
     final url = Uri.parse('http://localhost:1313');
     if (await canLaunchUrl(url) || Platform.isLinux) {
       await launchUrl(url);
     }
   }
 
-  Widget _openLocalhostButton() {
+  Widget openLocalhostButton() {
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -35,40 +35,32 @@ class OpenLocalhostButton extends StatelessWidget {
                   : MainAxisAlignment.center,
               children: [
                 Icon(
-                  //index == this.index ? icon : iconUnselected,
                   Icons.open_in_new,
                   size: 32.0,
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
-                isExtended
-                    ? Row(
-                        children: [
-                          const SizedBox(
-                            width: 16.0,
-                          ),
-                          SizedBox(
-                            width: constraints.maxWidth - 80,
-                            child: Text(
-                              AppLocalizations.of(context)!.openHugoServer,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      )
-                    : Container(),
+                if (isExtended)
+                  Row(
+                    children: [
+                      const SizedBox(width: 16.0),
+                      SizedBox(
+                        width: constraints.maxWidth - 80,
+                        child: Text(
+                          AppLocalizations.of(context)!.openHugoServer,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
-          onTap: () async {
-            await _openLocalhost();
-          }, //this.index = index),
+          onTap: () async => await openLocalhost(),
         ),
       );
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _openLocalhostButton();
-  }
+  Widget build(BuildContext context) => openLocalhostButton();
 }

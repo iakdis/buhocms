@@ -10,7 +10,7 @@ class HugoBuildButton extends StatelessWidget {
 
   final bool isExtended;
 
-  Widget _buildHugoSiteButton() {
+  Widget buildHugoSiteButton() {
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -26,27 +26,23 @@ class HugoBuildButton extends StatelessWidget {
                   : MainAxisAlignment.center,
               children: [
                 Icon(
-                  //index == this.index ? icon : iconUnselected,
                   Icons.web,
                   size: 32.0,
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
-                isExtended
-                    ? Row(
-                        children: [
-                          const SizedBox(
-                            width: 16.0,
-                          ),
-                          SizedBox(
-                            width: constraints.maxWidth - 80,
-                            child: Text(
-                              AppLocalizations.of(context)!.buildHugoSite,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      )
-                    : Container(),
+                if (isExtended)
+                  Row(
+                    children: [
+                      const SizedBox(width: 16.0),
+                      SizedBox(
+                        width: constraints.maxWidth - 80,
+                        child: Text(
+                          AppLocalizations.of(context)!.buildHugoSite,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
@@ -57,7 +53,5 @@ class HugoBuildButton extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _buildHugoSiteButton();
-  }
+  Widget build(BuildContext context) => buildHugoSiteButton();
 }

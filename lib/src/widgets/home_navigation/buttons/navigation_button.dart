@@ -23,7 +23,7 @@ class NavigationButton extends StatelessWidget {
   final String buttonText;
   final int index;
 
-  Widget _navigationButton() {
+  Widget navigationButton() {
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -59,34 +59,29 @@ class NavigationButton extends StatelessWidget {
                         ? Theme.of(context).colorScheme.primaryContainer
                         : Theme.of(context).colorScheme.onPrimary,
                   ),
-                  isExtended
-                      ? Row(
-                          children: [
-                            const SizedBox(
-                              width: 16.0,
-                            ),
-                            SizedBox(
-                              width: constraints.maxWidth - 80,
-                              child: Consumer<NavigationProvider>(
-                                  builder: (context, navigationProvider, _) {
-                                return Text(
-                                  buttonText,
-                                  style: TextStyle(
-                                    color: index ==
-                                            navigationProvider.navigationIndex
-                                        ? Theme.of(context)
-                                            .colorScheme
-                                            .primaryContainer
-                                        : Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary,
-                                  ),
-                                );
-                              }),
-                            ),
-                          ],
-                        )
-                      : Container(),
+                  if (isExtended)
+                    Row(
+                      children: [
+                        const SizedBox(width: 16.0),
+                        SizedBox(
+                          width: constraints.maxWidth - 80,
+                          child: Consumer<NavigationProvider>(
+                              builder: (context, navigationProvider, _) {
+                            return Text(
+                              buttonText,
+                              style: TextStyle(
+                                color: index ==
+                                        navigationProvider.navigationIndex
+                                    ? Theme.of(context)
+                                        .colorScheme
+                                        .primaryContainer
+                                    : Theme.of(context).colorScheme.onPrimary,
+                              ),
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
                 ],
               ),
             ), //this.index = index),
@@ -97,7 +92,5 @@ class NavigationButton extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _navigationButton();
-  }
+  Widget build(BuildContext context) => navigationButton();
 }

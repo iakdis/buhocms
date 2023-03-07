@@ -9,7 +9,8 @@ class OpenPublicButton extends StatelessWidget {
   });
 
   final bool isExtended;
-  Widget _openLocalhostButton() {
+
+  Widget openLocalhostButton() {
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -25,27 +26,23 @@ class OpenPublicButton extends StatelessWidget {
                     : MainAxisAlignment.center,
                 children: [
                   Icon(
-                    //index == this.index ? icon : iconUnselected,
                     Icons.folder_open,
                     size: 32.0,
                     color: Theme.of(context).colorScheme.onSecondary,
                   ),
-                  isExtended
-                      ? Row(
-                          children: [
-                            const SizedBox(
-                              width: 16.0,
-                            ),
-                            SizedBox(
-                              width: constraints.maxWidth - 80,
-                              child: Text(
-                                AppLocalizations.of(context)!.openPublicFolder,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        )
-                      : Container(),
+                  if (isExtended)
+                    Row(
+                      children: [
+                        const SizedBox(width: 16.0),
+                        SizedBox(
+                          width: constraints.maxWidth - 80,
+                          child: Text(
+                            AppLocalizations.of(context)!.openPublicFolder,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
                 ],
               ),
             ),
@@ -55,7 +52,5 @@ class OpenPublicButton extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _openLocalhostButton();
-  }
+  Widget build(BuildContext context) => openLocalhostButton();
 }

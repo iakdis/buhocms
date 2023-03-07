@@ -18,7 +18,7 @@ class GUIModeButton extends StatelessWidget {
   final bool isGUIMode;
   final bool isExtended;
 
-  Widget _guiModeButton() {
+  Widget guiModeButton() {
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -43,7 +43,6 @@ class GUIModeButton extends StatelessWidget {
                     : MainAxisAlignment.center,
                 children: [
                   Icon(
-                    //index == this.index ? icon : iconUnselected,
                     isGUIMode
                         ? Icons.table_chart //Icons.view_module_sharp
                         : Icons.text_snippet_outlined,
@@ -52,32 +51,26 @@ class GUIModeButton extends StatelessWidget {
                         ? Theme.of(context).colorScheme.primaryContainer
                         : Theme.of(context).colorScheme.onPrimary,
                   ),
-                  isExtended
-                      ? Row(
-                          children: [
-                            const SizedBox(
-                              width: 16.0,
-                            ),
-                            SizedBox(
-                              width: constraints.maxWidth - 80,
-                              child: Text(
-                                isGUIMode
-                                    ? AppLocalizations.of(context)!.guiMode
-                                    : AppLocalizations.of(context)!.textMode,
-                                style: TextStyle(
-                                    color:
-                                        isGUIMode == editingProvider.isGUIMode
-                                            ? Theme.of(context)
-                                                .colorScheme
-                                                .primaryContainer
-                                            : Theme.of(context)
-                                                .colorScheme
-                                                .onPrimary),
-                              ),
-                            ),
-                          ],
-                        )
-                      : Container(),
+                  if (isExtended)
+                    Row(
+                      children: [
+                        const SizedBox(width: 16.0),
+                        SizedBox(
+                          width: constraints.maxWidth - 80,
+                          child: Text(
+                            isGUIMode
+                                ? AppLocalizations.of(context)!.guiMode
+                                : AppLocalizations.of(context)!.textMode,
+                            style: TextStyle(
+                                color: isGUIMode == editingProvider.isGUIMode
+                                    ? Theme.of(context)
+                                        .colorScheme
+                                        .primaryContainer
+                                    : Theme.of(context).colorScheme.onPrimary),
+                          ),
+                        ),
+                      ],
+                    ),
                 ],
               ),
             ), //this.index = index),
@@ -88,7 +81,5 @@ class GUIModeButton extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _guiModeButton();
-  }
+  Widget build(BuildContext context) => guiModeButton();
 }
