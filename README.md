@@ -1,6 +1,6 @@
 
 ## :warning: Alpha warning
-#### BuhoCMS is currently in Alpha. While most things should work as expected, bugs :bug: are likely to exist. It is a good idea to backup 💾 your website folders just in case. Also, remember that [many more features](https://github.com/iakmds/buhocms#roadmap) are planned :sparkles:
+#### BuhoCMS is currently in Alpha. While most things should work as expected, bugs :bug: are likely to exist. It is a good idea to backup 💾 your website folders just in case. Also, remember that [many more features](https://github.com/iakmds/buhocms#roadmap) are planned! :sparkles:
 
 <p>
   <a href="https://github.com/iakmds/buhocms/releases/latest" alt="Release">
@@ -109,9 +109,11 @@ macOS support is planned. Unfortunately I do not currently own a macOS device; t
 
 ### Linux
 
-- Supported: AppImage
-- In progress: Flatpak (Flathub)
-- Planned: Snap, .deb, AUR, .rpm
+Supported | In progress | Planned
+|-|-|-|
+| AppImage | Flatpak (Flathub) | Snap |
+| .deb | | AUR |
+| | | .rpm |
 
 <!--To install BuhoCMS as a **Flatpak**, head over to Flathub:
 
@@ -119,6 +121,8 @@ macOS support is planned. Unfortunately I do not currently own a macOS device; t
     alt="Download on Flathub"
     height="80">](https://flathub.org/apps/details/org.buhocms.BuhoCMS)
 -->
+
+To install BuhoCMS as a **.deb** package, download the [BuhoCMS-Linux.deb](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.deb) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page and install it.
 
 [<img src=".github/appimage-badge.svg"
     alt="Download as an AppImage"
@@ -154,6 +158,7 @@ These are the ways you can contribute to BuhoCMS:
 Languages currently supported: 
   - English 🇬🇧
   - German (Deutsch) 🇩🇪
+  - Chinese (中文) 🇨🇳
 
 **First steps:**
 1. If not already supported (see above), request a new language by [opening an issue](https://github.com/iakmds/buhocms/issues) on GitHub and I will add the necessary code for the second step.
@@ -177,12 +182,11 @@ Feel free to send in a [pull request](https://github.com/iakmds/buhocms/pulls)! 
 
 **Windows** executable: Run the following command in your terminal on a Windows machine: `flutter build windows` – the output file will be generated at `buhocms\build\windows\runner\Release\buhocms.exe`.
 
-**Linux** executable: Run the following command in your terminal: `flutter build linux` – the output file will be generated at`buhocms/build/linux/x64/release/bundle`.
+**Linux** executable: Run the following command in your terminal: `flutter build linux` – the output files, including the executable, will be generated at`buhocms/build/linux/x64/release/bundle`.
 
 # Roadmap
 
 **General:**
-  - [ ] Show terminal output
   - [ ] Integration with git when "publishing" site (optional)
   - [ ] Language filter for l10n
   - [ ] Fix system light/dark color scheme
@@ -190,6 +194,7 @@ Feel free to send in a [pull request](https://github.com/iakmds/buhocms/pulls)! 
   - [ ] Markdown Toolbar: "Add media" button for images for selecting an image
   - [ ] Localization: Markdown Toolbar tooltip texts
   - [ ] Configurable shortcuts
+  - [x] Show terminal output (v0.3.0)
 
 **Hugo specific:**
   - [ ] Work with both hugo.* and config.* names ([see Hugo Documentation](https://gohugo.io/getting-started/configuration/#hugotoml-vs-configtoml))
