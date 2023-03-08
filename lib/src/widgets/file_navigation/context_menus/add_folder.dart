@@ -62,8 +62,7 @@ class AddFolder {
                             TextSpan(
                               text: path.substring(path.indexOf('content')),
                               style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
+                                  color: Theme.of(context).colorScheme.primary),
                             ),
                           ])),
                     ],
