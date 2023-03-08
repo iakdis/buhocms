@@ -1,4 +1,5 @@
 import 'package:buhocms/src/pages/editing_page.dart';
+import 'package:buhocms/src/provider/app/output_provider.dart';
 import 'package:buhocms/src/provider/app/shell_provider.dart';
 import 'package:buhocms/src/utils/globals.dart';
 import 'package:buhocms/src/utils/preferences.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../provider/navigation/navigation_size_provider.dart';
 import '../resize_bar.dart';
+import 'buttons/terminal_output_button.dart';
 
 class HomeNavigationDrawer extends StatefulWidget {
   const HomeNavigationDrawer({super.key, required this.editingPageKey});
@@ -201,6 +203,17 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                       .openPublicFolder,
                                   child:
                                       OpenPublicButton(isExtended: isExtended),
+                                ),
+                                divider(),
+                                CustomTooltip(
+                                  message: Provider.of<OutputProvider>(context)
+                                          .showOutput
+                                      ? AppLocalizations.of(context)!
+                                          .hideTerminalOutput
+                                      : AppLocalizations.of(context)!
+                                          .showTerminalOutput,
+                                  child: TerminalOutputButton(
+                                      isExtended: isExtended),
                                 ),
                               ],
                             ),
