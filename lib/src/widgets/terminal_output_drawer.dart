@@ -60,7 +60,9 @@ class _TerminalOutputDrawerState extends State<TerminalOutputDrawer> {
                                     controller: controller,
                                     child: ConstrainedBox(
                                       constraints: BoxConstraints(
-                                          minHeight: constraints.maxHeight),
+                                        minHeight: constraints.maxHeight,
+                                        minWidth: constraints.maxWidth,
+                                      ),
                                       child: Padding(
                                         padding: const EdgeInsets.fromLTRB(
                                             8.0, 0, 8.0, 8.0),
