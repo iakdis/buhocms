@@ -157,8 +157,8 @@ class Preferences {
   }
 
   static List getRecentSitePaths() {
-    List strToList = json.decode(
-        getPreferencesEntry(prefRecentSitePaths) ?? json.encode(['none']));
+    List strToList = json
+        .decode(getPreferencesEntry(prefRecentSitePaths) ?? json.encode([]));
     return strToList;
   }
 
