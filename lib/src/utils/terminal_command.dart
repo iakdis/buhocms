@@ -18,6 +18,10 @@ Future<void> runTerminalCommand({
   );
   final outputProvider = Provider.of<OutputProvider>(context, listen: false);
 
+  if (outputProvider.output.isNotEmpty) {
+    outputProvider.setOutput('${outputProvider.output}\n\n');
+  }
+
   controller.stream.asBroadcastStream().listen((event) {
     outputProvider.setOutput('${outputProvider.output}\n$event');
   });
@@ -48,6 +52,10 @@ void runTerminalCommandServer({
   successFunction();
 
   final outputProvider = Provider.of<OutputProvider>(context, listen: false);
+
+  if (outputProvider.output.isNotEmpty) {
+    outputProvider.setOutput('${outputProvider.output}\n\n');
+  }
 
   controller.stream.asBroadcastStream().listen((event) {
     outputProvider.setOutput('${outputProvider.output}\n$event');
