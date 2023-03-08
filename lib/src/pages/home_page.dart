@@ -12,6 +12,7 @@ import 'package:window_manager/window_manager.dart';
 import '../logic/buho_functions.dart';
 import '../utils/globals.dart';
 import '../widgets/menu_bar.dart';
+import '../widgets/terminal_output_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -94,23 +95,28 @@ class _HomePageState extends State<HomePage> with WindowListener {
         child: GestureDetector(
           onTapDown: (_) => focusNodePage.requestFocus(),
           child: Scaffold(
-            body: windowWidth >= mobileWidth
-                ? Row(
-                    children: [
-                      HomeNavigationDrawer(editingPageKey: editingPageKey),
-                      FilesNavigationDrawer(editingPageKey: editingPageKey),
-                      Expanded(
-                        child: Consumer<NavigationProvider>(
-                          builder: (_, navigationProvider, __) {
-                            return buildPages(
-                                index: navigationProvider.navigationIndex ?? 0);
-                          },
-                        ),
+            body: Stack(
+              alignment: AlignmentDirectional.centerEnd,
+              children: windowWidth >= mobileWidth
+                  ? [
+                      Row(
+                        children: [
+                          HomeNavigationDrawer(editingPageKey: editingPageKey),
+                          FilesNavigationDrawer(editingPageKey: editingPageKey),
+                          Expanded(
+                            child: Consumer<NavigationProvider>(
+                              builder: (_, navigationProvider, __) {
+                                return buildPages(
+                                    index: navigationProvider.navigationIndex ??
+                                        0);
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  )
-                : Stack(
-                    children: [
+                      const TerminalOutputDrawer(),
+                    ]
+                  : [
                       Padding(
                         padding: const EdgeInsets.only(left: 128.0),
                         child: Consumer<NavigationProvider>(
@@ -126,8 +132,9 @@ class _HomePageState extends State<HomePage> with WindowListener {
                           FilesNavigationDrawer(editingPageKey: editingPageKey),
                         ],
                       ),
+                      const TerminalOutputDrawer(),
                     ],
-                  ),
+            ),
           ),
         ),
       ),
