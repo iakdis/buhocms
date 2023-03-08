@@ -178,6 +178,8 @@ void startHugoServer({required BuildContext context}) {
       executable: 'hugo',
     );
 
+    shellProvider.updateController();
+
     runTerminalCommandServer(
       context: context,
       shell: shellProvider.shell(),

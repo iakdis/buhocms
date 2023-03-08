@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:process_run/shell.dart';
 
 class ShellProvider extends ChangeNotifier {
-  final ShellLinesController _controller = ShellLinesController();
+  ShellLinesController _controller = ShellLinesController();
   ShellLinesController get controller => _controller;
+
+  void updateController() {
+    _controller.close();
+    _controller = ShellLinesController();
+    notifyListeners();
+  }
 
   bool _shellActive = false;
 
