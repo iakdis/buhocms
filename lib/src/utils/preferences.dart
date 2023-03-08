@@ -12,7 +12,7 @@ class Preferences {
     return Map.fromEntries([
       const MapEntry(prefLanguage, ''),
       MapEntry(prefThemeMode, ThemeMode.system.name),
-      const MapEntry(prefColorScheme, 14),
+      const MapEntry(prefColorScheme, 27),
       const MapEntry(prefPageIndex, 0),
       const MapEntry(prefCurrentFileIndex, -1),
       const MapEntry(prefNavigationSize, 64.0),
