@@ -9,6 +9,7 @@ import '../../../logic/files.dart';
 import '../../../pages/editing_page.dart';
 import '../../../utils/preferences.dart';
 import '../../../utils/unsaved_check.dart';
+import '../../command_dialog.dart';
 import '../../snackbar.dart';
 
 const TextStyle textStyle = TextStyle(fontSize: 16);
@@ -68,60 +69,34 @@ class AddFolder {
                     ],
                   ),
                   const SizedBox(height: 32.0),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            Text(AppLocalizations.of(context)!.name,
-                                style: textStyle),
-                            ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                  minWidth: 200, maxWidth: 300),
-                              child: IntrinsicWidth(
-                                child: TextField(
-                                  controller: folderNameController,
-                                  focusNode: nameFocusNode,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      folderName = value;
-                                      empty = folderName.isEmpty;
+                  CustomTextField(
+                    leading: Text(AppLocalizations.of(context)!.name,
+                        style: textStyle),
+                    controller: folderNameController,
+                    focusNode: nameFocusNode,
+                    onChanged: (value) {
+                      setState(() {
+                        folderName = value;
+                        empty = folderName.isEmpty;
 
-                                      for (var i = 0;
-                                          i < allFolders.length;
-                                          i++) {
-                                        if (allFolders[i].path ==
-                                            '$path${Platform.pathSeparator}$folderName') {
-                                          folderAlreadyExists = true;
-                                          return;
-                                        }
-                                      }
-                                      folderAlreadyExists = false;
-                                    });
-                                  },
-                                  decoration: InputDecoration(
-                                    hintText: 'posts',
-                                    errorText: empty
-                                        ? AppLocalizations.of(context)!
-                                            .cantBeEmpty
-                                        : folderAlreadyExists
-                                            ? AppLocalizations.of(context)!
-                                                .error_folderAlreadyExists(
-                                                    '"$folderName"',
-                                                    '"${path.substring(path.indexOf('content'))}"')
-                                            : null,
-                                    errorMaxLines: 5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                        for (var i = 0; i < allFolders.length; i++) {
+                          if (allFolders[i].path ==
+                              '$path${Platform.pathSeparator}$folderName') {
+                            folderAlreadyExists = true;
+                            return;
+                          }
+                        }
+                        folderAlreadyExists = false;
+                      });
+                    },
+                    helperText: '"posts"',
+                    errorText: empty
+                        ? AppLocalizations.of(context)!.cantBeEmpty
+                        : folderAlreadyExists
+                            ? AppLocalizations.of(context)!
+                                .error_folderAlreadyExists('"$folderName"',
+                                    '"${path.substring(path.indexOf('content'))}"')
+                            : null,
                   ),
                   const SizedBox(height: 100),
                   Row(
