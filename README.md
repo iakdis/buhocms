@@ -1,7 +1,4 @@
 
-## :warning: Alpha warning
-#### BuhoCMS is currently in Alpha. While most things should work as expected, bugs :bug: are likely to exist. It is a good idea to backup 💾 your website folders just in case. Also, remember that [many more features](https://github.com/iakmds/buhocms#roadmap) are planned! :sparkles:
-
 <p>
   <a href="https://github.com/iakmds/buhocms/releases/latest" alt="Release">
   <img src="https://img.shields.io/github/v/release/iakmds/buhocms?style=flat-square" /></a>
@@ -85,6 +82,9 @@ BuhoCMS is for you if you land in at least one of the following categories:
 - You **already have a Hugo site** and want to easily edit your content from now on
 - You want to **create a new Hugo site from zero** with a graphical user interface
 - You are a **beginner** looking for a **simple way to begin your journey** in using static site generators
+
+## :warning: Alpha warning
+BuhoCMS is currently in Alpha. While most things should work as expected, bugs :bug: are likely to exist. It is a good idea to backup 💾 your website folders just in case. Also, remember that [many more features](https://github.com/iakmds/buhocms#roadmap) are planned! :sparkles:
 
 # Screenshots
 <p float="left">
