@@ -5,7 +5,7 @@ Type=Application
 Name=BuhoCMS
 Comment=A local CMS for Hugo static sites
 Categories=Office;
-Icon=buhocms
+Icon=org.buhocms.BuhoCMS
 
 Exec=buhocms
 Terminal=false
