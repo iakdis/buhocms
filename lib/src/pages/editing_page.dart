@@ -549,6 +549,23 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                   backgroundColor: Theme.of(context).primaryColorLight,
                   iconColor: Theme.of(context).colorScheme.onPrimary,
                   dropdownTextColor: Theme.of(context).colorScheme.primary,
+                  headingTooltip: AppLocalizations.of(context)!.tooltipHeading,
+                  boldTooltip: AppLocalizations.of(context)!.tooltipBold,
+                  italicTooltip: AppLocalizations.of(context)!.tooltipItalic,
+                  strikethroughTooltip:
+                      AppLocalizations.of(context)!.tooltipStrikethrough,
+                  linkTooltip: AppLocalizations.of(context)!.tooltipLink,
+                  imageTooltip: AppLocalizations.of(context)!.tooltipImage,
+                  codeTooltip: AppLocalizations.of(context)!.tooltipCode,
+                  bulletedListTooltip:
+                      AppLocalizations.of(context)!.tooltipBulletedList,
+                  numberedListTooltip:
+                      AppLocalizations.of(context)!.tooltipNumberedList,
+                  checkboxTooltip:
+                      AppLocalizations.of(context)!.tooltipCheckbox,
+                  quoteTooltip: AppLocalizations.of(context)!.tooltipQuote,
+                  horizontalRuleTooltip:
+                      AppLocalizations.of(context)!.tooltipHorizontalRule,
                 );
               },
             ),
