@@ -192,6 +192,7 @@ Feel free to send in a [pull request](https://github.com/iakmds/buhocms/pulls)! 
   - [ ] Fix system light/dark color scheme
   - [ ] Custom app theme colors
   - [ ] Markdown Toolbar: "Add media" button for images for selecting an image
+  - [ ] Markdown Toolbar: Shortcuts
   - [ ] Localization: Markdown Toolbar tooltip texts
   - [ ] Configurable shortcuts
   - [x] Show terminal output (v0.3.0)
