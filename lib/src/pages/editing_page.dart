@@ -599,6 +599,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
           focusNode: focusNodeTextField,
           minLines: 5,
           maxLines: null,
+          style: const TextStyle(fontSize: 18),
           decoration: InputDecoration(
             hintText: AppLocalizations.of(context)!.content_Description,
             labelText: AppLocalizations.of(context)!.content,
