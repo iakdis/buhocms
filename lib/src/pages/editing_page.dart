@@ -92,9 +92,6 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     unsavedTextProvider
         .setUnsavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 
-    editingProvider
-        .setMarkdownViewerText(fileNavigationProvider.controller.text);
-
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         fileNavigationProvider.controller.addListener(addListenerContent);
@@ -103,7 +100,10 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       },
     );
 
-    updateHugoWidgets();
+    await updateHugoWidgets();
+
+    editingProvider
+        .setMarkdownViewerText(fileNavigationProvider.controller.text);
   }
 
   Future<void> updateHugoWidgets() async {
