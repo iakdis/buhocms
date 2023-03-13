@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../utils/globals.dart';
 import '../widgets/menu_bar.dart';
@@ -85,6 +86,8 @@ class _HomePageState extends State<HomePage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
+    Localization.init(context);
+
     //final navigationProvider = Provider.of<NavigationProvider>(context);
     var windowWidth = MediaQuery.of(context).size.width;
 

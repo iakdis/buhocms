@@ -9,6 +9,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../i18n/l10n.dart';
 import '../provider/app/theme_provider.dart';
 import '../utils/preferences.dart';
 import 'home_page.dart';
@@ -394,6 +395,8 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
+    Localization.init(context);
+
     return Theme(
       data: Themes(Preferences.getColorSchemeIndex()).lightTheme(),
       child: GestureDetector(

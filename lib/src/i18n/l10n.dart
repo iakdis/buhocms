@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Localization {
   static final supportedLocales = [
@@ -19,4 +20,10 @@ class Localization {
         return 'English';
     }
   }
+
+  static AppLocalizations appLocalizations() => _appLocalizations!;
+  static AppLocalizations? _appLocalizations;
+
+  static void init(BuildContext context) =>
+      _appLocalizations = AppLocalizations.of(context);
 }
