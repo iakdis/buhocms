@@ -579,7 +579,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                 ? Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(child: _textEditor()),
+                      Expanded(flex: 2, child: _textEditor()),
                       if (showMarkdownViewer)
                         Expanded(child: _markdownViewer()),
                     ],
