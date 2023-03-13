@@ -12,6 +12,15 @@ class FileNavigationProvider extends ChangeNotifier {
   String _markdownTextContent = '';
   String _frontMatterText = '';
 
+  double? _textFieldHeight;
+
+  double? get textFieldHeight => _textFieldHeight;
+
+  void setTextFieldHeight(double height) {
+    _textFieldHeight = height;
+    notifyListeners();
+  }
+
   int get fileNavigationIndex {
     _fileNavigationIndex = Preferences.getFileIndex();
     return _fileNavigationIndex;
@@ -20,6 +29,7 @@ class FileNavigationProvider extends ChangeNotifier {
   void setFileNavigationIndex(int index) {
     Preferences.setFileIndex(index);
     _fileNavigationIndex = index;
+    _textFieldHeight = null;
     notifyListeners();
   }
 

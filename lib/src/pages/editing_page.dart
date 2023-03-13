@@ -48,6 +48,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
   late final FileNavigationProvider fileNavigationProvider;
   late final UnsavedTextProvider unsavedTextProvider;
   late final NavigationSizeProvider navigationSizeProvider;
+  static const double textFieldMinHeight = 100.0;
+  Color? textFieldHandleColor;
+  GlobalKey textFieldKey = GlobalKey();
 
   @override
   void initState() {
@@ -591,21 +594,79 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     );
   }
 
+  void _setActiveHandleColor() => setState(
+      () => textFieldHandleColor = Theme.of(context).colorScheme.primary);
+
+  void _resetActiveHandleColor() => setState(() =>
+      textFieldHandleColor = Theme.of(context).disabledColor.withAlpha(64));
+
   Widget _textEditor() {
     return Consumer<FileNavigationProvider>(
       builder: (context, value, _) {
-        return TextField(
-          controller: value.controller,
-          focusNode: focusNodeTextField,
-          minLines: 5,
-          maxLines: null,
-          style: const TextStyle(fontSize: 18),
-          decoration: InputDecoration(
-            hintText: AppLocalizations.of(context)!.content_Description,
-            labelText: AppLocalizations.of(context)!.content,
-            alignLabelWithHint: true,
-            border: const OutlineInputBorder(),
-          ),
+        return Column(
+          children: [
+            SizedBox(
+              height: value.textFieldHeight,
+              child: TextField(
+                key: textFieldKey,
+                controller: value.controller,
+                focusNode: focusNodeTextField,
+                expands: value.textFieldHeight != null ? true : false,
+                minLines: value.textFieldHeight != null ? null : 5,
+                maxLines: null,
+                textAlignVertical: TextAlignVertical.top,
+                style: const TextStyle(fontSize: 18),
+                decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.content_Description,
+                  labelText: AppLocalizations.of(context)!.content,
+                  alignLabelWithHint: true,
+                  border: const OutlineInputBorder(),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+              width: 60,
+              child: MouseRegion(
+                cursor: SystemMouseCursors.resizeUpDown,
+                onEnter: (event) => _setActiveHandleColor(),
+                onExit: (event) => _resetActiveHandleColor(),
+                child: GestureDetector(
+                  child: Transform.scale(
+                    scale: 3,
+                    child: Icon(
+                      Icons.horizontal_rule_rounded,
+                      size: 30,
+                      color: textFieldHandleColor ??
+                          Theme.of(context).disabledColor.withAlpha(64),
+                    ),
+                  ),
+                  onPanUpdate: (details) {
+                    var textFieldSize = textFieldMinHeight;
+                    if (textFieldKey.currentContext != null) {
+                      final renderBox = textFieldKey.currentContext!
+                          .findRenderObject() as RenderBox;
+                      textFieldSize = renderBox.size.height;
+                    }
+
+                    setState(() {
+                      final newHeight =
+                          (value.textFieldHeight ?? textFieldSize) +
+                              details.delta.dy;
+                      value.setTextFieldHeight(newHeight);
+
+                      if ((value.textFieldHeight ?? 0) < textFieldMinHeight) {
+                        value.setTextFieldHeight(textFieldMinHeight);
+                      }
+                    });
+
+                    _setActiveHandleColor();
+                  },
+                  onPanEnd: (details) => _resetActiveHandleColor(),
+                ),
+              ),
+            ),
+          ],
         );
       },
     );
@@ -845,7 +906,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                     return SingleChildScrollView(
                       child: Padding(
                         padding: constraints.maxWidth > mobileWidth
-                            ? const EdgeInsets.all(32.0)
+                            ? const EdgeInsets.fromLTRB(32.0, 32.0, 32.0, 256.0)
                             : const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 64.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
