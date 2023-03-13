@@ -33,15 +33,7 @@ void checkProgramInstalled({
       // Executable found, set it
       finalExecutable = value.outText;
     }).catchError((object) async {
-      // If no executable found, check for Linux Flatpak sandbox issue
-      if (Platform.isLinux) {
-        await shell.run('flatpak-spawn --host which $executable').then((value) {
-          // If platform is Flatpak and no error, executable found
-          finalExecutable = value.outText;
-        }).catchError((object) {
-          // If platform is Flatpak but still not found, not installed
-        });
-      }
+      // Not installed
     });
   }
 

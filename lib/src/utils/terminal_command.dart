@@ -26,7 +26,6 @@ Future<void> runTerminalCommand({
     outputProvider.setOutput('${outputProvider.output}\n$event');
   });
 
-  // Try to run command
   try {
     await shell.run(command);
   } catch (e) {
@@ -71,28 +70,4 @@ void runTerminalCommandServer({
       errorFunction();
     }
   }
-
-  /*try {
-    await shell.run(command);
-  } catch (e) {
-    if (!Platform.isLinux) {
-      catchFunction(e);
-    } else {
-      // If Linux error, check for Linux Flatpak sandbox issue
-      try {
-        // Check if platform is Flatpak
-        await shell.run('flatpak-spawn --host ls');
-
-        try {
-          await shell.run('flatpak-spawn --host $command');
-        } catch (_) {
-          // Finally, if platform is Linux Flatpak but still error, command not working
-          catchFunction(e);
-        }
-      } catch (_) {
-        // Not Flatpak, show no error
-        catchFunction(e);
-      }
-    }
-  }*/
 }
