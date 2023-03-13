@@ -31,15 +31,12 @@ fi
 # Go to Flutter project directory (buhocms/opt/BuhoCMS/Debian/installers)
 cd ../../../../..
 
-# Build Linux app
-flutter build linux
-
 # Copy final bundle into opt directory
 cp -r build/linux/x64/release/bundle/* $INSTALLERS/$OPT
 
 # Specify the automatically generated output name in addition to the final name to which the file will be renamed to
 OUTPUT=BuhoCMS.deb
-FINAL=BuhoCMS-Linux.deb
+FINAL=../BuhoCMS-Linux.deb
 EXEC=$BIN/buhocms
 
 cd $INSTALLERS

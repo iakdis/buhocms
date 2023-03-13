@@ -30,15 +30,12 @@ fi
 # Go to Flutter project directory (AppImage/installers/buhocms)
 cd ../../..
 
-# Build Linux app
-flutter build linux
-
 # Copy final bundle into installer directory
 cp -r build/linux/x64/release/bundle/* $INSTALLERS/$APPDIR
 
 # Specify the automatically generated output name in addition to the final name to which the file will be renamed to
 OUTPUT=BuhoCMS-x86_64.AppImage
-FINAL=BuhoCMS-Linux.AppImage
+FINAL=../BuhoCMS-Linux.AppImage
 APPIMAGETOOL=appimagetool-x86_64.AppImage
 DESKTOP=org.buhocms.BuhoCMS.desktop
 
