@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app.dart';
+import '../i18n/l10n.dart';
 
 void showSnackbar({
   required String text,
@@ -10,9 +11,14 @@ void showSnackbar({
   width = width <= 300.0 ? 300.0 : width;
   rootScaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
     behavior: SnackBarBehavior.floating,
+    backgroundColor: const Color(0xFF2C2C2C),
     width: width,
-    content: Text(text),
+    content: Text(text, style: const TextStyle(color: Colors.white)),
     duration: Duration(seconds: seconds),
-    action: SnackBarAction(label: 'Dismiss', onPressed: () {}),
+    action: SnackBarAction(
+      label: Localization.appLocalizations().dismiss,
+      onPressed: () {},
+      textColor: Colors.white,
+    ),
   ));
 }
