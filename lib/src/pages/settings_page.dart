@@ -13,6 +13,7 @@ import 'package:buhocms/src/provider/app/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../widgets/buttons/language_dropdown.dart';
 import '../widgets/theme_selector.dart';
@@ -38,7 +39,7 @@ class SettingsButton extends StatelessWidget {
         );
       },
       icon: const Icon(Icons.settings),
-      tooltip: AppLocalizations.of(context)!.settings,
+      tooltip: Localization.appLocalizations().settings,
       iconSize: 35,
       color: Colors.white,
     );
@@ -101,7 +102,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _aboutTile() {
     return ListTile(
       leading: const Icon(Icons.info),
-      title: Text(AppLocalizations.of(context)!.aboutBuhoCMS),
+      title: Text(Localization.appLocalizations().aboutBuhoCMS),
       onTap: () => about(context: context),
     );
   }
@@ -143,9 +144,9 @@ class _SettingsPageState extends State<SettingsPage> {
         MaterialPageRoute(builder: (context) => const OnboardingPage()),
       ),
       child: ListTile(
-        title: Text(AppLocalizations.of(context)!.onboardingScreen),
+        title: Text(Localization.appLocalizations().onboardingScreen),
         subtitle: Text(
-          AppLocalizations.of(context)!.onboardingScreen_description,
+          Localization.appLocalizations().onboardingScreen_description,
         ),
         trailing: const Icon(Icons.logout),
       ),
@@ -168,8 +169,8 @@ class _SettingsPageState extends State<SettingsPage> {
       child: ListTile(
         title: Text(
           isMoreOptions
-              ? AppLocalizations.of(context)!.less
-              : AppLocalizations.of(context)!.more,
+              ? Localization.appLocalizations().less
+              : Localization.appLocalizations().more,
           style: style,
         ),
         trailing: Padding(
@@ -188,26 +189,26 @@ class _SettingsPageState extends State<SettingsPage> {
         builder: (context, navigationProvider, _) {
       final sitePath = Preferences.getSitePath() ?? '';
       return ListTile(
-        title: Text(AppLocalizations.of(context)!.openSite),
+        title: Text(Localization.appLocalizations().openSite),
         subtitle: Text(
-          AppLocalizations.of(context)!.currentSitePath(sitePath),
+          Localization.appLocalizations().currentSitePath(sitePath),
         ),
         trailing: ElevatedButton(
             onPressed: () => openHugoSite(context: context),
-            child: Text(AppLocalizations.of(context)!.openSite)),
+            child: Text(Localization.appLocalizations().openSite)),
       );
     });
   }
 
   Widget _createSiteTile() {
     return ListTile(
-      title: Text(AppLocalizations.of(context)!.createSite),
+      title: Text(Localization.appLocalizations().createSite),
       subtitle: Text(
-        AppLocalizations.of(context)!.createSite_Description,
+        Localization.appLocalizations().createSite_Description,
       ),
       trailing: ElevatedButton(
         onPressed: () => createHugoSite(context: context),
-        child: Text(AppLocalizations.of(context)!.createSite),
+        child: Text(Localization.appLocalizations().createSite),
       ),
     );
   }
@@ -221,13 +222,13 @@ class _SettingsPageState extends State<SettingsPage> {
         : '"${Preferences.getHugoTheme().split(Platform.pathSeparator).last}"';
     return Consumer<NavigationProvider>(builder: (context, _, __) {
       return ListTile(
-        title: Text(AppLocalizations.of(context)!.hugoThemes),
+        title: Text(Localization.appLocalizations().hugoThemes),
         subtitle: Text(
-          AppLocalizations.of(context)!.currentHugoThemes(theme),
+          Localization.appLocalizations().currentHugoThemes(theme),
         ),
         trailing: ElevatedButton(
           onPressed: () => openHugoThemes(context: context),
-          child: Text(AppLocalizations.of(context)!.hugoThemes),
+          child: Text(Localization.appLocalizations().hugoThemes),
         ),
       );
     });
@@ -235,11 +236,11 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _themeTile() {
     return ListTile(
-      title: Text(AppLocalizations.of(context)!.theme),
+      title: Text(Localization.appLocalizations().theme),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context)!.theme_description),
+          Text(Localization.appLocalizations().theme_description),
           const ThemeSelector(),
         ],
       ),
@@ -258,20 +259,20 @@ class _SettingsPageState extends State<SettingsPage> {
                   .setTheme(ThemeMode.system),
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
-                child: Text(AppLocalizations.of(context)!.themeSystem),
+                child: Text(Localization.appLocalizations().themeSystem),
               ),
             ),
             DropdownMenuItem(
               value: ThemeMode.light,
               onTap: () => Provider.of<ThemeProvider>(context, listen: false)
                   .setTheme(ThemeMode.light),
-              child: Text(AppLocalizations.of(context)!.themeLight),
+              child: Text(Localization.appLocalizations().themeLight),
             ),
             DropdownMenuItem(
               value: ThemeMode.dark,
               onTap: () => Provider.of<ThemeProvider>(context, listen: false)
                   .setTheme(ThemeMode.dark),
-              child: Text(AppLocalizations.of(context)!.themeDark),
+              child: Text(Localization.appLocalizations().themeDark),
             ),
           ],
           onChanged: (_) {},
@@ -288,22 +289,22 @@ class _SettingsPageState extends State<SettingsPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.resetBuhoCMS),
+        title: Text(Localization.appLocalizations().resetBuhoCMS),
         content: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 400),
-          child: Text(AppLocalizations.of(context)!.areYouSureResetBuhoCMS),
+          child: Text(Localization.appLocalizations().areYouSureResetBuhoCMS),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(AppLocalizations.of(context)!.cancel),
+            child: Text(Localization.appLocalizations().cancel),
           ),
           TextButton(
             onPressed: () {
               Preferences.clearPreferences();
               _reloadUI();
             },
-            child: Text(AppLocalizations.of(context)!.yes),
+            child: Text(Localization.appLocalizations().yes),
           ),
         ],
       ),
@@ -317,7 +318,7 @@ class _SettingsPageState extends State<SettingsPage> {
           alignment: WrapAlignment.spaceBetween,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            Text(AppLocalizations.of(context)!.preferences),
+            Text(Localization.appLocalizations().preferences),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -326,7 +327,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   onPressed: () async {
                     String? outputFile = await FilePicker.platform.saveFile(
                       dialogTitle:
-                          AppLocalizations.of(context)!.selectASavePath,
+                          Localization.appLocalizations().selectASavePath,
                       fileName: 'preferences.json',
                     );
                     if (outputFile == null) return;
@@ -338,7 +339,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           builder: (context) {
                             return AlertDialog(
                               title: Text(
-                                  AppLocalizations.of(context)!.overrideFile),
+                                  Localization.appLocalizations().overrideFile),
                               content: Text(
                                 AppLocalizations.of(context)!
                                     .overrideFile_Description(outputFile
@@ -349,7 +350,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 TextButton(
                                   onPressed: () => Navigator.pop(context),
                                   child: Text(
-                                      AppLocalizations.of(context)!.cancel),
+                                      Localization.appLocalizations().cancel),
                                 ),
                                 TextButton(
                                   onPressed: () async {
@@ -360,7 +361,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                     if (mounted) Navigator.pop(context);
                                   },
                                   child:
-                                      Text(AppLocalizations.of(context)!.yes),
+                                      Text(Localization.appLocalizations().yes),
                                 ),
                               ],
                             );
@@ -372,7 +373,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       await file.writeAsString(Preferences.getAllPreferences());
                     }
                   },
-                  child: Text(AppLocalizations.of(context)!.export),
+                  child: Text(Localization.appLocalizations().export),
                 ),
                 //const VerticalDivider(),
                 ElevatedButton(
@@ -389,19 +390,19 @@ class _SettingsPageState extends State<SettingsPage> {
                     Preferences.setAllPreferences(file.readAsStringSync());
                     _reloadUI();
                   },
-                  child: Text(AppLocalizations.of(context)!.import),
+                  child: Text(Localization.appLocalizations().import),
                 ),
                 //const VerticalDivider(),
                 ElevatedButton(
                   onPressed: () => _showResetDialog(),
-                  child: Text(AppLocalizations.of(context)!.reset),
+                  child: Text(Localization.appLocalizations().reset),
                 ),
               ],
             ),
           ],
         ),
         subtitle: Text(
-          AppLocalizations.of(context)!.preferences_Description,
+          Localization.appLocalizations().preferences_Description,
         ),
       );
     });
@@ -409,8 +410,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _languageTile() {
     return ListTile(
-      title: Text(AppLocalizations.of(context)!.language),
-      subtitle: Text(AppLocalizations.of(context)!.language_description),
+      title: Text(Localization.appLocalizations().language),
+      subtitle: Text(Localization.appLocalizations().language_description),
       trailing: const LanguageDropdown(),
     );
   }
@@ -418,9 +419,9 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _editFrontmatterListTile() {
     return Consumer<NavigationProvider>(builder: (context, _, __) {
       return ListTile(
-        title: Text(AppLocalizations.of(context)!.editFrontmatterList),
+        title: Text(Localization.appLocalizations().editFrontmatterList),
         subtitle: Text(
-          AppLocalizations.of(context)!.editFrontmatterList_Description,
+          Localization.appLocalizations().editFrontmatterList_Description,
         ),
         trailing:
             EditFrontmatterListButton(editingPageKey: widget.editingPageKey),
@@ -441,28 +442,28 @@ class _SettingsPageState extends State<SettingsPage> {
             title: Row(
           children: [
             const SizedBox(width: 16),
-            Text(AppLocalizations.of(context)!.settings),
+            Text(Localization.appLocalizations().settings),
           ],
         )),
         body: ListView(
           controller: listScrollController,
           padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
           children: <Widget>[
-            _headingTile(AppLocalizations.of(context)!.appSettings),
+            _headingTile(Localization.appLocalizations().appSettings),
             _preferencesTile(),
             const Divider(),
             _languageTile(),
             const Divider(),
             _themeTile(),
             const Divider(),
-            _headingTile(AppLocalizations.of(context)!.site),
+            _headingTile(Localization.appLocalizations().site),
             _openSiteTile(),
             const Divider(),
             _createSiteTile(),
             const Divider(),
             _hugoThemeTile(),
             const Divider(),
-            _headingTile(AppLocalizations.of(context)!.hugoSettings),
+            _headingTile(Localization.appLocalizations().hugoSettings),
             _editFrontmatterListTile(),
             // const Divider(),
             // _showExperimentalTile(),

@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../i18n/l10n.dart';
 import '../provider/app/shell_provider.dart';
 import '../provider/navigation/navigation_provider.dart';
 import '../utils/preferences.dart';
@@ -140,13 +141,13 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
               ElevatedButton(
                 onPressed: canContinue ? details.onStepContinue : null,
                 child: Text(details.stepIndex < 2
-                    ? AppLocalizations.of(context)!.continue2
-                    : AppLocalizations.of(context)!.open.toUpperCase()),
+                    ? Localization.appLocalizations().continue2
+                    : Localization.appLocalizations().open.toUpperCase()),
               ),
               const SizedBox(width: 8),
               TextButton(
                 onPressed: details.stepIndex > 0 ? details.onStepCancel : null,
-                child: Text(AppLocalizations.of(context)!.back),
+                child: Text(Localization.appLocalizations().back),
               ),
             ],
           ),
@@ -155,7 +156,7 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
       steps: [
         Step(
           isActive: currentStep >= 0,
-          title: Text(AppLocalizations.of(context)!.checkHugoFolderStructure),
+          title: Text(Localization.appLocalizations().checkHugoFolderStructure),
           content: Column(
             children: [
               SizedBox(
@@ -180,8 +181,8 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
                     }
                   },
                   icon: const Icon(Icons.open_in_new),
-                  label:
-                      Text(AppLocalizations.of(context)!.openHugoDocumentation),
+                  label: Text(
+                      Localization.appLocalizations().openHugoDocumentation),
                 ),
               ),
             ],
@@ -189,12 +190,12 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
         ),
         Step(
           isActive: currentStep >= 1,
-          title: Text(AppLocalizations.of(context)!.selectSiteFolder),
+          title: Text(Localization.appLocalizations().selectSiteFolder),
           content: Column(
             children: [
               ElevatedButton(
                   onPressed: savePath,
-                  child: Text(AppLocalizations.of(context)!.choosePath)),
+                  child: Text(Localization.appLocalizations().choosePath)),
               const SizedBox(height: 12.0),
               SizedBox(
                 width: 400,
@@ -214,10 +215,10 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
                   style: TextStyle(color: Colors.grey[600], fontSize: 17.0),
                   decoration: InputDecoration(
                     errorText: sitePathError
-                        ? AppLocalizations.of(context)!.cantBeEmpty
+                        ? Localization.appLocalizations().cantBeEmpty
                         : null,
                     border: const OutlineInputBorder(),
-                    labelText: AppLocalizations.of(context)!.savePath,
+                    labelText: Localization.appLocalizations().savePath,
                     isDense: true,
                     hintText: Platform.isWindows
                         ? 'C:\\Documents\\Projects\\my-website'
@@ -236,11 +237,11 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
         ),
         Step(
           isActive: currentStep >= 2,
-          title: Text(AppLocalizations.of(context)!.open),
+          title: Text(Localization.appLocalizations().open),
           content: Column(
             children: [
               SelectableText.rich(TextSpan(
-                  text: AppLocalizations.of(context)!.openHugoSite,
+                  text: Localization.appLocalizations().openHugoSite,
                   style: const TextStyle(fontSize: 20),
                   children: <TextSpan>[
                     TextSpan(
@@ -296,7 +297,7 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
             children: [
               const Icon(Icons.restore),
               const SizedBox(width: 8.0),
-              Text(AppLocalizations.of(context)!.recentlyOpenedWebsites,
+              Text(Localization.appLocalizations().recentlyOpenedWebsites,
                   style: const TextStyle(fontSize: 20.0)),
             ],
           ),
@@ -320,7 +321,7 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.openSite),
+        title: Text(Localization.appLocalizations().openSite),
       ),
       body: Center(
         child: ListView(

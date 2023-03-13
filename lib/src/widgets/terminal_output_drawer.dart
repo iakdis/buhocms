@@ -1,7 +1,8 @@
 import 'package:buhocms/src/provider/app/output_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../i18n/l10n.dart';
 
 class TerminalOutputDrawer extends StatefulWidget {
   const TerminalOutputDrawer({super.key});
@@ -22,7 +23,7 @@ class _TerminalOutputDrawerState extends State<TerminalOutputDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    final headerText = AppLocalizations.of(context)!.terminalOutput;
+    final headerText = Localization.appLocalizations().terminalOutput;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -85,8 +86,8 @@ class _TerminalOutputDrawerState extends State<TerminalOutputDrawer> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       IconButton(
-                                        tooltip:
-                                            AppLocalizations.of(context)!.close,
+                                        tooltip: Localization.appLocalizations()
+                                            .close,
                                         onPressed: () =>
                                             outputProvider.setShowOutput(false),
                                         icon: const Icon(
@@ -108,8 +109,8 @@ class _TerminalOutputDrawerState extends State<TerminalOutputDrawer> {
                                         ),
                                       ),
                                       IconButton(
-                                        tooltip:
-                                            AppLocalizations.of(context)!.reset,
+                                        tooltip: Localization.appLocalizations()
+                                            .reset,
                                         onPressed: () =>
                                             outputProvider.clearOutput(),
                                         icon: const Icon(

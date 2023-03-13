@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../i18n/l10n.dart';
 import '../provider/navigation/navigation_provider.dart';
 import '../ssg/themes.dart';
 import '../utils/terminal_command.dart';
@@ -90,7 +91,8 @@ class _ThemePageState extends State<ThemePage> {
     if (Directory('${Preferences.getSitePath()}${Platform.pathSeparator}$path')
         .existsSync()) {
       showSnackbar(
-        text: AppLocalizations.of(context)!.error_ThemeAlreadyExists(themeName),
+        text:
+            Localization.appLocalizations().error_ThemeAlreadyExists(themeName),
         seconds: 4,
       );
       return;
@@ -140,7 +142,7 @@ class _ThemePageState extends State<ThemePage> {
         gitInstalled = false;
         if (mounted) {
           gitInstalledText =
-              AppLocalizations.of(context)!.executableNotFound('Git');
+              Localization.appLocalizations().executableNotFound('Git');
         }
         setState(() {});
       },
@@ -161,9 +163,9 @@ class _ThemePageState extends State<ThemePage> {
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(
         children: [
-          Text(AppLocalizations.of(context)!.selectATheme, style: style),
+          Text(Localization.appLocalizations().selectATheme, style: style),
           const SizedBox(height: 32),
-          SelectableText(AppLocalizations.of(context)!.rememberToVisitDocs,
+          SelectableText(Localization.appLocalizations().rememberToVisitDocs,
               style: smallerStyle),
           const SizedBox(height: 32),
           FutureBuilder(
@@ -176,7 +178,8 @@ class _ThemePageState extends State<ThemePage> {
               var value = Preferences.getHugoTheme();
               var buttonList = <DropdownMenuItem<String>>[];
               buttonList.add(DropdownMenuItem(
-                  value: '', child: Text(AppLocalizations.of(context)!.none)));
+                  value: '',
+                  child: Text(Localization.appLocalizations().none)));
               if (snapshot.hasData) {
                 if (snapshot.data!.isNotEmpty) {
                   buttonList.addAll(snapshot.data!.map((element) {
@@ -223,7 +226,7 @@ class _ThemePageState extends State<ThemePage> {
   Widget _downloadTheme() {
     return Column(
       children: [
-        Text(AppLocalizations.of(context)!.downloadTheme, style: style),
+        Text(Localization.appLocalizations().downloadTheme, style: style),
         const SizedBox(height: 32),
         Stepper(
           currentStep: currentStep,
@@ -252,15 +255,16 @@ class _ThemePageState extends State<ThemePage> {
                   if (details.stepIndex == 0)
                     ElevatedButton(
                       onPressed: canContinue ? details.onStepContinue : null,
-                      child: Text(AppLocalizations.of(context)!.continue2),
+                      child: Text(Localization.appLocalizations().continue2),
                     ),
                   if (details.stepIndex == 1)
                     ElevatedButton(
                       onPressed: themeNameError || isDownloading
                           ? null
                           : () => _download(),
-                      child: Text(
-                          AppLocalizations.of(context)!.download.toUpperCase()),
+                      child: Text(Localization.appLocalizations()
+                          .download
+                          .toUpperCase()),
                     ),
                   if (details.stepIndex == 2)
                     ElevatedButton(
@@ -275,7 +279,7 @@ class _ThemePageState extends State<ThemePage> {
                       onPressed: details.stepIndex > 0 && !isDownloading
                           ? details.onStepCancel
                           : null,
-                      child: Text(AppLocalizations.of(context)!.back),
+                      child: Text(Localization.appLocalizations().back),
                     ),
                 ],
               ),
@@ -284,7 +288,7 @@ class _ThemePageState extends State<ThemePage> {
           steps: [
             Step(
               isActive: currentStep >= 0,
-              title: Text(AppLocalizations.of(context)!.checkGitInstalled),
+              title: Text(Localization.appLocalizations().checkGitInstalled),
               content: Column(
                 children: [
                   Icon(
@@ -300,7 +304,7 @@ class _ThemePageState extends State<ThemePage> {
                   ElevatedButton(
                     onPressed: () => checkGitExecutableInstalled(),
                     child:
-                        Text(AppLocalizations.of(context)!.checkGitInstalled),
+                        Text(Localization.appLocalizations().checkGitInstalled),
                   ),
                   const SizedBox(height: 16),
                   Text(gitInstalledText),
@@ -309,7 +313,7 @@ class _ThemePageState extends State<ThemePage> {
             ),
             Step(
               isActive: currentStep >= 1,
-              title: Text(AppLocalizations.of(context)!.downloadTheme),
+              title: Text(Localization.appLocalizations().downloadTheme),
               content: Column(
                 children: [
                   const SizedBox(height: 16),
@@ -350,7 +354,7 @@ class _ThemePageState extends State<ThemePage> {
                                 : null,
                             border: const OutlineInputBorder(),
                             labelText:
-                                AppLocalizations.of(context)!.themeRepository,
+                                Localization.appLocalizations().themeRepository,
                             isDense: true,
                             hintText: 'https://github.com/user/hugo-theme',
                             hintStyle: TextStyle(
@@ -367,7 +371,7 @@ class _ThemePageState extends State<ThemePage> {
             ),
             Step(
               isActive: currentStep >= 2,
-              title: Text(AppLocalizations.of(context)!.finish),
+              title: Text(Localization.appLocalizations().finish),
               content: Column(
                 children: [
                   SelectableText.rich(TextSpan(
@@ -380,7 +384,7 @@ class _ThemePageState extends State<ThemePage> {
                           style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
                         TextSpan(
-                          text: AppLocalizations.of(context)!.nowSelectTheme(
+                          text: Localization.appLocalizations().nowSelectTheme(
                               '"${themeName.split(Platform.pathSeparator).last}"'),
                         ),
                       ])),
@@ -397,7 +401,7 @@ class _ThemePageState extends State<ThemePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.hugoThemes),
+        title: Text(Localization.appLocalizations().hugoThemes),
       ),
       body: SingleChildScrollView(
         child: Padding(

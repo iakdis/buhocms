@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../i18n/l10n.dart';
 
 class OpenLocalhostButton extends StatelessWidget {
   const OpenLocalhostButton({
@@ -46,7 +47,7 @@ class OpenLocalhostButton extends StatelessWidget {
                       SizedBox(
                         width: constraints.maxWidth - 80,
                         child: Text(
-                          AppLocalizations.of(context)!.openHugoServer,
+                          Localization.appLocalizations().openHugoServer,
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),

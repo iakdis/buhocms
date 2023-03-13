@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../i18n/l10n.dart';
 import '../provider/navigation/file_navigation_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
@@ -423,7 +424,7 @@ class HugoWidgetState extends State<HugoWidget> {
       ),
       deleteIconColor: Theme.of(context).colorScheme.onPrimary,
       deleteButtonTooltipMessage:
-          AppLocalizations.of(context)!.removeTag('"$label"'),
+          Localization.appLocalizations().removeTag('"$label"'),
       onDeleted: () {
         setState(() {
           unsavedList.removeWhere((String entry) => entry == label);
@@ -462,7 +463,7 @@ class HugoWidgetState extends State<HugoWidget> {
                         border: const OutlineInputBorder(),
                         //labelText: 'Tags',
                         prefixIcon: const Icon(Icons.tag),
-                        hintText: AppLocalizations.of(context)!.tag,
+                        hintText: Localization.appLocalizations().tag,
                       ),
                       autovalidateMode: AutovalidateMode.always,
                       onFieldSubmitted: ((value) {
@@ -585,12 +586,12 @@ class HugoWidgetState extends State<HugoWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.deleteFrontmatter),
+        title: Text(Localization.appLocalizations().deleteFrontmatter),
         content: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 400),
           child: SelectableText.rich(
             TextSpan(
-              text: AppLocalizations.of(context)!.areYouSureDeleteFrontmatter,
+              text: Localization.appLocalizations().areYouSureDeleteFrontmatter,
               children: <TextSpan>[
                 TextSpan(
                   text: allLines[widget.index + 1],
@@ -605,7 +606,7 @@ class HugoWidgetState extends State<HugoWidget> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(AppLocalizations.of(context)!.cancel),
+            child: Text(Localization.appLocalizations().cancel),
           ),
           TextButton(
             onPressed: () {
@@ -615,7 +616,7 @@ class HugoWidgetState extends State<HugoWidget> {
               fileNavigationProvider.setFrontMatterText(newFrontmatterText);
 
               showSnackbar(
-                text: AppLocalizations.of(context)!.removedFrontmatter(
+                text: Localization.appLocalizations().removedFrontmatter(
                     '"${frontmatter.key}"',
                     '"${frontmatter.value.name.substring(4)}"'),
                 seconds: 4,
@@ -625,7 +626,7 @@ class HugoWidgetState extends State<HugoWidget> {
 
               Navigator.pop(context);
             },
-            child: Text(AppLocalizations.of(context)!.yes),
+            child: Text(Localization.appLocalizations().yes),
           ),
         ],
       ),
@@ -691,7 +692,7 @@ class HugoWidgetState extends State<HugoWidget> {
                     mounted: mounted,
                     setStateFunction: widget.setStateCallback),
                 icon: const Icon(Icons.auto_awesome),
-                label: Text(AppLocalizations.of(context)!.detect)),
+                label: Text(Localization.appLocalizations().detect)),
             const SizedBox(width: 8.0),
             SizedBox(
               width: 800,
@@ -699,7 +700,7 @@ class HugoWidgetState extends State<HugoWidget> {
                   .notFound_Description('"${frontmatter.key}"')),
             ),
             Tooltip(
-              message: AppLocalizations.of(context)!.delete,
+              message: Localization.appLocalizations().delete,
               child: ElevatedButton(
                 //color: Colors.blue,
                 onPressed: () {
@@ -727,7 +728,7 @@ class HugoWidgetState extends State<HugoWidget> {
           frontmatterWidget,
           const VerticalDivider(),
           Tooltip(
-            message: AppLocalizations.of(context)!.delete,
+            message: Localization.appLocalizations().delete,
             child: ElevatedButton(
               //color: Colors.blue,
               onPressed: () {
@@ -742,7 +743,7 @@ class HugoWidgetState extends State<HugoWidget> {
           ),
           const VerticalDivider(),
           Tooltip(
-            message: AppLocalizations.of(context)!.restore,
+            message: Localization.appLocalizations().restore,
             child: ElevatedButton(
               //color: Colors.blue,
               onPressed: restore,

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
 import '../../../pages/editing_page.dart';
 import '../../../provider/navigation/file_navigation_provider.dart';
@@ -86,7 +87,7 @@ class _FileButtonState extends State<FileButton> {
       if (allFiles[i].path == newPath) {
         if (mounted) {
           showSnackbar(
-            text: AppLocalizations.of(context)!.error_RenameFile(
+            text: Localization.appLocalizations().error_RenameFile(
                 '"${file.path.split(Platform.pathSeparator).last}"',
                 '"${newPath.split(Platform.pathSeparator).last}"'),
             seconds: 4,
@@ -101,7 +102,7 @@ class _FileButtonState extends State<FileButton> {
 
     if (mounted) {
       showSnackbar(
-        text: AppLocalizations.of(context)!.renamedFile(
+        text: Localization.appLocalizations().renamedFile(
             '"${file.path.split(Platform.pathSeparator).last}"',
             '"${newPath.split(Platform.pathSeparator).last}"'),
         seconds: 4,
@@ -198,12 +199,12 @@ class _FileButtonState extends State<FileButton> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(AppLocalizations.of(context)!.deleteFile),
+          title: Text(Localization.appLocalizations().deleteFile),
           content: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 400),
             child: SelectableText.rich(
               TextSpan(
-                text: AppLocalizations.of(context)!.deleteFile_Description,
+                text: Localization.appLocalizations().deleteFile_Description,
                 children: <TextSpan>[
                   TextSpan(
                     text: widget.path,
@@ -218,7 +219,7 @@ class _FileButtonState extends State<FileButton> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text(AppLocalizations.of(context)!.cancel),
+              child: Text(Localization.appLocalizations().cancel),
             ),
             TextButton(
               onPressed: () async {
@@ -255,7 +256,7 @@ class _FileButtonState extends State<FileButton> {
                   }
                 }
               },
-              child: Text(AppLocalizations.of(context)!.yes),
+              child: Text(Localization.appLocalizations().yes),
             ),
           ],
         ),

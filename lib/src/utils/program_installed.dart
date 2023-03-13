@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:process_run/shell_run.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../i18n/l10n.dart';
 import '../widgets/snackbar.dart';
 
 void checkProgramInstalled({
@@ -16,7 +16,7 @@ void checkProgramInstalled({
 }) async {
   var finalExecutable = '';
   final shell = Shell();
-  final errorText = AppLocalizations.of(context)!.error_executableNotFound(
+  final errorText = Localization.appLocalizations().error_executableNotFound(
       '${executable[0].toUpperCase()}${executable.substring(1)}', '"$command"');
 
   if (Platform.isWindows) {

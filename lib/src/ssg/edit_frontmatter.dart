@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../i18n/l10n.dart';
 import '../logic/files.dart';
 import '../pages/editing_page.dart';
 import '../utils/preferences.dart';
@@ -104,7 +105,7 @@ void showAutoDialog({
                   const Icon(Icons.auto_awesome, size: 64.0),
                   const SizedBox(height: 16.0),
                   SelectableText(
-                    AppLocalizations.of(context)!.autoFrontmatterList,
+                    Localization.appLocalizations().autoFrontmatterList,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.w500),
                   ),
@@ -125,7 +126,7 @@ void showAutoDialog({
                 children: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: Text(AppLocalizations.of(context)!.cancel),
+                    child: Text(Localization.appLocalizations().cancel),
                   ),
                   TextButton(
                     onPressed: () {
@@ -133,7 +134,7 @@ void showAutoDialog({
                       setStateFunction?.call();
                       Navigator.pop(context);
                     },
-                    child: Text(AppLocalizations.of(context)!.yes),
+                    child: Text(Localization.appLocalizations().yes),
                   ),
                 ],
               ),
@@ -192,7 +193,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                   const Icon(Icons.restore, size: 64.0),
                   const SizedBox(height: 16.0),
                   SelectableText(
-                    AppLocalizations.of(context)!.resetFrontmatterList,
+                    Localization.appLocalizations().resetFrontmatterList,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.w500),
                   ),
@@ -213,7 +214,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                 children: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: Text(AppLocalizations.of(context)!.cancel),
+                    child: Text(Localization.appLocalizations().cancel),
                   ),
                   TextButton(
                     onPressed: () {
@@ -221,7 +222,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                       setStateFunction();
                       Navigator.pop(context);
                     },
-                    child: Text(AppLocalizations.of(context)!.yes),
+                    child: Text(Localization.appLocalizations().yes),
                   ),
                 ],
               ),
@@ -247,7 +248,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                 Column(
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.editFrontmatterList,
+                      Localization.appLocalizations().editFrontmatterList,
                       style: const TextStyle(
                           fontSize: 24, fontWeight: FontWeight.w500),
                     ),
@@ -402,7 +403,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: Text(AppLocalizations.of(context)!.close),
+                      child: Text(Localization.appLocalizations().close),
                     ),
                   ],
                 ),
@@ -417,8 +418,8 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
 
   void addNewFrontMatterTypes({required Function setStateFunction}) {
     showEditDialog(
-      title: AppLocalizations.of(context)!.addNewFrontmatterToList,
-      okText: AppLocalizations.of(context)!.add,
+      title: Localization.appLocalizations().addNewFrontmatterToList,
+      okText: Localization.appLocalizations().add,
       checkAlreadyContains: true,
       onPressed: () {
         Map<String, HugoType> frontMatterAddList =
@@ -429,7 +430,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
 
         if (mounted) {
           showSnackbar(
-            text: AppLocalizations.of(context)!.addedFrontmatterToList(
+            text: Localization.appLocalizations().addedFrontmatterToList(
                 '"$name"', '"${type.name.substring(4)}"'),
             seconds: 4,
           );
@@ -502,7 +503,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(AppLocalizations.of(context)!.frontmatterName,
+                    Text(Localization.appLocalizations().frontmatterName,
                         style: textStyle),
                     ConstrainedBox(
                       constraints:
@@ -526,7 +527,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                           decoration: InputDecoration(
                             hintText: 'title',
                             errorText: empty
-                                ? AppLocalizations.of(context)!.cantBeEmpty
+                                ? Localization.appLocalizations().cantBeEmpty
                                 : alreadyContains
                                     ? AppLocalizations.of(context)!
                                         .error_FrontmatterAlreadyContains
@@ -543,7 +544,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(AppLocalizations.of(context)!.frontmatterType,
+                    Text(Localization.appLocalizations().frontmatterType,
                         style: textStyle),
                     DropdownButton(
                       value: type,
@@ -568,7 +569,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: Text(AppLocalizations.of(context)!.cancel),
+                      child: Text(Localization.appLocalizations().cancel),
                     ),
                     TextButton(
                       onPressed: empty || alreadyContains
@@ -595,8 +596,8 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
     var oldName = element.key;
     var oldType = element.value;
     showEditDialog(
-      title: AppLocalizations.of(context)!.editFrontmatter,
-      okText: AppLocalizations.of(context)!.save,
+      title: Localization.appLocalizations().editFrontmatter,
+      okText: Localization.appLocalizations().save,
       customName: oldName,
       customType: oldType,
       onPressed: () {
@@ -625,7 +626,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
 
         if (mounted) {
           showSnackbar(
-            text: AppLocalizations.of(context)!.editedFrontmatterToList(
+            text: Localization.appLocalizations().editedFrontmatterToList(
                 '"$oldName"',
                 '"$name"',
                 '"${oldType.name.substring(4)}"',
@@ -670,7 +671,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
             function: () => editFrontMatterList());
       },
       icon: const Icon(Icons.edit),
-      label: Text(AppLocalizations.of(context)!.editFrontmatterList),
+      label: Text(Localization.appLocalizations().editFrontmatterList),
     );
   }
 }

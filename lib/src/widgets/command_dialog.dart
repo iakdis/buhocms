@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../i18n/l10n.dart';
 
 class CommandDialog extends StatefulWidget {
   const CommandDialog({
@@ -52,11 +53,11 @@ class _CommandDialogState extends State<CommandDialog> {
           children: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text(AppLocalizations.of(context)!.cancel),
+              child: Text(Localization.appLocalizations().cancel),
             ),
             TextButton(
               onPressed: () => widget.yes?.call(),
-              child: Text(AppLocalizations.of(context)!.yes),
+              child: Text(Localization.appLocalizations().yes),
             ),
           ],
         ),

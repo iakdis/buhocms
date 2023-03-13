@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../i18n/l10n.dart';
 import '../../../utils/preferences.dart';
 
 class SortButton extends StatefulWidget {
@@ -20,21 +20,21 @@ class SortButton extends StatefulWidget {
 class _SortButtonState extends State<SortButton> {
   String getSortOrderName(String getSortMode) {
     if (getSortMode == SortMode.name.name) {
-      return AppLocalizations.of(context)!.sortByName;
+      return Localization.appLocalizations().sortByName;
     } else if (getSortMode == SortMode.nameReversed.name) {
-      return AppLocalizations.of(context)!.sortByNameReversed;
+      return Localization.appLocalizations().sortByNameReversed;
     } else if (getSortMode == SortMode.date.name) {
-      return AppLocalizations.of(context)!.sortByDate;
+      return Localization.appLocalizations().sortByDate;
     } else if (getSortMode == SortMode.dateReversed.name) {
-      return AppLocalizations.of(context)!.sortByDateReversed;
+      return Localization.appLocalizations().sortByDateReversed;
     } else if (getSortMode == SortMode.size.name) {
-      return AppLocalizations.of(context)!.sortBySize;
+      return Localization.appLocalizations().sortBySize;
     } else if (getSortMode == SortMode.sizeReversed.name) {
-      return AppLocalizations.of(context)!.sortBySizeReversed;
+      return Localization.appLocalizations().sortBySizeReversed;
     } else if (getSortMode == SortMode.type.name) {
-      return AppLocalizations.of(context)!.sortByType;
+      return Localization.appLocalizations().sortByType;
     } else if (getSortMode == SortMode.typeReversed.name) {
-      return AppLocalizations.of(context)!.sortByTypeReversed;
+      return Localization.appLocalizations().sortByTypeReversed;
     } else {
       return 'Unknown sort order';
     }

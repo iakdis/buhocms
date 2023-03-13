@@ -40,7 +40,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
               onTap: () => localeProvider.clearLocale(),
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
-                child: Text(AppLocalizations.of(context)!.systemLanguage),
+                child: Text(Localization.appLocalizations().systemLanguage),
               ),
             ),
           ),

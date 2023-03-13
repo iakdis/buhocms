@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
 import '../../../pages/editing_page.dart';
 import '../../../provider/editing/tabs_provider.dart';
@@ -41,7 +42,7 @@ class AddFile {
     print('Add Post at: $path');
 
     final snackbarText =
-        AppLocalizations.of(context)!.postCreated('"$name"', '"$path"');
+        Localization.appLocalizations().postCreated('"$name"', '"$path"');
     var postDirectory = '';
     var finalPathAndName = '';
 
@@ -144,7 +145,7 @@ class AddFile {
           return StatefulBuilder(builder: (context, setState) {
             return CommandDialog(
               title: SelectableText.rich(TextSpan(
-                  text: AppLocalizations.of(context)!.createNewPostIn,
+                  text: Localization.appLocalizations().createNewPostIn,
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.w500),
                   children: <TextSpan>[
@@ -157,7 +158,7 @@ class AddFile {
                   ])),
               icon: Icons.note_add,
               expansionIcon: Icons.terminal,
-              expansionTitle: AppLocalizations.of(context)!.terminal,
+              expansionTitle: Localization.appLocalizations().terminal,
               yes: empty
                   ? null
                   : () => _create(
@@ -166,7 +167,7 @@ class AddFile {
                       ),
               dialogChildren: [
                 CustomTextField(
-                  leading: Text(AppLocalizations.of(context)!.name,
+                  leading: Text(Localization.appLocalizations().name,
                       style: textStyle),
                   controller: nameController,
                   focusNode: nameFocusNode,
@@ -188,7 +189,7 @@ class AddFile {
                   suffixText: '             .md',
                   helperText: '"my-post"',
                   errorText: empty
-                      ? AppLocalizations.of(context)!.cantBeEmpty
+                      ? Localization.appLocalizations().cantBeEmpty
                       : fileAlreadyExists
                           ? AppLocalizations.of(context)!
                               .error_fileAlreadyExists('"$name"',
@@ -198,7 +199,7 @@ class AddFile {
               ],
               expansionChildren: [
                 CustomTextField(
-                  leading: Text(AppLocalizations.of(context)!.command),
+                  leading: Text(Localization.appLocalizations().command),
                   controller: nameController,
                   onChanged: (value) {
                     setState(() {
@@ -220,7 +221,7 @@ class AddFile {
                 ),
                 const SizedBox(height: 12),
                 CustomTextField(
-                  leading: Text(AppLocalizations.of(context)!.flags),
+                  leading: Text(Localization.appLocalizations().flags),
                   onChanged: (value) {
                     setState(() {
                       flags = value;
@@ -246,7 +247,7 @@ class AddFile {
 
   ContextMenuButtonConfig addFileContextMenu({required String savePath}) {
     return ContextMenuButtonConfig(
-      AppLocalizations.of(context)!.newPost,
+      Localization.appLocalizations().newPost,
       icon: const Icon(Icons.post_add, size: 20),
       onPressed: () {
         newFile(path: savePath, editingPageKey: editingPageKey);

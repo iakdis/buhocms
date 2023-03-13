@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../i18n/l10n.dart';
 import '../../logic/files.dart';
 import '../../pages/editing_page.dart';
 import '../../utils/globals.dart';
@@ -226,7 +227,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                         .addFolderContextMenu(
                             savePath: Preferences.getCurrentPath()),
                     ContextMenuButtonConfig(
-                      AppLocalizations.of(context)!.openInFileExplorer,
+                      Localization.appLocalizations().openInFileExplorer,
                       icon: const Icon(Icons.open_in_new, size: 20),
                       onPressed: () => openInFolder(
                         path: savePath,
@@ -250,7 +251,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                                 color:
                                     Theme.of(context).colorScheme.onSecondary),
                             CustomTooltip(
-                              message: AppLocalizations.of(context)!.sortBy,
+                              message: Localization.appLocalizations().sortBy,
                               child: SortButton(
                                   setStateCallback: setStateCallback,
                                   isExtended: isExtended),
@@ -287,7 +288,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                                 color:
                                     Theme.of(context).colorScheme.onSecondary),
                             CustomTooltip(
-                              message: AppLocalizations.of(context)!.newPost,
+                              message: Localization.appLocalizations().newPost,
                               child: CreateNewButton(
                                   mounted: mounted,
                                   editingPageKey: widget.editingPageKey,

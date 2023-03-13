@@ -2,8 +2,8 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../pages/editing_page.dart';
 import '../provider/navigation/file_navigation_provider.dart';
@@ -56,7 +56,7 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
 
     showSnackbar(
-      text: AppLocalizations.of(context)!.addedFrontmatter(
+      text: Localization.appLocalizations().addedFrontmatter(
           '"$hugoFrontmatter"', '"${type.name.substring(4)}"'),
       seconds: 4,
     );
@@ -87,7 +87,7 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
           searchFieldProps: TextFieldProps(
             autofocus: true,
             decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.search,
+              labelText: Localization.appLocalizations().search,
               border: const OutlineInputBorder(),
             ),
           ),
@@ -102,7 +102,7 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
         ),
         dropdownDecoratorProps: DropDownDecoratorProps(
           dropdownSearchDecoration: InputDecoration(
-            labelText: AppLocalizations.of(context)!.addFrontmatter,
+            labelText: Localization.appLocalizations().addFrontmatter,
             border: const OutlineInputBorder(),
           ),
         ),

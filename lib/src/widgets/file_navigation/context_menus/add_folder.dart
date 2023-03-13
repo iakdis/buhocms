@@ -5,6 +5,7 @@ import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
 import '../../../pages/editing_page.dart';
 import '../../../utils/preferences.dart';
@@ -56,7 +57,8 @@ class AddFolder {
                       const Icon(Icons.create_new_folder, size: 64.0),
                       const SizedBox(height: 16.0),
                       SelectableText.rich(TextSpan(
-                          text: AppLocalizations.of(context)!.createNewFolderIn,
+                          text:
+                              Localization.appLocalizations().createNewFolderIn,
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500),
                           children: <TextSpan>[
@@ -70,7 +72,7 @@ class AddFolder {
                   ),
                   const SizedBox(height: 32.0),
                   CustomTextField(
-                    leading: Text(AppLocalizations.of(context)!.name,
+                    leading: Text(Localization.appLocalizations().name,
                         style: textStyle),
                     controller: folderNameController,
                     focusNode: nameFocusNode,
@@ -91,7 +93,7 @@ class AddFolder {
                     },
                     helperText: '"posts"',
                     errorText: empty
-                        ? AppLocalizations.of(context)!.cantBeEmpty
+                        ? Localization.appLocalizations().cantBeEmpty
                         : folderAlreadyExists
                             ? AppLocalizations.of(context)!
                                 .error_folderAlreadyExists('"$folderName"',
@@ -104,7 +106,7 @@ class AddFolder {
                     children: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: Text(AppLocalizations.of(context)!.cancel),
+                        child: Text(Localization.appLocalizations().cancel),
                       ),
                       TextButton(
                         onPressed: empty || folderAlreadyExists
@@ -128,7 +130,7 @@ class AddFolder {
 
                                 refreshFiles(context: context);
                               },
-                        child: Text(AppLocalizations.of(context)!.yes),
+                        child: Text(Localization.appLocalizations().yes),
                       ),
                     ],
                   ),
@@ -151,7 +153,7 @@ class AddFolder {
 
   ContextMenuButtonConfig addFolderContextMenu({required String savePath}) {
     return ContextMenuButtonConfig(
-      AppLocalizations.of(context)!.newFolder,
+      Localization.appLocalizations().newFolder,
       icon: const Icon(Icons.create_new_folder_outlined, size: 20),
       onPressed: () {
         newFolder(path: savePath, editingPageKey: editingPageKey);

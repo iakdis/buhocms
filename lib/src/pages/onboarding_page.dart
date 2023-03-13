@@ -107,7 +107,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         const LanguageDropdown(),
         const SizedBox(height: 24.0),
         Text(
-          AppLocalizations.of(context)!.welcomeToBuhoCMS,
+          Localization.appLocalizations().welcomeToBuhoCMS,
           style: TextStyle(
             color: Colors.teal.shade800,
             fontSize: 24.0,
@@ -133,7 +133,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Text(
-            AppLocalizations.of(context)!.welcomeToBuhoCMS_Description,
+            Localization.appLocalizations().welcomeToBuhoCMS_Description,
             style: textStyle,
           ),
         ),
@@ -148,19 +148,19 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         ElevatedButton(
           onPressed: () =>
               createHugoSite(context: context, setState: () => setState(() {})),
-          child: Text(AppLocalizations.of(context)!.createSite),
+          child: Text(Localization.appLocalizations().createSite),
         ),
         const SizedBox(height: 24.0),
         ElevatedButton(
           onPressed: () =>
               openHugoSite(context: context, setState: () => setState(() {})),
-          child: Text(AppLocalizations.of(context)!.openSite),
+          child: Text(Localization.appLocalizations().openSite),
         ),
         const SizedBox(height: 48.0),
         Text(
           Preferences.getSitePath() == null ||
                   (Preferences.getSitePath()?.isEmpty ?? false)
-              ? AppLocalizations.of(context)!.hugoSiteSelected('N/A')
+              ? Localization.appLocalizations().hugoSiteSelected('N/A')
               : AppLocalizations.of(context)!
                   .hugoSiteSelected('\n"${Preferences.getSitePath()}"'),
           style: textStyle,
@@ -191,7 +191,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          AppLocalizations.of(context)!.themes,
+          Localization.appLocalizations().themes,
           style: TextStyle(
             color: Colors.teal.shade800,
             fontSize: 24.0,
@@ -208,7 +208,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Text(
-            AppLocalizations.of(context)!.themes_Description,
+            Localization.appLocalizations().themes_Description,
             style: textStyle,
           ),
         ),
@@ -224,13 +224,13 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         ElevatedButton(
           onPressed: () =>
               openHugoThemes(context: context, setState: () => setState(() {})),
-          child: Text(AppLocalizations.of(context)!.hugoThemes),
+          child: Text(Localization.appLocalizations().hugoThemes),
         ),
         const SizedBox(height: 24.0),
         Text(
           Preferences.getHugoTheme().isEmpty
-              ? AppLocalizations.of(context)!.hugoThemeSelected('N/A')
-              : AppLocalizations.of(context)!.hugoThemeSelected('"$theme"'),
+              ? Localization.appLocalizations().hugoThemeSelected('N/A')
+              : Localization.appLocalizations().hugoThemeSelected('"$theme"'),
           style: textStyle,
         ),
       ],
@@ -245,7 +245,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            AppLocalizations.of(context)!.allDone,
+            Localization.appLocalizations().allDone,
             style: TextStyle(
               color: Colors.teal.shade800,
               fontSize: 36.0,
@@ -262,7 +262,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 32.0),
             child: Text(
-              AppLocalizations.of(context)!.allDone_Description,
+              Localization.appLocalizations().allDone_Description,
               style: textStyle,
             ),
           ),
@@ -278,7 +278,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
                 child: Text(
                   Preferences.getSitePath() == null ||
                           (Preferences.getSitePath()?.isEmpty ?? false)
-                      ? AppLocalizations.of(context)!.sitePath('N/A')
+                      ? Localization.appLocalizations().sitePath('N/A')
                       : AppLocalizations.of(context)!
                           .sitePath(Preferences.getSitePath() ?? 'N/A'),
                   style: textStyle,
@@ -296,8 +296,8 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
               Flexible(
                 child: Text(
                   Preferences.getHugoTheme().isEmpty
-                      ? AppLocalizations.of(context)!.hugoTheme('N/A')
-                      : AppLocalizations.of(context)!.hugoTheme(
+                      ? Localization.appLocalizations().hugoTheme('N/A')
+                      : Localization.appLocalizations().hugoTheme(
                           Preferences.getHugoTheme()
                               .split(Platform.pathSeparator)
                               .last),
@@ -320,7 +320,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         minimumSize: const Size.fromHeight(88.0),
       ),
       child: Text(
-        AppLocalizations.of(context)!.getStarted,
+        Localization.appLocalizations().getStarted,
         style: const TextStyle(fontSize: 24.0),
       ),
       onPressed: () {
@@ -342,7 +342,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         children: [
           TextButton(
             onPressed: backEnabled() ? previousPage : null,
-            child: Text(AppLocalizations.of(context)!.back),
+            child: Text(Localization.appLocalizations().back),
           ),
           Center(
             child: SmoothPageIndicator(
@@ -356,7 +356,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
           ),
           TextButton(
             onPressed: nextEnabled() ? nextPage : null,
-            child: Text(AppLocalizations.of(context)!.next),
+            child: Text(Localization.appLocalizations().next),
           ),
         ],
       ),

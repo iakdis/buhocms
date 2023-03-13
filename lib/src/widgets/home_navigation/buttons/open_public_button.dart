@@ -1,6 +1,7 @@
 import 'package:buhocms/src/logic/buho_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../i18n/l10n.dart';
 
 class OpenPublicButton extends StatelessWidget {
   const OpenPublicButton({
@@ -37,7 +38,7 @@ class OpenPublicButton extends StatelessWidget {
                         SizedBox(
                           width: constraints.maxWidth - 80,
                           child: Text(
-                            AppLocalizations.of(context)!.openPublicFolder,
+                            Localization.appLocalizations().openPublicFolder,
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../i18n/l10n.dart';
 import '../../../logic/buho_functions.dart';
 
 class HugoServerButton extends StatelessWidget {
@@ -47,8 +48,10 @@ class HugoServerButton extends StatelessWidget {
                           width: constraints.maxWidth - 80,
                           child: Text(
                             shellProvider.shellActive == false
-                                ? AppLocalizations.of(context)!.startHugoServer
-                                : AppLocalizations.of(context)!.stopHugoServer,
+                                ? Localization.appLocalizations()
+                                    .startHugoServer
+                                : Localization.appLocalizations()
+                                    .stopHugoServer,
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),

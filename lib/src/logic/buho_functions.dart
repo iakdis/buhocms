@@ -7,8 +7,8 @@ import 'package:buhocms/src/provider/editing/unsaved_text_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../i18n/l10n.dart';
 import '../pages/editing_page.dart';
 import '../pages/create_hugo_site.dart';
 import '../pages/open_hugo_site.dart';
@@ -43,7 +43,7 @@ void setGUIMode({
 void refreshFiles({required BuildContext context}) {
   Provider.of<NavigationProvider>(context, listen: false).notifyAllListeners();
   showSnackbar(
-    text: AppLocalizations.of(context)!.refreshedFileList,
+    text: Localization.appLocalizations().refreshedFileList,
     seconds: 2,
   );
 }
@@ -92,13 +92,13 @@ void save({
           true ||
       !checkUnsaved) {
     showSnackbar(
-      text: AppLocalizations.of(context)!.fileSavedSuccessfully,
+      text: Localization.appLocalizations().fileSavedSuccessfully,
       seconds: 2,
     );
     editingPageKey.currentState?.saveFileAndFrontmatter();
   } else {
     showSnackbar(
-      text: AppLocalizations.of(context)!.nothingToSave,
+      text: Localization.appLocalizations().nothingToSave,
       seconds: 1,
     );
   }
@@ -118,30 +118,31 @@ void revert({
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.revertChanges),
-        content: Text(AppLocalizations.of(context)!.revertChanges_Description),
+        title: Text(Localization.appLocalizations().revertChanges),
+        content:
+            Text(Localization.appLocalizations().revertChanges_Description),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(AppLocalizations.of(context)!.cancel),
+            child: Text(Localization.appLocalizations().cancel),
           ),
           TextButton(
             onPressed: () async {
               showSnackbar(
-                text: AppLocalizations.of(context)!.fileRevertedSuccessfully,
+                text: Localization.appLocalizations().fileRevertedSuccessfully,
                 seconds: 2,
               );
               await editingPageKey.currentState?.revertFileAndFrontmatter();
               if (mounted) Navigator.pop(context);
             },
-            child: Text(AppLocalizations.of(context)!.yes),
+            child: Text(Localization.appLocalizations().yes),
           ),
         ],
       ),
     );
   } else {
     showSnackbar(
-      text: AppLocalizations.of(context)!.nothingToRevert,
+      text: Localization.appLocalizations().nothingToRevert,
       seconds: 1,
     );
   }
@@ -189,8 +190,8 @@ void startHugoServer({required BuildContext context}) {
       command: commandToRun,
       snackbarFunction: () => showSnackbar(
         text: shellProvider.shellActive == true
-            ? AppLocalizations.of(context)!.alreadyStartedAHugoServer
-            : AppLocalizations.of(context)!.startedHugoServer,
+            ? Localization.appLocalizations().alreadyStartedAHugoServer
+            : Localization.appLocalizations().startedHugoServer,
         seconds: 4,
       ),
     );
@@ -204,24 +205,24 @@ void startHugoServer({required BuildContext context}) {
       return StatefulBuilder(builder: (context, setState) {
         return CommandDialog(
           title: Text(
-            AppLocalizations.of(context)!.startHugoServer,
+            Localization.appLocalizations().startHugoServer,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           ),
           icon: Icons.miscellaneous_services,
           expansionIcon: Icons.terminal,
-          expansionTitle: AppLocalizations.of(context)!.terminal,
+          expansionTitle: Localization.appLocalizations().terminal,
           yes: () => start(),
           dialogChildren: const [],
           expansionChildren: [
             CustomTextField(
               readOnly: true,
               controller: hugoServerController,
-              leading: Text(AppLocalizations.of(context)!.command),
+              leading: Text(Localization.appLocalizations().command),
               initialText: 'hugo server',
             ),
             const SizedBox(height: 12),
             CustomTextField(
-              leading: Text(AppLocalizations.of(context)!.flags),
+              leading: Text(Localization.appLocalizations().flags),
               onChanged: (value) {
                 setState(() {
                   flags = value;
@@ -242,8 +243,8 @@ void stopHugoServer({required BuildContext context, bool snackbar = true}) {
   if (snackbar) {
     showSnackbar(
       text: shellProvider.shellActive == true
-          ? AppLocalizations.of(context)!.stoppedHugoServer
-          : AppLocalizations.of(context)!.noHugoServerRunning,
+          ? Localization.appLocalizations().stoppedHugoServer
+          : Localization.appLocalizations().noHugoServerRunning,
       seconds: 4,
     );
   }
@@ -269,7 +270,7 @@ void buildHugoSite({required BuildContext context}) async {
       workingDirectory: Preferences.getSitePath(),
       command: commandToRun,
       successFunction: () => showSnackbar(
-        text: AppLocalizations.of(context)!.builtHugoSite,
+        text: Localization.appLocalizations().builtHugoSite,
         seconds: 4,
       ),
     );
@@ -283,24 +284,24 @@ void buildHugoSite({required BuildContext context}) async {
       return StatefulBuilder(builder: (context, setState) {
         return CommandDialog(
           title: Text(
-            AppLocalizations.of(context)!.buildHugoSite,
+            Localization.appLocalizations().buildHugoSite,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           ),
           icon: Icons.web,
           expansionIcon: Icons.terminal,
-          expansionTitle: AppLocalizations.of(context)!.terminal,
+          expansionTitle: Localization.appLocalizations().terminal,
           yes: () => build(),
           dialogChildren: const [],
           expansionChildren: [
             CustomTextField(
               readOnly: true,
               controller: hugoController,
-              leading: Text(AppLocalizations.of(context)!.command),
+              leading: Text(Localization.appLocalizations().command),
               initialText: 'hugo',
             ),
             const SizedBox(height: 12),
             CustomTextField(
-              leading: Text(AppLocalizations.of(context)!.flags),
+              leading: Text(Localization.appLocalizations().flags),
               onChanged: (value) {
                 setState(() {
                   flags = value;
@@ -343,9 +344,9 @@ void exit({
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(AppLocalizations.of(context)!.quitWithUnsaved),
+          title: Text(Localization.appLocalizations().quitWithUnsaved),
           content:
-              Text(AppLocalizations.of(context)!.quitWithUnsaved_Description),
+              Text(Localization.appLocalizations().quitWithUnsaved_Description),
           actionsOverflowButtonSpacing: 8.0,
           actions: [
             ElevatedButton(
@@ -353,7 +354,7 @@ void exit({
                   Navigator.of(context).pop();
                   setClosingWindow?.call(false);
                 },
-                child: Text(AppLocalizations.of(context)!.cancel)),
+                child: Text(Localization.appLocalizations().cancel)),
             ElevatedButton(
               onPressed: () async {
                 await editingPageKey.currentState?.revertFileAndFrontmatter();
@@ -361,7 +362,7 @@ void exit({
 
                 close();
               },
-              child: Text(AppLocalizations.of(context)!.revertAndQuit),
+              child: Text(Localization.appLocalizations().revertAndQuit),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -370,7 +371,7 @@ void exit({
 
                 close();
               },
-              child: Text(AppLocalizations.of(context)!.saveAndQuit),
+              child: Text(Localization.appLocalizations().saveAndQuit),
             ),
           ],
         );
@@ -401,7 +402,7 @@ void about({required BuildContext context}) {
   showAboutDialog(
     context: context,
     applicationName: 'BuhoCMS',
-    applicationVersion: AppLocalizations.of(context)!.version(
+    applicationVersion: Localization.appLocalizations().version(
       '0.3.0 Alpha',
     ), //TODO update version number
     applicationIcon: const Image(
@@ -413,7 +414,7 @@ void about({required BuildContext context}) {
     children: [
       SizedBox(
         width: 500,
-        child: SelectableText(AppLocalizations.of(context)!.license),
+        child: SelectableText(Localization.appLocalizations().license),
       ),
     ],
   );

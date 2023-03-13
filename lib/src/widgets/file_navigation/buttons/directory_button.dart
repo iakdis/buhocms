@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
 import '../../../pages/editing_page.dart';
 import '../../../provider/navigation/file_navigation_provider.dart';
@@ -91,7 +92,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
       if (allFiles[i].path == newPath) {
         if (mounted) {
           showSnackbar(
-            text: AppLocalizations.of(context)!.error_RenameDirectory(
+            text: Localization.appLocalizations().error_RenameDirectory(
                 '"${directory.path.split(Platform.pathSeparator).last}"',
                 '"${newPath.split(Platform.pathSeparator).last}"'),
             seconds: 4,
@@ -108,7 +109,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
 
     if (mounted) {
       showSnackbar(
-        text: AppLocalizations.of(context)!.renamedDirectory(
+        text: Localization.appLocalizations().renamedDirectory(
             '"${directory.path.split(Platform.pathSeparator).last}"',
             '"${newPath.split(Platform.pathSeparator).last}"'),
         seconds: 4,
@@ -140,12 +141,12 @@ class _DirectoryButtonState extends State<DirectoryButton> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(AppLocalizations.of(context)!.deleteFolder),
+          title: Text(Localization.appLocalizations().deleteFolder),
           content: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 400),
             child: SelectableText.rich(
               TextSpan(
-                text: AppLocalizations.of(context)!.deleteFolder_Description,
+                text: Localization.appLocalizations().deleteFolder_Description,
                 children: <TextSpan>[
                   TextSpan(
                     text: widget.path,
@@ -160,7 +161,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text(AppLocalizations.of(context)!.cancel),
+              child: Text(Localization.appLocalizations().cancel),
             ),
             TextButton(
               onPressed: () async {
@@ -186,7 +187,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
                   navigationProvider.setNavigationIndex(0);
                 }
               },
-              child: Text(AppLocalizations.of(context)!.yes),
+              child: Text(Localization.appLocalizations().yes),
             ),
           ],
         ),

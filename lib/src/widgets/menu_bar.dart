@@ -2,9 +2,9 @@ import 'package:buhocms/src/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../pages/editing_page.dart';
 import '../provider/navigation/navigation_provider.dart';
@@ -133,7 +133,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
       await windowManager.setFullScreen(true);
       if (mounted) {
         showSnackbar(
-          text: AppLocalizations.of(context)!.fullScreenInfo,
+          text: Localization.appLocalizations().fullScreenInfo,
           seconds: 3,
         );
       }
@@ -164,13 +164,13 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
 
     final List<MenuEntry> result = <MenuEntry>[
       MenuButton(
-        text: barButtonText(AppLocalizations.of(context)!.file),
+        text: barButtonText(Localization.appLocalizations().file),
         menuChildren: [
           MenuButton(
             onPressed: () =>
                 save(context: context, editingPageKey: widget.editingPageKey),
             icon: const Icon(Icons.save),
-            text: menuButtonText(AppLocalizations.of(context)!.save),
+            text: menuButtonText(Localization.appLocalizations().save),
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyS, control: true),
             shortcutText: 'Ctrl+S',
@@ -181,7 +181,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
                 editingPageKey: widget.editingPageKey,
                 mounted: mounted),
             icon: const Icon(Icons.undo),
-            text: menuButtonText(AppLocalizations.of(context)!.revertChanges),
+            text: menuButtonText(Localization.appLocalizations().revertChanges),
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyU, control: true),
             shortcutText: 'Ctrl+U',
@@ -194,7 +194,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
               editingPageKey: widget.editingPageKey,
             ),
             icon: const Icon(Icons.add),
-            text: menuButtonText(AppLocalizations.of(context)!.newPost),
+            text: menuButtonText(Localization.appLocalizations().newPost),
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyN, control: true),
             shortcutText: 'Ctrl+N',
@@ -210,13 +210,13 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
               editingPageKey: widget.editingPageKey,
             ),
             icon: const Icon(Icons.create_new_folder_outlined),
-            text: menuButtonText(AppLocalizations.of(context)!.newFolder),
+            text: menuButtonText(Localization.appLocalizations().newFolder),
           ),
           const MenuDivider(),
           MenuButton(
             onPressed: () => openHugoSite(context: context),
             icon: const Icon(Icons.folder_open),
-            text: menuButtonText(AppLocalizations.of(context)!.openSite),
+            text: menuButtonText(Localization.appLocalizations().openSite),
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyO, control: true),
             shortcutText: 'Ctrl+O',
@@ -224,7 +224,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           MenuButton(
             onPressed: () => createHugoSite(context: context),
             icon: const Icon(Icons.create_new_folder),
-            text: menuButtonText(AppLocalizations.of(context)!.createSite),
+            text: menuButtonText(Localization.appLocalizations().createSite),
             shortcut: const SingleActivator(LogicalKeyboardKey.keyN,
                 shift: true, control: true),
             shortcutText: 'Ctrl+Shift+N',
@@ -233,24 +233,26 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           MenuButton(
             onPressed: () => startHugoServer(context: context),
             icon: const Icon(Icons.miscellaneous_services_rounded),
-            text: menuButtonText(AppLocalizations.of(context)!.startHugoServer),
+            text:
+                menuButtonText(Localization.appLocalizations().startHugoServer),
           ),
           MenuButton(
             onPressed: () => stopHugoServer(context: context),
             icon: const Icon(Icons.stop_circle_outlined),
-            text: menuButtonText(AppLocalizations.of(context)!.stopHugoServer),
+            text:
+                menuButtonText(Localization.appLocalizations().stopHugoServer),
           ),
           const MenuDivider(),
           MenuButton(
             onPressed: () => buildHugoSite(context: context),
             icon: const Icon(Icons.web),
-            text: menuButtonText(AppLocalizations.of(context)!.buildHugoSite),
+            text: menuButtonText(Localization.appLocalizations().buildHugoSite),
           ),
           MenuButton(
             onPressed: () => openHugoPublicFolder(context: context),
             icon: const Icon(Icons.folder_open),
-            text:
-                menuButtonText(AppLocalizations.of(context)!.openPublicFolder),
+            text: menuButtonText(
+                Localization.appLocalizations().openPublicFolder),
           ),
           const MenuDivider(),
           MenuButton(
@@ -262,18 +264,18 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyQ, control: true),
             shortcutText: 'Ctrl+Q',
-            text: menuButtonText(AppLocalizations.of(context)!.exit),
+            text: menuButtonText(Localization.appLocalizations().exit),
             icon: const Icon(Icons.exit_to_app),
           ),
         ],
       ),
       MenuButton(
-        text: barButtonText(AppLocalizations.of(context)!.edit),
+        text: barButtonText(Localization.appLocalizations().edit),
         menuChildren: [
           MenuButton(
             onPressed: () => refreshFiles(context: context),
             icon: const Icon(Icons.refresh),
-            text: menuButtonText(AppLocalizations.of(context)!.refreshFiles),
+            text: menuButtonText(Localization.appLocalizations().refreshFiles),
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyR, control: true),
             shortcutText: 'Ctrl+R',
@@ -283,7 +285,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
                 path: Preferences.getCurrentPath(), keepPathTrailing: true),
             icon: const Icon(Icons.open_in_new),
             text: menuButtonText(
-                AppLocalizations.of(context)!.openCurrentFileInExplorer),
+                Localization.appLocalizations().openCurrentFileInExplorer),
           ),
           const MenuDivider(),
           MenuButton(
@@ -293,7 +295,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
               isGUIMode: true,
             ),
             icon: const Icon(Icons.table_chart),
-            text: menuButtonText(AppLocalizations.of(context)!.guiMode),
+            text: menuButtonText(Localization.appLocalizations().guiMode),
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyG, control: true),
             shortcutText: 'Ctrl+G',
@@ -305,7 +307,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
               isGUIMode: false,
             ),
             icon: const Icon(Icons.text_snippet_outlined),
-            text: menuButtonText(AppLocalizations.of(context)!.textMode),
+            text: menuButtonText(Localization.appLocalizations().textMode),
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyT, control: true),
             shortcutText: 'Ctrl+T',
@@ -314,37 +316,38 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           MenuButton(
             onPressed: () => fullScreen(),
             icon: const Icon(Icons.fullscreen),
-            text: menuButtonText(AppLocalizations.of(context)!.fullScreen),
+            text: menuButtonText(Localization.appLocalizations().fullScreen),
             shortcut: const SingleActivator(LogicalKeyboardKey.f11),
             shortcutText: 'F11',
           ),
           MenuButton(
             onPressed: () async => await windowManager.setFullScreen(false),
             icon: const Icon(Icons.fullscreen_exit),
-            text: menuButtonText(AppLocalizations.of(context)!.exitFullScreen),
+            text:
+                menuButtonText(Localization.appLocalizations().exitFullScreen),
             shortcut: const SingleActivator(LogicalKeyboardKey.escape),
             shortcutText: 'ESC',
           ),
         ],
       ),
       MenuButton(
-        text: barButtonText(AppLocalizations.of(context)!.help),
+        text: barButtonText(Localization.appLocalizations().help),
         menuChildren: [
           MenuButton(
             onPressed: () => openHomepage(),
             icon: const Icon(Icons.open_in_new),
-            text: menuButtonText(AppLocalizations.of(context)!.openHomepage),
+            text: menuButtonText(Localization.appLocalizations().openHomepage),
           ),
           MenuButton(
             onPressed: () => reportIssue(),
             icon: const Icon(Icons.bug_report),
-            text: menuButtonText(AppLocalizations.of(context)!.reportIssue),
+            text: menuButtonText(Localization.appLocalizations().reportIssue),
           ),
           const MenuDivider(),
           MenuButton(
             onPressed: () => about(context: context),
             icon: const Icon(Icons.info),
-            text: menuButtonText(AppLocalizations.of(context)!.about),
+            text: menuButtonText(Localization.appLocalizations().about),
           ),
         ],
       ),

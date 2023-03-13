@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../provider/navigation/navigation_provider.dart';
 import '../utils/preferences.dart';
@@ -84,7 +85,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
         hugoInstalled = false;
         if (mounted) {
           hugoInstalledText =
-              AppLocalizations.of(context)!.executableNotFound('Hugo');
+              Localization.appLocalizations().executableNotFound('Hugo');
         }
         setState(() {});
       },
@@ -119,7 +120,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.createSite),
+        title: Text(Localization.appLocalizations().createSite),
       ),
       body: Center(
         child: Stepper(
@@ -198,8 +199,8 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                   return StatefulBuilder(builder: (context, setState) {
                     return CommandDialog(
                       title: SelectableText.rich(TextSpan(
-                          text:
-                              AppLocalizations.of(context)!.createHugoSiteNamed,
+                          text: Localization.appLocalizations()
+                              .createHugoSiteNamed,
                           style: const TextStyle(fontSize: 20),
                           children: <TextSpan>[
                             TextSpan(
@@ -208,8 +209,8 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                                   const TextStyle(fontWeight: FontWeight.w500),
                             ),
                             TextSpan(
-                                text:
-                                    AppLocalizations.of(context)!.insideFolder),
+                                text: Localization.appLocalizations()
+                                    .insideFolder),
                             TextSpan(
                               text: sitePath,
                               style:
@@ -218,12 +219,13 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                           ])),
                       icon: Icons.create_new_folder,
                       expansionIcon: Icons.terminal,
-                      expansionTitle: AppLocalizations.of(context)!.terminal,
+                      expansionTitle: Localization.appLocalizations().terminal,
                       yes: () => create(),
                       dialogChildren: const [],
                       expansionChildren: [
                         CustomTextField(
-                          leading: Text(AppLocalizations.of(context)!.command),
+                          leading:
+                              Text(Localization.appLocalizations().command),
                           controller: nameController,
                           onChanged: (value) => onChangedText(
                             setState: () => setState(() {}),
@@ -232,7 +234,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                           prefixText: 'hugo new site ',
                           helperText: '"hugo new site my-website"',
                           errorText: siteNameError
-                              ? AppLocalizations.of(context)!.cantBeEmpty
+                              ? Localization.appLocalizations().cantBeEmpty
                               : directoryAlreadyExists
                                   ? AppLocalizations.of(context)!
                                       .error_DirectoryAlreadyExists('"$path"')
@@ -240,7 +242,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                         ),
                         const SizedBox(height: 12),
                         CustomTextField(
-                          leading: Text(AppLocalizations.of(context)!.flags),
+                          leading: Text(Localization.appLocalizations().flags),
                           onChanged: (value) {
                             setState(() => flags = value);
                           },
@@ -275,14 +277,14 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                   ElevatedButton(
                     onPressed: canContinue ? details.onStepContinue : null,
                     child: Text(details.stepIndex < 3
-                        ? AppLocalizations.of(context)!.continue2
-                        : AppLocalizations.of(context)!.create.toUpperCase()),
+                        ? Localization.appLocalizations().continue2
+                        : Localization.appLocalizations().create.toUpperCase()),
                   ),
                   const SizedBox(width: 8),
                   TextButton(
                     onPressed:
                         details.stepIndex > 0 ? details.onStepCancel : null,
-                    child: Text(AppLocalizations.of(context)!.back),
+                    child: Text(Localization.appLocalizations().back),
                   ),
                 ],
               ),
@@ -291,7 +293,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
           steps: [
             Step(
               isActive: currentStep >= 0,
-              title: Text(AppLocalizations.of(context)!.checkHugoInstalled),
+              title: Text(Localization.appLocalizations().checkHugoInstalled),
               content: Column(
                 children: [
                   Icon(
@@ -306,8 +308,8 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                   const SizedBox(height: 32),
                   ElevatedButton(
                     onPressed: () => checkHugoExecutableInstalled(),
-                    child:
-                        Text(AppLocalizations.of(context)!.checkHugoInstalled),
+                    child: Text(
+                        Localization.appLocalizations().checkHugoInstalled),
                   ),
                   const SizedBox(height: 16),
                   Text(hugoInstalledText),
@@ -316,12 +318,12 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
             ),
             Step(
               isActive: currentStep >= 1,
-              title: Text(AppLocalizations.of(context)!.createLocation),
+              title: Text(Localization.appLocalizations().createLocation),
               content: Column(
                 children: [
                   ElevatedButton(
                       onPressed: savePath,
-                      child: Text(AppLocalizations.of(context)!.choosePath)),
+                      child: Text(Localization.appLocalizations().choosePath)),
                   const SizedBox(height: 24.0),
                   Text(AppLocalizations.of(context)!
                       .hugoSiteWillBeCreatedInFolder),
@@ -346,11 +348,11 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                       style: TextStyle(color: Colors.grey[600], fontSize: 17.0),
                       decoration: InputDecoration(
                         errorText: sitePathError
-                            ? AppLocalizations.of(context)!.cantBeEmpty
+                            ? Localization.appLocalizations().cantBeEmpty
                             : null,
                         errorMaxLines: 5,
                         border: const OutlineInputBorder(),
-                        labelText: AppLocalizations.of(context)!.savePath,
+                        labelText: Localization.appLocalizations().savePath,
                         isDense: true,
                         hintText: Platform.isWindows
                             ? 'C:\\Documents\\HugoWebsites'
@@ -369,7 +371,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
             ),
             Step(
               isActive: currentStep >= 2,
-              title: Text(AppLocalizations.of(context)!.siteName),
+              title: Text(Localization.appLocalizations().siteName),
               content: Column(
                 children: [
                   const SizedBox(height: 8.0),
@@ -384,7 +386,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                       style: TextStyle(color: Colors.grey[600], fontSize: 17.0),
                       decoration: InputDecoration(
                         errorText: siteNameError
-                            ? AppLocalizations.of(context)!.cantBeEmpty
+                            ? Localization.appLocalizations().cantBeEmpty
                             : directoryAlreadyExists
                                 ? AppLocalizations.of(context)!
                                     .error_DirectoryAlreadyExists(
@@ -392,7 +394,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                                 : null,
                         errorMaxLines: 5,
                         border: const OutlineInputBorder(),
-                        labelText: AppLocalizations.of(context)!.siteName,
+                        labelText: Localization.appLocalizations().siteName,
                         isDense: true,
                         hintText: 'my-website',
                         hintStyle: TextStyle(

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../i18n/l10n.dart';
 import '../../../pages/editing_page.dart';
 import '../../../utils/preferences.dart';
 import '../../../utils/unsaved_check.dart';
@@ -73,7 +74,7 @@ class ParentFolderButton extends StatelessWidget {
           onTap: () {
             if (savePathSplit.contains('content')) {
               showSnackbar(
-                text: AppLocalizations.of(context)!.alreadyAtHighestLevel,
+                text: Localization.appLocalizations().alreadyAtHighestLevel,
                 seconds: 2,
               );
               return;

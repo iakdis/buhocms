@@ -4,6 +4,7 @@ import 'package:buhocms/src/provider/navigation/file_navigation_provider.dart';
 import 'package:buhocms/src/ssg/hugo.dart';
 import 'package:buhocms/src/utils/globals.dart';
 import 'package:buhocms/src/widgets/editing_page/tabs.dart';
+import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../ssg/add_frontmatter.dart';
 import '../widgets/markdown/markdown_viewer.dart';
@@ -228,13 +229,13 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(AppLocalizations.of(context)!.unsavedChanges),
-            content:
-                Text(AppLocalizations.of(context)!.unsavedChanges_Description),
+            title: Text(Localization.appLocalizations().unsavedChanges),
+            content: Text(
+                Localization.appLocalizations().unsavedChanges_Description),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(AppLocalizations.of(context)!.cancel),
+                child: Text(Localization.appLocalizations().cancel),
               ),
               TextButton(
                 onPressed: () async {
@@ -244,7 +245,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                   }
                   function();
                 },
-                child: Text(AppLocalizations.of(context)!.revert),
+                child: Text(Localization.appLocalizations().revert),
               ),
               TextButton(
                 onPressed: () async {
@@ -254,7 +255,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                   }
                   function();
                 },
-                child: Text(AppLocalizations.of(context)!.save),
+                child: Text(Localization.appLocalizations().save),
               ),
             ],
           ),
@@ -338,8 +339,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                 function: () => setState(() => setVisible()));
           },
           label: Text(visible
-              ? AppLocalizations.of(context)!.hide
-              : AppLocalizations.of(context)!.show),
+              ? Localization.appLocalizations().hide
+              : Localization.appLocalizations().show),
           icon: Icon(
             visible ? Icons.expand_less : Icons.expand_more,
           ),
@@ -350,7 +351,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
 
   Widget draggableFrontmatterButton() {
     return CustomTooltip(
-      message: AppLocalizations.of(context)!.draggableMode_Description,
+      message: Localization.appLocalizations().draggableMode_Description,
       child: ElevatedButton.icon(
         onPressed: () {
           checkUnsavedBeforeFunction(
@@ -361,8 +362,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         icon: Icon(
             draggableFrontMatter ? Icons.lock_outline : Icons.drag_indicator),
         label: Text(draggableFrontMatter
-            ? AppLocalizations.of(context)!.draggableModeLock
-            : AppLocalizations.of(context)!.draggableModeOn),
+            ? Localization.appLocalizations().draggableModeLock
+            : Localization.appLocalizations().draggableModeOn),
       ),
     );
   }
@@ -370,8 +371,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
   Widget textFrontmatterButton() {
     return CustomTooltip(
       message: editingProvider.isFrontmatterGUIMode
-          ? AppLocalizations.of(context)!.textMode
-          : AppLocalizations.of(context)!.guiMode,
+          ? Localization.appLocalizations().textMode
+          : Localization.appLocalizations().guiMode,
       child: ElevatedButton.icon(
         onPressed: () {
           checkUnsavedBeforeFunction(
@@ -384,8 +385,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
             ? Icons.text_snippet_outlined
             : Icons.table_chart),
         label: Text(editingProvider.isFrontmatterGUIMode
-            ? AppLocalizations.of(context)!.textMode
-            : AppLocalizations.of(context)!.guiMode),
+            ? Localization.appLocalizations().textMode
+            : Localization.appLocalizations().guiMode),
       ),
     );
   }
@@ -456,8 +457,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
           minLines: 5,
           maxLines: null,
           decoration: InputDecoration(
-            hintText: AppLocalizations.of(context)!.frontmatter,
-            labelText: AppLocalizations.of(context)!.frontmatter,
+            hintText: Localization.appLocalizations().frontmatter,
+            labelText: Localization.appLocalizations().frontmatter,
             alignLabelWithHint: true,
             border: const OutlineInputBorder(),
           ),
@@ -471,7 +472,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         showHideArea(
-          title: AppLocalizations.of(context)!.content,
+          title: Localization.appLocalizations().content,
           setVisible: () => editTextVisible = !editTextVisible,
           visible: editTextVisible,
         ),
@@ -481,7 +482,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         const Divider(),
         const SizedBox(height: 16),
         showHideArea(
-          title: AppLocalizations.of(context)!.frontmatter,
+          title: Localization.appLocalizations().frontmatter,
           setVisible: () => frontmatterVisible = !frontmatterVisible,
           visible: frontmatterVisible,
         ),
@@ -552,23 +553,24 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                   backgroundColor: Theme.of(context).primaryColorLight,
                   iconColor: Theme.of(context).colorScheme.onPrimary,
                   dropdownTextColor: Theme.of(context).colorScheme.primary,
-                  headingTooltip: AppLocalizations.of(context)!.tooltipHeading,
-                  boldTooltip: AppLocalizations.of(context)!.tooltipBold,
-                  italicTooltip: AppLocalizations.of(context)!.tooltipItalic,
+                  headingTooltip:
+                      Localization.appLocalizations().tooltipHeading,
+                  boldTooltip: Localization.appLocalizations().tooltipBold,
+                  italicTooltip: Localization.appLocalizations().tooltipItalic,
                   strikethroughTooltip:
-                      AppLocalizations.of(context)!.tooltipStrikethrough,
-                  linkTooltip: AppLocalizations.of(context)!.tooltipLink,
-                  imageTooltip: AppLocalizations.of(context)!.tooltipImage,
-                  codeTooltip: AppLocalizations.of(context)!.tooltipCode,
+                      Localization.appLocalizations().tooltipStrikethrough,
+                  linkTooltip: Localization.appLocalizations().tooltipLink,
+                  imageTooltip: Localization.appLocalizations().tooltipImage,
+                  codeTooltip: Localization.appLocalizations().tooltipCode,
                   bulletedListTooltip:
-                      AppLocalizations.of(context)!.tooltipBulletedList,
+                      Localization.appLocalizations().tooltipBulletedList,
                   numberedListTooltip:
-                      AppLocalizations.of(context)!.tooltipNumberedList,
+                      Localization.appLocalizations().tooltipNumberedList,
                   checkboxTooltip:
-                      AppLocalizations.of(context)!.tooltipCheckbox,
-                  quoteTooltip: AppLocalizations.of(context)!.tooltipQuote,
+                      Localization.appLocalizations().tooltipCheckbox,
+                  quoteTooltip: Localization.appLocalizations().tooltipQuote,
                   horizontalRuleTooltip:
-                      AppLocalizations.of(context)!.tooltipHorizontalRule,
+                      Localization.appLocalizations().tooltipHorizontalRule,
                 );
               },
             ),
@@ -617,8 +619,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                 textAlignVertical: TextAlignVertical.top,
                 style: const TextStyle(fontSize: 18),
                 decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.content_Description,
-                  labelText: AppLocalizations.of(context)!.content,
+                  hintText: Localization.appLocalizations().content_Description,
+                  labelText: Localization.appLocalizations().content,
                   alignLabelWithHint: true,
                   border: const OutlineInputBorder(),
                 ),
@@ -715,7 +717,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
               Row(
                 children: [
                   const SizedBox(width: 16),
-                  Text(AppLocalizations.of(context)!.editingPage),
+                  Text(Localization.appLocalizations().editingPage),
                   const SizedBox(width: 8),
                 ],
               ),
@@ -755,7 +757,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                         mounted: mounted,
                       );
                     },
-                    tooltip: '${AppLocalizations.of(context)!.revert} [Ctrl+U]',
+                    tooltip:
+                        '${Localization.appLocalizations().revert} [Ctrl+U]',
                     child: const Icon(Icons.restore),
                   ),
                   const SizedBox(width: 8),
@@ -764,7 +767,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                     onPressed: () => save(
                         context: context,
                         editingPageKey: widget.editingPageKey),
-                    tooltip: '${AppLocalizations.of(context)!.save} [Ctrl+S]',
+                    tooltip: '${Localization.appLocalizations().save} [Ctrl+S]',
                     child: const Icon(Icons.check),
                   ),
                 ],
@@ -853,7 +856,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                     if (fileNavigationProvider.fileNavigationIndex == -1) {
                       return Center(
                         child: SelectableText(
-                          AppLocalizations.of(context)!.noFileSelected,
+                          Localization.appLocalizations().noFileSelected,
                           style: TextStyle(
                             fontSize: 36.0,
                             fontWeight: FontWeight.bold,
