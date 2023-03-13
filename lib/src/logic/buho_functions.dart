@@ -385,7 +385,7 @@ void exit({
 }
 
 void openHomepage() async {
-  final url = Uri(scheme: 'https', path: 'github.com/iakmds/buhocms');
+  final url = Uri(scheme: 'https', path: 'buhocms.org');
   if (await canLaunchUrl(url) || Platform.isLinux) {
     await launchUrl(url);
   }
