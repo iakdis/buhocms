@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../utils/preferences.dart';
 
-// The width size of the scrolling button.
-const double _kWidthOfScrollItem = 40;
-
 class ThemeSelector extends StatefulWidget {
   const ThemeSelector({
     super.key,
@@ -19,13 +16,12 @@ class ThemeSelector extends StatefulWidget {
 }
 
 class _ThemeSelectorState extends State<ThemeSelector> {
-  late ScrollController scrollController;
-  late int schemeIndex;
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    schemeIndex = Preferences.getColorSchemeIndex();
+    final schemeIndex = Preferences.getColorSchemeIndex();
     if (schemeIndex != 27 &&
         schemeIndex != 11 &&
         schemeIndex != 8 &&
@@ -44,10 +40,6 @@ class _ThemeSelectorState extends State<ThemeSelector> {
             .setColorScheme(defaultTheme);
       });
     }
-
-    scrollController = ScrollController(
-      initialScrollOffset: _kWidthOfScrollItem * schemeIndex,
-    );
   }
 
   @override
@@ -95,11 +87,8 @@ class _ThemeSelectorState extends State<ThemeSelector> {
             unselectedBorder: BorderSide.none,
             selectedBorder: BorderSide(
                 color: Theme.of(context).primaryColorLight, width: 5),
-            onSelect: () {
-              setState(() => schemeIndex = index);
-              Provider.of<ThemeProvider>(context, listen: false)
-                  .setColorScheme(realIndex);
-            },
+            onSelect: () => Provider.of<ThemeProvider>(context, listen: false)
+                .setColorScheme(realIndex),
             selected: Preferences.getColorSchemeIndex() == realIndex,
             backgroundColor: Theme.of(context).colorScheme.surface,
             flexSchemeColor: schemesList()[index].light,
