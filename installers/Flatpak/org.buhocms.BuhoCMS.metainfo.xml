@@ -57,18 +57,17 @@
   </screenshots>
   <releases>
     <release version="0.4.0" date="2023-03-14">
-	    <description>
+      <description>
         <p>Release 0.4.0 of BuhoCMS</p>
         <ul>
           <li>Ability to resize the text field in the editing page up and down</li>
 	  <li>Use 2/3 for text field, 1/3 for markdown preview</li>
-	  <li>Ability to resize the text field in the editing page up and down</li>
           <li>Various bug fixes and localization improvements</li>
         </ul>
-		  </description>
+      </description>
     </release>
     <release version="0.3.0" date="2023-03-08">
-	    <description>
+      <description>
         <p>Release 0.3.0 of BuhoCMS</p>
         <ul>
           <li>Auto-Detect Front matter button - a great help for sites with lots of Front matter types</li>
@@ -77,10 +76,10 @@
           <li>Add Chinese translation</li>
           <li>Various bug fixes and localization improvements</li>
         </ul>
-		  </description>
+      </description>
     </release>
     <release version="0.2.0" date="2023-02-27">
-	    <description>
+      <description>
         <p>Release 0.2.0 of BuhoCMS</p>
         <ul>
           <li>Custom Hugo Flags are now supported when (i) starting a Hugo server, (ii) building a Hugo site, (iii) creating a new post, (iv) creating a new Hugo site</li>
@@ -88,7 +87,7 @@
           <li>Tags GUI: Add a submit button on the right side</li>
           <li>Various bug fixes and localization improvements</li>
         </ul>
-		  </description>
+      </description>
     </release>
     <release version="0.1.0" date="2023-02-09">
       <description>
