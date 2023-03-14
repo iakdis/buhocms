@@ -1,4 +1,9 @@
 
+## 🌟 New release: v0.4.0 🌟
+### Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.4.0)!
+
+<br>
+
 <p>
   <a href="https://github.com/iakmds/buhocms/releases/latest" alt="Release">
   <img src="https://img.shields.io/github/v/release/iakmds/buhocms?style=flat-square" /></a>
@@ -109,26 +114,31 @@ macOS support is planned. Unfortunately I do not currently own a macOS device; t
 
 ### Linux
 
-Supported | In progress | Planned
-|-|-|-|
-| AppImage | Flatpak (Flathub) | Snap |
-| .deb | | AUR |
-| | | .rpm |
+Supported | Planned
+|-|-|
+| Flatpak (Flathub) | Snap |
+| AppImage | AUR |
+| .deb | .rpm |
 
-<!--To install BuhoCMS as a **Flatpak**, head over to Flathub:
+<br>
+
+To install BuhoCMS as a **Flatpak**, head over to Flathub:
 
 [<img src="https://flathub.org/assets/badges/flathub-badge-en.png"
     alt="Download on Flathub"
     height="80">](https://flathub.org/apps/details/org.buhocms.BuhoCMS)
--->
 
-To install BuhoCMS as a **.deb** package, download the [BuhoCMS-Linux.deb](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.deb) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page and install it.
+<br>
+
+To install BuhoCMS as an **AppImage**, download the [BuhoCMS-Linux.AppImage](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.AppImage) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page, make it executable and run it. For better desktop integration consider using [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher).
 
 [<img src=".github/appimage-badge.svg"
     alt="Download as an AppImage"
     height="80">](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.AppImage)
 
-To install BuhoCMS as an **AppImage**, download the [BuhoCMS-Linux.AppImage](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.AppImage) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page, make it executable and run it. For better desktop integration consider using [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher).
+<br>
+
+To install BuhoCMS as a **.deb** package, download the [BuhoCMS-Linux.deb](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.deb) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page and install it.
 
 # Features
 
