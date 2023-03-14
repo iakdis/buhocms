@@ -193,14 +193,13 @@ Feel free to send in a [pull request](https://github.com/iakmds/buhocms/pulls)! 
   - [ ] Custom app theme colors
   - [ ] Markdown Toolbar: "Add media" button for images for selecting an image
   - [ ] Markdown Toolbar: Shortcuts
-  - [ ] Localization: Markdown Toolbar tooltip texts
   - [ ] Configurable shortcuts
+  - [x] Localization: Markdown Toolbar tooltip texts (v0.4.0)
   - [x] Show terminal output (v0.3.0)
 
 **Hugo specific:**
   - [ ] Work with both hugo.* and config.* names ([see Hugo Documentation](https://gohugo.io/getting-started/configuration/#hugotoml-vs-configtoml))
   - [ ] hugo/config.toml, hugo/config.yaml, hugo/config.json editor (+ create a .bak backup file)
-  - [ ] Hugo [Archetypes](https://gohugo.io/content-management/archetypes) editor
   - [ ] Be able to delete themes and open the theme folder button
   - [ ] [Git-submodules](https://gohugo.io/getting-started/quick-start/#explanation-of-commands) for themes support
 

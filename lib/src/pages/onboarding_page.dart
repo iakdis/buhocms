@@ -116,7 +116,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         ),
         const SizedBox(height: 8.0),
         Text(
-          'Alpha (0.3.0)', // TODO update version number
+          'Alpha (0.4.0)', // TODO update version number
           style: TextStyle(
             color: Colors.teal.shade800,
             fontSize: 24.0,

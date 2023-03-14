@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>org.buhocms.BuhoCMS</id>
-  
   <name>BuhoCMS</name>
   <summary>A local CMS for Hugo static sites</summary>
+  <developer_name>iakmds</developer_name>
   
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
-
   <content_rating type="oars-1.0" />
   
-  <url type="homepage">https://github.com/iakmds/buhocms</url>
+  <url type="homepage">https://buhocms.org</url>
   <url type="bugtracker">https://github.com/iakmds/buhocms/issues</url>
+  <url type="translate">https://github.com/iakmds/buhocms/#translating</url>
+	
   <description>
     <p>
       BuhoCMS is a local Content Management System for static site generators like Hugo.
@@ -55,6 +56,15 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.4.0" date="2023-03-14">
+	    <description>
+        <p>TODO Release 0.4.0 of BuhoCMS</p>
+        <ul>
+          <li>TODO</li>
+          <li>Various bug fixes and localization improvements</li>
+        </ul>
+		  </description>
+    </release>
     <release version="0.3.0" date="2023-03-08">
 	    <description>
         <p>Release 0.3.0 of BuhoCMS</p>
@@ -63,7 +73,7 @@
           <li>Recently opened websites list when opening a site</li>
           <li>Terminal output button to view all command logs</li>
           <li>Add Chinese translation</li>
-          <li>Various bug fixes, localization improvements</li>
+          <li>Various bug fixes and localization improvements</li>
         </ul>
 		  </description>
     </release>
@@ -74,7 +84,7 @@
           <li>Custom Hugo Flags are now supported when (i) starting a Hugo server, (ii) building a Hugo site, (iii) creating a new post, (iv) creating a new Hugo site</li>
           <li>Switch between Front matter GUI/Text mode with a new button</li>
           <li>Tags GUI: Add a submit button on the right side</li>
-          <li>Various bug fixes, localization improvements</li>
+          <li>Various bug fixes and localization improvements</li>
         </ul>
 		  </description>
     </release>
