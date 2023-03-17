@@ -341,7 +341,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               title: Text(
                                   Localization.appLocalizations().overrideFile),
                               content: Text(
-                                AppLocalizations.of(context)!
+                                Localization.appLocalizations()
                                     .overrideFile_Description(outputFile
                                         .split(Platform.pathSeparator)
                                         .last),

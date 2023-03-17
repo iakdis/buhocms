@@ -237,7 +237,7 @@ class _FileButtonState extends State<FileButton> {
 
                 if (mounted) {
                   showSnackbar(
-                    text: AppLocalizations.of(context)!
+                    text: Localization.appLocalizations()
                         .deletedFile('"${widget.path}"'),
                     seconds: 4,
                   );

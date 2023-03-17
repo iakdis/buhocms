@@ -1,7 +1,8 @@
 import 'package:buhocms/src/provider/app/output_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../i18n/l10n.dart';
 
 class TerminalOutputButton extends StatelessWidget {
   const TerminalOutputButton({
@@ -40,9 +41,9 @@ class TerminalOutputButton extends StatelessWidget {
                           width: constraints.maxWidth - 80,
                           child: Text(
                             outputProvider.showOutput
-                                ? AppLocalizations.of(context)!
+                                ? Localization.appLocalizations()
                                     .hideTerminalOutput
-                                : AppLocalizations.of(context)!
+                                : Localization.appLocalizations()
                                     .showTerminalOutput,
                             style: const TextStyle(color: Colors.white),
                           ),

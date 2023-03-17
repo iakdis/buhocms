@@ -5,7 +5,6 @@ import 'package:buhocms/src/provider/editing/unsaved_text_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../i18n/l10n.dart';
 import '../provider/navigation/file_navigation_provider.dart';
@@ -696,7 +695,7 @@ class HugoWidgetState extends State<HugoWidget> {
             const SizedBox(width: 8.0),
             SizedBox(
               width: 800,
-              child: SelectableText(AppLocalizations.of(context)!
+              child: SelectableText(Localization.appLocalizations()
                   .notFound_Description('"${frontmatter.key}"')),
             ),
             Tooltip(

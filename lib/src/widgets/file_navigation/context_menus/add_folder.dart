@@ -95,7 +95,7 @@ class AddFolder {
                     errorText: empty
                         ? Localization.appLocalizations().cantBeEmpty
                         : folderAlreadyExists
-                            ? AppLocalizations.of(context)!
+                            ? Localization.appLocalizations()
                                 .error_folderAlreadyExists('"$folderName"',
                                     '"${path.substring(path.indexOf('content'))}"')
                             : null,
@@ -119,7 +119,7 @@ class AddFolder {
                                     '${Preferences.getCurrentPath()}${Platform.pathSeparator}$folderName';
 
                                 showSnackbar(
-                                  text: AppLocalizations.of(context)!
+                                  text: Localization.appLocalizations()
                                       .folderCreated('"$finalPath"'),
                                   seconds: 4,
                                 );

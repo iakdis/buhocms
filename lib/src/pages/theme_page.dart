@@ -149,7 +149,7 @@ class _ThemePageState extends State<ThemePage> {
       found: (finalExecutable) {
         gitInstalled = true;
         if (mounted) {
-          gitInstalledText = AppLocalizations.of(context)!
+          gitInstalledText = Localization.appLocalizations()
               .executableFoundIn('Git', finalExecutable);
         }
         setState(() {});
@@ -269,7 +269,7 @@ class _ThemePageState extends State<ThemePage> {
                   if (details.stepIndex == 2)
                     ElevatedButton(
                       onPressed: canContinue ? details.onStepContinue : null,
-                      child: Text(AppLocalizations.of(context)!
+                      child: Text(Localization.appLocalizations()
                           .startOver
                           .toUpperCase()),
                     ),
@@ -349,7 +349,7 @@ class _ThemePageState extends State<ThemePage> {
                               color: Colors.grey[600], fontSize: 17.0),
                           decoration: InputDecoration(
                             errorText: themeNameError
-                                ? AppLocalizations.of(context)!
+                                ? Localization.appLocalizations()
                                     .repositoryInvalidURL
                                 : null,
                             border: const OutlineInputBorder(),
@@ -375,7 +375,7 @@ class _ThemePageState extends State<ThemePage> {
               content: Column(
                 children: [
                   SelectableText.rich(TextSpan(
-                      text: AppLocalizations.of(context)!
+                      text: Localization.appLocalizations()
                           .successfullyDownloadedHugoTheme,
                       style: const TextStyle(fontSize: 20),
                       children: <TextSpan>[

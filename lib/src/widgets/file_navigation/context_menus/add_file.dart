@@ -5,7 +5,6 @@ import 'package:buhocms/src/widgets/command_dialog.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
@@ -191,7 +190,7 @@ class AddFile {
                   errorText: empty
                       ? Localization.appLocalizations().cantBeEmpty
                       : fileAlreadyExists
-                          ? AppLocalizations.of(context)!
+                          ? Localization.appLocalizations()
                               .error_fileAlreadyExists('"$name"',
                                   '"${path.substring(path.indexOf('content'))}"')
                           : null,

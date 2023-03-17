@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:markdown_toolbar/markdown_toolbar.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../logic/files.dart';
 import '../provider/editing/editing_provider.dart';
@@ -796,9 +795,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                               children: [
                                 SelectableText(
                                   directoryExists
-                                      ? AppLocalizations.of(context)!
+                                      ? Localization.appLocalizations()
                                           .createYourFirstPost
-                                      : AppLocalizations.of(context)!
+                                      : Localization.appLocalizations()
                                           .error_DirectoryDoesNotExist(
                                               '"${Preferences.getCurrentPath()}"'),
                                   style: TextStyle(
@@ -820,7 +819,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                                                 widget.editingPageKey),
                                         icon: const Icon(Icons.text_snippet),
                                         label: Text(
-                                            AppLocalizations.of(context)!
+                                            Localization.appLocalizations()
                                                 .createNewPost),
                                         style: const ButtonStyle(
                                           fixedSize: MaterialStatePropertyAll(
@@ -837,7 +836,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                                                 widget.editingPageKey),
                                         icon: const Icon(Icons.folder_outlined),
                                         label: Text(
-                                            AppLocalizations.of(context)!
+                                            Localization.appLocalizations()
                                                 .createNewFolder),
                                         style: const ButtonStyle(
                                           fixedSize: MaterialStatePropertyAll(

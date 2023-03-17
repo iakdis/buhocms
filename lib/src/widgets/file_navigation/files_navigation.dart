@@ -13,7 +13,6 @@ import 'package:buhocms/src/widgets/tooltip.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../i18n/l10n.dart';
 import '../../logic/files.dart';
@@ -260,7 +259,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                                 color:
                                     Theme.of(context).colorScheme.onSecondary),
                             CustomTooltip(
-                              message: AppLocalizations.of(context)!
+                              message: Localization.appLocalizations()
                                   .parentFolderButton_Toolip(savePath
                                       .substring(savePath.indexOf('content'))),
                               child: ParentFolderButton(

@@ -152,7 +152,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                     isExtended: isExtended,
                                     icon: Icons.edit,
                                     iconUnselected: Icons.edit_outlined,
-                                    buttonText: AppLocalizations.of(context)!
+                                    buttonText: Localization.appLocalizations()
                                         .editingPage,
                                     index: 0,
                                   ),
@@ -179,40 +179,41 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                   message: Provider.of<ShellProvider>(context)
                                               .shellActive ==
                                           true
-                                      ? AppLocalizations.of(context)!
+                                      ? Localization.appLocalizations()
                                           .stopHugoServer
-                                      : AppLocalizations.of(context)!
+                                      : Localization.appLocalizations()
                                           .startHugoServer,
                                   child:
                                       HugoServerButton(isExtended: isExtended),
                                 ),
                                 CustomTooltip(
-                                  message: AppLocalizations.of(context)!
+                                  message: Localization.appLocalizations()
                                       .openHugoServer,
                                   child: OpenLocalhostButton(
                                       isExtended: isExtended),
                                 ),
                                 divider(),
                                 CustomTooltip(
-                                  message: AppLocalizations.of(context)!
+                                  message: Localization.appLocalizations()
                                       .buildHugoSite,
                                   child:
                                       HugoBuildButton(isExtended: isExtended),
                                 ),
                                 CustomTooltip(
-                                  message: AppLocalizations.of(context)!
+                                  message: Localization.appLocalizations()
                                       .openPublicFolder,
                                   child:
                                       OpenPublicButton(isExtended: isExtended),
                                 ),
                                 divider(),
                                 CustomTooltip(
-                                  message: Provider.of<OutputProvider>(context)
-                                          .showOutput
-                                      ? AppLocalizations.of(context)!
-                                          .hideTerminalOutput
-                                      : AppLocalizations.of(context)!
-                                          .showTerminalOutput,
+                                  message:
+                                      Provider.of<OutputProvider>(context)
+                                              .showOutput
+                                          ? Localization.appLocalizations()
+                                              .hideTerminalOutput
+                                          : Localization.appLocalizations()
+                                              .showTerminalOutput,
                                   child: TerminalOutputButton(
                                       isExtended: isExtended),
                                 ),

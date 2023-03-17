@@ -92,7 +92,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
       found: (finalExecutable) {
         hugoInstalled = true;
         if (mounted) {
-          hugoInstalledText = AppLocalizations.of(context)!
+          hugoInstalledText = Localization.appLocalizations()
               .executableFoundIn('Hugo', finalExecutable);
         }
         setState(() {});
@@ -142,7 +142,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
               }
               if (!Directory(sitePath).existsSync()) {
                 showSnackbar(
-                  text: AppLocalizations.of(context)!
+                  text: Localization.appLocalizations()
                       .error_DirectoryDoesNotExist('"$sitePath"'),
                   seconds: 4,
                 );
@@ -236,7 +236,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                           errorText: siteNameError
                               ? Localization.appLocalizations().cantBeEmpty
                               : directoryAlreadyExists
-                                  ? AppLocalizations.of(context)!
+                                  ? Localization.appLocalizations()
                                       .error_DirectoryAlreadyExists('"$path"')
                                   : null,
                         ),
@@ -325,7 +325,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                       onPressed: savePath,
                       child: Text(Localization.appLocalizations().choosePath)),
                   const SizedBox(height: 24.0),
-                  Text(AppLocalizations.of(context)!
+                  Text(Localization.appLocalizations()
                       .hugoSiteWillBeCreatedInFolder),
                   const SizedBox(height: 12.0),
                   SizedBox(
@@ -388,7 +388,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                         errorText: siteNameError
                             ? Localization.appLocalizations().cantBeEmpty
                             : directoryAlreadyExists
-                                ? AppLocalizations.of(context)!
+                                ? Localization.appLocalizations()
                                     .error_DirectoryAlreadyExists(
                                         '"$sitePath${Platform.pathSeparator}$siteName"')
                                 : null,

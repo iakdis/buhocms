@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/files.dart';
@@ -113,7 +112,7 @@ void showAutoDialog({
                   SizedBox(
                     width: 400,
                     child: SelectableText(
-                      AppLocalizations.of(context)!
+                      Localization.appLocalizations()
                           .areYouSureAutoFrontmatterList,
                       style: const TextStyle(fontSize: 16),
                     ),
@@ -201,7 +200,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                   SizedBox(
                     width: 300,
                     child: SelectableText(
-                      AppLocalizations.of(context)!
+                      Localization.appLocalizations()
                           .areYouSureResetFrontmatterList,
                       style: textStyle,
                     ),
@@ -253,7 +252,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                           fontSize: 24, fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 16.0),
-                    Text(AppLocalizations.of(context)!
+                    Text(Localization.appLocalizations()
                         .editFrontmatterList_Description),
                     const SizedBox(height: 16.0),
                     Tooltip(
@@ -270,7 +269,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                           }
                         },
                         icon: const Icon(Icons.open_in_new),
-                        label: Text(AppLocalizations.of(context)!
+                        label: Text(Localization.appLocalizations()
                             .openHugoDocumentation),
                       ),
                     ),
@@ -340,7 +339,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                                           },
                                           icon: const Icon(Icons.edit),
                                           label: Text(
-                                              AppLocalizations.of(context)!
+                                              Localization.appLocalizations()
                                                   .edit),
                                         ),
                                         const SizedBox(width: 8.0),
@@ -356,7 +355,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                                           },
                                           icon: const Icon(Icons.remove),
                                           label: Text(
-                                              AppLocalizations.of(context)!
+                                              Localization.appLocalizations()
                                                   .remove),
                                         ),
                                       ],
@@ -387,7 +386,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                         );
                       },
                       icon: const Icon(Icons.add),
-                      label: Text(AppLocalizations.of(context)!
+                      label: Text(Localization.appLocalizations()
                           .addNewFrontmatterToList),
                     ),
                     TextButton.icon(
@@ -531,7 +530,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                             errorText: empty
                                 ? Localization.appLocalizations().cantBeEmpty
                                 : alreadyContains
-                                    ? AppLocalizations.of(context)!
+                                    ? Localization.appLocalizations()
                                         .error_FrontmatterAlreadyContains
                                     : null,
                             errorMaxLines: 5,
@@ -655,7 +654,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
 
     if (mounted) {
       showSnackbar(
-        text: AppLocalizations.of(context)!
+        text: Localization.appLocalizations()
             .removedFrontmatterToList('"${element.key}"', '"${element.value}"'),
         seconds: 4,
       );

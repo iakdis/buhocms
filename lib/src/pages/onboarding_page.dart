@@ -6,7 +6,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../i18n/l10n.dart';
@@ -161,7 +160,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
           Preferences.getSitePath() == null ||
                   (Preferences.getSitePath()?.isEmpty ?? false)
               ? Localization.appLocalizations().hugoSiteSelected('N/A')
-              : AppLocalizations.of(context)!
+              : Localization.appLocalizations()
                   .hugoSiteSelected('\n"${Preferences.getSitePath()}"'),
           style: textStyle,
         ),
@@ -279,7 +278,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
                   Preferences.getSitePath() == null ||
                           (Preferences.getSitePath()?.isEmpty ?? false)
                       ? Localization.appLocalizations().sitePath('N/A')
-                      : AppLocalizations.of(context)!
+                      : Localization.appLocalizations()
                           .sitePath(Preferences.getSitePath() ?? 'N/A'),
                   style: textStyle,
                 ),

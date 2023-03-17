@@ -6,7 +6,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../i18n/l10n.dart';
 import '../provider/app/shell_provider.dart';
@@ -113,7 +112,7 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
           }
           if (!Directory(sitePath).existsSync()) {
             showSnackbar(
-              text: AppLocalizations.of(context)!
+              text: Localization.appLocalizations()
                   .error_DirectoryDoesNotExist('"$sitePath"'),
               seconds: 4,
             );
@@ -162,7 +161,7 @@ class _OpenHugoSiteState extends State<OpenHugoSite> {
               SizedBox(
                 width: 700,
                 child: SelectableText(
-                  AppLocalizations.of(context)!
+                  Localization.appLocalizations()
                       .checkHugoFolderStructure_Description,
                   style: const TextStyle(fontSize: 18),
                 ),

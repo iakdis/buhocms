@@ -5,7 +5,6 @@ import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
@@ -176,7 +175,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
 
                 if (mounted) {
                   showSnackbar(
-                    text: AppLocalizations.of(context)!
+                    text: Localization.appLocalizations()
                         .deletedFolder('"${widget.path}"'),
                     seconds: 4,
                   );
