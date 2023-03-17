@@ -40,14 +40,16 @@ class _CommandDialogState extends State<CommandDialog> {
         ),
         const SizedBox(height: 32.0),
         Column(children: widget.dialogChildren),
+        const SizedBox(height: 8.0),
         ExpansionTile(
           maintainState: true,
           leading: Icon(widget.expansionIcon),
           title: Text(widget.expansionTitle),
           expandedAlignment: Alignment.topLeft,
+          childrenPadding: const EdgeInsets.only(top: 8.0),
           children: widget.expansionChildren,
         ),
-        const SizedBox(height: 100),
+        const SizedBox(height: 64),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
