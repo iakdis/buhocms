@@ -119,8 +119,10 @@ void revert({
       context: context,
       builder: (context) => AlertDialog(
         title: Text(Localization.appLocalizations().revertChanges),
-        content:
-            Text(Localization.appLocalizations().revertChanges_Description),
+        content: SizedBox(
+            width: 512.0,
+            child: SelectableText(
+                Localization.appLocalizations().revertChanges_Description)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
