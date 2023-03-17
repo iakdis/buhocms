@@ -1,12 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../pages/editing_page.dart';
 import '../../../utils/preferences.dart';
-import '../../../utils/unsaved_check.dart';
 import '../../snackbar.dart';
 
 class ParentFolderButton extends StatelessWidget {
@@ -79,16 +77,9 @@ class ParentFolderButton extends StatelessWidget {
               );
               return;
             }
-            checkUnsavedBeforeFunction(
-              editingPageKey: editingPageKey,
-              function: () {
-                Preferences.setCurrentPath(savePath.substring(
-                  0,
-                  savePath.length - savePathSplit.length - 1,
-                ));
-                setStateCallback();
-              },
-            );
+            Preferences.setCurrentPath(savePath.substring(
+                0, savePath.length - savePathSplit.length - 1));
+            setStateCallback();
           }, //this.index = index),
         ),
       );

@@ -255,13 +255,8 @@ class _DirectoryButtonState extends State<DirectoryButton> {
                         focusNode: focusNodeButton,
                         child: InkWell(
                           onTap: () {
-                            checkUnsavedBeforeFunction(
-                              editingPageKey: widget.editingPageKey,
-                              function: () {
-                                Preferences.setCurrentPath(widget.path);
-                                widget.setStateCallback();
-                              },
-                            );
+                            Preferences.setCurrentPath(widget.path);
+                            widget.setStateCallback();
                           },
                           borderRadius: BorderRadius.circular(50),
                           child: Padding(
