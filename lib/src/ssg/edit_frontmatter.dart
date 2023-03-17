@@ -282,7 +282,8 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                         setStateFunction: setStateFunction,
                       ),
                       icon: const Icon(Icons.auto_awesome),
-                      label: const Text('Automatically detect Front matter'),
+                      label: Text(
+                          Localization.appLocalizations().autoFrontmatterList),
                     ),
                   ],
                 ),
@@ -393,7 +394,8 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                       onPressed: () =>
                           showResetDialog(setStateFunction: setStateFunction),
                       icon: const Icon(Icons.restore),
-                      label: const Text('Reset Front matter list'),
+                      label: Text(
+                          Localization.appLocalizations().resetFrontmatterList),
                     ),
                   ],
                 ),
