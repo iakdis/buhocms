@@ -252,8 +252,11 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                           fontSize: 24, fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 16.0),
-                    Text(Localization.appLocalizations()
-                        .editFrontmatterList_Description),
+                    SizedBox(
+                      width: 512.0,
+                      child: Text(Localization.appLocalizations()
+                          .editFrontmatterList_Description),
+                    ),
                     const SizedBox(height: 16.0),
                     Tooltip(
                       message:
