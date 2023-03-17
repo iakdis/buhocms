@@ -256,7 +256,7 @@
     "save": "Speichern",
     "createNewPost": "Neuen Artikel erstellen",
     "createNewFolder": "Neuen Ordner erstellen",
-    "addNewFrontmatterToList": "Neue Front matter Einträge zur Liste hinzufügen",
+    "addNewEntry": "Neuen Eintrag hinzufügen",
     "remove": "Entfernen",
     "close": "Schließen",
     "addFrontmatter": "Front matter hinzufügen",

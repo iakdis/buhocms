@@ -256,7 +256,7 @@
     "save": "保存",
     "createNewPost": "新建文章",
     "createNewFolder": "新建文件夹",
-    "addNewFrontmatterToList": "在列表中添加新的目录",
+    "addNewEntry": "增加新条目",
     "remove": "移除",
     "close": "关闭",
     "addFrontmatter": "添加目录",

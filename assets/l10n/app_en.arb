@@ -256,7 +256,7 @@
     "save": "Save",
     "createNewPost": "Create new post",
     "createNewFolder": "Create new folder",
-    "addNewFrontmatterToList": "Add new Front matter to list",
+    "addNewEntry": "Add new entry",
     "remove": "Remove",
     "close": "Close",
     "addFrontmatter": "Add Front matter",

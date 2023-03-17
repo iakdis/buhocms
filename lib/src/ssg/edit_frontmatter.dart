@@ -389,8 +389,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                         );
                       },
                       icon: const Icon(Icons.add),
-                      label: Text(Localization.appLocalizations()
-                          .addNewFrontmatterToList),
+                      label: Text(Localization.appLocalizations().addNewEntry),
                     ),
                     TextButton.icon(
                       onPressed: () =>
@@ -422,7 +421,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
 
   void addNewFrontMatterTypes({required Function setStateFunction}) {
     showEditDialog(
-      title: Localization.appLocalizations().addNewFrontmatterToList,
+      title: Localization.appLocalizations().addNewEntry,
       okText: Localization.appLocalizations().add,
       checkAlreadyContains: true,
       onPressed: () {
