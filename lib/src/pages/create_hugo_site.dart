@@ -170,7 +170,7 @@ class _CreateHugoSiteState extends State<CreateHugoSite> {
                   command: commandToRun,
                 );
 
-                Preferences.clearPreferences();
+                Preferences.clearPreferencesSite();
                 Preferences.setOnBoardingComplete(true);
 
                 Preferences.setSitePath(
