@@ -5,7 +5,6 @@ import 'package:buhocms/src/utils/terminal_command.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';

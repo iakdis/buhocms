@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:buhocms/src/logic/buho_functions.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
