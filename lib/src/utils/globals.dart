@@ -22,8 +22,5 @@ const String prefDraggableMode = 'draggableMode';
 
 const String prefTabs = 'tabs';
 
-//Hugo
-const String prefHugoTheme = 'hugoTheme';
-
 // Layout
 const int mobileWidth = 600;

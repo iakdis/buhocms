@@ -29,7 +29,6 @@ class Preferences {
           prefFrontMatterAddList, json.encode(defaultFrontMatterAddList())),
       const MapEntry(prefDraggableMode, false),
       const MapEntry(prefTabs, null),
-      const MapEntry(prefHugoTheme, ''),
     ]);
   }
 
@@ -247,9 +246,4 @@ class Preferences {
 
     return fromStringsToType.entries.map((e) => e).toList();
   }
-
-  //Hugo Theme
-  static Future<void> setHugoTheme(String theme) async =>
-      await setPreferences(prefHugoTheme, theme);
-  static String getHugoTheme() => getPreferencesEntry(prefHugoTheme);
 }
