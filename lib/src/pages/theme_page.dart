@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../i18n/l10n.dart';
 import '../provider/navigation/navigation_provider.dart';
+import '../ssg/hugo.dart';
 import '../ssg/themes.dart';
 import '../utils/terminal_command.dart';
 
@@ -33,51 +34,6 @@ class _ThemePageState extends State<ThemePage> {
   bool themeNameError = false;
 
   bool isDownloading = false;
-
-  void _updateConfig() {
-    final newThemeName =
-        Preferences.getHugoTheme().split(Platform.pathSeparator).last;
-    final sitePath = '${Preferences.getSitePath()}${Platform.pathSeparator}';
-    var config = File('${sitePath}config.toml');
-    final yaml = File('${sitePath}config.yaml');
-    final json = File('${sitePath}config.json');
-    if (yaml.existsSync()) config = yaml;
-    if (json.existsSync()) config = json;
-    var themeEntryExists = false;
-
-    var configLines = config.readAsLinesSync();
-    for (var i = 0; i < configLines.length; i++) {
-      if (yaml.existsSync()) {
-        if (configLines[i].startsWith('theme')) {
-          themeEntryExists = true;
-          configLines[i] = 'theme: $newThemeName';
-        }
-        break;
-      } else if (json.existsSync()) {
-        if (configLines[i].startsWith('"theme"')) {
-          themeEntryExists = true;
-          configLines[i] = '"theme": "$newThemeName"';
-        }
-        break;
-      } else {
-        if (configLines[i].startsWith('theme')) {
-          themeEntryExists = true;
-          configLines[i] = 'theme = "$newThemeName"';
-          break;
-        }
-      }
-    }
-    if (!themeEntryExists) {
-      if (yaml.existsSync()) {
-        configLines.add('theme: $newThemeName');
-      } else if (json.existsSync()) {
-        configLines.add('"theme": "$newThemeName"');
-      } else {
-        configLines.add('theme = "$newThemeName"');
-      }
-    }
-    config.writeAsStringSync(configLines.join('\n'));
-  }
 
   void _download() async {
     final theme = themeName.split('/').last;
@@ -118,9 +74,7 @@ class _ThemePageState extends State<ThemePage> {
     );
     setState(() => isDownloading = false);
 
-    await Preferences.setHugoTheme(
-        '${Preferences.getSitePath()}${Platform.pathSeparator}$path');
-    _updateConfig();
+    await Hugo.setHugoTheme(theme);
 
     setState(() => currentStep++);
 
@@ -174,7 +128,7 @@ class _ThemePageState extends State<ThemePage> {
                 return const CircularProgressIndicator();
               }
 
-              var value = Preferences.getHugoTheme();
+              var value = Hugo.getHugoTheme();
               var buttonList = <DropdownMenuItem<String>>[];
               buttonList.add(DropdownMenuItem(
                   value: '',
@@ -183,14 +137,14 @@ class _ThemePageState extends State<ThemePage> {
                 if (snapshot.data!.isNotEmpty) {
                   buttonList.addAll(snapshot.data!.map((element) {
                     return DropdownMenuItem(
-                      value: element.path,
+                      value: element.path.split(Platform.pathSeparator).last,
                       child:
                           Text(element.path.split(Platform.pathSeparator).last),
                     );
                   }).toList());
                 } else {
                   value = '';
-                  Preferences.setHugoTheme('');
+                  Hugo.setHugoTheme('');
                 }
               }
               var themeExists = false;
@@ -199,15 +153,14 @@ class _ThemePageState extends State<ThemePage> {
               }
               if (themeExists == false) {
                 value = '';
-                Preferences.setHugoTheme('');
+                Hugo.setHugoTheme('');
               }
 
               return DropdownButton(
                 value: value,
                 items: buttonList,
                 onChanged: (option) async {
-                  await Preferences.setHugoTheme(option ?? themeName);
-                  _updateConfig();
+                  await Hugo.setHugoTheme(option ?? themeName);
                   setState(() {});
                   if (mounted) {
                     Provider.of<NavigationProvider>(context, listen: false)

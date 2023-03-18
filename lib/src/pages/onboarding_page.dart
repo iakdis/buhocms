@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:buhocms/src/logic/buho_functions.dart';
 import 'package:buhocms/src/widgets/buttons/language_dropdown.dart';
 import 'package:flutter/gestures.dart';
@@ -10,6 +8,7 @@ import 'package:window_manager/window_manager.dart';
 
 import '../i18n/l10n.dart';
 import '../provider/app/theme_provider.dart';
+import '../ssg/hugo.dart';
 import '../utils/preferences.dart';
 import 'home_page.dart';
 
@@ -216,7 +215,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
   }
 
   Widget _themePageButtons() {
-    var theme = Preferences.getHugoTheme().split(Platform.pathSeparator).last;
+    final theme = Hugo.getHugoTheme();
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -227,7 +226,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         ),
         const SizedBox(height: 24.0),
         Text(
-          Preferences.getHugoTheme().isEmpty
+          Hugo.getHugoTheme().isEmpty
               ? Localization.appLocalizations().hugoThemeSelected('N/A')
               : Localization.appLocalizations().hugoThemeSelected('"$theme"'),
           style: textStyle,
@@ -289,17 +288,13 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Preferences.getHugoTheme().isEmpty
-                  ? Icons.close
-                  : Icons.check),
+              Icon(Hugo.getHugoTheme().isEmpty ? Icons.close : Icons.check),
               Flexible(
                 child: Text(
-                  Preferences.getHugoTheme().isEmpty
+                  Hugo.getHugoTheme().isEmpty
                       ? Localization.appLocalizations().hugoTheme('N/A')
-                      : Localization.appLocalizations().hugoTheme(
-                          Preferences.getHugoTheme()
-                              .split(Platform.pathSeparator)
-                              .last),
+                      : Localization.appLocalizations()
+                          .hugoTheme(Hugo.getHugoTheme()),
                   style: textStyle,
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:buhocms/src/pages/editing_page.dart';
@@ -34,6 +35,71 @@ class Hugo {
       default:
         return source.substring(source.indexOf('"') + 1, source.length - 1);
     }
+  }
+
+  static String getHugoTheme() {
+    final sitePath = '${Preferences.getSitePath()}${Platform.pathSeparator}';
+    final config = File('${sitePath}config.toml');
+    final configLines = config.readAsLinesSync();
+
+    var theme = '';
+    for (var i = 0; i < configLines.length; i++) {
+      final configLine = configLines[i];
+      if (configLine.startsWith('theme')) {
+        theme = configLine.substring(9, configLine.length - 1); //theme: ""
+      }
+    }
+    return theme;
+  }
+
+  static Future<void> setHugoTheme(String theme) async {
+    final sitePath = '${Preferences.getSitePath()}${Platform.pathSeparator}';
+
+    File? config;
+    final toml = File('${sitePath}config.toml');
+    final yaml = File('${sitePath}config.yaml');
+    final json = File('${sitePath}config.json');
+    final tomlExists = toml.existsSync();
+    final yamlExists = yaml.existsSync();
+    final jsonExists = json.existsSync();
+    if (tomlExists) config = toml;
+    if (yamlExists) config = yaml;
+    if (jsonExists) config = json;
+    var themeEntryExists = false;
+
+    final configLines = await config?.readAsLines() ?? [];
+    for (var i = 0; i < configLines.length; i++) {
+      if (tomlExists) {
+        if (configLines[i].startsWith('theme')) {
+          themeEntryExists = true;
+          configLines[i] = 'theme = "$theme"';
+          break;
+        }
+      } else if (yamlExists) {
+        if (configLines[i].startsWith('theme')) {
+          themeEntryExists = true;
+          configLines[i] = 'theme: $theme';
+        }
+        break;
+      } else if (jsonExists) {
+        if (configLines[i].startsWith('"theme"')) {
+          themeEntryExists = true;
+          configLines[i] = '"theme": "$theme"';
+        }
+        break;
+      }
+    }
+    if (!themeEntryExists) {
+      if (tomlExists) {
+        configLines.add('theme = "$theme"');
+      } else if (yamlExists) {
+        configLines.add('theme: $theme');
+      } else if (jsonExists) {
+        configLines.add('"theme": "$theme"');
+      }
+    }
+
+    await config?.writeAsString(configLines.join('\n'));
   }
 }
 

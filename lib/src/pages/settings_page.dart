@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
+import '../ssg/hugo.dart';
 import '../widgets/buttons/language_dropdown.dart';
 import '../widgets/theme_selector.dart';
 import 'editing_page.dart';
@@ -213,12 +214,8 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _hugoThemeTile() {
-    final theme = Preferences.getHugoTheme()
-            .split(Platform.pathSeparator)
-            .last
-            .isEmpty
-        ? 'N/A'
-        : '"${Preferences.getHugoTheme().split(Platform.pathSeparator).last}"';
+    final theme =
+        Hugo.getHugoTheme().isEmpty ? 'N/A' : '"${Hugo.getHugoTheme()}"';
     return Consumer<NavigationProvider>(builder: (context, _, __) {
       return ListTile(
         title: Text(Localization.appLocalizations().hugoThemes),
