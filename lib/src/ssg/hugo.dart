@@ -6,6 +6,7 @@ import 'package:buhocms/src/provider/editing/unsaved_text_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:yaml/yaml.dart';
 
 import '../i18n/l10n.dart';
 import '../provider/navigation/file_navigation_provider.dart';
@@ -138,7 +139,6 @@ class HugoWidgetState extends State<HugoWidget> {
   DateFormat formatter = DateFormat('dd.MM.yyyy'); //DateFormat('yyyy-MM-dd');
   String? formattedDate;
 
-  List<String> autoList = [];
   List<String> list = [];
   List<String> unsavedList = [];
   TextEditingController listController = TextEditingController();
@@ -195,22 +195,15 @@ class HugoWidgetState extends State<HugoWidget> {
     time ??= TimeOfDay.now();
     unsavedTime = time;*/
 
-    if (sourceValue.contains('[') &&
-        sourceValue.contains(']') &&
-        sourceValue.contains('"')) {
-      autoList = sourceValue.split(',').toList();
-      for (var i = 0; i < autoList.length; i++) {
-        if (autoList[0] != '[""]') {
-          autoList[i] = autoList[i].substring(
-              autoList[i].indexOf('"') + 1, autoList[i].indexOf('"', 2));
-          list.add(autoList[i]);
-        }
-      }
+    final yaml = loadYaml(widget.source) as YamlMap;
+    final entry = yaml.entries.first.value;
+    if (entry is List) {
+      list.addAll(entry.map((e) => e));
     }
-    if (autoList.isNotEmpty) {
-      unsavedList.clear();
-      unsavedList.addAll(list);
-    }
+
+    unsavedList.clear();
+    unsavedList.addAll(list);
+
     listFocusNode = FocusNode();
 
     //Other
@@ -604,31 +597,29 @@ class HugoWidgetState extends State<HugoWidget> {
     final fileNavigationProvider =
         Provider.of<FileNavigationProvider>(context, listen: false);
 
-    final oldList = list;
-    final newList = [];
-    newList.addAll(unsavedList);
-    if (oldList.isNotEmpty) {
-      for (var i = 0; i < oldList.length; i++) {
-        oldList[i] = '"${oldList[i]}"';
+    final newList = [...unsavedList.map((e) => '"$e"')];
+
+    final yaml = loadYaml(widget.source) as YamlMap;
+    final frontmatterKey = yaml.entries.first.key;
+
+    var oldFrontmatterText = fileNavigationProvider.frontMatterText.split('\n')
+      ..removeAt(0) // Remove "---""
+      ..removeLast(); // Remove "---"
+
+    var newFrontmatterText = oldFrontmatterText;
+
+    for (var i = 0; i < oldFrontmatterText.length; i++) {
+      final yaml = loadYaml(oldFrontmatterText[i]) as YamlMap;
+      if (yaml.entries.first.key == frontmatterKey) {
+        newFrontmatterText[i] = '$frontmatterKey: $newList';
       }
-    } else {
-      if (autoList.toString().contains('"')) oldList.add('""');
     }
 
-    for (var i = 0; i < newList.length; i++) {
-      newList[i] = '"${newList[i]}"';
-    }
+    newFrontmatterText
+      ..insert(0, '---') // Add "---"
+      ..insert(newFrontmatterText.length, '---'); // Add "---"
 
-    final frontmatterType =
-        widget.source.substring(0, widget.source.indexOf(':')).trim();
-
-    final oldFrontmatterText = fileNavigationProvider.frontMatterText;
-    final newFrontmatterText = oldFrontmatterText.replaceFirst(
-      '$frontmatterType: $oldList',
-      '$frontmatterType: $newList',
-    );
-
-    fileNavigationProvider.setFrontMatterText(newFrontmatterText);
+    fileNavigationProvider.setFrontMatterText(newFrontmatterText.join('\n'));
 
     setState(() {
       frontMatterController.text = frontMatterControllerUnsaved.text;
