@@ -40,16 +40,36 @@ class Hugo {
 
   static String getHugoTheme() {
     final sitePath = '${Preferences.getSitePath()}${Platform.pathSeparator}';
-    final config = File('${sitePath}config.toml');
-    final configLines = config.readAsLinesSync();
+    File? config;
+    final toml = File('${sitePath}config.toml');
+    final yaml = File('${sitePath}config.yaml');
+    final json = File('${sitePath}config.json');
+    final tomlExists = toml.existsSync();
+    final yamlExists = yaml.existsSync();
+    final jsonExists = json.existsSync();
+    if (tomlExists) config = toml;
+    if (yamlExists) config = yaml;
+    if (jsonExists) config = json;
 
     var theme = '';
+    final configLines = config?.readAsLinesSync() ?? [];
     for (var i = 0; i < configLines.length; i++) {
       final configLine = configLines[i];
-      if (configLine.startsWith('theme')) {
-        theme = configLine.substring(9, configLine.length - 1); //theme: ""
+      if (tomlExists) {
+        if (configLine.startsWith('theme')) {
+          theme = configLine.substring(9, configLine.length - 1); //TODO toml
+        }
+      } else if (yamlExists) {
+        if (configLine.startsWith('theme')) {
+          theme = configLine.substring(9, configLine.length - 1); //TODO yaml
+        }
+      } else if (jsonExists) {
+        if (configLine.startsWith('"theme"')) {
+          theme = configLine.substring(9, configLine.length - 1); //TODO json
+        }
       }
     }
+
     return theme;
   }
 
@@ -74,20 +94,17 @@ class Hugo {
         if (configLines[i].startsWith('theme')) {
           themeEntryExists = true;
           configLines[i] = 'theme = "$theme"';
-          break;
         }
       } else if (yamlExists) {
         if (configLines[i].startsWith('theme')) {
           themeEntryExists = true;
           configLines[i] = 'theme: $theme';
         }
-        break;
       } else if (jsonExists) {
         if (configLines[i].startsWith('"theme"')) {
           themeEntryExists = true;
           configLines[i] = '"theme": "$theme"';
         }
-        break;
       }
     }
     if (!themeEntryExists) {
