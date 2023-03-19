@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:yaml/yaml.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/files.dart';
@@ -43,31 +44,22 @@ Future<Map<String, HugoType>> automaticallyDetectFrontmatter() async {
       frontmatterLines.add(allLines[i]);
     }
 
-    // Add Front matter entries to a map with key and value pairs
-    final map = <String, String>{};
-    for (var i = 0; i < frontmatterLines.length; i++) {
-      final key =
-          frontmatterLines[i].substring(0, frontmatterLines[i].indexOf(':'));
-      final value =
-          frontmatterLines[i].substring(frontmatterLines[i].indexOf(':') + 1);
-      map.addEntries([MapEntry(key.trim(), value.trim())]);
-    }
-
     // Detect type for each key
     final keySet = <String>{};
-    for (var i = 0; i < map.entries.length; i++) {
-      final key = map.keys.toList()[i];
-      final value = map.values.toList()[i];
+    for (var i = 0; i < frontmatterLines.length; i++) {
+      final yaml = loadYaml(frontmatterLines[i]) as YamlMap;
+      final key = yaml.entries.first.key.toString();
+      final value = yaml.entries.first.value;
 
-      if (value == 'true' || value == 'false') {
+      if (value is bool) {
         if (!keySet.contains(key)) {
           typeMap.addEntries([MapEntry(key, HugoType.typeBool)]);
         }
-      } else if (value.contains('[') && value.contains(']')) {
+      } else if (value is List) {
         if (!keySet.contains(key)) {
           typeMap.addEntries([MapEntry(key, HugoType.typeList)]);
         }
-      } else if (DateTime.tryParse(value) != null) {
+      } else if (DateTime.tryParse(value.toString()) != null) {
         if (!keySet.contains(key)) {
           typeMap.addEntries([MapEntry(key, HugoType.typeDate)]);
         }
