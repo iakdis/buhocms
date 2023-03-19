@@ -23,19 +23,9 @@ enum HugoType {
 }
 
 class Hugo {
-  static String getValue(String source, HugoType type) {
-    switch (type) {
-      case HugoType.typeString:
-        return source.substring(source.indexOf('"') + 1, source.length - 1);
-      case HugoType.typeBool:
-        return source.substring(source.indexOf(':') + 1);
-      case HugoType.typeDate:
-        return source.substring(source.indexOf(':') + 1);
-      case HugoType.typeList:
-        return source.substring(source.indexOf(':') + 1);
-      default:
-        return source.substring(source.indexOf('"') + 1, source.length - 1);
-    }
+  static String getValue(String source) {
+    final yaml = loadYaml(source) as YamlMap;
+    return yaml.entries.first.value.toString();
   }
 
   static String getHugoTheme() {
@@ -173,27 +163,25 @@ class HugoWidgetState extends State<HugoWidget> {
 
   @override
   void initState() {
-    var frontmatterString =
-        widget.source.substring(0, widget.source.indexOf(':'));
-    if (Preferences.getFrontMatterAddList().keys.contains(frontmatterString)) {
+    final yaml = loadYaml(widget.source) as YamlMap;
+    final frontmatterKey = yaml.entries.first.key.toString();
+    final frontmatterValue = yaml.entries.first.value.toString();
+
+    if (Preferences.getFrontMatterAddList().keys.contains(frontmatterKey)) {
       frontmatter = Preferences.getFrontMatterAddList()
           .entries
-          .firstWhere((element) => element.key == frontmatterString);
+          .firstWhere((element) => element.key == frontmatterKey);
     } else {
-      frontmatter = MapEntry(frontmatterString, HugoType.typeString);
+      frontmatter = MapEntry(frontmatterKey, HugoType.typeString);
       frontMatterNotFound = true;
     }
 
-    frontMatterController.text =
-        Hugo.getValue(widget.source, frontmatter.value);
+    frontMatterController.text = Hugo.getValue(widget.source);
     frontMatterController.text.trim();
     frontMatterControllerUnsaved.text = frontMatterController.text;
     frontMatterControllerUnsaved.addListener(() {
       setState(() {});
     });
-
-    String sourceValue =
-        widget.source.substring(widget.source.indexOf(':') + 1).trim();
 
     if (frontMatterController.text.contains('true')) {
       isChecked = true;
@@ -204,7 +192,7 @@ class HugoWidgetState extends State<HugoWidget> {
     }
     unsavedIsChecked = isChecked;
 
-    date = DateTime.tryParse(sourceValue);
+    date = DateTime.tryParse(frontmatterValue);
     date ??= DateTime.now();
     unsavedDate = date;
     formattedDate = formatter.format(unsavedDate!);
@@ -212,7 +200,6 @@ class HugoWidgetState extends State<HugoWidget> {
     time ??= TimeOfDay.now();
     unsavedTime = time;*/
 
-    final yaml = loadYaml(widget.source) as YamlMap;
     final entry = yaml.entries.first.value;
     if (entry is List) {
       list.addAll(entry.map((e) => e));
@@ -276,8 +263,10 @@ class HugoWidgetState extends State<HugoWidget> {
   }
 
   Widget _textWidget(String source) {
-    String labelText =
-        '${source[0].toUpperCase()}${source.split(':').first.substring(1)}';
+    final yaml = loadYaml(source) as YamlMap;
+    var labelText = yaml.entries.first.key.toString();
+    labelText = '${labelText[0].toUpperCase()}${labelText.substring(1)}';
+
     return Wrap(
       spacing: 4.0,
       runSpacing: 8.0,
@@ -316,13 +305,14 @@ class HugoWidgetState extends State<HugoWidget> {
 
     final oldText = frontMatterController.text;
     final newText = frontMatterControllerUnsaved.text;
-    final frontmatterType =
-        widget.source.substring(0, widget.source.indexOf(':')).trim();
+
+    final yaml = loadYaml(widget.source) as YamlMap;
+    final frontmatterKey = yaml.entries.first.key.toString();
 
     final oldFrontmatterText = fileNavigationProvider.frontMatterText;
     final newFrontmatterText = oldFrontmatterText.replaceFirst(
-      '$frontmatterType: "$oldText"',
-      '$frontmatterType: "$newText"',
+      '$frontmatterKey: "$oldText"',
+      '$frontmatterKey: "$newText"',
     );
 
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
@@ -338,13 +328,14 @@ class HugoWidgetState extends State<HugoWidget> {
 
     final oldChecked = isChecked.toString();
     final newChecked = unsavedIsChecked.toString();
-    final frontmatterType =
-        widget.source.substring(0, widget.source.indexOf(':')).trim();
+
+    final yaml = loadYaml(widget.source) as YamlMap;
+    final frontmatterKey = yaml.entries.first.key.toString();
 
     final oldFrontmatterText = fileNavigationProvider.frontMatterText;
     final newFrontmatterText = oldFrontmatterText.replaceFirst(
-      '$frontmatterType: $oldChecked',
-      '$frontmatterType: $newChecked',
+      '$frontmatterKey: $oldChecked',
+      '$frontmatterKey: $newChecked',
     );
 
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
@@ -364,13 +355,13 @@ class HugoWidgetState extends State<HugoWidget> {
     final formattedOldDate = dateFormatter.format(oldDate);
     final formattedNewDate = dateFormatter.format(newDate);
 
-    final frontmatterType =
-        widget.source.substring(0, widget.source.indexOf(':')).trim();
+    final yaml = loadYaml(widget.source) as YamlMap;
+    final frontmatterKey = yaml.entries.first.key.toString();
 
     final oldFrontmatterText = fileNavigationProvider.frontMatterText;
     final newFrontmatterText = oldFrontmatterText.replaceFirst(
-      '$frontmatterType: $formattedOldDate',
-      '$frontmatterType: $formattedNewDate',
+      '$frontmatterKey: $formattedOldDate',
+      '$frontmatterKey: $formattedNewDate',
     );
 
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
@@ -386,11 +377,13 @@ class HugoWidgetState extends State<HugoWidget> {
   }
 
   Widget _boolWidget(String source) {
-    frontMatterController.text = Hugo.getValue(source, HugoType.typeBool);
+    frontMatterController.text = Hugo.getValue(source);
     frontMatterController.text.trim();
 
-    String labelText =
-        '${source[0].toUpperCase()}${source.split(':').first.substring(1)}';
+    final yaml = loadYaml(source) as YamlMap;
+    var labelText = yaml.entries.first.key.toString();
+    labelText = '${labelText[0].toUpperCase()}${labelText.substring(1)}';
+
     return SizedBox(
       width: 200,
       child: Wrap(
@@ -427,11 +420,13 @@ class HugoWidgetState extends State<HugoWidget> {
   }
 
   Widget _dateWidget(String source) {
-    frontMatterController.text = Hugo.getValue(source, HugoType.typeDate);
+    frontMatterController.text = Hugo.getValue(source);
     frontMatterController.text.trim();
 
-    String labelText =
-        '${source[0].toUpperCase()}${source.split(':').first.substring(1)}';
+    final yaml = loadYaml(source) as YamlMap;
+    var labelText = yaml.entries.first.key.toString();
+    labelText = '${labelText[0].toUpperCase()}${labelText.substring(1)}';
+
     return SizedBox(
       width: 200,
       child: Wrap(
@@ -514,8 +509,9 @@ class HugoWidgetState extends State<HugoWidget> {
   }
 
   Widget _listWidget(String source) {
-    String labelText =
-        '${source[0].toUpperCase()}${source.split(':').first.substring(1)}';
+    final yaml = loadYaml(source) as YamlMap;
+    var labelText = yaml.entries.first.key.toString();
+    labelText = '${labelText[0].toUpperCase()}${labelText.substring(1)}';
 
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
