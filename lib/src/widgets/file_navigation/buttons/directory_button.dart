@@ -205,6 +205,8 @@ class _DirectoryButtonState extends State<DirectoryButton> {
         ),
         builder: (context, snapshot) {
           return LayoutBuilder(builder: (context, constraints) {
+            final fileNavigationProvider =
+                Provider.of<FileNavigationProvider>(context, listen: false);
             return Material(
               color: Colors.transparent,
               child: CustomTooltip(
@@ -215,11 +217,15 @@ class _DirectoryButtonState extends State<DirectoryButton> {
                       folderContextMenus(
                         context: context,
                         addFile: AddFile(
-                          context,
-                          mounted,
-                          widget.editingPageKey,
-                          Provider.of<FileNavigationProvider>(context,
-                              listen: false),
+                          context: context,
+                          mounted: mounted,
+                          editingPageKey: widget.editingPageKey,
+                          setFileNavigationIndex:
+                              fileNavigationProvider.setFileNavigationIndex,
+                          setInitialTexts:
+                              fileNavigationProvider.setInitialTexts,
+                          fileNavigationIndex:
+                              fileNavigationProvider.fileNavigationIndex,
                         ).addFileContextMenu(savePath: widget.path),
                         addFolder:
                             AddFolder(context, mounted, widget.editingPageKey)

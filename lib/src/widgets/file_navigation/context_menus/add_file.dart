@@ -10,7 +10,6 @@ import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
 import '../../../pages/editing_page.dart';
 import '../../../provider/editing/tabs_provider.dart';
-import '../../../provider/navigation/file_navigation_provider.dart';
 import '../../../provider/navigation/navigation_provider.dart';
 import '../../../utils/preferences.dart';
 import '../../../utils/program_installed.dart';
@@ -21,13 +20,21 @@ import '../../snackbar.dart';
 const TextStyle textStyle = TextStyle(fontSize: 16);
 
 class AddFile {
-  AddFile(this.context, this.mounted, this.editingPageKey,
-      this.fileNavigationProvider);
+  AddFile({
+    required this.context,
+    required this.mounted,
+    required this.editingPageKey,
+    required this.setFileNavigationIndex,
+    required this.setInitialTexts,
+    required this.fileNavigationIndex,
+  });
 
   final BuildContext context;
   final bool mounted;
   final GlobalKey<EditingPageState> editingPageKey;
-  final FileNavigationProvider fileNavigationProvider;
+  final void Function(int) setFileNavigationIndex;
+  final Future<void> Function() setInitialTexts;
+  final int fileNavigationIndex;
 
   String name = 'my-post';
   final TextEditingController nameController = TextEditingController();
@@ -103,23 +110,22 @@ class AddFile {
 
     for (var i = 0; i < allFiles.length; i++) {
       if (allFiles[i].path == finalPath) {
-        fileNavigationProvider.setFileNavigationIndex(i);
+        setFileNavigationIndex(i);
         break;
       }
     }
 
-    await fileNavigationProvider.setInitialTexts();
+    await setInitialTexts();
     await Preferences.setCurrentFile(finalPath);
     await Preferences.setCurrentPath(path);
     editingPageKey.currentState?.updateHugoWidgets();
 
     final tabs = tabsProvider.tabs;
-    tabs.add(MapEntry(finalPath, fileNavigationProvider.fileNavigationIndex));
+    tabs.add(MapEntry(finalPath, fileNavigationIndex));
     await tabsProvider.setTabs(tabs, updateFiles: true);
 
     if ((navigationProvider.navigationIndex ?? 0) > 0) return;
-    tabsProvider.scrollToTab(
-        fileNavigationIndex: fileNavigationProvider.fileNavigationIndex);
+    tabsProvider.scrollToTab(fileNavigationIndex: fileNavigationIndex);
   }
 
   void _newFileDialog({required String path}) async {

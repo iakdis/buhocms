@@ -179,8 +179,8 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return Consumer<NavigationSizeProvider>(
-          builder: (context, navigationSizeProvider, _) {
+      return Consumer2<NavigationSizeProvider, FileNavigationProvider>(builder:
+          (context, navigationSizeProvider, fileNavigationProvider, _) {
         final savePath = Preferences.getCurrentPath();
 
         final windowWidth = MediaQuery.of(context).size.width;
@@ -215,13 +215,16 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                 contextMenu: GenericContextMenu(
                   buttonConfigs: [
                     AddFile(
-                            context,
-                            mounted,
-                            widget.editingPageKey,
-                            Provider.of<FileNavigationProvider>(context,
-                                listen: false))
-                        .addFileContextMenu(
-                            savePath: Preferences.getCurrentPath()),
+                      context: context,
+                      mounted: mounted,
+                      editingPageKey: widget.editingPageKey,
+                      setFileNavigationIndex:
+                          fileNavigationProvider.setFileNavigationIndex,
+                      setInitialTexts: fileNavigationProvider.setInitialTexts,
+                      fileNavigationIndex:
+                          fileNavigationProvider.fileNavigationIndex,
+                    ).addFileContextMenu(
+                        savePath: Preferences.getCurrentPath()),
                     AddFolder(context, mounted, widget.editingPageKey)
                         .addFolderContextMenu(
                             savePath: Preferences.getCurrentPath()),

@@ -58,9 +58,16 @@ void addFile({
   required bool mounted,
   required GlobalKey<EditingPageState> editingPageKey,
 }) {
-  AddFile(context, mounted, editingPageKey,
-          Provider.of<FileNavigationProvider>(context, listen: false))
-      .newFile(
+  final fileNavigationProvider =
+      Provider.of<FileNavigationProvider>(context, listen: false);
+  AddFile(
+    context: context,
+    mounted: mounted,
+    editingPageKey: editingPageKey,
+    setFileNavigationIndex: fileNavigationProvider.setFileNavigationIndex,
+    setInitialTexts: fileNavigationProvider.setInitialTexts,
+    fileNavigationIndex: fileNavigationProvider.fileNavigationIndex,
+  ).newFile(
     path: Preferences.getCurrentPath(),
     editingPageKey: editingPageKey,
   );
