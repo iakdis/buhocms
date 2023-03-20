@@ -35,7 +35,7 @@ class NavigationButton extends StatelessWidget {
                 ? null
                 : () {
                     checkUnsavedBeforeFunction(
-                        editingPageKey: editingPageKey,
+                        context: context,
                         function: () {
                           final navigationProvider =
                               Provider.of<NavigationProvider>(context,

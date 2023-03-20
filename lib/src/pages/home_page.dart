@@ -23,7 +23,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with WindowListener {
-  GlobalKey<EditingPageState> editingPageKey = GlobalKey<EditingPageState>();
   bool closingWindow = false;
   late FocusNode focusNodePage;
 
@@ -48,7 +47,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
 
     exit(
       context: context,
-      editingPageKey: editingPageKey,
+      editingPageKey: context.watch<EditingProvider>().editingPageKey,
       close: () async {
         closingWindow = false;
         if (mounted) {
@@ -61,15 +60,12 @@ class _HomePageState extends State<HomePage> with WindowListener {
   }
 
   Widget _editingPage() {
-    return Consumer<EditingProvider>(
-      builder: (_, editingProvider, __) {
-        return EditingPage(
-          isGUIMode: editingProvider.isGUIMode,
-          key: editingPageKey,
-          editingPageKey: editingPageKey,
-          focusNodePage: focusNodePage,
-        );
-      },
+    final editingProvider = context.watch<EditingProvider>();
+    return EditingPage(
+      isGUIMode: editingProvider.isGUIMode,
+      key: editingProvider.editingPageKey,
+      editingPageKey: editingProvider.editingPageKey,
+      focusNodePage: focusNodePage,
     );
   }
 
@@ -78,7 +74,8 @@ class _HomePageState extends State<HomePage> with WindowListener {
       case 0:
         return _editingPage();
       case 1:
-        return SettingsPage(editingPageKey: editingPageKey);
+        return SettingsPage(
+            editingPageKey: context.watch<EditingProvider>().editingPageKey);
       default:
         return _editingPage();
     }
@@ -88,8 +85,8 @@ class _HomePageState extends State<HomePage> with WindowListener {
   Widget build(BuildContext context) {
     Localization.init(context);
 
-    //final navigationProvider = Provider.of<NavigationProvider>(context);
-    var windowWidth = MediaQuery.of(context).size.width;
+    final editingPageKey = context.watch<EditingProvider>().editingPageKey;
+    final windowWidth = MediaQuery.of(context).size.width;
 
     return CustomMenuBar(
       editingPageKey: editingPageKey,

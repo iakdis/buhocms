@@ -108,8 +108,7 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
         ),
         onChanged: (value) {
           checkUnsavedBeforeFunction(
-              editingPageKey: widget.editingPageKey,
-              function: () => _add(value));
+              context: context, function: () => _add(value));
         },
         itemAsString: (item) => '${item.key} (${item.value.name.substring(4)})',
       ),

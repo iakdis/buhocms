@@ -156,7 +156,7 @@ class _FileButtonState extends State<FileButton> {
     int? insertAt,
   }) {
     checkUnsavedBeforeFunction(
-      editingPageKey: widget.editingPageKey,
+      context: context,
       function: () async {
         final tabsProvider = Provider.of<TabsProvider>(context, listen: false);
         final fileNavigationProvider =
@@ -189,8 +189,7 @@ class _FileButtonState extends State<FileButton> {
           TextSelection(baseOffset: 0, extentOffset: controller.text.length);
     }
 
-    checkUnsavedBeforeFunction(
-        editingPageKey: widget.editingPageKey, function: () => function());
+    checkUnsavedBeforeFunction(context: context, function: () => function());
   }
 
   void _delete() {
@@ -262,8 +261,7 @@ class _FileButtonState extends State<FileButton> {
       );
     }
 
-    checkUnsavedBeforeFunction(
-        editingPageKey: widget.editingPageKey, function: () => function());
+    checkUnsavedBeforeFunction(context: context, function: () => function());
   }
 
   Widget navigationButton() {

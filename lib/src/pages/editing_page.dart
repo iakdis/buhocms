@@ -334,8 +334,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         TextButton.icon(
           onPressed: () {
             checkUnsavedBeforeFunction(
-                editingPageKey: widget.editingPageKey,
-                function: () => setState(() => setVisible()));
+                context: context, function: () => setState(() => setVisible()));
           },
           label: Text(visible
               ? Localization.appLocalizations().hide
@@ -354,7 +353,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       child: ElevatedButton.icon(
         onPressed: () {
           checkUnsavedBeforeFunction(
-              editingPageKey: widget.editingPageKey,
+              context: context,
               function: () =>
                   setState(() => draggableFrontMatter = !draggableFrontMatter));
         },
@@ -375,7 +374,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       child: ElevatedButton.icon(
         onPressed: () {
           checkUnsavedBeforeFunction(
-              editingPageKey: widget.editingPageKey,
+              context: context,
               function: () => setState(() =>
                   editingProvider.setFrontmatterGUIMode(
                       !editingProvider.isFrontmatterGUIMode)));
@@ -413,8 +412,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
           saveFileAndFrontmatter();
         },
         onReorderStart: (index) {
-          checkUnsavedBeforeFunction(
-              editingPageKey: widget.editingPageKey, function: () {});
+          checkUnsavedBeforeFunction(context: context, function: () {});
         },
         children: [
           for (var index = 0; index < hugoWidgets.length; index++)

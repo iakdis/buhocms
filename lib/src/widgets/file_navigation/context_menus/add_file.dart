@@ -246,8 +246,7 @@ class AddFile {
       {required String path,
       required GlobalKey<EditingPageState> editingPageKey}) {
     checkUnsavedBeforeFunction(
-        editingPageKey: editingPageKey,
-        function: () => _newFileDialog(path: path));
+        context: context, function: () => _newFileDialog(path: path));
   }
 
   ContextMenuButtonConfig addFileContextMenu({required String savePath}) {

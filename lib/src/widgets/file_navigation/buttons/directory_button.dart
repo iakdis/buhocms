@@ -131,8 +131,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
           TextSelection(baseOffset: 0, extentOffset: controller.text.length);
     }
 
-    checkUnsavedBeforeFunction(
-        editingPageKey: widget.editingPageKey, function: () => function());
+    checkUnsavedBeforeFunction(context: context, function: () => function());
   }
 
   void _delete() {
@@ -193,8 +192,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
       );
     }
 
-    checkUnsavedBeforeFunction(
-        editingPageKey: widget.editingPageKey, function: () => function());
+    checkUnsavedBeforeFunction(context: context, function: () => function());
   }
 
   Widget navigationDirectoryButton() {

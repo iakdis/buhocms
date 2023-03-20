@@ -83,8 +83,7 @@ class _TabsState extends State<Tabs> {
               tabsProvider.setTabs(tabs);
             },
             onReorderStart: (index) {
-              checkUnsavedBeforeFunction(
-                  editingPageKey: widget.editingPageKey, function: () {});
+              checkUnsavedBeforeFunction(context: context, function: () {});
             },
             children: [
               for (var index = 0; index < tabs.length; index++)
@@ -130,7 +129,7 @@ class _TabState extends State<Tab> {
 
   void _removeTab() {
     checkUnsavedBeforeFunction(
-      editingPageKey: widget.editingPageKey,
+      context: context,
       function: () {
         final tabsProvider = Provider.of<TabsProvider>(context, listen: false);
         tabsProvider.removeTab(widget.index);
@@ -169,7 +168,7 @@ class _TabState extends State<Tab> {
                       ? () {}
                       : () async {
                           checkUnsavedBeforeFunction(
-                            editingPageKey: widget.editingPageKey,
+                            context: context,
                             function: () async {
                               fileNavigationProvider
                                   .setFileNavigationIndex(widget.fileIndex);

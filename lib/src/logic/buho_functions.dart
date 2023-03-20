@@ -30,7 +30,7 @@ void setGUIMode({
   required bool isGUIMode,
 }) {
   checkUnsavedBeforeFunction(
-    editingPageKey: editingPageKey,
+    context: context,
     function: () {
       final editingProvider =
           Provider.of<EditingProvider>(context, listen: false);

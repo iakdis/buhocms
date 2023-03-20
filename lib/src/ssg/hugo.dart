@@ -774,8 +774,7 @@ class HugoWidgetState extends State<HugoWidget> {
                 //color: Colors.blue,
                 onPressed: () {
                   checkUnsavedBeforeFunction(
-                      editingPageKey: widget.editingPageKey,
-                      function: () => _removeFrontMatter());
+                      context: context, function: () => _removeFrontMatter());
                 },
                 child: const Icon(
                   Icons.delete,
@@ -802,8 +801,7 @@ class HugoWidgetState extends State<HugoWidget> {
               //color: Colors.blue,
               onPressed: () {
                 checkUnsavedBeforeFunction(
-                    editingPageKey: widget.editingPageKey,
-                    function: () => _removeFrontMatter());
+                    context: context, function: () => _removeFrontMatter());
               },
               child: const Icon(
                 Icons.delete,

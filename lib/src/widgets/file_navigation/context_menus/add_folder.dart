@@ -146,8 +146,7 @@ class AddFolder {
       {required String path,
       required GlobalKey<EditingPageState> editingPageKey}) {
     checkUnsavedBeforeFunction(
-        editingPageKey: editingPageKey,
-        function: () => _newFolderDialog(path: path));
+        context: context, function: () => _newFolderDialog(path: path));
   }
 
   ContextMenuButtonConfig addFolderContextMenu({required String savePath}) {

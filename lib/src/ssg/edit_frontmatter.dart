@@ -325,8 +325,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                                         ElevatedButton.icon(
                                           onPressed: () {
                                             checkUnsavedBeforeFunction(
-                                              editingPageKey:
-                                                  widget.editingPageKey,
+                                              context: context,
                                               function: () => _edit(items[i],
                                                   setStateFunction:
                                                       setStateFunction),
@@ -341,8 +340,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                                         ElevatedButton.icon(
                                           onPressed: () {
                                             checkUnsavedBeforeFunction(
-                                              editingPageKey:
-                                                  widget.editingPageKey,
+                                              context: context,
                                               function: () => _remove(items[i],
                                                   setStateFunction:
                                                       setStateFunction),
@@ -375,7 +373,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                     ElevatedButton.icon(
                       onPressed: () {
                         checkUnsavedBeforeFunction(
-                          editingPageKey: widget.editingPageKey,
+                          context: context,
                           function: () => addNewFrontMatterTypes(
                               setStateFunction: setStateFunction),
                         );
@@ -662,8 +660,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
     return ElevatedButton.icon(
       onPressed: () {
         checkUnsavedBeforeFunction(
-            editingPageKey: widget.editingPageKey,
-            function: () => editFrontMatterList());
+            context: context, function: () => editFrontMatterList());
       },
       icon: const Icon(Icons.edit),
       label: Text(Localization.appLocalizations().editFrontmatterList),

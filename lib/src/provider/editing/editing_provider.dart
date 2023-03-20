@@ -1,7 +1,13 @@
 import 'package:buhocms/src/utils/preferences.dart';
 import 'package:flutter/material.dart';
 
+import '../../pages/editing_page.dart';
+
 class EditingProvider extends ChangeNotifier {
+  final GlobalKey<EditingPageState> _editingPageKey =
+      GlobalKey<EditingPageState>();
+  GlobalKey<EditingPageState> get editingPageKey => _editingPageKey;
+
   bool _isGUIMode = false;
 
   bool get isGUIMode {
