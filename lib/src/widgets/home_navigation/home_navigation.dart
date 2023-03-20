@@ -1,4 +1,3 @@
-import 'package:buhocms/src/pages/editing_page.dart';
 import 'package:buhocms/src/provider/app/output_provider.dart';
 import 'package:buhocms/src/provider/app/shell_provider.dart';
 import 'package:buhocms/src/utils/globals.dart';
@@ -19,9 +18,7 @@ import '../resize_bar.dart';
 import 'buttons/terminal_output_button.dart';
 
 class HomeNavigationDrawer extends StatefulWidget {
-  const HomeNavigationDrawer({super.key, required this.editingPageKey});
-
-  final GlobalKey<EditingPageState> editingPageKey;
+  const HomeNavigationDrawer({super.key});
 
   @override
   State<HomeNavigationDrawer> createState() => _HomeNavigationDrawerState();
@@ -147,7 +144,6 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                   message: Localization.appLocalizations()
                                       .editingPage,
                                   child: NavigationButton(
-                                    editingPageKey: widget.editingPageKey,
                                     isExtended: isExtended,
                                     icon: Icons.edit,
                                     iconUnselected: Icons.edit_outlined,
@@ -161,17 +157,13 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                   message:
                                       Localization.appLocalizations().guiMode,
                                   child: GUIModeButton(
-                                      isExtended: isExtended,
-                                      isGUIMode: true,
-                                      editingPageKey: widget.editingPageKey),
+                                      isExtended: isExtended, isGUIMode: true),
                                 ),
                                 CustomTooltip(
                                   message:
                                       Localization.appLocalizations().textMode,
                                   child: GUIModeButton(
-                                      isExtended: isExtended,
-                                      isGUIMode: false,
-                                      editingPageKey: widget.editingPageKey),
+                                      isExtended: isExtended, isGUIMode: false),
                                 ),
                                 divider(),
                                 CustomTooltip(
@@ -225,7 +217,6 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                   message:
                                       Localization.appLocalizations().settings,
                                   child: NavigationButton(
-                                    editingPageKey: widget.editingPageKey,
                                     isExtended: isExtended,
                                     icon: Icons.settings,
                                     iconUnselected: Icons.settings_outlined,

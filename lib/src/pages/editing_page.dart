@@ -25,12 +25,10 @@ class EditingPage extends StatefulWidget {
   const EditingPage({
     super.key,
     required this.isGUIMode,
-    required this.editingPageKey,
     required this.focusNodePage,
   });
 
   final bool isGUIMode;
-  final GlobalKey<EditingPageState> editingPageKey;
   final FocusNode focusNodePage;
 
   @override
@@ -172,7 +170,6 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         index: index,
         setStateCallback: saveFileAndFrontmatter,
         key: globalKey[index],
-        editingPageKey: widget.editingPageKey,
       ));
     }
   }
@@ -302,6 +299,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
   }
 
   Future<void> saveFileAndFrontmatter() async {
+    final editingPageKey = context.read<EditingProvider>().editingPageKey;
     for (var i = 0; i < globalKey.length; i++) {
       globalKey[i].currentState?.save();
     }
@@ -312,7 +310,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     unsavedTextProvider
         .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 
-    widget.editingPageKey.currentState?.updateHugoWidgets();
+    editingPageKey.currentState?.updateHugoWidgets();
   }
 
   Widget showHideArea({
@@ -493,7 +491,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                 spacing: 64.0,
                 runSpacing: 8.0,
                 children: [
-                  AddFrontmatterButton(editingPageKey: widget.editingPageKey),
+                  const AddFrontmatterButton(),
                   Wrap(
                     spacing: 8.0,
                     runSpacing: 8.0,
@@ -720,7 +718,6 @@ class EditingPageState extends State<EditingPage> with WindowListener {
               ),
             Expanded(
               child: Tabs(
-                editingPageKey: widget.editingPageKey,
                 globalKey: globalKey,
                 setStateCallback: () => setState(() {}),
               ), //https://github.com/flutter/flutter/issues/75180
@@ -750,7 +747,6 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                     onPressed: () async {
                       revert(
                         context: context,
-                        editingPageKey: widget.editingPageKey,
                         mounted: mounted,
                       );
                     },
@@ -761,9 +757,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                   const SizedBox(width: 8),
                   FloatingActionButton(
                     heroTag: null,
-                    onPressed: () => save(
-                        context: context,
-                        editingPageKey: widget.editingPageKey),
+                    onPressed: () => save(context: context),
                     tooltip: '${Localization.appLocalizations().save} [Ctrl+S]',
                     child: const Icon(Icons.check),
                   ),
@@ -811,10 +805,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                                       const SizedBox(height: 32.0),
                                       ElevatedButton.icon(
                                         onPressed: () => addFile(
-                                            context: context,
-                                            mounted: mounted,
-                                            editingPageKey:
-                                                widget.editingPageKey),
+                                          context: context,
+                                          mounted: mounted,
+                                        ),
                                         icon: const Icon(Icons.text_snippet),
                                         label: Text(
                                             Localization.appLocalizations()
@@ -827,11 +820,10 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                                       const SizedBox(height: 24.0),
                                       ElevatedButton.icon(
                                         onPressed: () => addFolder(
-                                            context: context,
-                                            mounted: mounted,
-                                            setStateCallback: () {},
-                                            editingPageKey:
-                                                widget.editingPageKey),
+                                          context: context,
+                                          mounted: mounted,
+                                          setStateCallback: () {},
+                                        ),
                                         icon: const Icon(Icons.folder_outlined),
                                         label: Text(
                                             Localization.appLocalizations()

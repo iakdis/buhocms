@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../i18n/l10n.dart';
-import '../pages/editing_page.dart';
 import '../pages/create_hugo_site.dart';
 import '../pages/open_hugo_site.dart';
 import '../provider/editing/editing_provider.dart';
@@ -26,7 +25,6 @@ import '../widgets/command_dialog.dart';
 
 void setGUIMode({
   required BuildContext context,
-  required GlobalKey<EditingPageState> editingPageKey,
   required bool isGUIMode,
 }) {
   checkUnsavedBeforeFunction(
@@ -35,7 +33,7 @@ void setGUIMode({
       final editingProvider =
           Provider.of<EditingProvider>(context, listen: false);
       editingProvider.setIsGUIMode(isGUIMode);
-      editingPageKey.currentState?.updateHugoWidgets();
+      editingProvider.editingPageKey.currentState?.updateHugoWidgets();
     },
   );
 }
@@ -56,20 +54,17 @@ void openCurrentPathInFolder(
 void addFile({
   required BuildContext context,
   required bool mounted,
-  required GlobalKey<EditingPageState> editingPageKey,
 }) {
   final fileNavigationProvider =
       Provider.of<FileNavigationProvider>(context, listen: false);
   AddFile(
     context: context,
     mounted: mounted,
-    editingPageKey: editingPageKey,
     setFileNavigationIndex: fileNavigationProvider.setFileNavigationIndex,
     setInitialTexts: fileNavigationProvider.setInitialTexts,
     fileNavigationIndex: fileNavigationProvider.fileNavigationIndex,
   ).newFile(
     path: Preferences.getCurrentPath(),
-    editingPageKey: editingPageKey,
   );
 }
 
@@ -77,19 +72,17 @@ void addFolder({
   required BuildContext context,
   required bool mounted,
   required Function setStateCallback,
-  required GlobalKey<EditingPageState> editingPageKey,
 }) {
-  AddFolder(context, mounted, editingPageKey).newFolder(
+  AddFolder(context, mounted).newFolder(
     path: Preferences.getCurrentPath(),
-    editingPageKey: editingPageKey,
   );
 }
 
 void save({
   required BuildContext context,
-  required GlobalKey<EditingPageState> editingPageKey,
   bool checkUnsaved = true,
 }) {
+  final editingPageKey = context.read<EditingProvider>().editingPageKey;
   if (editingPageKey.currentState == null) return;
 
   final unsavedTextProvider =
@@ -113,9 +106,9 @@ void save({
 
 void revert({
   required BuildContext context,
-  required GlobalKey<EditingPageState> editingPageKey,
   required bool mounted,
 }) async {
+  final editingPageKey = context.read<EditingProvider>().editingPageKey;
   if (editingPageKey.currentState == null) return;
 
   final unsavedTextProvider =
@@ -335,13 +328,14 @@ void openHugoPublicFolder({required BuildContext context}) {
 
 void exit({
   required BuildContext context,
-  required GlobalKey<EditingPageState> editingPageKey,
   required Function close,
   Function(bool)? setClosingWindow,
 }) async {
   final shellProvider = Provider.of<ShellProvider>(context, listen: false);
   final unsavedTextProvider =
       Provider.of<UnsavedTextProvider>(context, listen: false);
+  final editingPageKey = context.read<EditingProvider>().editingPageKey;
+
   var unsaved = editingPageKey.currentState != null
       ? unsavedTextProvider.unsaved(
           globalKey: editingPageKey.currentState!.globalKey)

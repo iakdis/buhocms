@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> with WindowListener {
 
     exit(
       context: context,
-      editingPageKey: context.watch<EditingProvider>().editingPageKey,
       close: () async {
         closingWindow = false;
         if (mounted) {
@@ -64,7 +63,6 @@ class _HomePageState extends State<HomePage> with WindowListener {
     return EditingPage(
       isGUIMode: editingProvider.isGUIMode,
       key: editingProvider.editingPageKey,
-      editingPageKey: editingProvider.editingPageKey,
       focusNodePage: focusNodePage,
     );
   }
@@ -74,8 +72,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
       case 0:
         return _editingPage();
       case 1:
-        return SettingsPage(
-            editingPageKey: context.watch<EditingProvider>().editingPageKey);
+        return const SettingsPage();
       default:
         return _editingPage();
     }
@@ -85,11 +82,9 @@ class _HomePageState extends State<HomePage> with WindowListener {
   Widget build(BuildContext context) {
     Localization.init(context);
 
-    final editingPageKey = context.watch<EditingProvider>().editingPageKey;
     final windowWidth = MediaQuery.of(context).size.width;
 
     return CustomMenuBar(
-      editingPageKey: editingPageKey,
       close: windowManager.destroy,
       child: ContextMenuOverlay(
         child: GestureDetector(
@@ -101,8 +96,8 @@ class _HomePageState extends State<HomePage> with WindowListener {
                   ? [
                       Row(
                         children: [
-                          HomeNavigationDrawer(editingPageKey: editingPageKey),
-                          FilesNavigationDrawer(editingPageKey: editingPageKey),
+                          const HomeNavigationDrawer(),
+                          const FilesNavigationDrawer(),
                           Expanded(
                             child: Consumer<NavigationProvider>(
                               builder: (_, navigationProvider, __) {
@@ -127,9 +122,9 @@ class _HomePageState extends State<HomePage> with WindowListener {
                         ),
                       ),
                       Row(
-                        children: [
-                          HomeNavigationDrawer(editingPageKey: editingPageKey),
-                          FilesNavigationDrawer(editingPageKey: editingPageKey),
+                        children: const [
+                          HomeNavigationDrawer(),
+                          FilesNavigationDrawer(),
                         ],
                       ),
                       const TerminalOutputDrawer(),

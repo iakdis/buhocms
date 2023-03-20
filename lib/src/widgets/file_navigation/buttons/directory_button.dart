@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
-import '../../../pages/editing_page.dart';
 import '../../../provider/navigation/file_navigation_provider.dart';
 import '../../../provider/navigation/navigation_provider.dart';
 import '../../../utils/preferences.dart';
@@ -27,7 +26,6 @@ class DirectoryButton extends StatefulWidget {
     required this.path,
     required this.isExtended,
     required this.setStateCallback,
-    required this.editingPageKey,
     required this.insideFolder,
   }) : super(key: key);
 
@@ -36,7 +34,6 @@ class DirectoryButton extends StatefulWidget {
   final String path;
   final bool isExtended;
   final Function setStateCallback;
-  final GlobalKey<EditingPageState> editingPageKey;
   final bool insideFolder;
 
   @override
@@ -217,7 +214,6 @@ class _DirectoryButtonState extends State<DirectoryButton> {
                         addFile: AddFile(
                           context: context,
                           mounted: mounted,
-                          editingPageKey: widget.editingPageKey,
                           setFileNavigationIndex:
                               fileNavigationProvider.setFileNavigationIndex,
                           setInitialTexts:
@@ -225,9 +221,8 @@ class _DirectoryButtonState extends State<DirectoryButton> {
                           fileNavigationIndex:
                               fileNavigationProvider.fileNavigationIndex,
                         ).addFileContextMenu(savePath: widget.path),
-                        addFolder:
-                            AddFolder(context, mounted, widget.editingPageKey)
-                                .addFolderContextMenu(savePath: widget.path),
+                        addFolder: AddFolder(context, mounted)
+                            .addFolderContextMenu(savePath: widget.path),
                         rename: () => _rename(),
                         openInFolder: () => openInFolder(
                             path: widget.path, keepPathTrailing: false),

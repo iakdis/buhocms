@@ -1,4 +1,3 @@
-import 'package:buhocms/src/pages/editing_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../i18n/l10n.dart';
@@ -8,12 +7,10 @@ class CreateNewButton extends StatelessWidget {
   const CreateNewButton({
     super.key,
     required this.mounted,
-    required this.editingPageKey,
     required this.isExtended,
   });
 
   final bool mounted;
-  final GlobalKey<EditingPageState> editingPageKey;
   final bool isExtended;
 
   Widget _createNewButton() {
@@ -62,7 +59,6 @@ class CreateNewButton extends StatelessWidget {
           onTap: () => addFile(
             context: context,
             mounted: mounted,
-            editingPageKey: editingPageKey,
           ),
         ),
       );

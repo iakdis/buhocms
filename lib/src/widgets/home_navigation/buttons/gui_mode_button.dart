@@ -1,4 +1,3 @@
-import 'package:buhocms/src/pages/editing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,10 +10,8 @@ class GUIModeButton extends StatelessWidget {
     super.key,
     required this.isExtended,
     required this.isGUIMode,
-    required this.editingPageKey,
   });
 
-  final GlobalKey<EditingPageState> editingPageKey;
   final bool isGUIMode;
   final bool isExtended;
 
@@ -30,7 +27,6 @@ class GUIModeButton extends StatelessWidget {
                 ? null
                 : () => setGUIMode(
                       context: context,
-                      editingPageKey: editingPageKey,
                       isGUIMode: isGUIMode,
                     ),
             child: Padding(

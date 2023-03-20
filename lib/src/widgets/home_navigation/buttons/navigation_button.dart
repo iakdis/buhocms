@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../pages/editing_page.dart';
 import '../../../provider/navigation/navigation_provider.dart';
 import '../../../utils/unsaved_check.dart';
 
 class NavigationButton extends StatelessWidget {
   const NavigationButton({
     super.key,
-    required this.editingPageKey,
     required this.isExtended,
     required this.icon,
     required this.iconUnselected,
@@ -16,7 +14,6 @@ class NavigationButton extends StatelessWidget {
     required this.index,
   });
 
-  final GlobalKey<EditingPageState> editingPageKey;
   final bool isExtended;
   final IconData icon;
   final IconData iconUnselected;

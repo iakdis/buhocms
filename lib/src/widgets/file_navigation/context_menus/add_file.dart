@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
-import '../../../pages/editing_page.dart';
+import '../../../provider/editing/editing_provider.dart';
 import '../../../provider/editing/tabs_provider.dart';
 import '../../../provider/navigation/navigation_provider.dart';
 import '../../../utils/preferences.dart';
@@ -23,7 +23,6 @@ class AddFile {
   AddFile({
     required this.context,
     required this.mounted,
-    required this.editingPageKey,
     required this.setFileNavigationIndex,
     required this.setInitialTexts,
     required this.fileNavigationIndex,
@@ -31,7 +30,6 @@ class AddFile {
 
   final BuildContext context;
   final bool mounted;
-  final GlobalKey<EditingPageState> editingPageKey;
   final void Function(int) setFileNavigationIndex;
   final Future<void> Function() setInitialTexts;
   final int fileNavigationIndex;
@@ -97,6 +95,7 @@ class AddFile {
     final tabsProvider = Provider.of<TabsProvider>(context, listen: false);
     final navigationProvider =
         Provider.of<NavigationProvider>(context, listen: false);
+    final editingPageKey = context.read<EditingProvider>().editingPageKey;
 
     setState(() => empty = name.isEmpty);
     if (empty) return;
@@ -242,9 +241,7 @@ class AddFile {
     }
   }
 
-  void newFile(
-      {required String path,
-      required GlobalKey<EditingPageState> editingPageKey}) {
+  void newFile({required String path}) {
     checkUnsavedBeforeFunction(
         context: context, function: () => _newFileDialog(path: path));
   }
@@ -253,10 +250,7 @@ class AddFile {
     return ContextMenuButtonConfig(
       Localization.appLocalizations().newPost,
       icon: const Icon(Icons.post_add, size: 20),
-      onPressed: () {
-        newFile(path: savePath, editingPageKey: editingPageKey);
-        //_newFolder(path:'${Preferences.getSavePath()}');
-      },
+      onPressed: () => newFile(path: savePath),
     );
   }
 }

@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:buhocms/src/provider/editing/editing_provider.dart';
 import 'package:buhocms/src/widgets/tooltip.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../pages/editing_page.dart';
 import '../../provider/navigation/file_navigation_provider.dart';
 import '../../provider/editing/tabs_provider.dart';
 import '../../provider/editing/unsaved_text_provider.dart';
@@ -15,12 +15,10 @@ import '../../utils/unsaved_check.dart';
 class Tabs extends StatefulWidget {
   const Tabs({
     super.key,
-    required this.editingPageKey,
     required this.globalKey,
     required this.setStateCallback,
   });
 
-  final GlobalKey<EditingPageState> editingPageKey;
   final List<GlobalKey<HugoWidgetState>> globalKey;
   final Function setStateCallback;
 
@@ -54,7 +52,6 @@ class _TabsState extends State<Tabs> {
         (e) {
           return Tab(
             key: tabsProvider.globalKeys[e.key],
-            editingPageKey: widget.editingPageKey,
             globalKey: widget.globalKey,
             setStateCallback: widget.setStateCallback,
             index: e.key,
@@ -105,7 +102,6 @@ class _TabsState extends State<Tabs> {
 class Tab extends StatefulWidget {
   const Tab({
     Key? key,
-    required this.editingPageKey,
     required this.globalKey,
     required this.setStateCallback,
     required this.index,
@@ -113,7 +109,6 @@ class Tab extends StatefulWidget {
     required this.fileIndex,
   }) : super(key: key);
 
-  final GlobalKey<EditingPageState> editingPageKey;
   final List<GlobalKey<HugoWidgetState>> globalKey;
   final Function setStateCallback;
   final int index;
@@ -148,6 +143,7 @@ class _TabState extends State<Tab> {
         Provider.of<FileNavigationProvider>(context, listen: false);
     final unsavedTextProvider =
         Provider.of<UnsavedTextProvider>(context, listen: false);
+    final editingPageKey = context.read<EditingProvider>().editingPageKey;
 
     return CustomTooltip(
       message: widget.title.substring(widget.title.indexOf('content')),
@@ -176,8 +172,7 @@ class _TabState extends State<Tab> {
                               await Preferences.setCurrentFile(widget.title);
                               await fileNavigationProvider.setInitialTexts();
 
-                              widget.editingPageKey.currentState
-                                  ?.updateHugoWidgets();
+                              editingPageKey.currentState?.updateHugoWidgets();
                             },
                           );
                           print(

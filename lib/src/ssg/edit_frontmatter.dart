@@ -6,7 +6,6 @@ import 'package:yaml/yaml.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/files.dart';
-import '../pages/editing_page.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
 import '../widgets/snackbar.dart';
@@ -138,10 +137,7 @@ void showAutoDialog({
 }
 
 class EditFrontmatterListButton extends StatefulWidget {
-  const EditFrontmatterListButton({Key? key, required this.editingPageKey})
-      : super(key: key);
-
-  final GlobalKey<EditingPageState> editingPageKey;
+  const EditFrontmatterListButton({Key? key}) : super(key: key);
 
   @override
   State<EditFrontmatterListButton> createState() =>

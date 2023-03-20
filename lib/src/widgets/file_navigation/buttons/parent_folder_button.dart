@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import '../../../i18n/l10n.dart';
-import '../../../pages/editing_page.dart';
 import '../../../utils/preferences.dart';
 import '../../snackbar.dart';
 
@@ -11,12 +10,10 @@ class ParentFolderButton extends StatelessWidget {
   const ParentFolderButton({
     super.key,
     required this.setStateCallback,
-    required this.editingPageKey,
     required this.isExtended,
   });
 
   final Function setStateCallback;
-  final GlobalKey<EditingPageState> editingPageKey;
   final bool isExtended;
 
   Widget _parentFolderButton() {

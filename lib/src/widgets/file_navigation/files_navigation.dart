@@ -16,19 +16,13 @@ import 'package:provider/provider.dart';
 
 import '../../i18n/l10n.dart';
 import '../../logic/files.dart';
-import '../../pages/editing_page.dart';
 import '../../utils/globals.dart';
 import '../../utils/preferences.dart';
 import 'context_menus/add_file.dart';
 import 'context_menus/add_folder.dart';
 
 class FilesNavigationDrawer extends StatefulWidget {
-  const FilesNavigationDrawer({
-    super.key,
-    required this.editingPageKey,
-  });
-
-  final GlobalKey<EditingPageState> editingPageKey;
+  const FilesNavigationDrawer({super.key});
 
   @override
   State<FilesNavigationDrawer> createState() => _FilesNavigationDrawerState();
@@ -131,7 +125,6 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                       path: snapshot.data?[index].path ?? 'No file path found',
                       isExtended: isExtended,
                       setStateCallback: setStateCallback,
-                      editingPageKey: widget.editingPageKey,
                       insideFolder: false,
                     ),
                   );
@@ -162,7 +155,6 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                       isExtended: isExtended,
                       insideFolder: false,
                       setStateCallback: setStateCallback,
-                      editingPageKey: widget.editingPageKey,
                     ),
                   );
                 } else {
@@ -217,7 +209,6 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                     AddFile(
                       context: context,
                       mounted: mounted,
-                      editingPageKey: widget.editingPageKey,
                       setFileNavigationIndex:
                           fileNavigationProvider.setFileNavigationIndex,
                       setInitialTexts: fileNavigationProvider.setInitialTexts,
@@ -225,9 +216,8 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                           fileNavigationProvider.fileNavigationIndex,
                     ).addFileContextMenu(
                         savePath: Preferences.getCurrentPath()),
-                    AddFolder(context, mounted, widget.editingPageKey)
-                        .addFolderContextMenu(
-                            savePath: Preferences.getCurrentPath()),
+                    AddFolder(context, mounted).addFolderContextMenu(
+                        savePath: Preferences.getCurrentPath()),
                     ContextMenuButtonConfig(
                       Localization.appLocalizations().openInFileExplorer,
                       icon: const Icon(Icons.open_in_new, size: 20),
@@ -267,7 +257,6 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                                       .substring(savePath.indexOf('content'))),
                               child: ParentFolderButton(
                                   setStateCallback: setStateCallback,
-                                  editingPageKey: widget.editingPageKey,
                                   isExtended: isExtended),
                             ),
                             SizedBox(
@@ -292,9 +281,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                             CustomTooltip(
                               message: Localization.appLocalizations().newPost,
                               child: CreateNewButton(
-                                  mounted: mounted,
-                                  editingPageKey: widget.editingPageKey,
-                                  isExtended: isExtended),
+                                  mounted: mounted, isExtended: isExtended),
                             ),
                           ],
                         ),

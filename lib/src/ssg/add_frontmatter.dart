@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
-import '../pages/editing_page.dart';
 import '../provider/navigation/file_navigation_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
@@ -13,12 +12,7 @@ import '../widgets/snackbar.dart';
 import 'hugo.dart';
 
 class AddFrontmatterButton extends StatefulWidget {
-  const AddFrontmatterButton({
-    required this.editingPageKey,
-    super.key,
-  });
-
-  final GlobalKey<EditingPageState> editingPageKey;
+  const AddFrontmatterButton({super.key});
 
   @override
   State<AddFrontmatterButton> createState() => _AddFrontmatterButtonState();
@@ -69,7 +63,6 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
     );
     save(
       context: context,
-      editingPageKey: widget.editingPageKey,
       checkUnsaved: false,
     );
   }

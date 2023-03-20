@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
-import '../../../pages/editing_page.dart';
+import '../../../provider/editing/editing_provider.dart';
 import '../../../provider/navigation/file_navigation_provider.dart';
 import '../../../provider/navigation/navigation_provider.dart';
 import '../../../utils/preferences.dart';
@@ -27,7 +27,6 @@ class FileButton extends StatefulWidget {
     required this.isExtended,
     required this.insideFolder,
     required this.setStateCallback,
-    required this.editingPageKey,
   }) : super(key: key);
 
   final String buttonText;
@@ -36,7 +35,6 @@ class FileButton extends StatefulWidget {
   final bool isExtended;
   final bool insideFolder;
   final Function setStateCallback;
-  final GlobalKey<EditingPageState> editingPageKey;
 
   @override
   State<FileButton> createState() => _FileButtonState();
@@ -161,11 +159,12 @@ class _FileButtonState extends State<FileButton> {
         final tabsProvider = Provider.of<TabsProvider>(context, listen: false);
         final fileNavigationProvider =
             Provider.of<FileNavigationProvider>(context, listen: false);
+        final editingPageKey = context.read<EditingProvider>().editingPageKey;
 
         fileNavigationProvider.setFileNavigationIndex(index);
         await Preferences.setCurrentFile(path);
         await fileNavigationProvider.setInitialTexts();
-        widget.editingPageKey.currentState?.updateHugoWidgets();
+        editingPageKey.currentState?.updateHugoWidgets();
 
         final tabs = tabsProvider.tabs;
         final insertAtNormal = tabs.length - 1 >= 0 ? tabs.length : 0;

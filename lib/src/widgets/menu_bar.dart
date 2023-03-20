@@ -6,7 +6,6 @@ import 'package:window_manager/window_manager.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
-import '../pages/editing_page.dart';
 import '../provider/navigation/navigation_provider.dart';
 import '../utils/preferences.dart';
 
@@ -112,12 +111,10 @@ class CustomMenuBar extends StatefulWidget {
   const CustomMenuBar({
     super.key,
     required this.child,
-    required this.editingPageKey,
     required this.close,
   });
 
   final Widget child;
-  final GlobalKey<EditingPageState> editingPageKey;
   final Function close;
 
   @override
@@ -167,8 +164,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
         text: barButtonText(Localization.appLocalizations().file),
         menuChildren: [
           MenuButton(
-            onPressed: () =>
-                save(context: context, editingPageKey: widget.editingPageKey),
+            onPressed: () => save(context: context),
             icon: const Icon(Icons.save),
             text: menuButtonText(Localization.appLocalizations().save),
             shortcut:
@@ -176,10 +172,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
             shortcutText: 'Ctrl+S',
           ),
           MenuButton(
-            onPressed: () => revert(
-                context: context,
-                editingPageKey: widget.editingPageKey,
-                mounted: mounted),
+            onPressed: () => revert(context: context, mounted: mounted),
             icon: const Icon(Icons.undo),
             text: menuButtonText(Localization.appLocalizations().revertChanges),
             shortcut:
@@ -191,7 +184,6 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
             onPressed: () => addFile(
               context: context,
               mounted: mounted,
-              editingPageKey: widget.editingPageKey,
             ),
             icon: const Icon(Icons.add),
             text: menuButtonText(Localization.appLocalizations().newPost),
@@ -207,7 +199,6 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
                 Provider.of<NavigationProvider>(context, listen: false)
                     .notifyAllListeners();
               },
-              editingPageKey: widget.editingPageKey,
             ),
             icon: const Icon(Icons.create_new_folder_outlined),
             text: menuButtonText(Localization.appLocalizations().newFolder),
@@ -258,7 +249,6 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           MenuButton(
             onPressed: () => exit(
               context: context,
-              editingPageKey: widget.editingPageKey,
               close: widget.close,
             ),
             shortcut:
@@ -291,7 +281,6 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           MenuButton(
             onPressed: () => setGUIMode(
               context: context,
-              editingPageKey: widget.editingPageKey,
               isGUIMode: true,
             ),
             icon: const Icon(Icons.table_chart),
@@ -303,7 +292,6 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           MenuButton(
             onPressed: () => setGUIMode(
               context: context,
-              editingPageKey: widget.editingPageKey,
               isGUIMode: false,
             ),
             icon: const Icon(Icons.text_snippet_outlined),

@@ -21,12 +21,7 @@ import 'editing_page.dart';
 import 'onboarding_page.dart';
 
 class SettingsButton extends StatelessWidget {
-  const SettingsButton({
-    Key? key,
-    required this.editingPageKey,
-  }) : super(key: key);
-
-  final GlobalKey<EditingPageState> editingPageKey;
+  const SettingsButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +29,7 @@ class SettingsButton extends StatelessWidget {
       onPressed: () async {
         await Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => SettingsPage(editingPageKey: editingPageKey),
+            builder: (context) => const SettingsPage(),
           ),
         );
       },
@@ -47,12 +42,7 @@ class SettingsButton extends StatelessWidget {
 }
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({
-    Key? key,
-    required this.editingPageKey,
-  }) : super(key: key);
-
-  final GlobalKey<EditingPageState> editingPageKey;
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -419,8 +409,7 @@ class _SettingsPageState extends State<SettingsPage> {
         subtitle: Text(
           Localization.appLocalizations().editFrontmatterList_Description,
         ),
-        trailing:
-            EditFrontmatterListButton(editingPageKey: widget.editingPageKey),
+        trailing: const EditFrontmatterListButton(),
       );
     });
   }

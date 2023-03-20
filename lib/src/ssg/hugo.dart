@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:buhocms/src/pages/editing_page.dart';
 import 'package:buhocms/src/provider/editing/unsaved_text_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -117,13 +116,11 @@ class HugoWidget extends StatefulWidget {
     required this.source,
     required this.index,
     required this.setStateCallback,
-    required this.editingPageKey,
   });
 
   final String source;
   final int index;
   final Function setStateCallback;
-  final GlobalKey<EditingPageState> editingPageKey;
 
   @override
   State<HugoWidget> createState() => HugoWidgetState();

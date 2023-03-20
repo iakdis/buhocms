@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
-import '../../../pages/editing_page.dart';
 import '../../../utils/preferences.dart';
 import '../../../utils/unsaved_check.dart';
 import '../../command_dialog.dart';
@@ -15,11 +14,10 @@ import '../../snackbar.dart';
 const TextStyle textStyle = TextStyle(fontSize: 16);
 
 class AddFolder {
-  AddFolder(this.context, this.mounted, this.editingPageKey);
+  AddFolder(this.context, this.mounted);
 
   final BuildContext context;
   final bool mounted;
-  final GlobalKey<EditingPageState> editingPageKey;
 
   String folderName = 'posts';
   final TextEditingController folderNameController = TextEditingController();
@@ -142,9 +140,7 @@ class AddFolder {
     }
   }
 
-  void newFolder(
-      {required String path,
-      required GlobalKey<EditingPageState> editingPageKey}) {
+  void newFolder({required String path}) {
     checkUnsavedBeforeFunction(
         context: context, function: () => _newFolderDialog(path: path));
   }
@@ -153,10 +149,7 @@ class AddFolder {
     return ContextMenuButtonConfig(
       Localization.appLocalizations().newFolder,
       icon: const Icon(Icons.create_new_folder_outlined, size: 20),
-      onPressed: () {
-        newFolder(path: savePath, editingPageKey: editingPageKey);
-        //_newFolder(path:'${Preferences.getSavePath()}');
-      },
+      onPressed: () => newFolder(path: savePath),
     );
   }
 }
