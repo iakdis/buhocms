@@ -16,7 +16,7 @@ class ParentFolderButton extends StatelessWidget {
   final Function setStateCallback;
   final bool isExtended;
 
-  Widget _parentFolderButton() {
+  Widget parentFolderButton() {
     var savePath = Preferences.getCurrentPath();
     if (savePath.endsWith(Platform.pathSeparator)) {
       savePath = savePath.substring(0, savePath.length - 1);
@@ -42,27 +42,26 @@ class ParentFolderButton extends StatelessWidget {
                   size: 32.0,
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
-                isExtended
-                    ? Row(
-                        children: [
-                          const SizedBox(width: 16.0),
-                          SizedBox(
-                            width: constraints.maxWidth - 80,
-                            child: Text(
-                              softWrap: false,
-                              maxLines: 1,
-                              '${Platform.pathSeparator}${savePath.split(Platform.pathSeparator).last.replaceAll('', '\u{200B}')}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                overflow: TextOverflow
-                                    .ellipsis, //https://github.com/flutter/flutter/issues/18761 "Text overflow with ellipsis is weird and ugly by design"
-                              ),
-                            ),
+                if (isExtended)
+                  Row(
+                    children: [
+                      const SizedBox(width: 16.0),
+                      SizedBox(
+                        width: constraints.maxWidth - 80,
+                        child: Text(
+                          softWrap: false,
+                          maxLines: 1,
+                          '${Platform.pathSeparator}${savePath.split(Platform.pathSeparator).last.replaceAll('', '\u{200B}')}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            overflow: TextOverflow
+                                .ellipsis, //https://github.com/flutter/flutter/issues/18761 "Text overflow with ellipsis is weird and ugly by design"
                           ),
-                        ],
-                      )
-                    : Container(),
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
@@ -84,7 +83,5 @@ class ParentFolderButton extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _parentFolderButton();
-  }
+  Widget build(BuildContext context) => parentFolderButton();
 }

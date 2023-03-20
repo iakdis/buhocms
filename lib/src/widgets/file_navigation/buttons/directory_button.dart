@@ -42,7 +42,7 @@ class DirectoryButton extends StatefulWidget {
 
 class _DirectoryButtonState extends State<DirectoryButton> {
   TextEditingController controller = TextEditingController();
-  late FocusNode focusNode; // = FocusNode();
+  late FocusNode focusNode;
   late FocusNode focusNodeButton;
   bool controllerEnabled = false;
 
@@ -54,9 +54,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
 
     focusNode.addListener(() {
       if (!focusNode.hasFocus) {
-        setState(() {
-          controllerEnabled = false;
-        });
+        setState(() => controllerEnabled = false);
       }
     });
 
@@ -195,9 +193,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
   Widget navigationDirectoryButton() {
     return FutureBuilder(
         future: getAllFilesAndDirectoriesInDirectory(
-          path: widget.path,
-          recursive: false,
-        ),
+            path: widget.path, recursive: false),
         builder: (context, snapshot) {
           return LayoutBuilder(builder: (context, constraints) {
             final fileNavigationProvider =
@@ -276,39 +272,33 @@ class _DirectoryButtonState extends State<DirectoryButton> {
                                         .colorScheme
                                         .onSecondary,
                                   ),
-                                  widget.isExtended
-                                      ? Row(
-                                          children: [
-                                            const SizedBox(width: 16.0),
-                                            SizedBox(
-                                              width: constraints.maxWidth -
-                                                  (widget.insideFolder
-                                                      ? 100
-                                                      : 80),
-                                              child: controllerEnabled
-                                                  ? TextField(
-                                                      controller: controller,
-                                                      style: const TextStyle(
-                                                          color: Colors.white),
-                                                      //enabled: controllerEnabled,
-                                                      autofocus: true,
-                                                      focusNode: focusNode,
-                                                      onSubmitted:
-                                                          (text) async {
-                                                        await rename(text);
-                                                      },
-                                                    )
-                                                  : Text(
-                                                      widget.buttonText,
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 16,
-                                                      ),
-                                                    ),
-                                            ),
-                                          ],
-                                        )
-                                      : Container(),
+                                  if (widget.isExtended)
+                                    Row(
+                                      children: [
+                                        const SizedBox(width: 16.0),
+                                        SizedBox(
+                                          width: constraints.maxWidth -
+                                              (widget.insideFolder ? 100 : 80),
+                                          child: controllerEnabled
+                                              ? TextField(
+                                                  controller: controller,
+                                                  style: const TextStyle(
+                                                      color: Colors.white),
+                                                  autofocus: true,
+                                                  focusNode: focusNode,
+                                                  onSubmitted: (text) async =>
+                                                      await rename(text),
+                                                )
+                                              : Text(
+                                                  widget.buttonText,
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                        ),
+                                      ],
+                                    ),
                                 ]),
                           ),
                         ),
@@ -323,7 +313,5 @@ class _DirectoryButtonState extends State<DirectoryButton> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return navigationDirectoryButton();
-  }
+  Widget build(BuildContext context) => navigationDirectoryButton();
 }

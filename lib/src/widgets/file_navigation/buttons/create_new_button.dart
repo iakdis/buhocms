@@ -13,7 +13,7 @@ class CreateNewButton extends StatelessWidget {
   final bool mounted;
   final bool isExtended;
 
-  Widget _createNewButton() {
+  Widget createNewButton() {
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -33,40 +33,34 @@ class CreateNewButton extends StatelessWidget {
                   size: 32.0,
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
-                isExtended
-                    ? Row(
-                        children: [
-                          const SizedBox(width: 16.0),
-                          SizedBox(
-                            width: constraints.maxWidth - 80,
-                            child: Text(
-                              Localization.appLocalizations()
-                                  .newPost
-                                  .replaceAll('', '\u{200B}'),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
+                if (isExtended)
+                  Row(
+                    children: [
+                      const SizedBox(width: 16.0),
+                      SizedBox(
+                        width: constraints.maxWidth - 80,
+                        child: Text(
+                          Localization.appLocalizations()
+                              .newPost
+                              .replaceAll('', '\u{200B}'),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ],
-                      )
-                    : Container(),
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
-          onTap: () => addFile(
-            context: context,
-            mounted: mounted,
-          ),
+          onTap: () => addFile(context: context, mounted: mounted),
         ),
       );
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _createNewButton();
-  }
+  Widget build(BuildContext context) => createNewButton();
 }

@@ -90,9 +90,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
     );
   }
 
-  void setStateCallback() {
-    setState(() {});
-  }
+  void setStateCallback() => setState(() {});
 
   Widget _listFilesAndDirectories() {
     print(Preferences.getCurrentPath());
@@ -320,9 +318,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                     }
                   }
                 },
-                onEnd: () {
-                  Preferences.setFileNavigationSize(finalSize);
-                },
+                onEnd: () => Preferences.setFileNavigationSize(finalSize),
               ),
             ),
           ],

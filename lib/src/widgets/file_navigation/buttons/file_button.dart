@@ -179,9 +179,7 @@ class _FileButtonState extends State<FileButton> {
 
   void _rename() {
     function() {
-      setState(() {
-        controllerEnabled = true;
-      });
+      setState(() => controllerEnabled = true);
       focusNode.requestFocus();
 
       controller.selection =
@@ -264,8 +262,6 @@ class _FileButtonState extends State<FileButton> {
   }
 
   Widget navigationButton() {
-    //final fileNavigationProvider = Provider.of<FileNavigationProvider>(context);
-
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -337,44 +333,43 @@ class _FileButtonState extends State<FileButton> {
                                       .secondaryContainer
                                   : Theme.of(context).colorScheme.onSecondary,
                             ),
-                            widget.isExtended
-                                ? Row(
-                                    children: [
-                                      const SizedBox(width: 16.0),
-                                      SizedBox(
-                                        width: constraints.maxWidth -
-                                            (widget.insideFolder ? 100 : 80),
-                                        child: controllerEnabled
-                                            ? TextField(
-                                                controller: controller,
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                                //enabled: controllerEnabled,
-                                                autofocus: true,
-                                                focusNode: focusNode,
-                                                onSubmitted: (text) async {
-                                                  await rename('$text.md');
-                                                },
-                                              )
-                                            : Text(
-                                                widget.buttonText,
-                                                style: TextStyle(
-                                                  color: widget.index ==
-                                                          fileNavigationProvider
-                                                              .fileNavigationIndex
-                                                      ? Theme.of(context)
-                                                          .colorScheme
-                                                          .secondaryContainer
-                                                      : Theme.of(context)
-                                                          .colorScheme
-                                                          .onSecondary,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(),
+                            if (widget.isExtended)
+                              Row(
+                                children: [
+                                  const SizedBox(width: 16.0),
+                                  SizedBox(
+                                    width: constraints.maxWidth -
+                                        (widget.insideFolder ? 100 : 80),
+                                    child: controllerEnabled
+                                        ? TextField(
+                                            controller: controller,
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                            //enabled: controllerEnabled,
+                                            autofocus: true,
+                                            focusNode: focusNode,
+                                            onSubmitted: (text) async {
+                                              await rename('$text.md');
+                                            },
+                                          )
+                                        : Text(
+                                            widget.buttonText,
+                                            style: TextStyle(
+                                              color: widget.index ==
+                                                      fileNavigationProvider
+                                                          .fileNavigationIndex
+                                                  ? Theme.of(context)
+                                                      .colorScheme
+                                                      .secondaryContainer
+                                                  : Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondary,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                  ),
+                                ],
+                              ),
                           ],
                         ),
                       ), //this.index = index),
@@ -390,7 +385,5 @@ class _FileButtonState extends State<FileButton> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return navigationButton();
-  }
+  Widget build(BuildContext context) => navigationButton();
 }

@@ -79,10 +79,7 @@ class AddFile {
       workingDirectory: Preferences.getSitePath(),
       command: commandToRun,
       successFunction: () {
-        showSnackbar(
-          text: snackbarText,
-          seconds: 4,
-        );
+        showSnackbar(text: snackbarText, seconds: 4);
         if (mounted) refreshFiles(context: context);
       },
     );
@@ -156,19 +153,13 @@ class AddFile {
                     TextSpan(
                       text: path.substring(path.indexOf('content')),
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                          color: Theme.of(context).colorScheme.primary),
                     ),
                   ])),
               icon: Icons.note_add,
               expansionIcon: Icons.terminal,
               expansionTitle: Localization.appLocalizations().terminal,
-              yes: empty
-                  ? null
-                  : () => _create(
-                        path: path,
-                        setState: setState,
-                      ),
+              yes: empty ? null : () => _create(path: path, setState: setState),
               dialogChildren: [
                 CustomTextField(
                   leading: Text(Localization.appLocalizations().name,
@@ -226,11 +217,7 @@ class AddFile {
                 const SizedBox(height: 12),
                 CustomTextField(
                   leading: Text(Localization.appLocalizations().flags),
-                  onChanged: (value) {
-                    setState(() {
-                      flags = value;
-                    });
-                  },
+                  onChanged: (value) => setState(() => flags = value),
                   helperText: '"--force"',
                 ),
               ],

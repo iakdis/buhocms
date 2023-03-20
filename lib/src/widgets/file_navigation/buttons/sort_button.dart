@@ -40,7 +40,7 @@ class _SortButtonState extends State<SortButton> {
     }
   }
 
-  Widget _sortButton(BuildContext context) {
+  Widget sortButton(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(50.0)),
       child: Material(
@@ -113,9 +113,7 @@ class _SortButtonState extends State<SortButton> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return _sortButton(context);
-  }
+  Widget build(BuildContext context) => sortButton(context);
 }
 
 enum SortMode {
