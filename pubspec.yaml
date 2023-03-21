@@ -40,7 +40,7 @@ dependencies:
     sdk: flutter
   flutter_markdown: ^0.6.12
   intl: ^0.17.0
-  markdown_toolbar: ^0.3.0
+  markdown_toolbar: ^0.4.0
   process_run: ^0.12.3+2
   provider: ^6.0.3
   shared_preferences: ^2.0.15
