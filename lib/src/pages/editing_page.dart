@@ -537,6 +537,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
             Consumer<FileNavigationProvider>(
               builder: (context, value, _) {
                 return MarkdownToolbar(
+                  key: context.watch<EditingProvider>().markdownToolbarKey,
                   useIncludedTextField: false,
                   controller: value.controller,
                   focusNode: focusNodeTextField,
@@ -550,22 +551,28 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                   dropdownTextColor: Theme.of(context).colorScheme.primary,
                   headingTooltip:
                       Localization.appLocalizations().tooltipHeading,
-                  boldTooltip: Localization.appLocalizations().tooltipBold,
-                  italicTooltip: Localization.appLocalizations().tooltipItalic,
+                  boldTooltip:
+                      '${Localization.appLocalizations().tooltipBold} [Ctrl+B]',
+                  italicTooltip:
+                      '${Localization.appLocalizations().tooltipItalic} [Ctrl+I]',
                   strikethroughTooltip:
                       Localization.appLocalizations().tooltipStrikethrough,
-                  linkTooltip: Localization.appLocalizations().tooltipLink,
-                  imageTooltip: Localization.appLocalizations().tooltipImage,
-                  codeTooltip: Localization.appLocalizations().tooltipCode,
+                  linkTooltip:
+                      '${Localization.appLocalizations().tooltipLink} [Ctrl+K]',
+                  imageTooltip:
+                      '${Localization.appLocalizations().tooltipImage} [Ctrl+P]',
+                  codeTooltip:
+                      '${Localization.appLocalizations().tooltipCode} [Ctrl+E]',
                   bulletedListTooltip:
-                      Localization.appLocalizations().tooltipBulletedList,
+                      '${Localization.appLocalizations().tooltipBulletedList} [Ctrl+Shift+8]',
                   numberedListTooltip:
-                      Localization.appLocalizations().tooltipNumberedList,
+                      '${Localization.appLocalizations().tooltipNumberedList} [Ctrl+Shift+7]',
                   checkboxTooltip:
                       Localization.appLocalizations().tooltipCheckbox,
-                  quoteTooltip: Localization.appLocalizations().tooltipQuote,
+                  quoteTooltip:
+                      '${Localization.appLocalizations().tooltipQuote} [Ctrl+.]',
                   horizontalRuleTooltip:
-                      Localization.appLocalizations().tooltipHorizontalRule,
+                      '${Localization.appLocalizations().tooltipHorizontalRule} [Ctrl+Shift+H]',
                 );
               },
             ),

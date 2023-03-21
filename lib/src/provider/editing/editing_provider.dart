@@ -1,5 +1,6 @@
 import 'package:buhocms/src/utils/preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:markdown_toolbar/markdown_toolbar.dart';
 
 import '../../pages/editing_page.dart';
 
@@ -7,6 +8,10 @@ class EditingProvider extends ChangeNotifier {
   final GlobalKey<EditingPageState> _editingPageKey =
       GlobalKey<EditingPageState>();
   GlobalKey<EditingPageState> get editingPageKey => _editingPageKey;
+
+  final GlobalKey<MarkdownToolbarState> _markdownToolbarKey =
+      GlobalKey<MarkdownToolbarState>();
+  GlobalKey<MarkdownToolbarState> get markdownToolbarKey => _markdownToolbarKey;
 
   bool _isGUIMode = false;
 

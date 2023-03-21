@@ -1,3 +1,4 @@
+import 'package:buhocms/src/widgets/shortcuts.dart';
 import 'package:buhocms/src/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -341,8 +342,9 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
       ),
     ];
     _shortcutsEntry?.dispose();
-    _shortcutsEntry =
-        ShortcutRegistry.of(context).addAll(MenuEntry.shortcuts(result));
+    _shortcutsEntry = ShortcutRegistry.of(context).addAll(
+        MenuEntry.shortcuts(result)..addAll(markdownToolbarShortcuts(context)));
+
     return result;
   }
 
