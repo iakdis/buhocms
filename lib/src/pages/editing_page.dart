@@ -324,21 +324,22 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       children: [
         SelectableText(
           title,
-          style: TextStyle(
-              fontSize: 22.0,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary),
+          style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
         ),
         TextButton.icon(
           onPressed: () {
             checkUnsavedBeforeFunction(
                 context: context, function: () => setState(() => setVisible()));
           },
-          label: Text(visible
-              ? Localization.appLocalizations().hide
-              : Localization.appLocalizations().show),
+          label: Text(
+            visible
+                ? Localization.appLocalizations().hide
+                : Localization.appLocalizations().show,
+            style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+          ),
           icon: Icon(
             visible ? Icons.expand_less : Icons.expand_more,
+            color: Theme.of(context).colorScheme.onBackground,
           ),
         ),
       ],
@@ -427,10 +428,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                         //width: 64,
                         child: ReorderableDragStartListener(
                           index: index,
-                          child: Icon(
-                            Icons.drag_handle,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                          child: const Icon(Icons.drag_handle),
                         ),
                       ),
                     hugoWidgets[index],
@@ -684,8 +682,14 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     return TextButton.icon(
       onPressed: () =>
           openCurrentPathInFolder(path: path, keepPathTrailing: false),
-      icon: const Icon(Icons.open_in_new),
-      label: Text(path.substring(path.indexOf('content'))),
+      icon: Icon(
+        Icons.open_in_new,
+        color: Theme.of(context).colorScheme.onBackground,
+      ),
+      label: Text(
+        path.substring(path.indexOf('content')),
+        style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+      ),
     );
   }
 
@@ -799,11 +803,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                                       : Localization.appLocalizations()
                                           .error_DirectoryDoesNotExist(
                                               '"${Preferences.getCurrentPath()}"'),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 36.0,
                                     fontWeight: FontWeight.bold,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                                 if (directoryExists)
@@ -853,10 +855,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                       return Center(
                         child: SelectableText(
                           Localization.appLocalizations().noFileSelected,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 36.0,
                             fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       );
@@ -915,10 +916,10 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                               snapshot.data != null
                                   ? title.substring(0, title.length - 3)
                                   : 'No snapshot data',
-                              style: TextStyle(
-                                  fontSize: 32.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).colorScheme.primary),
+                              style: const TextStyle(
+                                fontSize: 32.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const SizedBox(height: 8.0),
                             _openInFolderButton(path: path),

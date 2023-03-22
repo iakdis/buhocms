@@ -17,7 +17,6 @@ import '../logic/buho_functions.dart';
 import '../ssg/hugo.dart';
 import '../widgets/buttons/language_dropdown.dart';
 import '../widgets/theme_selector.dart';
-import 'editing_page.dart';
 import 'onboarding_page.dart';
 
 class SettingsButton extends StatelessWidget {
@@ -237,7 +236,7 @@ class _SettingsPageState extends State<SettingsPage> {
               : Preferences.getThemeMode() == ThemeMode.light.name
                   ? const Icon(Icons.light_mode)
                   : const Icon(Icons.dark_mode),
-          value: Themes.getThemeModeFromName(Preferences.getThemeMode()),
+          value: ThemeMode.values.byName(Preferences.getThemeMode()),
           items: [
             DropdownMenuItem(
               value: ThemeMode.system,

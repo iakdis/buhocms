@@ -8,7 +8,7 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeMode? themeMode() {
     _themeMode = Preferences.getThemeMode().isNotEmpty
-        ? Themes.getThemeModeFromName(Preferences.getThemeMode())
+        ? ThemeMode.values.byName(Preferences.getThemeMode())
         : ThemeMode.system;
     return _themeMode;
   }
@@ -54,7 +54,7 @@ class Themes {
     return FlexThemeData.dark(
       primary: FlexThemeData.light(
         scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
-      ).primaryColorLight,
+      ).primaryColor,
       secondary: FlexThemeData.light(
         scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
       ).colorScheme.secondary,
@@ -80,18 +80,11 @@ class Themes {
         toolbarHeight: 46,
         titleSpacing: 0,
       ),
+      textButtonTheme: const TextButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: MaterialStatePropertyAll(Colors.white),
+        ),
+      ),
     );
-  }
-
-  static ThemeMode getThemeModeFromName(String themeModeName) {
-    if (themeModeName == ThemeMode.system.name) {
-      return ThemeMode.system;
-    } else if (themeModeName == ThemeMode.light.name) {
-      return ThemeMode.light;
-    } else if (themeModeName == ThemeMode.dark.name) {
-      return ThemeMode.dark;
-    } else {
-      return ThemeMode.system;
-    }
   }
 }

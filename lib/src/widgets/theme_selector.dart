@@ -74,13 +74,15 @@ class _ThemeSelectorState extends State<ThemeSelector> {
         }
       }
 
+      final isSelected = Preferences.getColorSchemeIndex() == realIndex;
+
       list.add(
         Tooltip(
           message: schemesList()[index].name,
           child: FlexThemeModeOptionButton(
             optionButtonBorderRadius: 12,
-            height: Preferences.getColorSchemeIndex() == realIndex ? 26 : 20,
-            width: Preferences.getColorSchemeIndex() == realIndex ? 26 : 20,
+            height: isSelected ? 26 : 20,
+            width: isSelected ? 26 : 20,
             padding: const EdgeInsets.all(0.4),
             optionButtonMargin: EdgeInsets.zero,
             borderRadius: 0,
@@ -89,7 +91,7 @@ class _ThemeSelectorState extends State<ThemeSelector> {
                 color: Theme.of(context).primaryColorLight, width: 5),
             onSelect: () => Provider.of<ThemeProvider>(context, listen: false)
                 .setColorScheme(realIndex),
-            selected: Preferences.getColorSchemeIndex() == realIndex,
+            selected: isSelected,
             backgroundColor: Theme.of(context).colorScheme.surface,
             flexSchemeColor: schemesList()[index].light,
           ),
