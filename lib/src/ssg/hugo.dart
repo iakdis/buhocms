@@ -199,7 +199,9 @@ class HugoWidgetState extends State<HugoWidget> {
 
     final entry = yaml.entries.first.value;
     if (entry is List) {
-      list.addAll(entry.map((e) => e));
+      if (entry.isNotEmpty && entry[0].isNotEmpty) {
+        list.addAll(entry.map((e) => e));
+      }
     }
 
     unsavedList.clear();
