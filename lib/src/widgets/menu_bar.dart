@@ -64,7 +64,7 @@ class MenuEntry {
           style: const ButtonStyle(
             padding:
                 MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 6.0)),
-            minimumSize: MaterialStatePropertyAll(Size(0.0, 64.0)),
+            minimumSize: MaterialStatePropertyAll(Size(0.0, 32.0)),
           ),
           menuChildren: MenuEntry.build(selection.menuChildren!),
           child: selection.text,
