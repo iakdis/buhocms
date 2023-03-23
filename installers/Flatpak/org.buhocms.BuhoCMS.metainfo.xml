@@ -56,12 +56,25 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.5.0" date="2023-03-23">
+      <description>
+        <p>Release 0.5.0 of BuhoCMS</p>
+        <ul>
+          <li>Markdown Toolbar: Now supporting shortcuts</li>
+	      <li>Do not check for unsaved file when changing folder</li>
+          <li>Set Hugo theme based on current config, not app preferences</li>
+          <li>Parse front matter as yaml instead of custom parsing</li>
+          <li>Improve theme legibility</li>
+          <li>Various bug fixes and localization improvements</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.0" date="2023-03-14">
       <description>
         <p>Release 0.4.0 of BuhoCMS</p>
         <ul>
           <li>Ability to resize the text field in the editing page up and down</li>
-	  <li>Use 2/3 for text field, 1/3 for markdown preview</li>
+	      <li>Use 2/3 for text field, 1/3 for markdown preview</li>
           <li>Various bug fixes and localization improvements</li>
         </ul>
       </description>

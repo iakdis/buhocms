@@ -1,6 +1,6 @@
 
-## 🌟 New release: v0.4.0 🌟
-### Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.4.0)!
+## 🌟 New release: v0.5.0 🌟
+### Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.5.0)!
 
 <br>
 
@@ -202,8 +202,8 @@ Feel free to send in a [pull request](https://github.com/iakmds/buhocms/pulls)! 
   - [ ] Fix system light/dark color scheme
   - [ ] Custom app theme colors
   - [ ] Markdown Toolbar: "Add media" button for images for selecting an image
-  - [ ] Markdown Toolbar: Shortcuts
   - [ ] Configurable shortcuts
+  - [x] Markdown Toolbar: Shortcuts (v0.5.0)
   - [x] Localization: Markdown Toolbar tooltip texts (v0.4.0)
   - [x] Show terminal output (v0.3.0)
 
