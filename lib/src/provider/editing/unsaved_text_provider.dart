@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../ssg/hugo.dart';
+import '../../ssg/frontmatter.dart';
 
 class UnsavedTextProvider extends ChangeNotifier {
   bool _unsaved = false;

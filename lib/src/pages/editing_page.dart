@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:buhocms/src/provider/navigation/file_navigation_provider.dart';
-import 'package:buhocms/src/ssg/hugo.dart';
+import 'package:buhocms/src/ssg/frontmatter.dart';
 import 'package:buhocms/src/utils/globals.dart';
 import 'package:buhocms/src/widgets/editing_page/tabs.dart';
 import '../i18n/l10n.dart';

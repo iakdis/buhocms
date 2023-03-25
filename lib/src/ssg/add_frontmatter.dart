@@ -9,7 +9,7 @@ import '../provider/navigation/file_navigation_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
 import '../widgets/snackbar.dart';
-import 'hugo.dart';
+import 'frontmatter.dart';
 
 class AddFrontmatterButton extends StatefulWidget {
   const AddFrontmatterButton({super.key});

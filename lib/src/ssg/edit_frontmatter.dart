@@ -9,7 +9,7 @@ import '../logic/files.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
 import '../widgets/snackbar.dart';
-import 'hugo.dart';
+import 'frontmatter.dart';
 
 Future<Map<String, HugoType>> automaticallyDetectFrontmatter() async {
   final getFiles = await getAllFiles();

@@ -4,7 +4,7 @@ import 'package:buhocms/src/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../ssg/hugo.dart';
+import '../ssg/frontmatter.dart';
 import '../widgets/file_navigation/buttons/sort_button.dart';
 
 class Preferences {

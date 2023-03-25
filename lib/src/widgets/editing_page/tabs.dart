@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import '../../provider/navigation/file_navigation_provider.dart';
 import '../../provider/editing/tabs_provider.dart';
 import '../../provider/editing/unsaved_text_provider.dart';
-import '../../ssg/hugo.dart';
+import '../../ssg/frontmatter.dart';
 import '../../utils/preferences.dart';
 import '../../utils/unsaved_check.dart';
 
