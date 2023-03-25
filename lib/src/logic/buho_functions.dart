@@ -150,8 +150,7 @@ void revert({
                 text: Localization.appLocalizations().fileRevertedSuccessfully,
                 seconds: 2,
               );
-              await editingPageKey.editingPageKey.currentState
-                  ?.revertFileAndFrontmatter();
+              await revertFileAndFrontmatter(context: context);
               if (mounted) Navigator.pop(context);
             },
             child: Text(Localization.appLocalizations().yes),
@@ -165,6 +164,38 @@ void revert({
       seconds: 1,
     );
   }
+}
+
+Future<void> revertFileAndFrontmatter({required BuildContext context}) async {
+  final unsavedTextProvider = context.read<UnsavedTextProvider>();
+  final fileNavigationProvider = context.read<FileNavigationProvider>();
+  final editingProvider = context.read<EditingProvider>();
+
+  for (var i = 0; i < editingProvider.frontmatterKeys.length; i++) {
+    editingProvider.frontmatterKeys[i].currentState?.restore();
+  }
+
+  if (editingProvider.isGUIMode) {
+    fileNavigationProvider
+        .setMarkdownTextContent(unsavedTextProvider.savedText);
+    fileNavigationProvider
+        .setFrontMatterText(unsavedTextProvider.savedTextFrontmatter);
+  } else {
+    var frontMatterText = unsavedTextProvider.savedText
+        .substring(0, unsavedTextProvider.savedText.indexOf('---', 1) + 3)
+        .trim();
+    var markdownTextContent = unsavedTextProvider.savedText;
+    fileNavigationProvider.setFrontMatterText(frontMatterText);
+    fileNavigationProvider.setMarkdownTextContent(markdownTextContent);
+  }
+
+  fileNavigationProvider.controller.text =
+      fileNavigationProvider.markdownTextContent;
+  unsavedTextProvider.setSavedText(fileNavigationProvider.markdownTextContent);
+  fileNavigationProvider.controllerFrontmatter.text =
+      fileNavigationProvider.frontMatterText;
+  unsavedTextProvider
+      .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 }
 
 void openHugoSite({required BuildContext context, Function? setState}) {
@@ -377,8 +408,7 @@ void exit({
                 child: Text(Localization.appLocalizations().cancel)),
             ElevatedButton(
               onPressed: () async {
-                await editingPageKey.editingPageKey.currentState
-                    ?.revertFileAndFrontmatter();
+                await revertFileAndFrontmatter(context: context);
                 shellProvider.kill();
 
                 close();

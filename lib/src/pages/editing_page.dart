@@ -238,7 +238,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
               ),
               TextButton(
                 onPressed: () async {
-                  await revertFileAndFrontmatter();
+                  await revertFileAndFrontmatter(context: context);
                   if (mounted) {
                     Navigator.pop(context);
                   }
@@ -268,39 +268,6 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     print('FUNCTION()');
 
     function();
-  }
-
-  Future<void> revertFileAndFrontmatter() async {
-    final editingProvider = context.read<EditingProvider>();
-
-    for (var i = 0; i < editingProvider.frontmatterKeys.length; i++) {
-      editingProvider.frontmatterKeys[i].currentState?.restore();
-    }
-
-    if (editingProvider.isGUIMode) {
-      fileNavigationProvider
-          .setMarkdownTextContent(unsavedTextProvider.savedText);
-      fileNavigationProvider
-          .setFrontMatterText(unsavedTextProvider.savedTextFrontmatter);
-    } else {
-      var frontMatterText = unsavedTextProvider.savedText
-          .substring(0, unsavedTextProvider.savedText.indexOf('---', 1) + 3)
-          .trim();
-      var markdownTextContent = unsavedTextProvider.savedText;
-      fileNavigationProvider.setFrontMatterText(frontMatterText);
-      fileNavigationProvider.setMarkdownTextContent(markdownTextContent);
-    }
-
-    fileNavigationProvider.controller.text =
-        fileNavigationProvider.markdownTextContent;
-    unsavedTextProvider
-        .setSavedText(fileNavigationProvider.markdownTextContent);
-    fileNavigationProvider.controllerFrontmatter.text =
-        fileNavigationProvider.frontMatterText;
-    unsavedTextProvider
-        .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
-
-    setState(() {});
   }
 
   Widget showHideArea({
