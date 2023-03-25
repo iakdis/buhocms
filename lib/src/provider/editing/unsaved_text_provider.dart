@@ -36,7 +36,7 @@ class UnsavedTextProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool unsaved({required List<GlobalKey<HugoWidgetState>> globalKey}) {
+  bool unsaved({required List<GlobalKey<FrontmatterWidgetState>> globalKey}) {
     _unsaved = false;
     for (var i = 0; i < globalKey.length; i++) {
       var saved = globalKey[i].currentState?.checkUnsaved(

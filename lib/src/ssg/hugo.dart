@@ -110,8 +110,8 @@ class Hugo {
   }
 }
 
-class HugoWidget extends StatefulWidget {
-  const HugoWidget({
+class FrontmatterWidget extends StatefulWidget {
+  const FrontmatterWidget({
     super.key,
     required this.source,
     required this.index,
@@ -123,10 +123,10 @@ class HugoWidget extends StatefulWidget {
   final Function setStateCallback;
 
   @override
-  State<HugoWidget> createState() => HugoWidgetState();
+  State<FrontmatterWidget> createState() => FrontmatterWidgetState();
 }
 
-class HugoWidgetState extends State<HugoWidget> {
+class FrontmatterWidgetState extends State<FrontmatterWidget> {
   ScrollController scrollController = ScrollController();
 
   TextEditingController frontMatterController = TextEditingController();

@@ -19,7 +19,7 @@ class Tabs extends StatefulWidget {
     required this.setStateCallback,
   });
 
-  final List<GlobalKey<HugoWidgetState>> globalKey;
+  final List<GlobalKey<FrontmatterWidgetState>> globalKey;
   final Function setStateCallback;
 
   @override
@@ -109,7 +109,7 @@ class Tab extends StatefulWidget {
     required this.fileIndex,
   }) : super(key: key);
 
-  final List<GlobalKey<HugoWidgetState>> globalKey;
+  final List<GlobalKey<FrontmatterWidgetState>> globalKey;
   final Function setStateCallback;
   final int index;
   final String title;

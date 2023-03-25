@@ -37,8 +37,8 @@ class EditingPage extends StatefulWidget {
 
 class EditingPageState extends State<EditingPage> with WindowListener {
   late final FocusNode focusNodeTextField;
-  List<HugoWidget> hugoWidgets = [];
-  List<GlobalKey<HugoWidgetState>> globalKey = [];
+  List<FrontmatterWidget> hugoWidgets = [];
+  List<GlobalKey<FrontmatterWidgetState>> globalKey = [];
   bool frontmatterVisible = true;
   bool editTextVisible = true;
   bool draggableFrontMatter = false;
@@ -163,9 +163,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       ..removeAt(finalLines.length - 1);
 
     for (var index = 0; index < finalLines.length; index++) {
-      globalKey.add(GlobalKey<HugoWidgetState>());
+      globalKey.add(GlobalKey<FrontmatterWidgetState>());
 
-      hugoWidgets.add(HugoWidget(
+      hugoWidgets.add(FrontmatterWidget(
         source: finalLines[index],
         index: index,
         setStateCallback: saveFileAndFrontmatter,
