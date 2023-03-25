@@ -36,11 +36,12 @@ class UnsavedTextProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool unsaved({required List<GlobalKey<FrontmatterWidgetState>> globalKey}) {
+  bool unsaved(
+      {required List<GlobalKey<FrontmatterWidgetState>> frontmatterKeys}) {
     _unsaved = false;
-    for (var i = 0; i < globalKey.length; i++) {
-      var saved = globalKey[i].currentState?.checkUnsaved(
-          globalKey[i].currentState?.frontmatter.value ??
+    for (var i = 0; i < frontmatterKeys.length; i++) {
+      var saved = frontmatterKeys[i].currentState?.checkUnsaved(
+          frontmatterKeys[i].currentState?.frontmatter.value ??
               FrontmatterType.typeString);
       if (saved == true) _unsaved = true;
     }

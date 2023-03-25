@@ -38,7 +38,6 @@ class EditingPage extends StatefulWidget {
 class EditingPageState extends State<EditingPage> with WindowListener {
   late final FocusNode focusNodeTextField;
   List<FrontmatterWidget> frontmatterWidgets = [];
-  List<GlobalKey<FrontmatterWidgetState>> globalKey = [];
   bool frontmatterVisible = true;
   bool editTextVisible = true;
   bool draggableFrontMatter = false;
@@ -109,6 +108,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
 
   Future<void> updateFrontmatterWidgets() async {
     print('Hugo widgets update!');
+    final editingProvider = context.read<EditingProvider>();
 
     await fileNavigationProvider.setInitialTexts();
 
@@ -154,7 +154,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       }
     }
 
-    globalKey = [];
+    editingProvider.setFrontmatterKeys([]);
     frontmatterWidgets = [];
     if (finalLines.isEmpty) return;
     if (finalLines[0].isEmpty) return;
@@ -163,13 +163,14 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       ..removeAt(finalLines.length - 1);
 
     for (var index = 0; index < finalLines.length; index++) {
-      globalKey.add(GlobalKey<FrontmatterWidgetState>());
+      editingProvider.setFrontmatterKeys(editingProvider.frontmatterKeys
+        ..add(GlobalKey<FrontmatterWidgetState>()));
 
       frontmatterWidgets.add(FrontmatterWidget(
         source: finalLines[index],
         index: index,
         setStateCallback: saveFileAndFrontmatter,
-        key: globalKey[index],
+        key: editingProvider.frontmatterKeys[index],
       ));
     }
   }
@@ -220,8 +221,11 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     required Function() function,
     required bool checkUnsaved,
   }) async {
+    final editingProvider = context.read<EditingProvider>();
+
     if (checkUnsaved) {
-      if (unsavedTextProvider.unsaved(globalKey: globalKey)) {
+      if (unsavedTextProvider.unsaved(
+          frontmatterKeys: editingProvider.frontmatterKeys)) {
         await showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -268,8 +272,10 @@ class EditingPageState extends State<EditingPage> with WindowListener {
   }
 
   Future<void> revertFileAndFrontmatter() async {
-    for (var i = 0; i < globalKey.length; i++) {
-      globalKey[i].currentState?.restore();
+    final editingProvider = context.read<EditingProvider>();
+
+    for (var i = 0; i < editingProvider.frontmatterKeys.length; i++) {
+      editingProvider.frontmatterKeys[i].currentState?.restore();
     }
 
     if (editingProvider.isGUIMode) {
@@ -299,9 +305,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
   }
 
   Future<void> saveFileAndFrontmatter() async {
-    final editingPageKey = context.read<EditingProvider>().editingPageKey;
-    for (var i = 0; i < globalKey.length; i++) {
-      globalKey[i].currentState?.save();
+    final editingProvider = context.read<EditingProvider>();
+    for (var i = 0; i < editingProvider.frontmatterKeys.length; i++) {
+      editingProvider.frontmatterKeys[i].currentState?.save();
     }
     await saveFile(context);
 
@@ -310,7 +316,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     unsavedTextProvider
         .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 
-    editingPageKey.currentState?.updateFrontmatterWidgets();
+    editingProvider.editingPageKey.currentState?.updateFrontmatterWidgets();
   }
 
   Widget showHideArea({
@@ -705,8 +711,10 @@ class EditingPageState extends State<EditingPage> with WindowListener {
             'No file selected';
     final title = '$fileName - BuhoCMS';
 
-    final finalTitle =
-        unsavedTextProvider.unsaved(globalKey: globalKey) ? '*$title' : title;
+    final finalTitle = unsavedTextProvider.unsaved(
+            frontmatterKeys: context.read<EditingProvider>().frontmatterKeys)
+        ? '*$title'
+        : title;
 
     windowManager.setTitle(finalTitle);
   }
@@ -729,7 +737,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
               ),
             Expanded(
               child: Tabs(
-                globalKey: globalKey,
+                frontmatterKeys:
+                    context.read<EditingProvider>().frontmatterKeys,
                 setStateCallback: () => setState(() {}),
               ), //https://github.com/flutter/flutter/issues/75180
             ),

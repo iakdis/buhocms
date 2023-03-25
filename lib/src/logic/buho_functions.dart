@@ -82,20 +82,20 @@ void save({
   required BuildContext context,
   bool checkUnsaved = true,
 }) {
-  final editingPageKey = context.read<EditingProvider>().editingPageKey;
-  if (editingPageKey.currentState == null) return;
+  final editingPageKey = context.read<EditingProvider>();
+  if (editingPageKey.editingPageKey.currentState == null) return;
 
   final unsavedTextProvider =
       Provider.of<UnsavedTextProvider>(context, listen: false);
   if (unsavedTextProvider.unsaved(
-              globalKey: editingPageKey.currentState!.globalKey) ==
+              frontmatterKeys: editingPageKey.frontmatterKeys) ==
           true ||
       !checkUnsaved) {
     showSnackbar(
       text: Localization.appLocalizations().fileSavedSuccessfully,
       seconds: 2,
     );
-    editingPageKey.currentState?.saveFileAndFrontmatter();
+    editingPageKey.editingPageKey.currentState?.saveFileAndFrontmatter();
   } else {
     showSnackbar(
       text: Localization.appLocalizations().nothingToSave,
@@ -108,13 +108,13 @@ void revert({
   required BuildContext context,
   required bool mounted,
 }) async {
-  final editingPageKey = context.read<EditingProvider>().editingPageKey;
-  if (editingPageKey.currentState == null) return;
+  final editingPageKey = context.read<EditingProvider>();
+  if (editingPageKey.editingPageKey.currentState == null) return;
 
   final unsavedTextProvider =
       Provider.of<UnsavedTextProvider>(context, listen: false);
   if (unsavedTextProvider.unsaved(
-      globalKey: editingPageKey.currentState!.globalKey)) {
+      frontmatterKeys: editingPageKey.frontmatterKeys)) {
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -134,7 +134,8 @@ void revert({
                 text: Localization.appLocalizations().fileRevertedSuccessfully,
                 seconds: 2,
               );
-              await editingPageKey.currentState?.revertFileAndFrontmatter();
+              await editingPageKey.editingPageKey.currentState
+                  ?.revertFileAndFrontmatter();
               if (mounted) Navigator.pop(context);
             },
             child: Text(Localization.appLocalizations().yes),
@@ -334,11 +335,11 @@ void exit({
   final shellProvider = Provider.of<ShellProvider>(context, listen: false);
   final unsavedTextProvider =
       Provider.of<UnsavedTextProvider>(context, listen: false);
-  final editingPageKey = context.read<EditingProvider>().editingPageKey;
+  final editingPageKey = context.read<EditingProvider>();
 
-  var unsaved = editingPageKey.currentState != null
+  var unsaved = editingPageKey.editingPageKey.currentState != null
       ? unsavedTextProvider.unsaved(
-          globalKey: editingPageKey.currentState!.globalKey)
+          frontmatterKeys: editingPageKey.frontmatterKeys)
       : false;
 
   if (unsaved) {
@@ -360,7 +361,8 @@ void exit({
                 child: Text(Localization.appLocalizations().cancel)),
             ElevatedButton(
               onPressed: () async {
-                await editingPageKey.currentState?.revertFileAndFrontmatter();
+                await editingPageKey.editingPageKey.currentState
+                    ?.revertFileAndFrontmatter();
                 shellProvider.kill();
 
                 close();
@@ -369,7 +371,8 @@ void exit({
             ),
             ElevatedButton(
               onPressed: () async {
-                await editingPageKey.currentState?.saveFileAndFrontmatter();
+                await editingPageKey.editingPageKey.currentState
+                    ?.saveFileAndFrontmatter();
                 shellProvider.kill();
 
                 close();

@@ -3,8 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:markdown_toolbar/markdown_toolbar.dart';
 
 import '../../pages/editing_page.dart';
+import '../../ssg/frontmatter.dart';
 
 class EditingProvider extends ChangeNotifier {
+  List<GlobalKey<FrontmatterWidgetState>> _frontmatterKeys = [];
+  List<GlobalKey<FrontmatterWidgetState>> get frontmatterKeys =>
+      _frontmatterKeys;
+
+  void setFrontmatterKeys(List<GlobalKey<FrontmatterWidgetState>> newKeys) {
+    _frontmatterKeys = newKeys;
+    notifyListeners();
+  }
+
   final GlobalKey<EditingPageState> _editingPageKey =
       GlobalKey<EditingPageState>();
   GlobalKey<EditingPageState> get editingPageKey => _editingPageKey;

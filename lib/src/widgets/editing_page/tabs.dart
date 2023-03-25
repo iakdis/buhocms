@@ -15,11 +15,11 @@ import '../../utils/unsaved_check.dart';
 class Tabs extends StatefulWidget {
   const Tabs({
     super.key,
-    required this.globalKey,
+    required this.frontmatterKeys,
     required this.setStateCallback,
   });
 
-  final List<GlobalKey<FrontmatterWidgetState>> globalKey;
+  final List<GlobalKey<FrontmatterWidgetState>> frontmatterKeys;
   final Function setStateCallback;
 
   @override
@@ -52,7 +52,7 @@ class _TabsState extends State<Tabs> {
         (e) {
           return Tab(
             key: tabsProvider.globalKeys[e.key],
-            globalKey: widget.globalKey,
+            globalKey: widget.frontmatterKeys,
             setStateCallback: widget.setStateCallback,
             index: e.key,
             title: e.value.key,
@@ -184,7 +184,7 @@ class _TabState extends State<Tab> {
                 children: [
                   const SizedBox(width: 8),
                   if (unsavedTextProvider.unsaved(
-                          globalKey: widget.globalKey) &&
+                          frontmatterKeys: widget.globalKey) &&
                       widget.fileIndex ==
                           fileNavigationProvider.fileNavigationIndex)
                     Text('* ',
