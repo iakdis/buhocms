@@ -33,7 +33,7 @@ void setGUIMode({
       final editingProvider =
           Provider.of<EditingProvider>(context, listen: false);
       editingProvider.setIsGUIMode(isGUIMode);
-      editingProvider.editingPageKey.currentState?.updateHugoWidgets();
+      editingProvider.editingPageKey.currentState?.updateFrontmatterWidgets();
     },
   );
 }

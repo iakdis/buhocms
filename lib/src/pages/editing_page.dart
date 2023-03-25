@@ -37,7 +37,7 @@ class EditingPage extends StatefulWidget {
 
 class EditingPageState extends State<EditingPage> with WindowListener {
   late final FocusNode focusNodeTextField;
-  List<FrontmatterWidget> hugoWidgets = [];
+  List<FrontmatterWidget> frontmatterWidgets = [];
   List<GlobalKey<FrontmatterWidgetState>> globalKey = [];
   bool frontmatterVisible = true;
   bool editTextVisible = true;
@@ -101,13 +101,13 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       },
     );
 
-    await updateHugoWidgets();
+    await updateFrontmatterWidgets();
 
     editingProvider
         .setMarkdownViewerText(fileNavigationProvider.controller.text);
   }
 
-  Future<void> updateHugoWidgets() async {
+  Future<void> updateFrontmatterWidgets() async {
     print('Hugo widgets update!');
 
     await fileNavigationProvider.setInitialTexts();
@@ -155,7 +155,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     }
 
     globalKey = [];
-    hugoWidgets = [];
+    frontmatterWidgets = [];
     if (finalLines.isEmpty) return;
     if (finalLines[0].isEmpty) return;
     finalLines
@@ -165,7 +165,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     for (var index = 0; index < finalLines.length; index++) {
       globalKey.add(GlobalKey<FrontmatterWidgetState>());
 
-      hugoWidgets.add(FrontmatterWidget(
+      frontmatterWidgets.add(FrontmatterWidget(
         source: finalLines[index],
         index: index,
         setStateCallback: saveFileAndFrontmatter,
@@ -310,7 +310,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     unsavedTextProvider
         .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 
-    editingPageKey.currentState?.updateHugoWidgets();
+    editingPageKey.currentState?.updateFrontmatterWidgets();
   }
 
   Widget showHideArea({
@@ -405,8 +405,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
 
           fileNavigationProvider.setFrontMatterText(newFinalLines);
 
-          final oldHugoWidget = hugoWidgets.removeAt(oldIndex);
-          hugoWidgets.insert(newIndex, oldHugoWidget);
+          final oldFrontmatterWidget = frontmatterWidgets.removeAt(oldIndex);
+          frontmatterWidgets.insert(newIndex, oldFrontmatterWidget);
 
           saveFileAndFrontmatter();
         },
@@ -414,7 +414,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
           checkUnsavedBeforeFunction(context: context, function: () {});
         },
         children: [
-          for (var index = 0; index < hugoWidgets.length; index++)
+          for (var index = 0; index < frontmatterWidgets.length; index++)
             Column(
               key: ValueKey(index),
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -431,7 +431,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                           child: const Icon(Icons.drag_handle),
                         ),
                       ),
-                    hugoWidgets[index],
+                    frontmatterWidgets[index],
                   ],
                 ),
                 const Divider(),

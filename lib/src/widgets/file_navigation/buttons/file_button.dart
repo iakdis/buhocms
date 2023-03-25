@@ -164,7 +164,7 @@ class _FileButtonState extends State<FileButton> {
         fileNavigationProvider.setFileNavigationIndex(index);
         await Preferences.setCurrentFile(path);
         await fileNavigationProvider.setInitialTexts();
-        editingPageKey.currentState?.updateHugoWidgets();
+        editingPageKey.currentState?.updateFrontmatterWidgets();
 
         final tabs = tabsProvider.tabs;
         final insertAtNormal = tabs.length - 1 >= 0 ? tabs.length : 0;

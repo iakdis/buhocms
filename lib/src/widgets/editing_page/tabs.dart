@@ -172,7 +172,8 @@ class _TabState extends State<Tab> {
                               await Preferences.setCurrentFile(widget.title);
                               await fileNavigationProvider.setInitialTexts();
 
-                              editingPageKey.currentState?.updateHugoWidgets();
+                              editingPageKey.currentState
+                                  ?.updateFrontmatterWidgets();
                             },
                           );
                           print(

@@ -114,7 +114,7 @@ class AddFile {
     await setInitialTexts();
     await Preferences.setCurrentFile(finalPath);
     await Preferences.setCurrentPath(path);
-    editingPageKey.currentState?.updateHugoWidgets();
+    editingPageKey.currentState?.updateFrontmatterWidgets();
 
     final tabs = tabsProvider.tabs;
     tabs.add(MapEntry(finalPath, fileNavigationIndex));
