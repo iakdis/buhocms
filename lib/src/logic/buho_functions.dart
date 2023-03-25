@@ -384,10 +384,8 @@ void exit({
       Provider.of<UnsavedTextProvider>(context, listen: false);
   final editingPageKey = context.read<EditingProvider>();
 
-  var unsaved = editingPageKey.editingPageKey.currentState != null
-      ? unsavedTextProvider.unsaved(
-          frontmatterKeys: editingPageKey.frontmatterKeys)
-      : false;
+  final unsaved = unsavedTextProvider.unsaved(
+      frontmatterKeys: editingPageKey.frontmatterKeys);
 
   if (unsaved) {
     setClosingWindow?.call(true);
