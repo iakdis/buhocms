@@ -40,7 +40,8 @@ class UnsavedTextProvider extends ChangeNotifier {
     _unsaved = false;
     for (var i = 0; i < globalKey.length; i++) {
       var saved = globalKey[i].currentState?.checkUnsaved(
-          globalKey[i].currentState?.frontmatter.value ?? HugoType.typeString);
+          globalKey[i].currentState?.frontmatter.value ??
+              FrontmatterType.typeString);
       if (saved == true) _unsaved = true;
     }
     if (savedText != unsavedText ||

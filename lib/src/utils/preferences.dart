@@ -190,7 +190,7 @@ class Preferences {
 
   //Front Matter Add list
   static Future<void> setFrontMatterAddList(
-      Map<String, HugoType> frontMatterAddList) async {
+      Map<String, FrontmatterType> frontMatterAddList) async {
     Map<String, String> addListWithTypesStrings = {};
     addListWithTypesStrings.addEntries(
         frontMatterAddList.entries.map((e) => MapEntry(e.key, e.value.name)));
@@ -201,15 +201,15 @@ class Preferences {
 
   static Map<String, String> defaultFrontMatterAddList() {
     Map<String, String> defaultStringsAndTypes = {
-      'title': HugoType.typeString.name,
-      'date': HugoType.typeDate.name,
-      'draft': HugoType.typeBool.name,
-      'tags': HugoType.typeList.name,
+      'title': FrontmatterType.typeString.name,
+      'date': FrontmatterType.typeDate.name,
+      'draft': FrontmatterType.typeBool.name,
+      'tags': FrontmatterType.typeList.name,
     };
     return defaultStringsAndTypes;
   }
 
-  static Map<String, HugoType> getFrontMatterAddList() {
+  static Map<String, FrontmatterType> getFrontMatterAddList() {
     Map<String, String> defaultStringsAndTypesStrings = {};
     defaultStringsAndTypesStrings.addEntries(defaultFrontMatterAddList()
         .entries
@@ -218,9 +218,9 @@ class Preferences {
     Map strToMap = json.decode(getPreferencesEntry(prefFrontMatterAddList) ??
         json.encode(defaultStringsAndTypesStrings));
 
-    Map<String, HugoType> fromStringsToType = {};
+    Map<String, FrontmatterType> fromStringsToType = {};
     fromStringsToType.addEntries(strToMap.entries
-        .map((e) => MapEntry(e.key, HugoType.values.byName(e.value))));
+        .map((e) => MapEntry(e.key, FrontmatterType.values.byName(e.value))));
 
     return fromStringsToType;
   }

@@ -14,7 +14,7 @@ import '../widgets/snackbar.dart';
 import 'edit_frontmatter.dart';
 import 'hugo.dart';
 
-enum HugoType {
+enum FrontmatterType {
   typeString,
   typeBool,
   typeDate,
@@ -57,7 +57,7 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
   TextEditingController listController = TextEditingController();
   late FocusNode listFocusNode;
 
-  late MapEntry<String, HugoType> frontmatter;
+  late MapEntry<String, FrontmatterType> frontmatter;
   bool frontMatterNotFound = false;
 
   late Widget frontmatterWidget;
@@ -75,7 +75,7 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
           .entries
           .firstWhere((element) => element.key == frontmatterKey);
     } else {
-      frontmatter = MapEntry(frontmatterKey, HugoType.typeString);
+      frontmatter = MapEntry(frontmatterKey, FrontmatterType.typeString);
       frontMatterNotFound = true;
     }
 
@@ -136,15 +136,15 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
     unsavedTextProvider.setUnsaved(checkUnsaved(frontmatter.value));
   }
 
-  bool checkUnsaved(HugoType type) {
+  bool checkUnsaved(FrontmatterType type) {
     switch (type) {
-      case HugoType.typeString:
+      case FrontmatterType.typeString:
         return frontMatterControllerUnsaved.text != frontMatterController.text;
-      case HugoType.typeBool:
+      case FrontmatterType.typeBool:
         return unsavedIsChecked != isChecked;
-      case HugoType.typeDate:
+      case FrontmatterType.typeDate:
         return formatter.format(unsavedDate!) != formatter.format(date!);
-      case HugoType.typeList:
+      case FrontmatterType.typeList:
         if (unsavedList.length == list.length) {
           for (var i = 0; i < list.length; i++) {
             if (unsavedList[i] != list[i]) {
@@ -571,22 +571,22 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
     save = () {};
 
     switch (frontmatter.value) {
-      case HugoType.typeString:
+      case FrontmatterType.typeString:
         frontmatterWidget = _textWidget(widget.source);
         restore = _textRestore;
         save = _textSave;
         break;
-      case HugoType.typeBool:
+      case FrontmatterType.typeBool:
         frontmatterWidget = _boolWidget(widget.source);
         restore = _boolRestore;
         save = _boolSave;
         break;
-      case HugoType.typeDate:
+      case FrontmatterType.typeDate:
         frontmatterWidget = _dateWidget(widget.source);
         restore = _dateRestore;
         save = _dateSave;
         break;
-      case HugoType.typeList:
+      case FrontmatterType.typeList:
         frontmatterWidget = _listWidget(widget.source);
         restore = _listRestore;
         save = _listSave;

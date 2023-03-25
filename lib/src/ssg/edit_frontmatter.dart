@@ -11,9 +11,9 @@ import '../utils/unsaved_check.dart';
 import '../widgets/snackbar.dart';
 import 'frontmatter.dart';
 
-Future<Map<String, HugoType>> automaticallyDetectFrontmatter() async {
+Future<Map<String, FrontmatterType>> automaticallyDetectFrontmatter() async {
   final getFiles = await getAllFiles();
-  final typeMap = <String, HugoType>{};
+  final typeMap = <String, FrontmatterType>{};
 
   for (var i = 0; i < getFiles.length; i++) {
     final allLines = getFiles[i].readAsLinesSync();
@@ -52,19 +52,19 @@ Future<Map<String, HugoType>> automaticallyDetectFrontmatter() async {
 
       if (value is bool) {
         if (!keySet.contains(key)) {
-          typeMap.addEntries([MapEntry(key, HugoType.typeBool)]);
+          typeMap.addEntries([MapEntry(key, FrontmatterType.typeBool)]);
         }
       } else if (value is List) {
         if (!keySet.contains(key)) {
-          typeMap.addEntries([MapEntry(key, HugoType.typeList)]);
+          typeMap.addEntries([MapEntry(key, FrontmatterType.typeList)]);
         }
       } else if (DateTime.tryParse(value.toString()) != null) {
         if (!keySet.contains(key)) {
-          typeMap.addEntries([MapEntry(key, HugoType.typeDate)]);
+          typeMap.addEntries([MapEntry(key, FrontmatterType.typeDate)]);
         }
       } else {
         if (!keySet.contains(key)) {
-          typeMap.addEntries([MapEntry(key, HugoType.typeString)]);
+          typeMap.addEntries([MapEntry(key, FrontmatterType.typeString)]);
         }
       }
 
@@ -146,7 +146,7 @@ class EditFrontmatterListButton extends StatefulWidget {
 
 class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
   String name = '';
-  HugoType type = HugoType.typeString;
+  FrontmatterType type = FrontmatterType.typeString;
   final TextEditingController nameController = TextEditingController();
   final ScrollController scrollController = ScrollController();
 
@@ -161,11 +161,11 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
 
   void showResetDialog({required Function setStateFunction}) async {
     final map = Preferences.defaultFrontMatterAddList();
-    final typeMap = <String, HugoType>{};
+    final typeMap = <String, FrontmatterType>{};
     for (var i = 0; i < map.entries.length; i++) {
       final entry = map.entries.toList()[i];
       typeMap.addEntries(
-          [MapEntry(entry.key, HugoType.values.byName(entry.value))]);
+          [MapEntry(entry.key, FrontmatterType.values.byName(entry.value))]);
     }
 
     showDialog(
@@ -411,7 +411,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
       okText: Localization.appLocalizations().add,
       checkAlreadyContains: true,
       onPressed: () {
-        Map<String, HugoType> frontMatterAddList =
+        Map<String, FrontmatterType> frontMatterAddList =
             Preferences.getFrontMatterAddList();
         frontMatterAddList.addEntries([MapEntry(name, type)]);
 
@@ -445,7 +445,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
     required String okText,
     required Function onPressed,
     String? customName,
-    HugoType? customType,
+    FrontmatterType? customType,
     bool checkAlreadyContains = false,
   }) {
     showDialog(
@@ -459,7 +459,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
           type = customType;
         }
         var empty = name.isEmpty;
-        Map<String, HugoType> frontMatterAddList =
+        Map<String, FrontmatterType> frontMatterAddList =
             Preferences.getFrontMatterAddList();
         var oldName = name;
         var alreadyContains = oldName == name && !checkAlreadyContains
@@ -537,7 +537,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                         style: textStyle),
                     DropdownButton(
                       value: type,
-                      items: HugoType.values.map((element) {
+                      items: FrontmatterType.values.map((element) {
                         return DropdownMenuItem(
                           value: element,
                           child: Text(element.name.substring(4)),
@@ -545,7 +545,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                       }).toList(),
                       onChanged: (option) async {
                         setState(() {
-                          type = option ?? HugoType.typeString;
+                          type = option ?? FrontmatterType.typeString;
                         });
                         //
                       },
@@ -579,7 +579,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
   }
 
   void _edit(
-    MapEntry<String, HugoType> element, {
+    MapEntry<String, FrontmatterType> element, {
     required Function setStateFunction,
   }) {
     var oldName = element.key;
@@ -590,7 +590,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
       customName: oldName,
       customType: oldType,
       onPressed: () {
-        Map<String, HugoType> frontMatterAddList =
+        Map<String, FrontmatterType> frontMatterAddList =
             Preferences.getFrontMatterAddList();
         var tmpLst = frontMatterAddList.entries
             .map((e) => MapEntry(e.key, e.value))
@@ -632,10 +632,10 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
   }
 
   void _remove(
-    MapEntry<String, HugoType> element, {
+    MapEntry<String, FrontmatterType> element, {
     required Function setStateFunction,
   }) {
-    Map<String, HugoType> frontMatterAddList =
+    Map<String, FrontmatterType> frontMatterAddList =
         Preferences.getFrontMatterAddList();
     frontMatterAddList.remove(element.key);
     Preferences.setFrontMatterAddList(frontMatterAddList);

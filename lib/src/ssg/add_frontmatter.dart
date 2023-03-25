@@ -20,23 +20,23 @@ class AddFrontmatterButton extends StatefulWidget {
 
 class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
   void _addFrontMatter(
-      {required String hugoFrontmatter, required HugoType type}) {
+      {required String hugoFrontmatter, required FrontmatterType type}) {
     final fileNavigationProvider =
         Provider.of<FileNavigationProvider>(context, listen: false);
     String? newLine;
     final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
 
     switch (type) {
-      case HugoType.typeString:
+      case FrontmatterType.typeString:
         newLine = '$hugoFrontmatter: "Text"';
         break;
-      case HugoType.typeBool:
+      case FrontmatterType.typeBool:
         newLine = '$hugoFrontmatter: false';
         break;
-      case HugoType.typeDate:
+      case FrontmatterType.typeDate:
         newLine = '$hugoFrontmatter: ${dateFormatter.format(DateTime.now())}';
         break;
-      case HugoType.typeList:
+      case FrontmatterType.typeList:
         newLine = '$hugoFrontmatter: []';
         break;
     }
@@ -56,10 +56,10 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
     );
   }
 
-  void _add(MapEntry<String, HugoType>? option) {
+  void _add(MapEntry<String, FrontmatterType>? option) {
     _addFrontMatter(
       hugoFrontmatter: option?.key ?? 'unknown',
-      type: option?.value ?? HugoType.typeString,
+      type: option?.value ?? FrontmatterType.typeString,
     );
     save(
       context: context,
@@ -70,7 +70,7 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
   Widget _addFrontmatterButton() {
     return SizedBox(
       width: 312,
-      child: DropdownSearch<MapEntry<String, HugoType>>(
+      child: DropdownSearch<MapEntry<String, FrontmatterType>>(
         items:
             Preferences.getFrontMatterAddList().entries.map((e) => e).toList(),
         popupProps: PopupPropsMultiSelection.menu(
