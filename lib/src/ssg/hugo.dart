@@ -131,16 +131,14 @@ class HugoWidgetState extends State<HugoWidget> {
 
   TextEditingController frontMatterController = TextEditingController();
   TextEditingController frontMatterControllerUnsaved = TextEditingController();
-  //String? text;
-  //String? unsavedText;
 
   bool? isChecked;
   bool? unsavedIsChecked;
 
-  DateTime? date; //TimeOfDay? time;
-  DateTime? unsavedDate; //TimeOfDay? unsavedTime;
+  DateTime? date;
+  DateTime? unsavedDate;
 
-  DateFormat formatter = DateFormat('dd.MM.yyyy'); //DateFormat('yyyy-MM-dd');
+  DateFormat formatter = DateFormat('dd.MM.yyyy');
   String? formattedDate;
 
   List<String> list = [];
@@ -150,13 +148,10 @@ class HugoWidgetState extends State<HugoWidget> {
 
   late MapEntry<String, HugoType> frontmatter;
   bool frontMatterNotFound = false;
-  //late HugoType type;
 
   late Widget frontmatterWidget;
   late VoidCallback restore;
   late VoidCallback save;
-
-  //String? unsaved (dynamic x, dynamic y) => x == y ? '*' : null;
 
   @override
   void initState() {
@@ -193,9 +188,6 @@ class HugoWidgetState extends State<HugoWidget> {
     date ??= DateTime.now();
     unsavedDate = date;
     formattedDate = formatter.format(unsavedDate!);
-    /*time = TimeOfDay.fromDateTime(unsavedDate!);
-    time ??= TimeOfDay.now();
-    unsavedTime = time;*/
 
     final entry = yaml.entries.first.value;
     if (entry is List) {
@@ -208,9 +200,6 @@ class HugoWidgetState extends State<HugoWidget> {
     unsavedList.addAll(list);
 
     listFocusNode = FocusNode();
-
-    //Other
-    //frontmatter = Hugo.getFrontMatter(widget.source.substring(0, widget.source.indexOf(':')));
 
     super.initState();
   }
@@ -275,9 +264,6 @@ class HugoWidgetState extends State<HugoWidget> {
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 200),
           child: TextField(
-            onChanged: (value) {
-              //frontMatterControllerUnsaved.text = value;
-            },
             controller: frontMatterControllerUnsaved,
             minLines: 1,
             maxLines: null,
@@ -365,11 +351,6 @@ class HugoWidgetState extends State<HugoWidget> {
 
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
 
-    print('oldTime: $formattedOldDate');
-    print('newTime: $formattedNewDate');
-    //print('oldDate: $formattedOldDate');
-    //print('newDate: $formattedNewDate');
-
     setState(() {
       date = unsavedDate;
     });
@@ -389,7 +370,6 @@ class HugoWidgetState extends State<HugoWidget> {
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           Text('$labelText: '),
-          //Change to switch
           Switch(
             value: unsavedIsChecked ?? false,
             onChanged: (value) {
@@ -398,14 +378,6 @@ class HugoWidgetState extends State<HugoWidget> {
               });
             },
           ),
-          /*Checkbox(
-            value: unsavedIsChecked,
-            onChanged: (value) {
-              setState(() {
-                unsavedIsChecked = value;
-              });
-            },
-          ),*/
         ],
       ),
     );
@@ -431,7 +403,7 @@ class HugoWidgetState extends State<HugoWidget> {
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          Text('$labelText: '), //$formattedDate
+          Text('$labelText: '),
           TextButton.icon(
             label: Text('$formattedDate'),
             onPressed: () async {
@@ -450,25 +422,6 @@ class HugoWidgetState extends State<HugoWidget> {
             },
             icon: const Icon(Icons.date_range),
           ),
-          /*unsavedTime != time ? const Text('*') : Container(),
-          const VerticalDivider(),
-          const Text('Time: '), //${unsavedTime?.format(context)}
-          ElevatedButton.icon(
-            //IconButton
-            label: Text('${unsavedTime?.format(context)}'),
-            onPressed: () async {
-              var newTime = await showTimePicker(
-                context: context,
-                initialTime: unsavedTime!,
-              );
-
-              if (newTime == null) return;
-              setState(() {
-                unsavedTime = newTime;
-              });
-            },
-            icon: const Icon(Icons.more_time),
-          ),*/
         ],
       ),
     );
@@ -479,9 +432,6 @@ class HugoWidgetState extends State<HugoWidget> {
       DateTime? oldDate = date;
       unsavedDate = oldDate;
       formattedDate = formatter.format(unsavedDate!);
-
-      /*TimeOfDay? oldTime = time;
-      unsavedTime = oldTime;*/
     });
   }
 
@@ -515,7 +465,7 @@ class HugoWidgetState extends State<HugoWidget> {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        Text('$labelText: '), //$formattedDate
+        Text('$labelText: '),
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 360),
           child: Column(
@@ -531,7 +481,6 @@ class HugoWidgetState extends State<HugoWidget> {
                       focusNode: listFocusNode,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        //labelText: 'Tags',
                         prefixIcon: const Icon(Icons.tag),
                         hintText: Localization.appLocalizations().tag,
                       ),
@@ -770,7 +719,6 @@ class HugoWidgetState extends State<HugoWidget> {
             Tooltip(
               message: Localization.appLocalizations().delete,
               child: ElevatedButton(
-                //color: Colors.blue,
                 onPressed: () {
                   checkUnsavedBeforeFunction(
                       context: context, function: () => _removeFrontMatter());
@@ -780,7 +728,6 @@ class HugoWidgetState extends State<HugoWidget> {
                 ),
               ),
             ),
-            //_textWidget(widget.source),
           ],
         ),
       );
@@ -797,7 +744,6 @@ class HugoWidgetState extends State<HugoWidget> {
           Tooltip(
             message: Localization.appLocalizations().delete,
             child: ElevatedButton(
-              //color: Colors.blue,
               onPressed: () {
                 checkUnsavedBeforeFunction(
                     context: context, function: () => _removeFrontMatter());
@@ -811,26 +757,12 @@ class HugoWidgetState extends State<HugoWidget> {
           Tooltip(
             message: Localization.appLocalizations().restore,
             child: ElevatedButton(
-              //color: Colors.blue,
               onPressed: restore,
               child: const Icon(
                 Icons.restore,
               ),
             ),
           ),
-          /*const VerticalDivider(),
-          Tooltip(
-            message: 'Save',
-            child: ElevatedButton(
-              //color: Colors.blue,
-              onPressed: save,
-              //onPressed: null,
-              child: Icon(
-                Icons.save,
-                color: Theme.of(context).colorScheme.onSecondary,
-              ),
-            ),
-          ),*/
         ],
       ),
     );
