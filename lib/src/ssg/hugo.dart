@@ -302,9 +302,8 @@ class HugoWidgetState extends State<HugoWidget> {
 
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
 
-    setState(() {
-      frontMatterController.text = frontMatterControllerUnsaved.text;
-    });
+    setState(
+        () => frontMatterController.text = frontMatterControllerUnsaved.text);
   }
 
   void _boolSave() {
@@ -325,9 +324,7 @@ class HugoWidgetState extends State<HugoWidget> {
 
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
 
-    setState(() {
-      isChecked = unsavedIsChecked;
-    });
+    setState(() => isChecked = unsavedIsChecked);
   }
 
   void _dateSave() {
@@ -351,9 +348,7 @@ class HugoWidgetState extends State<HugoWidget> {
 
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
 
-    setState(() {
-      date = unsavedDate;
-    });
+    setState(() => date = unsavedDate);
   }
 
   Widget _boolWidget(String source) {
@@ -372,11 +367,7 @@ class HugoWidgetState extends State<HugoWidget> {
           Text('$labelText: '),
           Switch(
             value: unsavedIsChecked ?? false,
-            onChanged: (value) {
-              setState(() {
-                unsavedIsChecked = value;
-              });
-            },
+            onChanged: (value) => setState(() => unsavedIsChecked = value),
           ),
         ],
       ),
@@ -437,18 +428,12 @@ class HugoWidgetState extends State<HugoWidget> {
 
   Widget _listChip(String label) {
     return InputChip(
-      deleteIcon: const Icon(
-        Icons.cancel,
-        size: 20,
-      ),
+      deleteIcon: const Icon(Icons.cancel, size: 20),
       deleteIconColor: Theme.of(context).colorScheme.onPrimary,
       deleteButtonTooltipMessage:
           Localization.appLocalizations().removeTag('"$label"'),
-      onDeleted: () {
-        setState(() {
-          unsavedList.removeWhere((String entry) => entry == label);
-        });
-      },
+      onDeleted: () => setState(
+          () => unsavedList.removeWhere((String entry) => entry == label)),
       label: Text(
         label,
         style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
@@ -612,9 +597,7 @@ class HugoWidgetState extends State<HugoWidget> {
               children: <TextSpan>[
                 TextSpan(
                   text: allLines[widget.index + 1],
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -704,12 +687,13 @@ class HugoWidgetState extends State<HugoWidget> {
         child: Row(
           children: [
             TextButton.icon(
-                onPressed: () => showAutoDialog(
-                    context: context,
-                    mounted: mounted,
-                    setStateFunction: widget.setStateCallback),
-                icon: const Icon(Icons.auto_awesome),
-                label: Text(Localization.appLocalizations().detect)),
+              onPressed: () => showAutoDialog(
+                  context: context,
+                  mounted: mounted,
+                  setStateFunction: widget.setStateCallback),
+              icon: const Icon(Icons.auto_awesome),
+              label: Text(Localization.appLocalizations().detect),
+            ),
             const SizedBox(width: 8.0),
             SizedBox(
               width: 800,
@@ -719,13 +703,9 @@ class HugoWidgetState extends State<HugoWidget> {
             Tooltip(
               message: Localization.appLocalizations().delete,
               child: ElevatedButton(
-                onPressed: () {
-                  checkUnsavedBeforeFunction(
-                      context: context, function: () => _removeFrontMatter());
-                },
-                child: const Icon(
-                  Icons.delete,
-                ),
+                onPressed: () => checkUnsavedBeforeFunction(
+                    context: context, function: () => _removeFrontMatter()),
+                child: const Icon(Icons.delete),
               ),
             ),
           ],
@@ -744,13 +724,9 @@ class HugoWidgetState extends State<HugoWidget> {
           Tooltip(
             message: Localization.appLocalizations().delete,
             child: ElevatedButton(
-              onPressed: () {
-                checkUnsavedBeforeFunction(
-                    context: context, function: () => _removeFrontMatter());
-              },
-              child: const Icon(
-                Icons.delete,
-              ),
+              onPressed: () => checkUnsavedBeforeFunction(
+                  context: context, function: () => _removeFrontMatter()),
+              child: const Icon(Icons.delete),
             ),
           ),
           const VerticalDivider(),
@@ -758,9 +734,7 @@ class HugoWidgetState extends State<HugoWidget> {
             message: Localization.appLocalizations().restore,
             child: ElevatedButton(
               onPressed: restore,
-              child: const Icon(
-                Icons.restore,
-              ),
+              child: const Icon(Icons.restore),
             ),
           ),
         ],
