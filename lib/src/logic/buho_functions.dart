@@ -95,13 +95,29 @@ void save({
       text: Localization.appLocalizations().fileSavedSuccessfully,
       seconds: 2,
     );
-    editingPageKey.editingPageKey.currentState?.saveFileAndFrontmatter();
+    saveFileAndFrontmatter(context: context);
   } else {
     showSnackbar(
       text: Localization.appLocalizations().nothingToSave,
       seconds: 1,
     );
   }
+}
+
+Future<void> saveFileAndFrontmatter({required BuildContext context}) async {
+  final unsavedTextProvider = context.read<UnsavedTextProvider>();
+  final fileNavigationProvider = context.read<FileNavigationProvider>();
+  final editingProvider = context.read<EditingProvider>();
+  for (var i = 0; i < editingProvider.frontmatterKeys.length; i++) {
+    editingProvider.frontmatterKeys[i].currentState?.save();
+  }
+  await saveFile(context);
+
+  unsavedTextProvider.setSavedText(fileNavigationProvider.markdownTextContent);
+  unsavedTextProvider
+      .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
+
+  editingProvider.editingPageKey.currentState?.updateFrontmatterWidgets();
 }
 
 void revert({
@@ -371,8 +387,7 @@ void exit({
             ),
             ElevatedButton(
               onPressed: () async {
-                await editingPageKey.editingPageKey.currentState
-                    ?.saveFileAndFrontmatter();
+                await saveFileAndFrontmatter(context: context);
                 shellProvider.kill();
 
                 close();

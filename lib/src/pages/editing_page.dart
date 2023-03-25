@@ -169,7 +169,6 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       frontmatterWidgets.add(FrontmatterWidget(
         source: finalLines[index],
         index: index,
-        setStateCallback: saveFileAndFrontmatter,
         key: editingProvider.frontmatterKeys[index],
       ));
     }
@@ -249,7 +248,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
               ),
               TextButton(
                 onPressed: () async {
-                  await saveFileAndFrontmatter();
+                  await saveFileAndFrontmatter(context: context);
                   if (mounted) {
                     Navigator.pop(context);
                   }
@@ -302,21 +301,6 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 
     setState(() {});
-  }
-
-  Future<void> saveFileAndFrontmatter() async {
-    final editingProvider = context.read<EditingProvider>();
-    for (var i = 0; i < editingProvider.frontmatterKeys.length; i++) {
-      editingProvider.frontmatterKeys[i].currentState?.save();
-    }
-    await saveFile(context);
-
-    unsavedTextProvider
-        .setSavedText(fileNavigationProvider.markdownTextContent);
-    unsavedTextProvider
-        .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
-
-    editingProvider.editingPageKey.currentState?.updateFrontmatterWidgets();
   }
 
   Widget showHideArea({
@@ -414,7 +398,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
           final oldFrontmatterWidget = frontmatterWidgets.removeAt(oldIndex);
           frontmatterWidgets.insert(newIndex, oldFrontmatterWidget);
 
-          saveFileAndFrontmatter();
+          saveFileAndFrontmatter(context: context);
         },
         onReorderStart: (index) {
           checkUnsavedBeforeFunction(context: context, function: () {});

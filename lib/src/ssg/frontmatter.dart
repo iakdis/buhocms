@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:yaml/yaml.dart';
 
 import '../i18n/l10n.dart';
+import '../logic/buho_functions.dart';
 import '../provider/navigation/file_navigation_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
@@ -26,12 +27,10 @@ class FrontmatterWidget extends StatefulWidget {
     super.key,
     required this.source,
     required this.index,
-    required this.setStateCallback,
   });
 
   final String source;
   final int index;
-  final Function setStateCallback;
 
   @override
   State<FrontmatterWidget> createState() => FrontmatterWidgetState();
@@ -533,7 +532,7 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
                 seconds: 4,
               );
 
-              widget.setStateCallback();
+              saveFileAndFrontmatter(context: context);
 
               Navigator.pop(context);
             },
@@ -599,9 +598,11 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
           children: [
             TextButton.icon(
               onPressed: () => showAutoDialog(
-                  context: context,
-                  mounted: mounted,
-                  setStateFunction: widget.setStateCallback),
+                context: context,
+                mounted: mounted,
+                setStateFunction: () =>
+                    saveFileAndFrontmatter(context: context),
+              ),
               icon: const Icon(Icons.auto_awesome),
               label: Text(Localization.appLocalizations().detect),
             ),
