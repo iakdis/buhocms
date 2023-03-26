@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../i18n/l10n.dart';
-import '../pages/create_hugo_site.dart';
+import '../pages/create_website.dart';
 import '../pages/open_hugo_site.dart';
 import '../provider/editing/editing_provider.dart';
 import '../provider/navigation/file_navigation_provider.dart';
