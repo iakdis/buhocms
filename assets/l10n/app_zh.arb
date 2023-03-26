@@ -164,7 +164,12 @@
     "next": "下一步",
     "continue2": "继续",
     "create": "创建",
-    "checkHugoInstalled": "检查是否已安装Hugo",
+    "checkSSGInstalled": "检查是否已安装{ssg}",
+    "@checkSSGInstalled": {
+      "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "executableNotFound": "没有找到 {program} 可执行文件，请确保 {program} 已正确安装。",
     "@executableNotFound": {
       "placeholders": {
@@ -181,10 +186,21 @@
     "createLocation": "创建位置",
     "choosePath": "选择路径",
     "hugoSiteWillBeCreatedInFolder": "新的Hugo网站将在此文件夹中创建：",
+    "websiteWillBeCreatedInFolder": "新的{ssg}网站将在此文件夹中创建：",
+    "@websiteWillBeCreatedInFolder": {
+      "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "savePath": "保存路径",
     "siteName": "网站名称",
     "finish": "完成",
-    "createHugoSiteNamed": "创建Hugo网站，命名为：\n",
+    "createWebsiteNamed": "创建{ssg}网站，命名为：\n",
+    "@createWebsiteNamed": {
+      "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "insideFolder": "内部文件夹:\n",
     "open": "打开",
     "checkHugoFolderStructure": "检查Hugo文件夹结构",

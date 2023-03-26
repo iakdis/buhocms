@@ -164,7 +164,12 @@
     "next": "NÄCHSTE",
     "continue2": "WEITER",
     "create": "Erstellen",
-    "checkHugoInstalled": "Überprüfen, ob Hugo installiert ist",
+    "checkSSGInstalled": "Überprüfen, ob {ssg} installiert ist",
+    "@checkSSGInstalled": {
+      "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "executableNotFound": "{program} Executable-Datei nicht gefunden. Stelle bitte sicher, dass {program} korrekt installiert ist.",
     "@executableNotFound": {
       "placeholders": {
@@ -180,11 +185,21 @@
     },
     "createLocation": "Speicherort",
     "choosePath": "Pfad auswählen",
-    "hugoSiteWillBeCreatedInFolder": "Die neue Hugo Webseite wird im Ordner erstellt:",
+    "websiteWillBeCreatedInFolder": "Die neue {ssg} Webseite wird im Ordner erstellt:",
+    "@websiteWillBeCreatedInFolder": {
+      "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "savePath": "Speicherpfad",
     "siteName": "Name der Webseite",
     "finish": "Fertigstellen",
-    "createHugoSiteNamed": "Hugo Webseite erstellen namens:\n",
+    "createWebsiteNamed": "{ssg} Webseite erstellen namens:\n",
+    "@createWebsiteNamed": {
+      "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "insideFolder": "Im Ordner:\n",
     "open": "Open",
     "checkHugoFolderStructure": "Hugo Ordner Struktur überprüfen",

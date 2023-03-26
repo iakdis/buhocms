@@ -164,7 +164,12 @@
     "next": "NEXT",
     "continue2": "CONTINUE",
     "create": "Create",
-    "checkHugoInstalled": "Check, if Hugo is installed",
+    "checkSSGInstalled": "Check, if {ssg} is installed",
+    "@checkSSGInstalled": {
+      "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "executableNotFound": "{program} executable not found. Please make sure that {program} is installed correctly.",
     "@executableNotFound": {
       "placeholders": {
@@ -180,11 +185,21 @@
     },
     "createLocation": "Create location",
     "choosePath": "Choose path",
-    "hugoSiteWillBeCreatedInFolder": "The new Hugo website will be created inside this folder:",
+    "websiteWillBeCreatedInFolder": "The new {ssg} website will be created inside this folder:",
+    "@websiteWillBeCreatedInFolder": {
+      "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "savePath": "Save path",
     "siteName": "Website name",
     "finish": "Finish",
-    "createHugoSiteNamed": "Create Hugo website named:\n",
+    "createWebsiteNamed": "Create {ssg} website named:\n",
+    "@createWebsiteNamed": {
+      "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "insideFolder": "Inside folder:\n",
     "open": "Open",
     "checkHugoFolderStructure": "Check Hugo folder structure",

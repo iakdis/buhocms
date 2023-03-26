@@ -199,7 +199,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                     return CommandDialog(
                       title: SelectableText.rich(TextSpan(
                           text: Localization.appLocalizations()
-                              .createHugoSiteNamed,
+                              .createWebsiteNamed('Hugo'),
                           style: const TextStyle(fontSize: 20),
                           children: <TextSpan>[
                             TextSpan(
@@ -292,7 +292,8 @@ class _CreateWebsiteState extends State<CreateWebsite> {
           steps: [
             Step(
               isActive: currentStep >= 0,
-              title: Text(Localization.appLocalizations().checkHugoInstalled),
+              title: Text(
+                  Localization.appLocalizations().checkSSGInstalled('Hugo')),
               content: Column(
                 children: [
                   Icon(
@@ -307,8 +308,8 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                   const SizedBox(height: 32),
                   ElevatedButton(
                     onPressed: () => checkExecutableInstalled(),
-                    child: Text(
-                        Localization.appLocalizations().checkHugoInstalled),
+                    child: Text(Localization.appLocalizations()
+                        .checkSSGInstalled('Hugo')),
                   ),
                   const SizedBox(height: 16),
                   Text(ssgInstalledText),
@@ -325,7 +326,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                       child: Text(Localization.appLocalizations().choosePath)),
                   const SizedBox(height: 24.0),
                   Text(Localization.appLocalizations()
-                      .hugoSiteWillBeCreatedInFolder),
+                      .websiteWillBeCreatedInFolder('Hugo')),
                   const SizedBox(height: 12.0),
                   SizedBox(
                     width: 400,
@@ -354,10 +355,10 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                         labelText: Localization.appLocalizations().savePath,
                         isDense: true,
                         hintText: Platform.isWindows
-                            ? 'C:\\Documents\\HugoWebsites'
+                            ? 'C:\\Documents\\Websites'
                             : Platform.isMacOS
-                                ? '/Users/user/Documents/HugoWebsites'
-                                : 'home/user/Documents/HugoWebsites',
+                                ? '/Users/user/Documents/Websites'
+                                : 'home/user/Documents/Websites',
                         hintStyle: TextStyle(
                           color: Colors.grey[500],
                           fontStyle: FontStyle.italic,
