@@ -199,8 +199,8 @@ Future<void> revertFileAndFrontmatter({required BuildContext context}) async {
 }
 
 void openHugoSite({required BuildContext context, Function? setState}) {
-  Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const OpenHugoSite()))
+  Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const OpenWebsite()))
       .then((value) => setState?.call());
 }
 

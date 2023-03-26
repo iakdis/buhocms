@@ -12,14 +12,14 @@ import '../provider/app/shell_provider.dart';
 import '../provider/navigation/navigation_provider.dart';
 import '../utils/preferences.dart';
 
-class OpenHugoSite extends StatefulWidget {
-  const OpenHugoSite({super.key});
+class OpenWebsite extends StatefulWidget {
+  const OpenWebsite({super.key});
 
   @override
-  State<OpenHugoSite> createState() => _OpenHugoSiteState();
+  State<OpenWebsite> createState() => _OpenWebsiteState();
 }
 
-class _OpenHugoSiteState extends State<OpenHugoSite> {
+class _OpenWebsiteState extends State<OpenWebsite> {
   int currentStep = 0;
   bool canContinue = false;
 
