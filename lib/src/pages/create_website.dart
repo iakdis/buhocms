@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:buhocms/src/provider/app/shell_provider.dart';
+import 'package:buhocms/src/ssg/ssg.dart';
 import 'package:buhocms/src/utils/terminal_command.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
   String ssgInstalledText = '';
 
   String sitePath = Preferences.getSitePath() ?? '';
+  SSGTypes ssg = SSGTypes.values.byName(Preferences.getSSG());
   String path = '';
   bool sitePathError = false;
   TextEditingController textController = TextEditingController();
@@ -79,12 +81,12 @@ class _CreateWebsiteState extends State<CreateWebsite> {
   void checkExecutableInstalled() {
     checkProgramInstalled(
       context: context,
-      executable: 'hugo',
+      executable: SSG.getSSGExecutable(ssg),
       notFound: () {
         ssgInstalled = false;
         if (mounted) {
-          ssgInstalledText =
-              Localization.appLocalizations().executableNotFound('Hugo');
+          ssgInstalledText = Localization.appLocalizations()
+              .executableNotFound(SSG.getSSGName(ssg));
         }
         setState(() {});
       },
@@ -92,7 +94,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
         ssgInstalled = true;
         if (mounted) {
           ssgInstalledText = Localization.appLocalizations()
-              .executableFoundIn('Hugo', finalExecutable);
+              .executableFoundIn(SSG.getSSGName(ssg), finalExecutable);
         }
         setState(() {});
       },
@@ -132,127 +134,137 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                 }
               : null,*/
           onStepContinue: () async {
-            if (currentStep == 0) {
-              setState(() => currentStep++);
-            } else if (currentStep == 1) {
-              if (sitePath.isEmpty) {
-                setState(() => sitePathError = true);
-                return;
-              }
-              if (!Directory(sitePath).existsSync()) {
-                showSnackbar(
-                  text: Localization.appLocalizations()
-                      .error_DirectoryDoesNotExist('"$sitePath"'),
-                  seconds: 4,
-                );
-                return;
-              }
-              setState(() => currentStep++);
-            } else if (currentStep == 2) {
-              path = '$sitePath${Platform.pathSeparator}$siteName';
-              var flags = '';
-
-              create() async {
-                path = '$sitePath${Platform.pathSeparator}$siteName';
-
-                final shellProvider =
-                    Provider.of<ShellProvider>(context, listen: false);
-                final commandToRun = 'hugo new site $siteName $flags';
-
-                checkProgramInstalled(
-                  context: context,
-                  command: commandToRun,
-                  executable: 'hugo',
-                );
-                await runTerminalCommand(
-                  context: context,
-                  workingDirectory: sitePath,
-                  command: commandToRun,
-                );
-
-                Preferences.clearPreferencesSite();
-                Preferences.setOnBoardingComplete(true);
-
-                Preferences.setSitePath(
-                    '$sitePath${Platform.pathSeparator}$siteName');
-                Preferences.setCurrentPath(
-                    '${Preferences.getSitePath()}${Platform.pathSeparator}content');
-
-                shellProvider.updateShell();
-
-                if (mounted) {
-                  stopSSGServer(context: context, ssg: 'Hugo', snackbar: false);
-
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  Provider.of<NavigationProvider>(context, listen: false)
-                      .notifyAllListeners();
+            switch (currentStep) {
+              case 0:
+                setState(() => currentStep++);
+                break;
+              case 1:
+                if (sitePath.isEmpty) {
+                  setState(() => sitePathError = true);
+                  return;
                 }
-              }
+                if (!Directory(sitePath).existsSync()) {
+                  showSnackbar(
+                    text: Localization.appLocalizations()
+                        .error_DirectoryDoesNotExist('"$sitePath"'),
+                    seconds: 4,
+                  );
+                  return;
+                }
+                setState(() => currentStep++);
+                break;
+              case 2:
+                path = '$sitePath${Platform.pathSeparator}$siteName';
+                var flags = '';
 
-              await showDialog(
-                context: context,
-                builder: (context) {
-                  directoryAlreadyExists = Directory(path).existsSync();
+                create() async {
+                  path = '$sitePath${Platform.pathSeparator}$siteName';
 
-                  return StatefulBuilder(builder: (context, setState) {
-                    return CommandDialog(
-                      title: SelectableText.rich(TextSpan(
-                          text: Localization.appLocalizations()
-                              .createWebsiteNamed('Hugo'),
-                          style: const TextStyle(fontSize: 20),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: '$siteName\n\n',
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.w500),
+                  final shellProvider =
+                      Provider.of<ShellProvider>(context, listen: false);
+                  final commandToRun = 'hugo new site $siteName $flags';
+
+                  checkProgramInstalled(
+                    context: context,
+                    command: commandToRun,
+                    executable: 'hugo',
+                  );
+                  await runTerminalCommand(
+                    context: context,
+                    workingDirectory: sitePath,
+                    command: commandToRun,
+                  );
+
+                  Preferences.clearPreferencesSite();
+                  Preferences.setOnBoardingComplete(true);
+
+                  Preferences.setSitePath(
+                      '$sitePath${Platform.pathSeparator}$siteName');
+                  Preferences.setCurrentPath(
+                      '${Preferences.getSitePath()}${Platform.pathSeparator}content');
+
+                  Preferences.setSSG(ssg.name);
+
+                  shellProvider.updateShell();
+
+                  if (mounted) {
+                    stopSSGServer(
+                        context: context, ssg: 'Hugo', snackbar: false);
+
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Provider.of<NavigationProvider>(context, listen: false)
+                        .notifyAllListeners();
+                  }
+                }
+
+                await showDialog(
+                  context: context,
+                  builder: (context) {
+                    directoryAlreadyExists = Directory(path).existsSync();
+
+                    return StatefulBuilder(builder: (context, setState) {
+                      return CommandDialog(
+                        title: SelectableText.rich(TextSpan(
+                            text: Localization.appLocalizations()
+                                .createWebsiteNamed(SSG.getSSGName(ssg)),
+                            style: const TextStyle(fontSize: 20),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: '$siteName\n\n',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              TextSpan(
+                                  text: Localization.appLocalizations()
+                                      .insideFolder),
+                              TextSpan(
+                                text: sitePath,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ])),
+                        icon: Icons.create_new_folder,
+                        expansionIcon: Icons.terminal,
+                        expansionTitle:
+                            Localization.appLocalizations().terminal,
+                        yes: () => create(),
+                        dialogChildren: const [],
+                        expansionChildren: [
+                          CustomTextField(
+                            leading:
+                                Text(Localization.appLocalizations().command),
+                            controller: nameController,
+                            onChanged: (value) => onChangedText(
+                              setState: () => setState(() {}),
+                              value: value,
                             ),
-                            TextSpan(
-                                text: Localization.appLocalizations()
-                                    .insideFolder),
-                            TextSpan(
-                              text: sitePath,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.w500),
-                            ),
-                          ])),
-                      icon: Icons.create_new_folder,
-                      expansionIcon: Icons.terminal,
-                      expansionTitle: Localization.appLocalizations().terminal,
-                      yes: () => create(),
-                      dialogChildren: const [],
-                      expansionChildren: [
-                        CustomTextField(
-                          leading:
-                              Text(Localization.appLocalizations().command),
-                          controller: nameController,
-                          onChanged: (value) => onChangedText(
-                            setState: () => setState(() {}),
-                            value: value,
+                            prefixText: 'hugo new site ',
+                            helperText: '"hugo new site my-website"',
+                            errorText: siteNameError
+                                ? Localization.appLocalizations().cantBeEmpty
+                                : directoryAlreadyExists
+                                    ? Localization.appLocalizations()
+                                        .error_DirectoryAlreadyExists('"$path"')
+                                    : null,
                           ),
-                          prefixText: 'hugo new site ',
-                          helperText: '"hugo new site my-website"',
-                          errorText: siteNameError
-                              ? Localization.appLocalizations().cantBeEmpty
-                              : directoryAlreadyExists
-                                  ? Localization.appLocalizations()
-                                      .error_DirectoryAlreadyExists('"$path"')
-                                  : null,
-                        ),
-                        const SizedBox(height: 12),
-                        CustomTextField(
-                          leading: Text(Localization.appLocalizations().flags),
-                          onChanged: (value) {
-                            setState(() => flags = value);
-                          },
-                          helperText: '"--force"',
-                        ),
-                      ],
-                    );
-                  });
-                },
-              );
-              setState(() {});
+                          const SizedBox(height: 12),
+                          CustomTextField(
+                            leading:
+                                Text(Localization.appLocalizations().flags),
+                            onChanged: (value) {
+                              setState(() => flags = value);
+                            },
+                            helperText: '"--force"',
+                          ),
+                        ],
+                      );
+                    });
+                  },
+                );
+                setState(() {});
+                break;
+              default:
             }
           },
           onStepCancel: () {
@@ -292,26 +304,57 @@ class _CreateWebsiteState extends State<CreateWebsite> {
           steps: [
             Step(
               isActive: currentStep >= 0,
-              content: Column(
               title: Text(Localization.appLocalizations().checkExecutableFound),
+              content: Wrap(
+                spacing: 128.0,
+                runSpacing: 32.0,
+                alignment: WrapAlignment.center,
                 children: [
-                  Icon(
-                    ssgInstalled == null
-                        ? Icons.question_mark
-                        : ssgInstalled == true
-                            ? Icons.check
-                            : Icons.close,
-                    size: 64,
-                    color: Theme.of(context).colorScheme.primary,
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.web_stories,
+                        size: 64,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      const SizedBox(height: 32),
+                      DropdownButton<SSGTypes>(
+                        value: ssg,
+                        items: SSGTypes.values
+                            .map((e) => DropdownMenuItem(
+                                value: e, child: Text(SSG.getSSGName(e))))
+                            .toList(),
+                        onChanged: (option) async {
+                          if (option == null) return;
+                          ssg = option;
+                          ssgInstalled = false;
+                          setState(() {});
+                        },
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 32),
-                  ElevatedButton(
-                    onPressed: () => checkExecutableInstalled(),
-                    child: Text(Localization.appLocalizations()
-                        .checkSSGInstalled('Hugo')),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(ssgInstalledText),
+                  if (ssg != SSGTypes.none)
+                    Column(
+                      children: [
+                        Icon(
+                          ssgInstalled == null
+                              ? Icons.question_mark
+                              : ssgInstalled == true
+                                  ? Icons.check
+                                  : Icons.close,
+                          size: 64,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(height: 32),
+                        ElevatedButton(
+                          onPressed: () => checkExecutableInstalled(),
+                          child: Text(Localization.appLocalizations()
+                              .checkSSGInstalled(SSG.getSSGName(ssg))),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(ssgInstalledText),
+                      ],
+                    ),
                 ],
               ),
             ),
@@ -325,7 +368,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                       child: Text(Localization.appLocalizations().choosePath)),
                   const SizedBox(height: 24.0),
                   Text(Localization.appLocalizations()
-                      .websiteWillBeCreatedInFolder('Hugo')),
+                      .websiteWillBeCreatedInFolder(SSG.getSSGName(ssg))),
                   const SizedBox(height: 12.0),
                   SizedBox(
                     width: 400,

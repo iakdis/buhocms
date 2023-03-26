@@ -12,22 +12,20 @@ class SSG {
     await Preferences.setSSG(ssg.name);
   }
 
-  static String getSSGName() {
-    final ssg = SSGTypes.values.byName(Preferences.getSSG());
-
+  static String getSSGName(SSGTypes ssg) {
     switch (ssg) {
       case SSGTypes.hugo:
         return 'Hugo';
       case SSGTypes.jekyll:
         return 'Jekyll';
+      case SSGTypes.none:
+        return 'None';
       default:
         return 'Get name: Unknown SSG';
     }
   }
 
-  static String getSSGExecutable() {
-    final ssg = SSGTypes.values.byName(Preferences.getSSG());
-
+  static String getSSGExecutable(SSGTypes ssg) {
     switch (ssg) {
       case SSGTypes.hugo:
         return 'hugo';
