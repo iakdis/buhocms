@@ -164,7 +164,7 @@
     "next": "NÄCHSTE",
     "continue2": "WEITER",
     "create": "Erstellen",
-    "checkExecutableFound": "Überprüfen, ob Executable-Datei installiert ist",
+    "chooseStaticSiteGenerator": "Static-Site-Generator auswählen",
     "checkSSGInstalled": "Überprüfen, ob {ssg} installiert ist",
     "@checkSSGInstalled": {
       "placeholders": {

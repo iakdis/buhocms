@@ -317,7 +317,8 @@ class _CreateWebsiteState extends State<CreateWebsite> {
           steps: [
             Step(
               isActive: currentStep >= 0,
-              title: Text(Localization.appLocalizations().checkExecutableFound),
+              title: Text(
+                  Localization.appLocalizations().chooseStaticSiteGenerator),
               content: Wrap(
                 spacing: 128.0,
                 runSpacing: 32.0,
