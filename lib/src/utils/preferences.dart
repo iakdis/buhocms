@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:buhocms/src/ssg/ssg.dart';
 import 'package:buhocms/src/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,6 +19,7 @@ class Preferences {
       const MapEntry(prefNavigationSize, 64.0),
       const MapEntry(prefFileNavigationSize, 64.0),
       const MapEntry(prefOnboardingCompleted, false),
+      MapEntry(prefSSG, SSGTypes.none.name),
       const MapEntry(prefSitePath, null),
       const MapEntry(prefRecentSitePaths, null),
       const MapEntry(prefCurrentPath, ''),
@@ -148,6 +150,11 @@ class Preferences {
   static Future<void> setSitePath(String path) async =>
       await setPreferences(prefSitePath, path);
   static String? getSitePath() => getPreferencesEntry(prefSitePath);
+
+  //SSG
+  static Future<void> setSSG(String ssg) async =>
+      await setPreferences(prefSSG, ssg);
+  static String getSSG() => getPreferencesEntry(prefSSG);
 
   //Recently opened site paths
   static Future<void> setRecentSitePaths(List paths) async {

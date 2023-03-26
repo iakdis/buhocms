@@ -6,6 +6,7 @@ const String prefColorScheme = 'colorScheme';
 const String prefPageIndex = 'pageIndex';
 const String prefCurrentFileIndex = 'currrentFileIndex';
 const String prefOnboardingCompleted = 'onboardingCompleted';
+const String prefSSG = 'ssg';
 const String prefSitePath = 'sitePostPath';
 const String prefRecentSitePaths = 'recentSitePaths';
 const String prefCurrentPath = 'currentPath';
