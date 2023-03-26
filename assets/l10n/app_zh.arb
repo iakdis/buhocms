@@ -357,8 +357,18 @@
     "nothingToRevert": "没有内容被还原",
     "alreadyStartedAHugoServer": "已启动 Hugo Server",
     "startedHugoServer": "Hugo server 已开启",
-    "stoppedHugoServer": "Hugo Server 已停止",
-    "noHugoServerRunning": "目前没有运行的 Hugo Server",
+    "stoppedSSGServer": "{ssg} Server 已停止",
+    "@stoppedSSGServer": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
+    "noSSGServerRunning": "目前没有运行的 {ssg} Server",
+    "@noSSGServerRunning": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "builtHugoSite": "已组建Hugo Page",
     "addedFrontmatter": "添加了类型为 {type} 的目录 {name}",
     "@addedFrontmatter": {

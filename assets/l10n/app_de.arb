@@ -356,8 +356,18 @@
     "nothingToRevert": "Nichts zum Rückgängig machen",
     "alreadyStartedAHugoServer": "Bereits einen Hugo Server gestartet",
     "startedHugoServer": "Hugo server gestartet",
-    "stoppedHugoServer": "Hugo server gestoppt",
-    "noHugoServerRunning": "Kein Hugo Server ist gerade aktiv",
+    "stoppedSSGServer": "{ssg} server gestoppt",
+    "@stoppedSSGServer": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
+    "noSSGServerRunning": "Kein {ssg} Server ist gerade aktiv",
+    "@noSSGServerRunning": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "builtHugoSite": "Hugo Webseite gebaut",
     "addedFrontmatter": "Front matter {name} mit Typ {type} hinzugefügt",
     "@addedFrontmatter": {

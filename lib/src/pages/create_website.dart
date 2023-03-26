@@ -181,7 +181,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                 shellProvider.updateShell();
 
                 if (mounted) {
-                  stopHugoServer(context: context, snackbar: false);
+                  stopSSGServer(context: context, ssg: 'Hugo', snackbar: false);
 
                   Navigator.pop(context);
                   Navigator.pop(context);

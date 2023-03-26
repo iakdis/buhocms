@@ -66,7 +66,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
   }
 
   void open({required String sitePath}) {
-    stopHugoServer(context: context, snackbar: false);
+    stopSSGServer(context: context, ssg: 'Hugo', snackbar: false);
 
     Preferences.clearPreferencesSite();
     Preferences.setOnBoardingComplete(true);

@@ -287,14 +287,18 @@ void startHugoServer({required BuildContext context}) {
   );
 }
 
-void stopHugoServer({required BuildContext context, bool snackbar = true}) {
-  final shellProvider = Provider.of<ShellProvider>(context, listen: false);
+void stopSSGServer({
+  required BuildContext context,
+  required String ssg,
+  bool snackbar = true,
+}) {
+  final shellProvider = context.read<ShellProvider>();
 
   if (snackbar) {
     showSnackbar(
       text: shellProvider.shellActive == true
-          ? Localization.appLocalizations().stoppedHugoServer
-          : Localization.appLocalizations().noHugoServerRunning,
+          ? Localization.appLocalizations().stoppedSSGServer(ssg)
+          : Localization.appLocalizations().noSSGServerRunning(ssg),
       seconds: 4,
     );
   }

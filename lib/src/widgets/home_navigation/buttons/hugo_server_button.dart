@@ -22,7 +22,7 @@ class HugoServerButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
             onTap: shellProvider.shellActive == false
                 ? () => startHugoServer(context: context)
-                : () => stopHugoServer(context: context),
+                : () => stopSSGServer(context: context, ssg: 'Hugo'),
             child: Padding(
               padding: isExtended
                   ? const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0)

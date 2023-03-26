@@ -229,7 +229,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
                 menuButtonText(Localization.appLocalizations().startHugoServer),
           ),
           MenuButton(
-            onPressed: () => stopHugoServer(context: context),
+            onPressed: () => stopSSGServer(context: context, ssg: 'Hugo'),
             icon: const Icon(Icons.stop_circle_outlined),
             text:
                 menuButtonText(Localization.appLocalizations().stopHugoServer),
