@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:yaml/yaml.dart';
 
 import '../i18n/l10n.dart';
@@ -244,25 +241,6 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                       width: 512.0,
                       child: Text(Localization.appLocalizations()
                           .editFrontmatterList_Description),
-                    ),
-                    const SizedBox(height: 16.0),
-                    Tooltip(
-                      message:
-                          'https://gohugo.io/content-management/front-matter/',
-                      child: TextButton.icon(
-                        onPressed: () async {
-                          final url = Uri(
-                              scheme: 'https',
-                              path:
-                                  'gohugo.io/content-management/front-matter/');
-                          if (await canLaunchUrl(url) || Platform.isLinux) {
-                            await launchUrl(url);
-                          }
-                        },
-                        icon: const Icon(Icons.open_in_new),
-                        label: Text(Localization.appLocalizations()
-                            .openHugoDocumentation),
-                      ),
                     ),
                     const SizedBox(height: 16.0),
                     ElevatedButton.icon(
