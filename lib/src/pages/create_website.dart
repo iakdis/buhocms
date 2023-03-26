@@ -5,6 +5,7 @@ import 'package:buhocms/src/ssg/ssg.dart';
 import 'package:buhocms/src/utils/terminal_command.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../i18n/l10n.dart';
@@ -326,11 +327,17 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                 children: [
                   Column(
                     children: [
-                      Icon(
-                        Icons.web_stories,
-                        size: 64,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                      if (ssg != SSGTypes.none)
+                        SvgPicture.asset(
+                          'assets/images/${SSG.getSSGName(ssg).toLowerCase()}.svg',
+                          width: 64,
+                          height: 64,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.primary,
+                            BlendMode.srcIn,
+                          ),
+                          semanticsLabel: '${SSG.getSSGName(ssg)} Logo',
+                        ),
                       const SizedBox(height: 32),
                       DropdownButton<SSGTypes>(
                         value: ssg,
@@ -342,6 +349,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                           if (option == null) return;
                           ssg = option;
                           ssgInstalled = false;
+                          ssgInstalledText = '';
                           setState(() {});
                         },
                       ),
