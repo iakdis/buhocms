@@ -4,9 +4,11 @@ import 'package:buhocms/src/provider/navigation/file_navigation_provider.dart';
 import 'package:buhocms/src/ssg/frontmatter.dart';
 import 'package:buhocms/src/utils/globals.dart';
 import 'package:buhocms/src/widgets/editing_page/tabs.dart';
+import 'package:flutter_svg/svg.dart';
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../ssg/add_frontmatter.dart';
+import '../ssg/ssg.dart';
 import '../widgets/markdown/markdown_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:markdown_toolbar/markdown_toolbar.dart';
@@ -19,6 +21,7 @@ import '../provider/navigation/navigation_size_provider.dart';
 import '../provider/editing/unsaved_text_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
+import '../widgets/ssg_icon.dart';
 import '../widgets/tooltip.dart';
 
 class EditingPage extends StatefulWidget {
@@ -693,6 +696,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                 setStateCallback: () => setState(() {}),
               ), //https://github.com/flutter/flutter/issues/75180
             ),
+            const SSGIcon(),
+            const SizedBox(width: 8.0),
           ],
         );
       }),
