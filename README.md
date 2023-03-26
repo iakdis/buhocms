@@ -232,6 +232,7 @@ Package | Use case
 [flutter](https://pub.dev/packages/flutter) | Flutter SDK
 [flutter_localizations](https://pub.dev/packages/flutter_localizations) | Localization
 [flutter_markdown](https://pub.dev/packages/flutter_markdown) | Markdown preview
+[flutter_svg](https://pub.dev/packages/flutter_svg) | Displaying SVG files
 [intl](https://pub.dev/packages/intl) | Localization
 [markdown_toolbar](https://pub.dev/packages/markdown_toolbar) | Markdown Toolbar
 [process_run](https://pub.dev/packages/process_run) | Run terminal commands
