@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:buhocms/src/app.dart';
+import 'package:buhocms/src/provider/app/locale_provider.dart';
 import 'package:buhocms/src/provider/navigation/navigation_provider.dart';
 import 'package:buhocms/src/ssg/edit_frontmatter.dart';
 import 'package:buhocms/src/utils/preferences.dart';
@@ -416,43 +417,41 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: (() async {
-        //await widget.onNewCameraSelected(widget.controller!.description);
-        return true;
-        //return true;
-      }),
-      child: Scaffold(
-        appBar: CustomAppBar(text: Localization.appLocalizations().settings),
-        body: ListView(
-          controller: listScrollController,
-          padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
-          children: <Widget>[
-            _headingTile(Localization.appLocalizations().appSettings),
-            _preferencesTile(),
-            const Divider(),
-            _languageTile(),
-            const Divider(),
-            _themeTile(),
-            const Divider(),
-            _headingTile(Localization.appLocalizations().site),
-            _openSiteTile(),
-            const Divider(),
-            _createSiteTile(),
-            const Divider(),
-            _hugoThemeTile(),
-            const Divider(),
-            _headingTile(Localization.appLocalizations().hugoSettings),
-            _editFrontmatterListTile(),
-            // const Divider(),
-            // _showExperimentalTile(),
-            // if (isExperimentalOptions) _experimentalTile(),
-            const Divider(),
-            _showMoreTile(),
-            if (isMoreOptions) _moreTile(),
-          ],
+    return Consumer<LocaleProvider>(builder: (_, __, ___) {
+      return WillPopScope(
+        onWillPop: (() async => true),
+        child: Scaffold(
+          appBar: CustomAppBar(text: Localization.appLocalizations().settings),
+          body: ListView(
+            controller: listScrollController,
+            padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+            children: <Widget>[
+              _headingTile(Localization.appLocalizations().appSettings),
+              _preferencesTile(),
+              const Divider(),
+              _languageTile(),
+              const Divider(),
+              _themeTile(),
+              const Divider(),
+              _headingTile(Localization.appLocalizations().site),
+              _openSiteTile(),
+              const Divider(),
+              _createSiteTile(),
+              const Divider(),
+              _hugoThemeTile(),
+              const Divider(),
+              _headingTile(Localization.appLocalizations().hugoSettings),
+              _editFrontmatterListTile(),
+              // const Divider(),
+              // _showExperimentalTile(),
+              // if (isExperimentalOptions) _experimentalTile(),
+              const Divider(),
+              _showMoreTile(),
+              if (isMoreOptions) _moreTile(),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
