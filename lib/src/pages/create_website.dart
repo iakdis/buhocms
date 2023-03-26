@@ -14,14 +14,14 @@ import '../utils/program_installed.dart';
 import '../widgets/command_dialog.dart';
 import '../widgets/snackbar.dart';
 
-class CreateHugoSite extends StatefulWidget {
-  const CreateHugoSite({super.key});
+class CreateWebsite extends StatefulWidget {
+  const CreateWebsite({super.key});
 
   @override
-  State<CreateHugoSite> createState() => _CreateHugoSiteState();
+  State<CreateWebsite> createState() => _CreateWebsiteState();
 }
 
-class _CreateHugoSiteState extends State<CreateHugoSite> {
+class _CreateWebsiteState extends State<CreateWebsite> {
   int currentStep = 0;
   bool canContinue = false;
 

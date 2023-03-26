@@ -206,7 +206,7 @@ void openHugoSite({required BuildContext context, Function? setState}) {
 
 void createHugoSite({required BuildContext context, Function? setState}) {
   Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const CreateHugoSite()))
+          MaterialPageRoute(builder: (context) => const CreateWebsite()))
       .then((value) => setState?.call());
 }
 
