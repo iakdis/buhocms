@@ -402,6 +402,12 @@
     "tooltipQuote": "引用",
     "tooltipHorizontalRule": "横向规则",
     "dismiss": "关闭",
+    "logo": "{logo} 徽标",
+    "@logo": {
+      "placeholders": {
+         "logo": { "type": "String" }
+      }
+    },
 
     "settings": "设置",
     "appSettings": "应用设置",

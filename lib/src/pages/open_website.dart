@@ -6,7 +6,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../i18n/l10n.dart';
 import '../provider/app/shell_provider.dart';
@@ -171,7 +170,8 @@ class _OpenWebsiteState extends State<OpenWebsite> {
                         Theme.of(context).colorScheme.primary,
                         BlendMode.srcIn,
                       ),
-                      semanticsLabel: '${SSG.getSSGName(ssg)} Logo',
+                      semanticsLabel: Localization.appLocalizations()
+                          .logo(SSG.getSSGName(ssg)),
                     ),
                   const SizedBox(height: 32),
                   DropdownButton<SSGTypes>(

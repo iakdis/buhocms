@@ -1,3 +1,4 @@
+import 'package:buhocms/src/i18n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -8,8 +9,8 @@ class SSGIcon extends StatelessWidget {
   const SSGIcon({Key? key}) : super(key: key);
 
   Widget ssgIcon(BuildContext context) {
-    final tooltip =
-        '${SSG.getSSGName(SSGTypes.values.byName(Preferences.getSSG()))} Logo';
+    final tooltip = Localization.appLocalizations()
+        .logo(SSG.getSSGName(SSGTypes.values.byName(Preferences.getSSG())));
 
     return Tooltip(
       message: tooltip,

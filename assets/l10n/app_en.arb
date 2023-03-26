@@ -401,6 +401,12 @@
     "tooltipQuote": "Quote",
     "tooltipHorizontalRule": "Horizontal rule",
     "dismiss": "Dismiss",
+    "logo": "{logo} logo",
+    "@logo": {
+      "placeholders": {
+         "logo": { "type": "String" }
+      }
+    },
 
     "settings": "Settings",
     "appSettings": "APP SETTINGS",

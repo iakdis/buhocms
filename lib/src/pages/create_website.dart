@@ -331,7 +331,8 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                             Theme.of(context).colorScheme.primary,
                             BlendMode.srcIn,
                           ),
-                          semanticsLabel: '${SSG.getSSGName(ssg)} Logo',
+                          semanticsLabel: Localization.appLocalizations()
+                              .logo(SSG.getSSGName(ssg)),
                         ),
                       const SizedBox(height: 32),
                       DropdownButton<SSGTypes>(
