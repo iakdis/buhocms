@@ -164,6 +164,7 @@
     "next": "下一步",
     "continue2": "继续",
     "create": "创建",
+    "checkExecutableFound": "检查，如果找到了可执行文件",
     "checkSSGInstalled": "检查是否已安装{ssg}",
     "@checkSSGInstalled": {
       "placeholders": {

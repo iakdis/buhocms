@@ -164,6 +164,7 @@
     "next": "NEXT",
     "continue2": "CONTINUE",
     "create": "Create",
+    "checkExecutableFound": "Check, if executable is found",
     "checkSSGInstalled": "Check, if {ssg} is installed",
     "@checkSSGInstalled": {
       "placeholders": {

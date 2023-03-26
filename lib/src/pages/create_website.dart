@@ -292,9 +292,8 @@ class _CreateWebsiteState extends State<CreateWebsite> {
           steps: [
             Step(
               isActive: currentStep >= 0,
-              title: Text(
-                  Localization.appLocalizations().checkSSGInstalled('Hugo')),
               content: Column(
+              title: Text(Localization.appLocalizations().checkExecutableFound),
                 children: [
                   Icon(
                     ssgInstalled == null

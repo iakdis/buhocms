@@ -164,6 +164,7 @@
     "next": "NÄCHSTE",
     "continue2": "WEITER",
     "create": "Erstellen",
+    "checkExecutableFound": "Überprüfen, ob Executable-Datei installiert ist",
     "checkSSGInstalled": "Überprüfen, ob {ssg} installiert ist",
     "@checkSSGInstalled": {
       "placeholders": {
