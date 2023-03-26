@@ -25,8 +25,8 @@ class _CreateWebsiteState extends State<CreateWebsite> {
   int currentStep = 0;
   bool canContinue = false;
 
-  bool? hugoInstalled;
-  String hugoInstalledText = '';
+  bool? ssgInstalled;
+  String ssgInstalledText = '';
 
   String sitePath = Preferences.getSitePath() ?? '';
   String path = '';
@@ -76,22 +76,22 @@ class _CreateWebsiteState extends State<CreateWebsite> {
     });
   }
 
-  void checkHugoExecutableInstalled() {
+  void checkExecutableInstalled() {
     checkProgramInstalled(
       context: context,
       executable: 'hugo',
       notFound: () {
-        hugoInstalled = false;
+        ssgInstalled = false;
         if (mounted) {
-          hugoInstalledText =
+          ssgInstalledText =
               Localization.appLocalizations().executableNotFound('Hugo');
         }
         setState(() {});
       },
       found: (finalExecutable) {
-        hugoInstalled = true;
+        ssgInstalled = true;
         if (mounted) {
-          hugoInstalledText = Localization.appLocalizations()
+          ssgInstalledText = Localization.appLocalizations()
               .executableFoundIn('Hugo', finalExecutable);
         }
         setState(() {});
@@ -261,7 +261,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
             }
           },
           controlsBuilder: (context, details) {
-            canContinue = hugoInstalled == true &&
+            canContinue = ssgInstalled == true &&
                 (details.stepIndex == 1 ? !sitePathError : true) &&
                 (details.stepIndex == 2
                     ? !siteNameError &&
@@ -296,9 +296,9 @@ class _CreateWebsiteState extends State<CreateWebsite> {
               content: Column(
                 children: [
                   Icon(
-                    hugoInstalled == null
+                    ssgInstalled == null
                         ? Icons.question_mark
-                        : hugoInstalled == true
+                        : ssgInstalled == true
                             ? Icons.check
                             : Icons.close,
                     size: 64,
@@ -306,12 +306,12 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                   ),
                   const SizedBox(height: 32),
                   ElevatedButton(
-                    onPressed: () => checkHugoExecutableInstalled(),
+                    onPressed: () => checkExecutableInstalled(),
                     child: Text(
                         Localization.appLocalizations().checkHugoInstalled),
                   ),
                   const SizedBox(height: 16),
-                  Text(hugoInstalledText),
+                  Text(ssgInstalledText),
                 ],
               ),
             ),
