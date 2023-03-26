@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:buhocms/src/provider/app/shell_provider.dart';
 import 'package:buhocms/src/ssg/ssg.dart';
-import 'package:buhocms/src/utils/terminal_command.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -163,17 +162,13 @@ class _CreateWebsiteState extends State<CreateWebsite> {
 
                   final shellProvider =
                       Provider.of<ShellProvider>(context, listen: false);
-                  final commandToRun = 'hugo new site $siteName $flags';
 
-                  checkProgramInstalled(
+                  SSG.createSSGWebsite(
                     context: context,
-                    command: commandToRun,
-                    executable: 'hugo',
-                  );
-                  await runTerminalCommand(
-                    context: context,
-                    workingDirectory: sitePath,
-                    command: commandToRun,
+                    ssg: ssg,
+                    sitePath: sitePath,
+                    siteName: siteName,
+                    flags: flags,
                   );
 
                   Preferences.clearPreferencesSite();
@@ -253,8 +248,8 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                               setState: () => setState(() {}),
                               value: value,
                             ),
-                            prefixText: 'hugo new site ',
-                            helperText: '"hugo new site my-website"',
+                            prefixText: SSG.getCreateSiteSSGPrefix(ssg),
+                            helperText: SSG.getCreateSiteSSGHelper(ssg),
                             errorText: siteNameError
                                 ? Localization.appLocalizations().cantBeEmpty
                                 : directoryAlreadyExists
@@ -388,9 +383,6 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                   ElevatedButton(
                       onPressed: savePath,
                       child: Text(Localization.appLocalizations().choosePath)),
-                  const SizedBox(height: 24.0),
-                  Text(Localization.appLocalizations()
-                      .websiteWillBeCreatedInFolder(SSG.getSSGName(ssg))),
                   const SizedBox(height: 12.0),
                   SizedBox(
                     width: 400,
@@ -430,6 +422,9 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 24.0),
+                  Text(Localization.appLocalizations()
+                      .websiteWillBeCreatedInFolder(SSG.getSSGName(ssg))),
                 ],
               ),
             ),
