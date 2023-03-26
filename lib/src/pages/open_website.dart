@@ -118,16 +118,12 @@ class _OpenWebsiteState extends State<OpenWebsite> {
             );
             return;
           }
-          setState(() => currentStep++);
-        } else {
           open(sitePath: sitePath);
         }
       },
       onStepCancel: () {
         if (currentStep > 0) {
-          setState(() {
-            currentStep--;
-          });
+          setState(() => currentStep--);
         }
       },
       controlsBuilder: (context, details) {
@@ -139,7 +135,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
             children: <Widget>[
               ElevatedButton(
                 onPressed: canContinue ? details.onStepContinue : null,
-                child: Text(details.stepIndex < 2
+                child: Text(details.stepIndex == 0
                     ? Localization.appLocalizations().continue2
                     : Localization.appLocalizations().open.toUpperCase()),
               ),
@@ -231,23 +227,6 @@ class _OpenWebsiteState extends State<OpenWebsite> {
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-        Step(
-          isActive: currentStep >= 2,
-          title: Text(Localization.appLocalizations().open),
-          content: Column(
-            children: [
-              SelectableText.rich(TextSpan(
-                  text: Localization.appLocalizations().openHugoSite,
-                  style: const TextStyle(fontSize: 20),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '"$sitePath"',
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                  ])),
             ],
           ),
         ),
