@@ -186,7 +186,7 @@
     },
     "createLocation": "Speicherort",
     "choosePath": "Pfad auswählen",
-    "websiteWillBeCreatedInFolder": "Die neue {ssg} Webseite wird im Ordner erstellt:",
+    "websiteWillBeCreatedInFolder": "Die neue {ssg} Webseite wird im ausgewählten Ordner erstellt",
     "@websiteWillBeCreatedInFolder": {
       "placeholders": {
         "ssg": { "type": "String" }
@@ -203,9 +203,8 @@
     },
     "insideFolder": "Im Ordner:\n",
     "open": "Open",
-    "checkHugoFolderStructure": "Hugo Ordner Struktur überprüfen",
-    "checkHugoFolderStructure_Description": "Stelle sicher, dass dein Ordner der korrekten Hugo Struktur mit einem content Ordner, einer config-Datei, etc. befolgt. Weitere Informationen findest du in der Hugo-Dokumentation. Wenn du sicher sein willst, dass deine Site der richtigen Ordnerstruktur folgt, kannst du eine neue Hugo-Site erstellen.",
-    "openHugoDocumentation": "Hugo-Dokumentation öffnen",
+    "checkStaticSiteStructure": "Static-Site-Generator Struktur überprüfen",
+    "checkStaticSiteStructure_Description": "Stelle sicher, dass dein Ordner der korrekten Static-Site-Generator Struktur entspricht. Weitere Informationen findest du in der jeweiligen Dokumentation.\n\nWenn du dir sicher sein willst, dass deine Webseite der richtigen Ordnerstruktur folgt, kannst du eine neue Website mit BuhoCMS erstellen.",
     "selectSiteFolder": "Webseitenordner auswählen",
     "openHugoSite": "Hugo Webseite öffnen:\n",
     "error_ThemeAlreadyExists": "Ein Thema mit dem Namen {theme} existiert bereits im Themenordner. Bitte benenne den existierenden Ordner um oder entferne ihn.",

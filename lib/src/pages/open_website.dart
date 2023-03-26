@@ -4,12 +4,14 @@ import 'package:buhocms/src/logic/buho_functions.dart';
 import 'package:buhocms/src/widgets/snackbar.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../i18n/l10n.dart';
 import '../provider/app/shell_provider.dart';
 import '../provider/navigation/navigation_provider.dart';
+import '../ssg/ssg.dart';
 import '../utils/preferences.dart';
 
 class OpenWebsite extends StatefulWidget {
@@ -24,6 +26,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
   bool canContinue = false;
 
   String sitePath = Preferences.getSitePath() ?? '';
+  SSGTypes ssg = SSGTypes.values.byName(Preferences.getSSG());
   bool sitePathError = false;
   TextEditingController textController = TextEditingController();
 
@@ -151,33 +154,46 @@ class _OpenWebsiteState extends State<OpenWebsite> {
       steps: [
         Step(
           isActive: currentStep >= 0,
-          title: Text(Localization.appLocalizations().checkHugoFolderStructure),
-          content: Column(
+          title: Text(Localization.appLocalizations().checkStaticSiteStructure),
+          content: Wrap(
+            spacing: 128.0,
+            runSpacing: 32.0,
+            alignment: WrapAlignment.center,
             children: [
+              Column(
+                children: [
+                  if (ssg != SSGTypes.none)
+                    SvgPicture.asset(
+                      'assets/images/${SSG.getSSGName(ssg).toLowerCase()}.svg',
+                      width: 64,
+                      height: 64,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.primary,
+                        BlendMode.srcIn,
+                      ),
+                      semanticsLabel: '${SSG.getSSGName(ssg)} Logo',
+                    ),
+                  const SizedBox(height: 32),
+                  DropdownButton<SSGTypes>(
+                    value: ssg,
+                    items: SSGTypes.values
+                        .map((e) => DropdownMenuItem(
+                            value: e, child: Text(SSG.getSSGName(e))))
+                        .toList(),
+                    onChanged: (option) async {
+                      if (option == null) return;
+                      ssg = option;
+                      setState(() {});
+                    },
+                  ),
+                ],
+              ),
               SizedBox(
-                width: 700,
+                width: 500,
                 child: SelectableText(
                   Localization.appLocalizations()
-                      .checkHugoFolderStructure_Description,
+                      .checkStaticSiteStructure_Description,
                   style: const TextStyle(fontSize: 18),
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              Tooltip(
-                message:
-                    'https://gohugo.io/getting-started/directory-structure/',
-                child: ElevatedButton.icon(
-                  onPressed: () async {
-                    final url = Uri(
-                        scheme: 'https',
-                        path: 'gohugo.io/getting-started/directory-structure/');
-                    if (await canLaunchUrl(url) || Platform.isLinux) {
-                      await launchUrl(url);
-                    }
-                  },
-                  icon: const Icon(Icons.open_in_new),
-                  label: Text(
-                      Localization.appLocalizations().openHugoDocumentation),
                 ),
               ),
             ],

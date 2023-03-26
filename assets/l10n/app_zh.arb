@@ -187,7 +187,7 @@
     "createLocation": "创建位置",
     "choosePath": "选择路径",
     "hugoSiteWillBeCreatedInFolder": "新的Hugo网站将在此文件夹中创建：",
-    "websiteWillBeCreatedInFolder": "新的{ssg}网站将在此文件夹中创建：",
+    "websiteWillBeCreatedInFolder": "新的{ssg}网站将在选定的文件夹中创建。",
     "@websiteWillBeCreatedInFolder": {
       "placeholders": {
         "ssg": { "type": "String" }
@@ -204,9 +204,8 @@
     },
     "insideFolder": "内部文件夹:\n",
     "open": "打开",
-    "checkHugoFolderStructure": "检查Hugo文件夹结构",
-    "checkHugoFolderStructure_Description": "确保你的文件夹遵循正确的Hugo结构，有一个内容文件夹、配置文件等。请参考Hugo文档以了解更多细节。如果你想确保你的网站遵循正确的文件夹结构，请随时创建一个新的Hugo网站。",
-    "openHugoDocumentation": "打开Hugo文档",
+    "checkStaticSiteStructure": "检查静态网站生成器结构",
+    "checkStaticSiteStructure_Description": "确保你的文件夹遵循正确的静态网站生成器结构。请参考具体的文档以了解更多细节。\n\n如果你想确定你的网站遵循正确的文件夹结构，请随时用BuhoCMS创建一个新的网站",
     "selectSiteFolder": "选择网站文件夹",
     "openHugoSite": "打开Hugo网站:\n",
     "error_ThemeAlreadyExists": "主题文件夹中已经存在一个名称为 {theme} 的主题文件夹，请重新命名或删除现有文件夹。",

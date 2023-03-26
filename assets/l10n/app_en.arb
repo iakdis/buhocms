@@ -186,7 +186,7 @@
     },
     "createLocation": "Create location",
     "choosePath": "Choose path",
-    "websiteWillBeCreatedInFolder": "The new {ssg} website will be created inside this folder:",
+    "websiteWillBeCreatedInFolder": "The new {ssg} website will be created inside the selected folder",
     "@websiteWillBeCreatedInFolder": {
       "placeholders": {
         "ssg": { "type": "String" }
@@ -203,9 +203,8 @@
     },
     "insideFolder": "Inside folder:\n",
     "open": "Open",
-    "checkHugoFolderStructure": "Check Hugo folder structure",
-    "checkHugoFolderStructure_Description": "Make sure your folder follows the correct Hugo structure with a content folder, config file, etc. Please refer to the Hugo documentation for more details. If you want to be sure your website follows the correct folder structure, feel free to create a new Hugo website.",
-    "openHugoDocumentation": "Open Hugo Documentation",
+    "checkStaticSiteStructure": "Check static site generator structure",
+    "checkStaticSiteStructure_Description": "Make sure your folder follows the correct static site generator structure. Please refer to the specific documentation for more details.\n\nIf you want to be sure your website follows the correct folder structure, feel free to create a new website with BuhoCMS.",
     "selectSiteFolder": "Select website folder",
     "openHugoSite": "Open Hugo website:\n",
     "error_ThemeAlreadyExists": "A theme folder with the name {theme} already exists inside the themes folder. Please rename or remove the existing folder.",
