@@ -16,7 +16,7 @@ import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../ssg/hugo.dart';
 import '../widgets/buttons/language_dropdown.dart';
-import '../widgets/ssg_icon.dart';
+import '../widgets/custom_appbar.dart';
 import '../widgets/theme_selector.dart';
 import 'onboarding_page.dart';
 
@@ -423,16 +423,7 @@ class _SettingsPageState extends State<SettingsPage> {
         //return true;
       }),
       child: Scaffold(
-        appBar: AppBar(
-            title: Row(
-          children: [
-            const SizedBox(width: 16),
-            Text(Localization.appLocalizations().settings),
-            Expanded(child: Container()),
-            const SSGIcon(),
-            const SizedBox(width: 8.0),
-          ],
-        )),
+        appBar: CustomAppBar(text: Localization.appLocalizations().settings),
         body: ListView(
           controller: listScrollController,
           padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
