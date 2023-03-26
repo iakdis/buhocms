@@ -178,10 +178,23 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                   Preferences.clearPreferencesSite();
                   Preferences.setOnBoardingComplete(true);
 
-                  Preferences.setSitePath(
-                      '$sitePath${Platform.pathSeparator}$siteName');
+                  final finalSitePath =
+                      '$sitePath${Platform.pathSeparator}$siteName';
+
+                  Preferences.setSitePath(finalSitePath);
                   Preferences.setCurrentPath(
                       '${Preferences.getSitePath()}${Platform.pathSeparator}content');
+
+                  final recentPaths = Preferences.getRecentSitePaths();
+                  if (recentPaths.contains(sitePath)) {
+                    for (var i = 0; i < recentPaths.length; i++) {
+                      if (recentPaths[i] == sitePath) {
+                        recentPaths.removeAt(i);
+                      }
+                    }
+                  }
+                  Preferences.setRecentSitePaths(
+                      recentPaths..insert(0, finalSitePath));
 
                   Preferences.setSSG(ssg.name);
 
