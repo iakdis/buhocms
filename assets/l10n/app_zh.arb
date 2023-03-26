@@ -192,7 +192,7 @@
         "ssg": { "type": "String" }
       }
     },
-    "savePath": "保存路径",
+    "websitePath": "网站路径",
     "siteName": "网站名称",
     "finish": "完成",
     "createWebsiteNamed": "创建{ssg}网站，命名为：\n",

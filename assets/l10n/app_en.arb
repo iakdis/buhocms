@@ -191,7 +191,7 @@
         "ssg": { "type": "String" }
       }
     },
-    "savePath": "Save path",
+    "websitePath": "Website path",
     "siteName": "Website name",
     "finish": "Finish",
     "createWebsiteNamed": "Create {ssg} website named:\n",

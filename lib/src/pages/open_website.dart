@@ -213,7 +213,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
                         ? Localization.appLocalizations().cantBeEmpty
                         : null,
                     border: const OutlineInputBorder(),
-                    labelText: Localization.appLocalizations().savePath,
+                    labelText: Localization.appLocalizations().websitePath,
                     isDense: true,
                     hintText: Platform.isWindows
                         ? 'C:\\Documents\\Projects\\my-website'

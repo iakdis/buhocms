@@ -191,7 +191,7 @@
         "ssg": { "type": "String" }
       }
     },
-    "savePath": "Speicherpfad",
+    "websitePath": "Pfad der Webseite",
     "siteName": "Name der Webseite",
     "finish": "Fertigstellen",
     "createWebsiteNamed": "{ssg} Webseite erstellen namens:\n",

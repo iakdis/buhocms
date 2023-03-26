@@ -352,7 +352,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                             : null,
                         errorMaxLines: 5,
                         border: const OutlineInputBorder(),
-                        labelText: Localization.appLocalizations().savePath,
+                        labelText: Localization.appLocalizations().websitePath,
                         isDense: true,
                         hintText: Platform.isWindows
                             ? 'C:\\Documents\\Websites'
