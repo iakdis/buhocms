@@ -344,7 +344,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                         onChanged: (option) async {
                           if (option == null) return;
                           ssg = option;
-                          ssgInstalled = false;
+                          ssgInstalled = null;
                           ssgInstalledText = '';
                           setState(() {});
                         },
