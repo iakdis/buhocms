@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../i18n/l10n.dart';
 import '../provider/navigation/navigation_provider.dart';
 import '../ssg/hugo.dart';
+import '../ssg/ssg.dart';
 import '../ssg/themes.dart';
 import '../utils/terminal_command.dart';
 
@@ -108,6 +109,7 @@ class _ThemePageState extends State<ThemePage> {
         setState(() {});
       },
       showErrorSnackbar: false,
+      ssg: SSGTypes.values.byName(Preferences.getSSG()),
     );
   }
 

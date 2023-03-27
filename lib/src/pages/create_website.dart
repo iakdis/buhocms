@@ -99,6 +99,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
         setState(() {});
       },
       showErrorSnackbar: false,
+      ssg: ssg,
     );
   }
 

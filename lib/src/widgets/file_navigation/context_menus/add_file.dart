@@ -11,6 +11,7 @@ import '../../../logic/files.dart';
 import '../../../provider/editing/editing_provider.dart';
 import '../../../provider/editing/tabs_provider.dart';
 import '../../../provider/navigation/navigation_provider.dart';
+import '../../../ssg/ssg.dart';
 import '../../../utils/preferences.dart';
 import '../../../utils/program_installed.dart';
 import '../../../utils/terminal_command.dart';
@@ -72,6 +73,7 @@ class AddFile {
       context: context,
       command: commandToRun,
       executable: 'hugo',
+      ssg: SSGTypes.values.byName(Preferences.getSSG()),
     );
 
     await runTerminalCommand(

@@ -14,6 +14,7 @@ import '../pages/open_website.dart';
 import '../provider/editing/editing_provider.dart';
 import '../provider/navigation/file_navigation_provider.dart';
 import '../provider/navigation/navigation_provider.dart';
+import '../ssg/ssg.dart';
 import '../utils/preferences.dart';
 import '../utils/program_installed.dart';
 import '../utils/terminal_command.dart';
@@ -227,6 +228,7 @@ void startHugoServer({required BuildContext context}) {
       context: context,
       command: commandToRun,
       executable: 'hugo',
+      ssg: SSGTypes.values.byName(Preferences.getSSG()),
     );
 
     shellProvider.updateController();
@@ -317,6 +319,7 @@ void buildHugoSite({required BuildContext context}) async {
       context: context,
       command: commandToRun,
       executable: 'hugo',
+      ssg: SSGTypes.values.byName(Preferences.getSSG()),
     );
 
     runTerminalCommand(

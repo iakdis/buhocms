@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:process_run/shell_run.dart';
 
 import '../i18n/l10n.dart';
+import '../ssg/ssg.dart';
 import '../widgets/snackbar.dart';
 
 void checkProgramInstalled({
   required BuildContext context,
   required String executable,
+  required SSGTypes ssg,
   Function? notFound,
   Function(String)? found,
   String? command,
