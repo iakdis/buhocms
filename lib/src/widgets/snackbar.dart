@@ -13,7 +13,7 @@ void showSnackbar({
     behavior: SnackBarBehavior.floating,
     backgroundColor: const Color(0xFF2C2C2C),
     width: width,
-    content: Text(text, style: const TextStyle(color: Colors.white)),
+    content: SelectableText(text, style: const TextStyle(color: Colors.white)),
     duration: Duration(seconds: seconds),
     action: SnackBarAction(
       label: Localization.appLocalizations().dismiss,
