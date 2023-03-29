@@ -2,7 +2,6 @@ import 'package:buhocms/src/widgets/ssg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../i18n/l10n.dart';
 import '../provider/editing/editing_provider.dart';
 import '../provider/editing/unsaved_text_provider.dart';
 import '../provider/navigation/file_navigation_provider.dart';
@@ -59,17 +58,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
         );
       }),
     );
-
-    return AppBar(
-        title: Row(
-      children: [
-        const SizedBox(width: 16),
-        Text(Localization.appLocalizations().settings),
-        Expanded(child: Container()),
-        const SSGIcon(),
-        const SizedBox(width: 8.0),
-      ],
-    ));
   }
 
   @override

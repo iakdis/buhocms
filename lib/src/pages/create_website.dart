@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
+import '../provider/app/ssg_provider.dart';
 import '../provider/navigation/navigation_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/program_installed.dart';
@@ -193,7 +194,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                   Preferences.setRecentSitePaths(
                       recentPaths..insert(0, finalSitePath));
 
-                  Preferences.setSSG(ssg.name);
+                  context.read<SSGProvider>().setSSG(ssg.name);
 
                   shellProvider.updateShell();
 

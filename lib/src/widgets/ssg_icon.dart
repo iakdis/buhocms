@@ -1,21 +1,23 @@
 import 'package:buhocms/src/i18n/l10n.dart';
+import 'package:buhocms/src/provider/app/ssg_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../ssg/ssg.dart';
-import '../utils/preferences.dart';
 
 class SSGIcon extends StatelessWidget {
   const SSGIcon({Key? key}) : super(key: key);
 
   Widget ssgIcon(BuildContext context) {
+    final ssg = context.watch<SSGProvider>().ssg;
     final tooltip = Localization.appLocalizations()
-        .logo(SSG.getSSGName(SSGTypes.values.byName(Preferences.getSSG())));
+        .logo(SSG.getSSGName(SSGTypes.values.byName(ssg)));
 
     return Tooltip(
       message: tooltip,
       child: SvgPicture.asset(
-        'assets/images/${Preferences.getSSG().toLowerCase()}.svg',
+        'assets/images/${ssg.toLowerCase()}.svg',
         width: 28,
         height: 28,
         colorFilter: ColorFilter.mode(

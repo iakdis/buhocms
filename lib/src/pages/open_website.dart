@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:buhocms/src/logic/buho_functions.dart';
+import 'package:buhocms/src/provider/app/ssg_provider.dart';
 import 'package:buhocms/src/widgets/snackbar.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -86,6 +87,8 @@ class _OpenWebsiteState extends State<OpenWebsite> {
       }
     }
     Preferences.setRecentSitePaths(recentPaths..insert(0, sitePath));
+
+    context.read<SSGProvider>().setSSG(ssg.name);
 
     Provider.of<ShellProvider>(context, listen: false).updateShell();
 
