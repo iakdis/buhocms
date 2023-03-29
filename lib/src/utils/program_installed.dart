@@ -13,30 +13,36 @@ void checkProgramInstalled({
   required SSGTypes ssg,
   Function? notFound,
   Function(String)? found,
-  String? command,
   bool showErrorSnackbar = true,
 }) async {
   var finalExecutable = '';
-  final shell = Shell();
   final errorText = Localization.appLocalizations().error_executableNotFound(
-      '${executable[0].toUpperCase()}${executable.substring(1)}', '"$command"');
+      '${executable[0].toUpperCase()}${executable.substring(1)}',
+      '"$executable"');
 
   if (Platform.isWindows) {
-    // Try to get executable
     await which(executable).then((value) {
-      // Executable found, set it
       finalExecutable = value ?? '';
-    }).catchError((object) async {
-      // Not installed
-    });
+    }).catchError((object) async {});
   } else {
-    // Try to get executable
-    await shell.run('which $executable').then((value) {
-      // Executable found, set it
-      finalExecutable = value.outText;
-    }).catchError((object) async {
-      // Not installed
-    });
+    //final shell = Shell(runInShell: true);
+    // await shell.run('which $executable').then((value) {
+    //   finalExecutable = value.outText;
+    // }).catchError((object) async {});
+    switch (ssg) {
+      case SSGTypes.hugo:
+        await which(executable).then((value) {
+          finalExecutable = value ?? '';
+        }).catchError((object) async {});
+        break;
+      case SSGTypes.jekyll:
+        await which(executable).then((value) {
+          finalExecutable = value ?? '';
+        }).catchError((object) async {});
+        break;
+      default:
+        break;
+    }
   }
 
   if (finalExecutable.isEmpty) {

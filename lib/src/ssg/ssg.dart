@@ -23,27 +23,36 @@ class SSG {
     required String siteName,
     required String flags,
   }) async {
-    //TODO
+    String? executable;
+    String allFlags = '';
     switch (ssg) {
       case SSGTypes.hugo:
-        final commandToRun = 'hugo new site $siteName $flags';
-
-        checkProgramInstalled(
-          context: context,
-          command: commandToRun,
-          executable: 'hugo',
-        );
-        await runTerminalCommand(
-          context: context,
-          workingDirectory: sitePath,
-          command: commandToRun,
-        );
+        executable = 'hugo';
+        allFlags = 'new site $siteName';
+        if (flags.isNotEmpty) allFlags += ' $flags';
         break;
       case SSGTypes.jekyll:
+        executable = 'jekyll';
+        allFlags = 'new $siteName';
+        if (flags.isNotEmpty) allFlags += ' $flags';
         break;
       default:
         break;
     }
+
+    if (executable == null) return;
+
+    checkProgramInstalled(
+      context: context,
+      executable: getSSGExecutable(ssg),
+      ssg: ssg,
+    );
+    await runTerminalCommand(
+      context: context,
+      workingDirectory: sitePath,
+      executable: executable,
+      flags: allFlags.split(' '),
+    );
   }
 
   static String getCreateSiteSSGPrefix(SSGTypes ssg) {
