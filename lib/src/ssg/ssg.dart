@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:buhocms/src/utils/preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +16,29 @@ enum SSGTypes {
 class SSG {
   static Future<void> setSSG(SSGTypes ssg) async {
     await Preferences.setSSG(ssg.name);
+  }
+
+  static String getSSGContentFolder({
+    required SSGTypes ssg,
+    required bool pathSeparator,
+  }) {
+    String folder;
+
+    switch (ssg) {
+      case SSGTypes.hugo:
+        folder = 'content';
+        if (pathSeparator) folder = '${Platform.pathSeparator}$folder';
+        break;
+      case SSGTypes.jekyll:
+        folder = '_posts';
+        if (pathSeparator) folder = '${Platform.pathSeparator}$folder';
+        break;
+      default:
+        folder = '';
+        break;
+    }
+
+    return folder;
   }
 
   static Future<void> createSSGWebsite({

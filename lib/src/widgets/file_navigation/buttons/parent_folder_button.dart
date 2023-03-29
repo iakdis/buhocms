@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import '../../../i18n/l10n.dart';
+import '../../../ssg/ssg.dart';
 import '../../../utils/preferences.dart';
 import '../../snackbar.dart';
 
@@ -17,6 +18,10 @@ class ParentFolderButton extends StatelessWidget {
   final bool isExtended;
 
   Widget parentFolderButton() {
+    final contentFolder = SSG.getSSGContentFolder(
+      ssg: SSGTypes.values.byName(Preferences.getSSG()),
+      pathSeparator: false,
+    );
     var savePath = Preferences.getCurrentPath();
     if (savePath.endsWith(Platform.pathSeparator)) {
       savePath = savePath.substring(0, savePath.length - 1);
@@ -68,7 +73,8 @@ class ParentFolderButton extends StatelessWidget {
           onTap: () {
             if (savePathSplit.contains('content')) {
               showSnackbar(
-                text: Localization.appLocalizations().alreadyAtHighestLevel,
+                text: Localization.appLocalizations()
+                    .alreadyAtHighestLevel(contentFolder),
                 seconds: 2,
               );
               return;

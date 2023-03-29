@@ -94,7 +94,12 @@
         "path": { "type": "String" }
       }
     },
-    "alreadyAtHighestLevel": "Already at highest level; Cannot open folder above \"content\" folder",
+    "alreadyAtHighestLevel": "Already at highest level; Cannot open folder above \"{content}\" folder",
+    "@alreadyAtHighestLevel": {
+     "placeholders": {
+        "content": { "type": "String" }
+      }
+    },
     "sortByName": "By name",
     "sortByNameReversed": "By name (reversed)",
     "sortByDate": "By date",

@@ -94,7 +94,7 @@
         "path": { "type": "String" }
       }
     },
-    "alreadyAtHighestLevel": "已经处于最高级文件夹，无法打开 \"content\" 的上一级文件夹。",
+    "alreadyAtHighestLevel": "已经处于最高级文件夹，无法打开 \"{content}\" 的上一级文件夹。",
     "sortByName": "按文件名排序",
     "sortByNameReversed": "按文件名排序 (倒序)",
     "sortByDate": "按日期排序",

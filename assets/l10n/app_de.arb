@@ -94,7 +94,7 @@
         "path": { "type": "String" }
       }
     },
-    "alreadyAtHighestLevel": "Bereits im höchsten Ordner; Kann keinen Ordner über \"content\" öffnen",
+    "alreadyAtHighestLevel": "Bereits im höchsten Ordner; Kann keinen Ordner über \"{content}\" öffnen",
     "sortByName": "Nach Namen",
     "sortByNameReversed": "Nach Namen (umgekehrt)",
     "sortByDate": "Nach Datum",
