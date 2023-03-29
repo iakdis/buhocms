@@ -226,7 +226,6 @@ void startHugoServer({required BuildContext context}) {
     final shellProvider = Provider.of<ShellProvider>(context, listen: false);
     checkProgramInstalled(
       context: context,
-      command: commandToRun,
       executable: 'hugo',
       ssg: SSGTypes.values.byName(Preferences.getSSG()),
     );
@@ -313,11 +312,10 @@ void buildHugoSite({required BuildContext context}) async {
   final hugoController = TextEditingController();
 
   build() async {
-    final commandToRun = 'hugo $flags';
+    const executable = 'hugo';
 
     checkProgramInstalled(
       context: context,
-      command: commandToRun,
       executable: 'hugo',
       ssg: SSGTypes.values.byName(Preferences.getSSG()),
     );
@@ -325,7 +323,8 @@ void buildHugoSite({required BuildContext context}) async {
     runTerminalCommand(
       context: context,
       workingDirectory: Preferences.getSitePath(),
-      command: commandToRun,
+      executable: executable,
+      flags: flags.split(' '),
       successFunction: () => showSnackbar(
         text: Localization.appLocalizations().builtHugoSite,
         seconds: 4,

@@ -67,11 +67,14 @@ class _ThemePageState extends State<ThemePage> {
     }
 
     setState(() => isDownloading = true);
-    final commandToRun = 'git clone $themeName $path --depth=1';
+    const executable = 'git';
+    final flags = 'clone $themeName $path --depth=1';
+
     await runTerminalCommand(
       context: context,
       workingDirectory: Preferences.getSitePath(),
-      command: commandToRun,
+      executable: executable,
+      flags: flags.split(' '),
     );
     setState(() => isDownloading = false);
 

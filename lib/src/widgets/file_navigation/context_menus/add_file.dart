@@ -68,10 +68,10 @@ class AddFile {
       finalPathAndName = '$name.md';
     }
 
-    final commandToRun = 'hugo new $finalPathAndName $flags';
+    const executable = 'hugo';
+    final allFlags = 'new $finalPathAndName $flags';
     checkProgramInstalled(
       context: context,
-      command: commandToRun,
       executable: 'hugo',
       ssg: SSGTypes.values.byName(Preferences.getSSG()),
     );
@@ -79,7 +79,8 @@ class AddFile {
     await runTerminalCommand(
       context: context,
       workingDirectory: Preferences.getSitePath(),
-      command: commandToRun,
+      executable: executable,
+      flags: allFlags.split(' '),
       successFunction: () {
         showSnackbar(text: snackbarText, seconds: 4);
         if (mounted) refreshFiles(context: context);
