@@ -262,14 +262,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                     width: 400,
                     height: constraints.maxHeight * 0.5,
                     child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.secondary,
-                          width: 6.0,
-                        ),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(6.0)),
-                      ),
+                      padding: const EdgeInsets.all(6.0),
                       child: ReorderableListView(
                         scrollController: scrollController,
                         buildDefaultDragHandles: false,
