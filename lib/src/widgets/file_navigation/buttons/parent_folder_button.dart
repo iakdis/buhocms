@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:buhocms/src/provider/app/ssg_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../ssg/ssg.dart';
@@ -17,11 +19,12 @@ class ParentFolderButton extends StatelessWidget {
   final Function setStateCallback;
   final bool isExtended;
 
-  Widget parentFolderButton() {
+  Widget parentFolderButton({required BuildContext context}) {
+    context.watch<SSGProvider>();
+
     final contentFolder = SSG.getSSGContentFolder(
-      ssg: SSGTypes.values.byName(Preferences.getSSG()),
-      pathSeparator: false,
-    );
+        ssg: SSGTypes.values.byName(Preferences.getSSG()),
+        pathSeparator: false);
     var savePath = Preferences.getCurrentPath();
     if (savePath.endsWith(Platform.pathSeparator)) {
       savePath = savePath.substring(0, savePath.length - 1);
@@ -89,5 +92,5 @@ class ParentFolderButton extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => parentFolderButton();
+  Widget build(BuildContext context) => parentFolderButton(context: context);
 }
