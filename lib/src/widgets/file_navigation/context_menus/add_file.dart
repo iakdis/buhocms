@@ -42,8 +42,6 @@ class AddFile {
 
   Future<void> _addNew({required String path}) async {
     if (path == null) return;
-    if (!path.contains('content')) return;
-
     print('Add Post at: $path');
 
     final snackbarText =
@@ -51,7 +49,11 @@ class AddFile {
     var postDirectory = '';
     var finalPathAndName = '';
 
-    postDirectory = path.substring(path.indexOf('content') + 7);
+    final contentFolder = SSG.getSSGContentFolder(
+        ssg: SSGTypes.values.byName(Preferences.getSSG()),
+        pathSeparator: false);
+    postDirectory =
+        path.substring(path.indexOf(contentFolder) + contentFolder.length);
 
     if (postDirectory.isNotEmpty) {
       if (postDirectory.startsWith(Platform.pathSeparator)) {
@@ -128,6 +130,9 @@ class AddFile {
   }
 
   void _newFileDialog({required String path}) async {
+    final contentFolder = SSG.getSSGContentFolder(
+        ssg: SSGTypes.values.byName(Preferences.getSSG()),
+        pathSeparator: false);
     nameController.text = name;
     var allFiles = await getAllFiles();
     if (mounted) {
@@ -154,7 +159,7 @@ class AddFile {
                       fontSize: 20, fontWeight: FontWeight.w500),
                   children: <TextSpan>[
                     TextSpan(
-                      text: path.substring(path.indexOf('content')),
+                      text: path.substring(path.indexOf(contentFolder)),
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.primary),
                     ),
@@ -189,9 +194,9 @@ class AddFile {
                   errorText: empty
                       ? Localization.appLocalizations().cantBeEmpty
                       : fileAlreadyExists
-                          ? Localization.appLocalizations()
-                              .error_fileAlreadyExists('"$name"',
-                                  '"${path.substring(path.indexOf('content'))}"')
+                          ? Localization.appLocalizations().error_fileAlreadyExists(
+                              '"$name"',
+                              '"${path.substring(path.indexOf(contentFolder))}"')
                           : null,
                 )
               ],

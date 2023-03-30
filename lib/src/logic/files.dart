@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../provider/navigation/file_navigation_provider.dart';
+import '../ssg/ssg.dart';
 import '../utils/preferences.dart';
 import '../widgets/file_navigation/buttons/sort_button.dart';
 
@@ -46,8 +47,10 @@ Future<List<Directory>> getAllDirectories({BuildContext? context}) async {
   }
   List<Directory> directories = [];
 
+  final contentFolder = SSG.getSSGContentFolder(
+      ssg: SSGTypes.values.byName(Preferences.getSSG()), pathSeparator: false);
   Directory fileDirectory = Directory(Preferences.getCurrentPath()
-      .substring(0, Preferences.getCurrentPath().indexOf('content')));
+      .substring(0, Preferences.getCurrentPath().indexOf(contentFolder)));
 
   var subscription =
       fileDirectory.list(recursive: true, followLinks: false).listen(
@@ -72,8 +75,12 @@ Future<List<File>> getAllFiles({BuildContext? context}) async {
   }
   List<File> files = [];
 
-  Directory fileDirectory = Directory(Preferences.getCurrentPath()
-      .substring(0, Preferences.getCurrentPath().indexOf('content') + 7));
+  final contentFolder = SSG.getSSGContentFolder(
+      ssg: SSGTypes.values.byName(Preferences.getSSG()), pathSeparator: false);
+  Directory fileDirectory = Directory(Preferences.getCurrentPath().substring(
+      0,
+      Preferences.getCurrentPath().indexOf(contentFolder) +
+          contentFolder.length));
 
   if (!fileDirectory.existsSync()) return [];
 

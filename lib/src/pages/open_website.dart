@@ -55,8 +55,10 @@ class _OpenWebsiteState extends State<OpenWebsite> {
 
     await Preferences.setSitePath(
         selectedDirectory ?? Preferences.getSitePath() ?? '');
+    final contentFolder = SSG.getSSGContentFolder(
+        ssg: SSGTypes.values.byName(Preferences.getSSG()), pathSeparator: true);
     await Preferences.setCurrentPath(
-        '${Preferences.getSitePath()}${Platform.pathSeparator}content');
+        '${Preferences.getSitePath()}$contentFolder');
 
     setState(() {
       sitePathError = false;
@@ -75,8 +77,9 @@ class _OpenWebsiteState extends State<OpenWebsite> {
     Preferences.setOnBoardingComplete(true);
 
     Preferences.setSitePath(sitePath);
-    Preferences.setCurrentPath(
-        '${Preferences.getSitePath()}${Platform.pathSeparator}content');
+    final contentFolder =
+        SSG.getSSGContentFolder(ssg: ssg, pathSeparator: true);
+    Preferences.setCurrentPath('${Preferences.getSitePath()}$contentFolder');
     final recentPaths = Preferences.getRecentSitePaths();
 
     if (recentPaths.contains(sitePath)) {

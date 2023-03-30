@@ -7,6 +7,7 @@ import 'package:buhocms/src/widgets/custom_appbar.dart';
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../ssg/add_frontmatter.dart';
+import '../ssg/ssg.dart';
 import '../widgets/markdown/markdown_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:markdown_toolbar/markdown_toolbar.dart';
@@ -636,6 +637,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
   }
 
   Widget _openInFolderButton({required String path}) {
+    final contentFolder = SSG.getSSGContentFolder(
+        ssg: SSGTypes.values.byName(Preferences.getSSG()),
+        pathSeparator: false);
     return TextButton.icon(
       onPressed: () =>
           openCurrentPathInFolder(path: path, keepPathTrailing: false),
@@ -644,7 +648,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         color: Theme.of(context).colorScheme.onBackground,
       ),
       label: Text(
-        path.substring(path.indexOf('content')),
+        path.substring(path.indexOf(contentFolder)),
         style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
       ),
     );

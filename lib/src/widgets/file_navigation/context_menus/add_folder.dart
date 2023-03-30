@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
+import '../../../ssg/ssg.dart';
 import '../../../utils/preferences.dart';
 import '../../../utils/unsaved_check.dart';
 import '../../command_dialog.dart';
@@ -23,6 +24,9 @@ class AddFolder {
   final TextEditingController folderNameController = TextEditingController();
 
   void _newFolderDialog({required String path}) async {
+    final contentFolder = SSG.getSSGContentFolder(
+        ssg: SSGTypes.values.byName(Preferences.getSSG()),
+        pathSeparator: false);
     folderNameController.text = folderName;
     var allFolders = await getAllDirectories();
     if (mounted) {
@@ -60,7 +64,7 @@ class AddFolder {
                               fontSize: 20, fontWeight: FontWeight.w500),
                           children: <TextSpan>[
                             TextSpan(
-                              text: path.substring(path.indexOf('content')),
+                              text: path.substring(path.indexOf(contentFolder)),
                               style: TextStyle(
                                   color: Theme.of(context).colorScheme.primary),
                             ),
@@ -94,7 +98,7 @@ class AddFolder {
                         : folderAlreadyExists
                             ? Localization.appLocalizations()
                                 .error_folderAlreadyExists('"$folderName"',
-                                    '"${path.substring(path.indexOf('content'))}"')
+                                    '"${path.substring(path.indexOf(contentFolder))}"')
                             : null,
                   ),
                   const SizedBox(height: 100),

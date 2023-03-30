@@ -7,6 +7,7 @@ class SSGProvider extends ChangeNotifier {
   String get ssg => _ssg;
 
   void setSSG(String ssg) {
+    Preferences.setSSG(ssg);
     _ssg = ssg;
     notifyListeners();
   }

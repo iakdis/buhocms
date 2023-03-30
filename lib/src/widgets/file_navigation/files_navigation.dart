@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 
 import '../../i18n/l10n.dart';
 import '../../logic/files.dart';
+import '../../ssg/ssg.dart';
 import '../../utils/globals.dart';
 import '../../utils/preferences.dart';
 import 'context_menus/add_file.dart';
@@ -171,6 +172,9 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
     return LayoutBuilder(builder: (context, constraints) {
       return Consumer2<NavigationSizeProvider, FileNavigationProvider>(builder:
           (context, navigationSizeProvider, fileNavigationProvider, _) {
+        final contentFolder = SSG.getSSGContentFolder(
+            ssg: SSGTypes.values.byName(Preferences.getSSG()),
+            pathSeparator: false);
         final savePath = Preferences.getCurrentPath();
 
         final windowWidth = MediaQuery.of(context).size.width;
@@ -251,8 +255,8 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                                     Theme.of(context).colorScheme.onSecondary),
                             CustomTooltip(
                               message: Localization.appLocalizations()
-                                  .parentFolderButton_Toolip(savePath
-                                      .substring(savePath.indexOf('content'))),
+                                  .parentFolderButton_Toolip(savePath.substring(
+                                      savePath.indexOf(contentFolder))),
                               child: ParentFolderButton(
                                   setStateCallback: setStateCallback,
                                   isExtended: isExtended),
