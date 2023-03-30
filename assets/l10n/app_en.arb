@@ -406,10 +406,10 @@
     "tooltipQuote": "Quote",
     "tooltipHorizontalRule": "Horizontal rule",
     "dismiss": "Dismiss",
-    "logo": "{logo} logo",
-    "@logo": {
+    "currentSSG": "Current SSG: {ssg}",
+    "@currentSSG": {
       "placeholders": {
-         "logo": { "type": "String" }
+         "ssg": { "type": "String" }
       }
     },
 

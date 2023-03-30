@@ -177,7 +177,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
                         BlendMode.srcIn,
                       ),
                       semanticsLabel: Localization.appLocalizations()
-                          .logo(SSG.getSSGName(ssg)),
+                          .currentSSG(SSG.getSSGName(ssg)),
                     ),
                   const SizedBox(height: 32),
                   DropdownButton<SSGTypes>(

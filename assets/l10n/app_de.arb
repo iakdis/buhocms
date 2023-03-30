@@ -401,12 +401,7 @@
     "tooltipQuote": "Zitat",
     "tooltipHorizontalRule": "Horizontale Linie",
     "dismiss": "Schließen",
-    "logo": "{logo} Logo",
-    "@logo": {
-      "placeholders": {
-         "logo": { "type": "String" }
-      }
-    },
+    "currentSSG": "Aktueller SSG: {ssg}",
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",

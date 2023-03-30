@@ -338,7 +338,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                             BlendMode.srcIn,
                           ),
                           semanticsLabel: Localization.appLocalizations()
-                              .logo(SSG.getSSGName(ssg)),
+                              .currentSSG(SSG.getSSGName(ssg)),
                         ),
                       const SizedBox(height: 32),
                       DropdownButton<SSGTypes>(
