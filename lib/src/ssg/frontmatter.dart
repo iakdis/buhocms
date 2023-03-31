@@ -162,15 +162,15 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
 
   Widget _textWidget(String source) {
     final yaml = loadYaml(source) as YamlMap;
-    var labelText = yaml.entries.first.key.toString();
-    labelText = '${labelText[0].toUpperCase()}${labelText.substring(1)}';
+    var key = yaml.entries.first.key.toString();
+    key = '${key[0].toUpperCase()}${key.substring(1)}';
 
     return Wrap(
       spacing: 4.0,
       runSpacing: 8.0,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        Text('$labelText: '),
+        Text('$key: '),
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 200),
           child: TextField(
@@ -178,7 +178,7 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
             minLines: 1,
             maxLines: null,
             decoration: InputDecoration(
-              labelText: labelText,
+              hintText: key,
               border: const OutlineInputBorder(),
             ),
           ),
