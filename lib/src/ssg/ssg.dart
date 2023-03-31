@@ -5,6 +5,7 @@ import 'package:buhocms/src/utils/unsaved_check.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
@@ -57,6 +58,14 @@ class SSG {
         return 'http://localhost:4000';
     }
   }
+
+  static Future<void> openSSGLiveServer({required SSGTypes ssg}) async {
+    final uri = Uri.parse(getSSGLiveServer(ssg: ssg));
+    if (await canLaunchUrl(uri) || Platform.isLinux) {
+      await launchUrl(uri);
+    }
+  }
+
   static Future<void> buildSSGWebsiteDialog({
     required BuildContext context,
     required SSGTypes ssg,

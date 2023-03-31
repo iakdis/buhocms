@@ -1,9 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../i18n/l10n.dart';
+import '../../../logic/buho_functions.dart';
 
 class OpenLocalhostButton extends StatelessWidget {
   const OpenLocalhostButton({
@@ -12,13 +10,6 @@ class OpenLocalhostButton extends StatelessWidget {
   });
 
   final bool isExtended;
-
-  Future<void> openLocalhost() async {
-    final url = Uri.parse('http://localhost:1313');
-    if (await canLaunchUrl(url) || Platform.isLinux) {
-      await launchUrl(url);
-    }
-  }
 
   Widget openLocalhostButton() {
     return LayoutBuilder(builder: (context, constraints) {
@@ -56,7 +47,7 @@ class OpenLocalhostButton extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () async => await openLocalhost(),
+          onTap: () => openLocalhost(),
         ),
       );
     });

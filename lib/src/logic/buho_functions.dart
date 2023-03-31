@@ -230,6 +230,9 @@ void stopSSGServer({
   shellProvider.kill();
 }
 
+void openLocalhost() =>
+    SSG.openSSGLiveServer(ssg: SSGTypes.values.byName(Preferences.getSSG()));
+
 void buildHugoSite({required BuildContext context}) async {
   SSG.buildSSGWebsiteDialog(
       context: context, ssg: SSGTypes.values.byName(Preferences.getSSG()));
