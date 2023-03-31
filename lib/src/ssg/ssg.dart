@@ -20,8 +20,6 @@ import '../widgets/snackbar.dart';
 enum SSGTypes {
   hugo,
   jekyll,
-
-  none,
 }
 
 class SSG {
@@ -43,9 +41,6 @@ class SSG {
       case SSGTypes.jekyll:
         folder = '_posts';
         if (pathSeparator) folder = '${Platform.pathSeparator}$folder';
-        break;
-      default:
-        folder = '';
         break;
     }
 
@@ -282,11 +277,7 @@ class SSG {
         allFlags = 'new $siteName';
         if (flags.isNotEmpty) allFlags += ' $flags';
         break;
-      default:
-        break;
     }
-
-    if (executable == null) return;
 
     checkProgramInstalled(
       context: context,
@@ -307,8 +298,6 @@ class SSG {
         return 'hugo new site ';
       case SSGTypes.jekyll:
         return 'jekyll new ';
-      default:
-        return 'Get name: Unknown SSG';
     }
   }
 
@@ -318,8 +307,6 @@ class SSG {
         return '"hugo new site my-website"';
       case SSGTypes.jekyll:
         return '"jekyll new myblog"';
-      default:
-        return 'Get name: Unknown SSG';
     }
   }
 
@@ -329,10 +316,6 @@ class SSG {
         return 'Hugo';
       case SSGTypes.jekyll:
         return 'Jekyll';
-      case SSGTypes.none:
-        return 'None';
-      default:
-        return 'Get name: Unknown SSG';
     }
   }
 
@@ -342,8 +325,6 @@ class SSG {
         return 'hugo';
       case SSGTypes.jekyll:
         return 'jekyll';
-      default:
-        return 'Get executable: Unknown SSG';
     }
   }
 }

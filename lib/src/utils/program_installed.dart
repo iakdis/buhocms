@@ -40,8 +40,6 @@ void checkProgramInstalled({
           finalExecutable = value ?? '';
         }).catchError((object) async {});
         break;
-      default:
-        break;
     }
   }
 

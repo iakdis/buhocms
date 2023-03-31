@@ -167,18 +167,17 @@ class _OpenWebsiteState extends State<OpenWebsite> {
             children: [
               Column(
                 children: [
-                  if (ssg != SSGTypes.none)
-                    SvgPicture.asset(
-                      'assets/images/${SSG.getSSGName(ssg).toLowerCase()}.svg',
-                      width: 64,
-                      height: 64,
-                      colorFilter: ColorFilter.mode(
-                        Theme.of(context).colorScheme.primary,
-                        BlendMode.srcIn,
-                      ),
-                      semanticsLabel: Localization.appLocalizations()
-                          .currentSSG(SSG.getSSGName(ssg)),
+                  SvgPicture.asset(
+                    'assets/images/${SSG.getSSGName(ssg).toLowerCase()}.svg',
+                    width: 64,
+                    height: 64,
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.primary,
+                      BlendMode.srcIn,
                     ),
+                    semanticsLabel: Localization.appLocalizations()
+                        .currentSSG(SSG.getSSGName(ssg)),
+                  ),
                   const SizedBox(height: 32),
                   DropdownButton<SSGTypes>(
                     value: ssg,

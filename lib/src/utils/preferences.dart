@@ -19,7 +19,7 @@ class Preferences {
       const MapEntry(prefNavigationSize, 64.0),
       const MapEntry(prefFileNavigationSize, 64.0),
       const MapEntry(prefOnboardingCompleted, false),
-      MapEntry(prefSSG, SSGTypes.none.name),
+      MapEntry(prefSSG, SSGTypes.hugo.name),
       const MapEntry(prefSitePath, null),
       const MapEntry(prefRecentSitePaths, null),
       const MapEntry(prefCurrentPath, ''),

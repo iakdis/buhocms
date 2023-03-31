@@ -328,18 +328,17 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                 children: [
                   Column(
                     children: [
-                      if (ssg != SSGTypes.none)
-                        SvgPicture.asset(
-                          'assets/images/${SSG.getSSGName(ssg).toLowerCase()}.svg',
-                          width: 64,
-                          height: 64,
-                          colorFilter: ColorFilter.mode(
-                            Theme.of(context).colorScheme.primary,
-                            BlendMode.srcIn,
-                          ),
-                          semanticsLabel: Localization.appLocalizations()
-                              .currentSSG(SSG.getSSGName(ssg)),
+                      SvgPicture.asset(
+                        'assets/images/${SSG.getSSGName(ssg).toLowerCase()}.svg',
+                        width: 64,
+                        height: 64,
+                        colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.primary,
+                          BlendMode.srcIn,
                         ),
+                        semanticsLabel: Localization.appLocalizations()
+                            .currentSSG(SSG.getSSGName(ssg)),
+                      ),
                       const SizedBox(height: 32),
                       DropdownButton<SSGTypes>(
                         value: ssg,
@@ -357,28 +356,27 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                       ),
                     ],
                   ),
-                  if (ssg != SSGTypes.none)
-                    Column(
-                      children: [
-                        Icon(
-                          ssgInstalled == null
-                              ? Icons.question_mark
-                              : ssgInstalled == true
-                                  ? Icons.check
-                                  : Icons.close,
-                          size: 64,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        const SizedBox(height: 32),
-                        ElevatedButton(
-                          onPressed: () => checkExecutableInstalled(),
-                          child: Text(Localization.appLocalizations()
-                              .checkSSGInstalled(SSG.getSSGName(ssg))),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(ssgInstalledText),
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      Icon(
+                        ssgInstalled == null
+                            ? Icons.question_mark
+                            : ssgInstalled == true
+                                ? Icons.check
+                                : Icons.close,
+                        size: 64,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      const SizedBox(height: 32),
+                      ElevatedButton(
+                        onPressed: () => checkExecutableInstalled(),
+                        child: Text(Localization.appLocalizations()
+                            .checkSSGInstalled(SSG.getSSGName(ssg))),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(ssgInstalledText),
+                    ],
+                  ),
                 ],
               ),
             ),
