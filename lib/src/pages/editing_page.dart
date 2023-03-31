@@ -405,7 +405,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       builder: (context, value, _) {
         return TextField(
           controller: value.controllerFrontmatter,
-          minLines: 5,
+          minLines: 1,
           maxLines: null,
           decoration: InputDecoration(
             hintText: Localization.appLocalizations().frontmatter,
