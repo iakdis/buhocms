@@ -20,7 +20,7 @@ class CommandDialog extends StatefulWidget {
   final String expansionTitle;
   final Function? yes;
   final List<Widget> dialogChildren;
-  final List<Widget> expansionChildren;
+  final List<Widget>? expansionChildren;
 
   @override
   State<CommandDialog> createState() => _CommandDialogState();
@@ -40,15 +40,16 @@ class _CommandDialogState extends State<CommandDialog> {
         ),
         const SizedBox(height: 32.0),
         Column(children: widget.dialogChildren),
-        const SizedBox(height: 8.0),
-        ExpansionTile(
-          maintainState: true,
-          leading: Icon(widget.expansionIcon),
-          title: Text(widget.expansionTitle),
-          expandedAlignment: Alignment.topLeft,
-          childrenPadding: const EdgeInsets.only(top: 8.0),
-          children: widget.expansionChildren,
-        ),
+        if (widget.expansionChildren != null) const SizedBox(height: 8.0),
+        if (widget.expansionChildren != null)
+          ExpansionTile(
+            maintainState: true,
+            leading: Icon(widget.expansionIcon),
+            title: Text(widget.expansionTitle),
+            expandedAlignment: Alignment.topLeft,
+            childrenPadding: const EdgeInsets.only(top: 8.0),
+            children: widget.expansionChildren!,
+          ),
         const SizedBox(height: 64),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,

@@ -63,6 +63,8 @@ class FileNavigationProvider extends ChangeNotifier {
       if (_initialText.isNotEmpty && _initialText.contains('---', 1)) {
         _markdownTextContent =
             _initialText.substring(_initialText.indexOf('---', 1) + 3).trim();
+      } else if (_initialText.isEmpty) {
+        _markdownTextContent = '';
       }
 
       if (_initialText.isEmpty) {
