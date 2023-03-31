@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../logic/buho_functions.dart';
+import '../../../ssg/ssg.dart';
+import '../../../utils/preferences.dart';
 
 class HugoServerButton extends StatelessWidget {
   const HugoServerButton({
@@ -21,7 +23,9 @@ class HugoServerButton extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(50),
             onTap: shellProvider.shellActive == false
-                ? () => startHugoServer(context: context)
+                ? () => startHugoServer(
+                    context: context,
+                    ssg: SSGTypes.values.byName(Preferences.getSSG()))
                 : () => stopSSGServer(context: context, ssg: 'Hugo'),
             child: Padding(
               padding: isExtended

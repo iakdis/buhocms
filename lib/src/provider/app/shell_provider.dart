@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:buhocms/src/utils/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:process_run/shell.dart';
@@ -13,6 +15,7 @@ class ShellProvider extends ChangeNotifier {
   }
 
   bool _shellActive = false;
+  int? _pid;
 
   Shell? _shell;
 
@@ -38,13 +41,14 @@ class ShellProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setShellActive(bool active) {
+  void setShellActive(bool active, int pid) {
     _shellActive = active;
+    _pid = pid;
     notifyListeners();
   }
 
   void kill() {
-    if (_shellActive == true) _shell?.kill();
+    if (_shellActive == true && _pid != null) Process.killPid(_pid!);
     _shellActive = false;
     notifyListeners();
   }

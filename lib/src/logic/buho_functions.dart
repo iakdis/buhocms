@@ -210,76 +210,8 @@ void openHugoThemes({required BuildContext context, Function? setState}) {
       .then((value) => setState?.call());
 }
 
-void startHugoServer({required BuildContext context}) {
-  var flags = '';
-  final hugoServerController = TextEditingController();
-
-  start() {
-    final commandToRun = 'hugo server $flags';
-    final shellProvider = Provider.of<ShellProvider>(context, listen: false);
-    checkProgramInstalled(
-      context: context,
-      executable: 'hugo',
-      ssg: SSGTypes.values.byName(Preferences.getSSG()),
-    );
-
-    shellProvider.updateController();
-
-    runTerminalCommandServer(
-      context: context,
-      shell: shellProvider.shell(),
-      controller: shellProvider.controller,
-      successFunction: () => shellProvider.setShellActive(true),
-      errorFunction: () => shellProvider.setShellActive(false),
-      command: commandToRun,
-      snackbarFunction: () => showSnackbar(
-        text: shellProvider.shellActive == true
-            ? Localization.appLocalizations().alreadyStartedAHugoServer
-            : Localization.appLocalizations().startedHugoServer,
-        seconds: 4,
-      ),
-    );
-
-    Navigator.pop(context);
-  }
-
-  showDialog(
-    context: context,
-    builder: (context) {
-      return StatefulBuilder(builder: (context, setState) {
-        return CommandDialog(
-          title: Text(
-            Localization.appLocalizations().startHugoServer,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-          ),
-          icon: Icons.miscellaneous_services,
-          expansionIcon: Icons.terminal,
-          expansionTitle: Localization.appLocalizations().terminal,
-          yes: () => start(),
-          dialogChildren: const [],
-          expansionChildren: [
-            CustomTextField(
-              readOnly: true,
-              controller: hugoServerController,
-              leading: Text(Localization.appLocalizations().command),
-              initialText: 'hugo server',
-            ),
-            const SizedBox(height: 12),
-            CustomTextField(
-              leading: Text(Localization.appLocalizations().flags),
-              onChanged: (value) {
-                setState(() {
-                  flags = value;
-                });
-              },
-              helperText: '"--theme hugo-PaperMod"',
-            ),
-          ],
-        );
-      });
-    },
-  );
-}
+void startHugoServer({required BuildContext context, required SSGTypes ssg}) =>
+    SSG.startSSGServerDialog(context: context, ssg: ssg);
 
 void stopSSGServer({
   required BuildContext context,

@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../logic/files.dart';
+import '../provider/app/shell_provider.dart';
 import '../provider/editing/editing_provider.dart';
 import '../provider/editing/tabs_provider.dart';
 import '../provider/navigation/file_navigation_provider.dart';
@@ -46,6 +47,107 @@ class SSG {
     }
 
     return folder;
+  }
+
+  static Future<void> startSSGServerDialog({
+    required BuildContext context,
+    required SSGTypes ssg,
+  }) async {
+    final commandTextController = TextEditingController();
+    final String command;
+
+    var currentFlags = '';
+    final String exampleFlags;
+
+    switch (ssg) {
+      case SSGTypes.hugo:
+        command = 'hugo server';
+        exampleFlags = '--theme hugo-PaperMod';
+        break;
+      case SSGTypes.jekyll:
+        command = 'bundle exec jekyll serve';
+        exampleFlags = '--livereload';
+        break;
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return CommandDialog(
+            title: Text(
+              Localization.appLocalizations().startHugoServer,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
+            icon: Icons.miscellaneous_services,
+            expansionIcon: Icons.terminal,
+            expansionTitle: Localization.appLocalizations().terminal,
+            yes: () => SSG.startSSGServer(
+                context: context, ssg: ssg, flags: currentFlags),
+            dialogChildren: const [],
+            expansionChildren: [
+              CustomTextField(
+                readOnly: true,
+                controller: commandTextController,
+                leading: Text(Localization.appLocalizations().command),
+                initialText: command,
+              ),
+              const SizedBox(height: 12),
+              CustomTextField(
+                leading: Text(Localization.appLocalizations().flags),
+                onChanged: (value) => setState(() => currentFlags = value),
+                helperText: '"$exampleFlags"',
+              ),
+            ],
+          );
+        });
+      },
+    );
+  }
+
+  static Future<void> startSSGServer({
+    required BuildContext context,
+    required String flags,
+    required SSGTypes ssg,
+  }) async {
+    final String executable;
+    final List<String> commandFlags;
+    switch (ssg) {
+      case SSGTypes.hugo:
+        executable = 'hugo';
+        commandFlags = 'server $flags'.split(' ');
+        break;
+      case SSGTypes.jekyll:
+        executable = 'bundle';
+        commandFlags = 'exec jekyll serve $flags'.split(' ');
+        break;
+    }
+    final shellProvider = context.read<ShellProvider>();
+    checkProgramInstalled(
+      context: context,
+      executable: SSG.getSSGExecutable(ssg),
+      ssg: SSGTypes.values.byName(Preferences.getSSG()),
+    );
+
+    shellProvider.updateController();
+
+    runTerminalCommandServer(
+      context: context,
+      workingDirectory: Preferences.getSitePath(),
+      controller: shellProvider.controller,
+      successFunction: (pid) => shellProvider.setShellActive(true, pid),
+      errorFunction: () => shellProvider.setShellActive(false, pid),
+      executable: executable,
+      flags: commandFlags,
+      snackbarFunction: () => showSnackbar(
+        text: shellProvider.shellActive == true
+            ? Localization.appLocalizations().alreadyStartedAHugoServer
+            : Localization.appLocalizations().startedHugoServer,
+        seconds: 4,
+      ),
+    );
+
+    Navigator.pop(context);
   }
 
   static Future<void> addSSGPostDialog({

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -15,7 +16,6 @@ Future<void> runTerminalCommand({
   Function? successFunction,
 }) async {
   final outputProvider = context.read<OutputProvider>();
-  int pid;
 
   if (outputProvider.output.isNotEmpty) {
     outputProvider.setOutput('${outputProvider.output}\n\n');
@@ -41,7 +41,7 @@ Future<void> runTerminalCommand({
   outputProvider.setOutput(output);
   outputProvider.setOutput('${outputProvider.output}\n${result.stdout}');
 
-  pid = result.pid;
+  final pid = result.pid;
 
   final exitCode = result.exitCode;
   final errText = (result.stderr as String).trim();
@@ -64,34 +64,47 @@ Future<void> runTerminalCommand({
 
 void runTerminalCommandServer({
   required BuildContext context,
+  required String? workingDirectory,
   required ShellLinesController controller,
-  required Shell shell,
-  required Function successFunction,
+  required Function(int) successFunction,
   required Function errorFunction,
-  required String command,
+  required String executable,
+  required List<String> flags,
   required Function snackbarFunction,
 }) async {
-  snackbarFunction();
-  successFunction();
-
   final outputProvider = Provider.of<OutputProvider>(context, listen: false);
 
   if (outputProvider.output.isNotEmpty) {
     outputProvider.setOutput('${outputProvider.output}\n\n');
   }
 
-  controller.stream.asBroadcastStream().listen((event) {
+  final home = Platform.environment['HOME'];
+  final path = Platform.environment['PATH'];
+
+  final result = await Process.start(
+    executable,
+    flags,
+    runInShell: true,
+    workingDirectory: workingDirectory,
+    environment: {
+      'GEM_HOME': '$home/gems', // Jekyll
+      'PATH': '$home/gems/bin:$path', // Jekyll
+      'DEBIAN_DISABLE_RUBYGEMS_INTEGRATION': '1', // Jekyll
+    },
+  );
+
+  var output = '${outputProvider.output}\n\$ $executable';
+  if (flags.isNotEmpty) output += ' ${flags.join(" ")}';
+  outputProvider.setOutput(output);
+  result.stdout.transform(utf8.decoder).listen((event) {
+    outputProvider.setOutput('${outputProvider.output}\n$event');
+  });
+  result.stderr.transform(utf8.decoder).listen((event) {
     outputProvider.setOutput('${outputProvider.output}\n$event');
   });
 
-  try {
-    await shell.run(command).then((value) {
-      return;
-    });
-  } catch (e) {
-    if (e.toString() != 'ShellException(Killed by framework)') {
-      showSnackbar(text: e.toString(), seconds: 10);
-      errorFunction();
-    }
-  }
+  final pid = result.pid + 1;
+
+  snackbarFunction();
+  successFunction(pid);
 }
