@@ -16,12 +16,9 @@ import '../provider/navigation/file_navigation_provider.dart';
 import '../provider/navigation/navigation_provider.dart';
 import '../ssg/ssg.dart';
 import '../utils/preferences.dart';
-import '../utils/program_installed.dart';
-import '../utils/terminal_command.dart';
 import '../utils/unsaved_check.dart';
 import '../widgets/file_navigation/context_menus/add_folder.dart';
 import '../widgets/snackbar.dart';
-import '../widgets/command_dialog.dart';
 
 void setGUIMode({
   required BuildContext context,
@@ -234,68 +231,8 @@ void stopSSGServer({
 }
 
 void buildHugoSite({required BuildContext context}) async {
-  var flags = '';
-  final hugoController = TextEditingController();
-
-  build() async {
-    const executable = 'hugo';
-
-    checkProgramInstalled(
-      context: context,
-      executable: 'hugo',
-      ssg: SSGTypes.values.byName(Preferences.getSSG()),
-    );
-
-    runTerminalCommand(
-      context: context,
-      workingDirectory: Preferences.getSitePath(),
-      executable: executable,
-      flags: flags.split(' '),
-      successFunction: () => showSnackbar(
-        text: Localization.appLocalizations().builtHugoSite,
-        seconds: 4,
-      ),
-    );
-
-    Navigator.pop(context);
-  }
-
-  showDialog(
-    context: context,
-    builder: (context) {
-      return StatefulBuilder(builder: (context, setState) {
-        return CommandDialog(
-          title: Text(
-            Localization.appLocalizations().buildHugoSite,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-          ),
-          icon: Icons.web,
-          expansionIcon: Icons.terminal,
-          expansionTitle: Localization.appLocalizations().terminal,
-          yes: () => build(),
-          dialogChildren: const [],
-          expansionChildren: [
-            CustomTextField(
-              readOnly: true,
-              controller: hugoController,
-              leading: Text(Localization.appLocalizations().command),
-              initialText: 'hugo',
-            ),
-            const SizedBox(height: 12),
-            CustomTextField(
-              leading: Text(Localization.appLocalizations().flags),
-              onChanged: (value) {
-                setState(() {
-                  flags = value;
-                });
-              },
-              helperText: '"--buildDrafts"',
-            ),
-          ],
-        );
-      });
-    },
-  );
+  SSG.buildSSGWebsiteDialog(
+      context: context, ssg: SSGTypes.values.byName(Preferences.getSSG()));
 }
 
 void openHugoPublicFolder({required BuildContext context}) {

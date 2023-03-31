@@ -49,6 +49,100 @@ class SSG {
     return folder;
   }
 
+  static Future<void> buildSSGWebsiteDialog({
+    required BuildContext context,
+    required SSGTypes ssg,
+  }) async {
+    final commandTextController = TextEditingController();
+    final String command;
+
+    var currentFlags = '';
+    final String exampleFlags;
+
+    switch (ssg) {
+      case SSGTypes.hugo:
+        command = 'hugo';
+        exampleFlags = '--buildDrafts';
+        break;
+      case SSGTypes.jekyll:
+        command = 'jekyll build';
+        exampleFlags = '--drafts';
+        break;
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return CommandDialog(
+            title: Text(
+              Localization.appLocalizations().buildHugoSite,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
+            icon: Icons.web,
+            expansionIcon: Icons.terminal,
+            expansionTitle: Localization.appLocalizations().terminal,
+            yes: () => buildSSGWebsite(
+                context: context, flags: currentFlags, ssg: ssg),
+            dialogChildren: const [],
+            expansionChildren: [
+              CustomTextField(
+                readOnly: true,
+                controller: commandTextController,
+                leading: Text(Localization.appLocalizations().command),
+                initialText: command,
+              ),
+              const SizedBox(height: 12),
+              CustomTextField(
+                leading: Text(Localization.appLocalizations().flags),
+                onChanged: (value) => setState(() => currentFlags = value),
+                helperText: '"$exampleFlags"',
+              ),
+            ],
+          );
+        });
+      },
+    );
+  }
+
+  static Future<void> buildSSGWebsite({
+    required BuildContext context,
+    required String flags,
+    required SSGTypes ssg,
+  }) async {
+    final String executable;
+    final List<String> commandFlags;
+    switch (ssg) {
+      case SSGTypes.hugo:
+        executable = 'hugo';
+        commandFlags = flags.split(' ');
+        break;
+      case SSGTypes.jekyll:
+        executable = 'jekyll';
+        commandFlags = 'build $flags'.split(' ');
+        break;
+    }
+
+    checkProgramInstalled(
+      context: context,
+      executable: executable,
+      ssg: SSGTypes.values.byName(Preferences.getSSG()),
+    );
+
+    runTerminalCommand(
+      context: context,
+      workingDirectory: Preferences.getSitePath(),
+      executable: executable,
+      flags: commandFlags,
+      successFunction: () => showSnackbar(
+        text: Localization.appLocalizations().builtHugoSite,
+        seconds: 4,
+      ),
+    );
+
+    Navigator.pop(context);
+  }
+
   static Future<void> startSSGServerDialog({
     required BuildContext context,
     required SSGTypes ssg,
@@ -125,7 +219,7 @@ class SSG {
     final shellProvider = context.read<ShellProvider>();
     checkProgramInstalled(
       context: context,
-      executable: getSSGExecutable(ssg),
+      executable: executable,
       ssg: SSGTypes.values.byName(Preferences.getSSG()),
     );
 
