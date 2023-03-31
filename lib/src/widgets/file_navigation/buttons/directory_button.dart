@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:buhocms/src/widgets/file_navigation/context_menus/add_file.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +9,7 @@ import '../../../i18n/l10n.dart';
 import '../../../logic/files.dart';
 import '../../../provider/navigation/file_navigation_provider.dart';
 import '../../../provider/navigation/navigation_provider.dart';
+import '../../../ssg/ssg.dart';
 import '../../../utils/preferences.dart';
 import '../../../utils/unsaved_check.dart';
 import '../../shortcuts.dart';
@@ -196,8 +196,6 @@ class _DirectoryButtonState extends State<DirectoryButton> {
             path: widget.path, recursive: false),
         builder: (context, snapshot) {
           return LayoutBuilder(builder: (context, constraints) {
-            final fileNavigationProvider =
-                Provider.of<FileNavigationProvider>(context, listen: false);
             return Material(
               color: Colors.transparent,
               child: CustomTooltip(
@@ -207,16 +205,13 @@ class _DirectoryButtonState extends State<DirectoryButton> {
                     context.contextMenuOverlay.show(
                       folderContextMenus(
                         context: context,
-                        addFile: AddFile(
-                          context: context,
-                          mounted: mounted,
-                          setFileNavigationIndex:
-                              fileNavigationProvider.setFileNavigationIndex,
-                          setInitialTexts:
-                              fileNavigationProvider.setInitialTexts,
-                          fileNavigationIndex:
-                              fileNavigationProvider.fileNavigationIndex,
-                        ).addFileContextMenu(savePath: widget.path),
+                        addFile: ContextMenuButtonConfig(
+                            Localization.appLocalizations().newPost,
+                            icon: const Icon(Icons.post_add, size: 20),
+                            onPressed: () => SSG.addSSGPostDialog(
+                                context: context,
+                                mounted: mounted,
+                                path: widget.path)),
                         addFolder: AddFolder(context, mounted)
                             .addFolderContextMenu(savePath: widget.path),
                         rename: () => _rename(),

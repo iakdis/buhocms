@@ -19,7 +19,6 @@ import '../utils/preferences.dart';
 import '../utils/program_installed.dart';
 import '../utils/terminal_command.dart';
 import '../utils/unsaved_check.dart';
-import '../widgets/file_navigation/context_menus/add_file.dart';
 import '../widgets/file_navigation/context_menus/add_folder.dart';
 import '../widgets/snackbar.dart';
 import '../widgets/command_dialog.dart';
@@ -56,17 +55,8 @@ void addFile({
   required BuildContext context,
   required bool mounted,
 }) {
-  final fileNavigationProvider =
-      Provider.of<FileNavigationProvider>(context, listen: false);
-  AddFile(
-    context: context,
-    mounted: mounted,
-    setFileNavigationIndex: fileNavigationProvider.setFileNavigationIndex,
-    setInitialTexts: fileNavigationProvider.setInitialTexts,
-    fileNavigationIndex: fileNavigationProvider.fileNavigationIndex,
-  ).newFile(
-    path: Preferences.getCurrentPath(),
-  );
+  SSG.addSSGPostDialog(
+      context: context, mounted: mounted, path: Preferences.getCurrentPath());
 }
 
 void addFolder({

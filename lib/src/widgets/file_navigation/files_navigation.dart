@@ -19,7 +19,6 @@ import '../../logic/files.dart';
 import '../../ssg/ssg.dart';
 import '../../utils/globals.dart';
 import '../../utils/preferences.dart';
-import 'context_menus/add_file.dart';
 import 'context_menus/add_folder.dart';
 
 class FilesNavigationDrawer extends StatefulWidget {
@@ -208,16 +207,13 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
               child: ContextMenuRegion(
                 contextMenu: GenericContextMenu(
                   buttonConfigs: [
-                    AddFile(
-                      context: context,
-                      mounted: mounted,
-                      setFileNavigationIndex:
-                          fileNavigationProvider.setFileNavigationIndex,
-                      setInitialTexts: fileNavigationProvider.setInitialTexts,
-                      fileNavigationIndex:
-                          fileNavigationProvider.fileNavigationIndex,
-                    ).addFileContextMenu(
-                        savePath: Preferences.getCurrentPath()),
+                    ContextMenuButtonConfig(
+                        Localization.appLocalizations().newPost,
+                        icon: const Icon(Icons.post_add, size: 20),
+                        onPressed: () => SSG.addSSGPostDialog(
+                            context: context,
+                            mounted: mounted,
+                            path: Preferences.getCurrentPath())),
                     AddFolder(context, mounted).addFolderContextMenu(
                         savePath: Preferences.getCurrentPath()),
                     ContextMenuButtonConfig(

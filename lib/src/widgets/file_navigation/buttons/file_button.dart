@@ -258,7 +258,9 @@ class _FileButtonState extends State<FileButton> {
       );
     }
 
-    checkUnsavedBeforeFunction(context: context, function: () => function());
+    if (mounted) {
+      checkUnsavedBeforeFunction(context: context, function: () => function());
+    }
   }
 
   Widget navigationButton() {
