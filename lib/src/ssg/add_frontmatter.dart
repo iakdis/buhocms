@@ -81,7 +81,6 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
             autofocus: true,
             decoration: InputDecoration(
               labelText: Localization.appLocalizations().search,
-              border: const OutlineInputBorder(),
             ),
           ),
           itemBuilder: (context, item, isSelected) {

@@ -309,10 +309,8 @@ class _ThemePageState extends State<ThemePage> {
                                 ? Localization.appLocalizations()
                                     .repositoryInvalidURL
                                 : null,
-                            border: const OutlineInputBorder(),
                             labelText:
                                 Localization.appLocalizations().themeRepository,
-                            isDense: true,
                             hintText: 'https://github.com/user/hugo-theme',
                             hintStyle: TextStyle(
                               color: Colors.grey[500],

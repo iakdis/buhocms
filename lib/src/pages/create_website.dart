@@ -414,9 +414,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                             ? Localization.appLocalizations().cantBeEmpty
                             : null,
                         errorMaxLines: 5,
-                        border: const OutlineInputBorder(),
                         labelText: Localization.appLocalizations().websitePath,
-                        isDense: true,
                         hintText: Platform.isWindows
                             ? 'C:\\Documents\\Websites'
                             : Platform.isMacOS
@@ -459,9 +457,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                                         '"$sitePath${Platform.pathSeparator}$siteName"')
                                 : null,
                         errorMaxLines: 5,
-                        border: const OutlineInputBorder(),
                         labelText: Localization.appLocalizations().siteName,
-                        isDense: true,
                         hintText: 'my-website',
                         hintStyle: TextStyle(
                           color: Colors.grey[500],

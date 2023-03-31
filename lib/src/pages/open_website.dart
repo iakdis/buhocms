@@ -234,9 +234,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
                     errorText: sitePathError
                         ? Localization.appLocalizations().cantBeEmpty
                         : null,
-                    border: const OutlineInputBorder(),
                     labelText: Localization.appLocalizations().websitePath,
-                    isDense: true,
                     hintText: Platform.isWindows
                         ? 'C:\\Documents\\Projects\\my-website'
                         : Platform.isMacOS
