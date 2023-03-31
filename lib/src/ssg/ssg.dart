@@ -82,8 +82,8 @@ class SSG {
             icon: Icons.miscellaneous_services,
             expansionIcon: Icons.terminal,
             expansionTitle: Localization.appLocalizations().terminal,
-            yes: () => SSG.startSSGServer(
-                context: context, ssg: ssg, flags: currentFlags),
+            yes: () =>
+                startSSGServer(context: context, ssg: ssg, flags: currentFlags),
             dialogChildren: const [],
             expansionChildren: [
               CustomTextField(
@@ -125,7 +125,7 @@ class SSG {
     final shellProvider = context.read<ShellProvider>();
     checkProgramInstalled(
       context: context,
-      executable: SSG.getSSGExecutable(ssg),
+      executable: getSSGExecutable(ssg),
       ssg: SSGTypes.values.byName(Preferences.getSSG()),
     );
 
@@ -179,7 +179,7 @@ class SSG {
       String flags = '';
       String name = defaultName;
 
-      final contentFolder = SSG.getSSGContentFolder(
+      final contentFolder = getSSGContentFolder(
           ssg: SSGTypes.values.byName(Preferences.getSSG()),
           pathSeparator: false);
       nameController.text = name;
@@ -219,7 +219,7 @@ class SSG {
                 expansionTitle: Localization.appLocalizations().terminal,
                 yes: empty || (fileAlreadyExists && !canOverride)
                     ? null
-                    : () => SSG.addSSGPost(
+                    : () => addSSGPost(
                           context: context,
                           mounted: mounted,
                           path: path,
@@ -321,8 +321,7 @@ class SSG {
       if (mounted) refreshFiles(context: context);
     }
 
-    final contentFolder =
-        SSG.getSSGContentFolder(ssg: ssg, pathSeparator: false);
+    final contentFolder = getSSGContentFolder(ssg: ssg, pathSeparator: false);
 
     // Create post
     switch (ssg) {
