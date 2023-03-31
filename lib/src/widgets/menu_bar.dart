@@ -1,4 +1,3 @@
-import 'package:buhocms/src/ssg/ssg.dart';
 import 'package:buhocms/src/widgets/shortcuts.dart';
 import 'package:buhocms/src/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -224,9 +223,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           ),
           const MenuDivider(),
           MenuButton(
-            onPressed: () => startHugoServer(
-                context: context,
-                ssg: SSGTypes.values.byName(Preferences.getSSG())),
+            onPressed: () => startHugoServer(context: context),
             icon: const Icon(Icons.miscellaneous_services_rounded),
             text:
                 menuButtonText(Localization.appLocalizations().startHugoServer),

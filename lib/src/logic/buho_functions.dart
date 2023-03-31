@@ -210,8 +210,9 @@ void openHugoThemes({required BuildContext context, Function? setState}) {
       .then((value) => setState?.call());
 }
 
-void startHugoServer({required BuildContext context, required SSGTypes ssg}) =>
-    SSG.startSSGServerDialog(context: context, ssg: ssg);
+void startHugoServer({required BuildContext context}) =>
+    SSG.startSSGServerDialog(
+        context: context, ssg: SSGTypes.values.byName(Preferences.getSSG()));
 
 void stopSSGServer({
   required BuildContext context,
