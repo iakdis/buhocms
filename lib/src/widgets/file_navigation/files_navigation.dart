@@ -148,7 +148,11 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                     key: UniqueKey(),
                     color: Colors.transparent,
                     child: FileButton(
-                      buttonText: path.substring(0, path.length - 3),
+                      buttonText: path.endsWith('.md')
+                          ? path.substring(0, path.length - 3)
+                          : path.endsWith('.markdown')
+                              ? path.substring(0, path.length - 9)
+                              : path,
                       index: finalIndex,
                       path: snapshot.data?[index].path ?? 'No file path found',
                       isExtended: isExtended,
