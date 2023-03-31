@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 
 import '../../i18n/l10n.dart';
 import '../../provider/navigation/navigation_size_provider.dart';
+import '../../ssg/ssg.dart';
 import '../resize_bar.dart';
 import 'buttons/terminal_output_button.dart';
 
@@ -178,8 +179,9 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                       HugoServerButton(isExtended: isExtended),
                                 ),
                                 CustomTooltip(
-                                  message: Localization.appLocalizations()
-                                      .openHugoServer,
+                                  message: SSG.getSSGLiveServer(
+                                      ssg: SSGTypes.values
+                                          .byName(Preferences.getSSG())),
                                   child: OpenLocalhostButton(
                                       isExtended: isExtended),
                                 ),

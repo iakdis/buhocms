@@ -49,6 +49,14 @@ class SSG {
     return folder;
   }
 
+  static String getSSGLiveServer({required SSGTypes ssg}) {
+    switch (ssg) {
+      case SSGTypes.hugo:
+        return 'http://localhost:1313';
+      case SSGTypes.jekyll:
+        return 'http://localhost:4000';
+    }
+  }
   static Future<void> buildSSGWebsiteDialog({
     required BuildContext context,
     required SSGTypes ssg,
