@@ -54,10 +54,13 @@ void openCurrentPathInFolder(
 void addFile({
   required BuildContext context,
   required bool mounted,
-}) {
-  SSG.addSSGPostDialog(
-      context: context, mounted: mounted, path: Preferences.getCurrentPath());
-}
+  String? path,
+}) =>
+    SSG.addSSGPostDialog(
+        context: context,
+        mounted: mounted,
+        path: path ?? Preferences.getCurrentPath(),
+        ssg: SSGTypes.values.byName(Preferences.getSSG()));
 
 void addFolder({
   required BuildContext context,

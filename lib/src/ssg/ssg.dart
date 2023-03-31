@@ -85,7 +85,7 @@ class SSG {
               }
             }
 
-            return StatefulBuilder(builder: (context, setState) {
+            return StatefulBuilder(builder: (_, setState) {
               return CommandDialog(
                 title: SelectableText.rich(TextSpan(
                     text: Localization.appLocalizations().createNewPostIn,

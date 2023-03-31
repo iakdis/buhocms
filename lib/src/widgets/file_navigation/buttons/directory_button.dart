@@ -6,10 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../i18n/l10n.dart';
+import '../../../logic/buho_functions.dart';
 import '../../../logic/files.dart';
 import '../../../provider/navigation/file_navigation_provider.dart';
 import '../../../provider/navigation/navigation_provider.dart';
-import '../../../ssg/ssg.dart';
 import '../../../utils/preferences.dart';
 import '../../../utils/unsaved_check.dart';
 import '../../shortcuts.dart';
@@ -208,7 +208,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
                         addFile: ContextMenuButtonConfig(
                             Localization.appLocalizations().newPost,
                             icon: const Icon(Icons.post_add, size: 20),
-                            onPressed: () => SSG.addSSGPostDialog(
+                            onPressed: () => addFile(
                                 context: context,
                                 mounted: mounted,
                                 path: widget.path)),

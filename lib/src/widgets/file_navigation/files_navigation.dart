@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:buhocms/src/logic/buho_functions.dart';
 import 'package:buhocms/src/provider/navigation/file_navigation_provider.dart';
 import 'package:buhocms/src/provider/navigation/navigation_provider.dart';
 import 'package:buhocms/src/provider/navigation/navigation_size_provider.dart';
@@ -210,7 +211,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                     ContextMenuButtonConfig(
                         Localization.appLocalizations().newPost,
                         icon: const Icon(Icons.post_add, size: 20),
-                        onPressed: () => SSG.addSSGPostDialog(
+                        onPressed: () => addFile(
                             context: context,
                             mounted: mounted,
                             path: Preferences.getCurrentPath())),
