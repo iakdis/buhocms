@@ -1,15 +1,15 @@
 {
     "aboutBuhoCMS": "Über BuhoCMS",
-    "openSite": "Webseite öffnen",
-    "currentSitePath": "Pfad der aktuellen Webseite: {path}",
+    "openSite": "Website öffnen",
+    "currentSitePath": "Pfad der aktuellen Website: {path}",
      "@currentSitePath": {
       "placeholders": {
          "path": { "type": "String" }
       }
     },
-    "createSite": "Webseite erstellen",
     "createSite_Description": "Neue Hugo Webseite erstellen",
     "hugoThemes": "Hugo Themen",
+    "createSite": "Website erstellen",
     "currentHugoThemes": "Aktuelles Hugo-Thema: {theme}. Select or download a Hugo theme",
      "@currentHugoThemes": {
       "placeholders": {
@@ -39,7 +39,7 @@
     "stopHugoServer": "Hugo Server stoppen",
     "startHugoServer": "Hugo Server starten",
     "openHugoServer": "Hugo Server öffnen",
-    "buildHugoSite": "Hugo Webseite bauen",
+    "buildHugoSite": "Hugo Website bauen",
     "openPublicFolder": "Ordner \"public\" öffnen",
     "sortBy": "Sortieren nach",
     "parentFolderButton_Toolip": "Zum übergeordneten Ordner wechseln. Aktuell: {path}",
@@ -186,16 +186,16 @@
     },
     "createLocation": "Speicherort",
     "choosePath": "Pfad auswählen",
-    "websiteWillBeCreatedInFolder": "Die neue {ssg} Webseite wird im ausgewählten Ordner erstellt",
+    "websiteWillBeCreatedInFolder": "Die neue {ssg} Website wird im ausgewählten Ordner erstellt",
     "@websiteWillBeCreatedInFolder": {
       "placeholders": {
         "ssg": { "type": "String" }
       }
     },
-    "websitePath": "Pfad der Webseite",
-    "siteName": "Name der Webseite",
+    "websitePath": "Pfad der Website",
+    "siteName": "Name der Website",
     "finish": "Fertigstellen",
-    "createWebsiteNamed": "{ssg} Webseite erstellen namens:\n",
+    "createWebsiteNamed": "{ssg} Website erstellen namens:\n",
     "@createWebsiteNamed": {
       "placeholders": {
         "ssg": { "type": "String" }
@@ -204,9 +204,9 @@
     "insideFolder": "Im Ordner:\n",
     "open": "Open",
     "checkStaticSiteStructure": "Static-Site-Generator Struktur überprüfen",
-    "checkStaticSiteStructure_Description": "Stelle sicher, dass dein Ordner der korrekten Static-Site-Generator Struktur entspricht. Weitere Informationen findest du in der jeweiligen Dokumentation.\n\nWenn du dir sicher sein willst, dass deine Webseite der richtigen Ordnerstruktur folgt, kannst du eine neue Website mit BuhoCMS erstellen.",
-    "selectSiteFolder": "Webseitenordner auswählen",
-    "openHugoSite": "Hugo Webseite öffnen:\n",
+    "checkStaticSiteStructure_Description": "Stelle sicher, dass dein Ordner der korrekten Static-Site-Generator Struktur entspricht. Weitere Informationen findest du in der jeweiligen Dokumentation.\n\nWenn du dir sicher sein willst, dass deine Website der richtigen Ordnerstruktur folgt, kannst du eine neue Website mit BuhoCMS erstellen.",
+    "selectSiteFolder": "Websiteordner auswählen",
+    "openHugoSite": "Hugo Website öffnen:\n",
     "error_ThemeAlreadyExists": "Ein Thema mit dem Namen {theme} existiert bereits im Themenordner. Bitte benenne den existierenden Ordner um oder entferne ihn.",
     "@error_ThemeAlreadyExists": {
       "placeholders": {
@@ -230,8 +230,8 @@
     },
     "rememberToVisitDocs": "Denke daran, die Dokumentation im Themen-Repository zu besuchen, um Details zur Implementierung der richtigen Konfigurationen zu erfahren.",
     "welcomeToBuhoCMS": "Willkommen bei BuhoCMS",
-    "welcomeToBuhoCMS_Description": "BuhoCMS ist ein lokales Content Management System für Hugo.\nErstelle oder öffne eine Webseite, installiere ein Thema, und beginne damit, neue Artikel zu erstellen.\n\nUm fortzufahren, erstelle oder öffne eine Hugo Seite.",
-    "hugoSiteSelected": "Ausgewählte Hugo Webseite: {path}",
+    "welcomeToBuhoCMS_Description": "BuhoCMS ist ein lokales Content Management System für Hugo.\nErstelle oder öffne eine Website, installiere ein Thema, und beginne damit, neue Artikel zu erstellen.\n\nUm fortzufahren, erstelle oder öffne eine Hugo Seite.",
+    "hugoSiteSelected": "Ausgewählte Hugo Website: {path}",
     "@hugoSiteSelected": {
       "placeholders": {
         "path": { "type": "String" }
@@ -247,7 +247,7 @@
     },
     "allDone": "Das ist alles!",
     "allDone_Description": "Herzlichen Glückwunsch, du bist nun bereit, BuhoCMS zu benutzen!",
-    "sitePath": "Webseitenpfad: {path}",
+    "sitePath": "Websitepfad: {path}",
     "@sitePath": {
       "placeholders": {
         "path": { "type": "String" }
@@ -368,7 +368,7 @@
         "ssg": { "type": "String" }
       }
     },
-    "builtHugoSite": "Hugo Webseite gebaut",
+    "builtHugoSite": "Hugo Website gebaut",
     "addedFrontmatter": "Front matter {name} mit Typ {type} hinzugefügt",
     "@addedFrontmatter": {
      "placeholders": {
@@ -384,7 +384,7 @@
     "areYouSureAutoFrontmatterList": "Deine BuhoCMS Front matter Liste aus allen Dateien automatisch erfassen? Die vorherige Liste wird dadurch überschrieben.",
     "resetFrontmatterList": "Front matter Liste zurücksetzen",
     "areYouSureResetFrontmatterList": "Bist du sicher, deine Front matter Liste zur Standardliste zurückzusetzen? Die Standardliste beinhaltet \"title\", \"date\", \"draft\" und \"tags\".",
-    "recentlyOpenedWebsites": "Kürzlich geöffnete Webseiten:",
+    "recentlyOpenedWebsites": "Kürzlich geöffnete Websites:",
     "terminalOutput": "Kommandozeilen-Ausgabe",
     "showTerminalOutput": "Kommandozeilen-Ausgabe zeigen",
     "hideTerminalOutput": "Kommandozeilen-Ausgabe verstecken",
@@ -406,7 +406,7 @@
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",
-    "site": "WEBSEITE",
+    "site": "WEBSITE",
     "hugoSettings": "HUGO EINSTELLUNGEN",
 
     "language": "Sprache",
