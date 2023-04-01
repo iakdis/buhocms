@@ -47,7 +47,7 @@ class OpenPublicButton extends StatelessWidget {
                 ],
               ),
             ),
-            onTap: () => openHugoPublicFolder(context: context)),
+            onTap: () => openHugoPublicFolder()),
       );
     });
   }

@@ -238,13 +238,8 @@ void buildHugoSite({required BuildContext context}) async {
       context: context, ssg: SSGTypes.values.byName(Preferences.getSSG()));
 }
 
-void openHugoPublicFolder({required BuildContext context}) {
-  openInFolder(
-    path:
-        '${Preferences.getSitePath()}${Platform.pathSeparator}public${Platform.pathSeparator}index.html',
-    keepPathTrailing: false,
-  );
-}
+void openHugoPublicFolder() =>
+    SSG.openSSGBuildFolder(ssg: SSGTypes.values.byName(Preferences.getSSG()));
 
 void exit({
   required BuildContext context,

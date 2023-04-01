@@ -50,6 +50,24 @@ class SSG {
     return folder;
   }
 
+  static String getSSGBuildFolder({required SSGTypes ssg}) {
+    final websitePath = Preferences.getSitePath();
+    if (websitePath == null) return '';
+
+    switch (ssg) {
+      case SSGTypes.hugo:
+        return '$websitePath${Platform.pathSeparator}public';
+      case SSGTypes.jekyll:
+        return '$websitePath${Platform.pathSeparator}_site';
+    }
+  }
+
+  static Future<void> openSSGBuildFolder({required SSGTypes ssg}) async {
+    if (getSSGBuildFolder(ssg: ssg).isEmpty) return;
+    final uri = Uri(path: getSSGBuildFolder(ssg: ssg), scheme: 'file');
+    if (await canLaunchUrl(uri) || Platform.isLinux) await launchUrl(uri);
+  }
+
   static String getSSGLiveServer({required SSGTypes ssg}) {
     switch (ssg) {
       case SSGTypes.hugo:
@@ -61,9 +79,7 @@ class SSG {
 
   static Future<void> openSSGLiveServer({required SSGTypes ssg}) async {
     final uri = Uri.parse(getSSGLiveServer(ssg: ssg));
-    if (await canLaunchUrl(uri) || Platform.isLinux) {
-      await launchUrl(uri);
-    }
+    if (await canLaunchUrl(uri) || Platform.isLinux) await launchUrl(uri);
   }
 
   static Future<void> buildSSGWebsiteDialog({

@@ -241,7 +241,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
             text: menuButtonText(Localization.appLocalizations().buildHugoSite),
           ),
           MenuButton(
-            onPressed: () => openHugoPublicFolder(context: context),
+            onPressed: () => openHugoPublicFolder(),
             icon: const Icon(Icons.folder_open),
             text: menuButtonText(
                 Localization.appLocalizations().openPublicFolder),

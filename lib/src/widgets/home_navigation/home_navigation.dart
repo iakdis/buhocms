@@ -193,8 +193,9 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                       HugoBuildButton(isExtended: isExtended),
                                 ),
                                 CustomTooltip(
-                                  message: Localization.appLocalizations()
-                                      .openPublicFolder,
+                                  message: SSG.getSSGBuildFolder(
+                                      ssg: SSGTypes.values
+                                          .byName(Preferences.getSSG())),
                                   child:
                                       OpenPublicButton(isExtended: isExtended),
                                 ),
