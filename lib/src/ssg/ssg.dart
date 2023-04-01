@@ -260,10 +260,10 @@ class SSG {
 
     runTerminalCommandServer(
       context: context,
-      workingDirectory: Preferences.getSitePath(),
+      shell: shellProvider.shell(),
       controller: shellProvider.controller,
-      successFunction: (pid) => shellProvider.setShellActive(true, pid),
-      errorFunction: () => shellProvider.setShellActive(false, pid),
+      successFunction: () => shellProvider.setShellActive(true),
+      errorFunction: () => shellProvider.setShellActive(false),
       executable: executable,
       flags: commandFlags,
       snackbarFunction: () => showSnackbar(

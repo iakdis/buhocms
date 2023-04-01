@@ -15,16 +15,23 @@ class ShellProvider extends ChangeNotifier {
   }
 
   bool _shellActive = false;
-  int? _pid;
 
   Shell? _shell;
 
   Shell shell() {
+    final home = Platform.environment['HOME'];
+    final path = Platform.environment['PATH'];
+
     _shell?.kill();
     _shell = Shell(
       workingDirectory: Preferences.getSitePath(),
       stdout: _controller.sink,
       stderr: _controller.sink,
+      environment: {
+        'GEM_HOME': '$home/gems', // Jekyll
+        'PATH': '$home/gems/bin:$path', // Jekyll
+        'DEBIAN_DISABLE_RUBYGEMS_INTEGRATION': '1', // Jekyll
+      },
     );
     return _shell!;
   }
@@ -41,14 +48,13 @@ class ShellProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setShellActive(bool active, int pid) {
+  void setShellActive(bool active) {
     _shellActive = active;
-    _pid = pid;
     notifyListeners();
   }
 
   void kill() {
-    if (_shellActive == true && _pid != null) Process.killPid(_pid!);
+    if (_shellActive == true) _shell?.kill();
     _shellActive = false;
     notifyListeners();
   }

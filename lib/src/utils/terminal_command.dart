@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -64,47 +63,33 @@ Future<void> runTerminalCommand({
 
 void runTerminalCommandServer({
   required BuildContext context,
-  required String? workingDirectory,
+  required Shell shell,
   required ShellLinesController controller,
-  required Function(int) successFunction,
+  required Function successFunction,
   required Function errorFunction,
   required String executable,
   required List<String> flags,
   required Function snackbarFunction,
 }) async {
+  snackbarFunction();
+  successFunction();
+
   final outputProvider = Provider.of<OutputProvider>(context, listen: false);
 
   if (outputProvider.output.isNotEmpty) {
     outputProvider.setOutput('${outputProvider.output}\n\n');
   }
 
-  final home = Platform.environment['HOME'];
-  final path = Platform.environment['PATH'];
-
-  final result = await Process.start(
-    executable,
-    flags,
-    runInShell: true,
-    workingDirectory: workingDirectory,
-    environment: {
-      'GEM_HOME': '$home/gems', // Jekyll
-      'PATH': '$home/gems/bin:$path', // Jekyll
-      'DEBIAN_DISABLE_RUBYGEMS_INTEGRATION': '1', // Jekyll
-    },
-  );
-
-  var output = '${outputProvider.output}\n\$ $executable';
-  if (flags.isNotEmpty) output += ' ${flags.join(" ")}';
-  outputProvider.setOutput(output);
-  result.stdout.transform(utf8.decoder).listen((event) {
-    outputProvider.setOutput('${outputProvider.output}\n$event');
-  });
-  result.stderr.transform(utf8.decoder).listen((event) {
+  controller.stream.asBroadcastStream().listen((event) {
     outputProvider.setOutput('${outputProvider.output}\n$event');
   });
 
-  final pid = result.pid + 1;
-
-  snackbarFunction();
-  successFunction(pid);
+  try {
+    await shell.run('$executable ${flags.join(' ')}');
+  } catch (e) {
+    if (e.toString() != 'ShellException(Killed by framework)') {
+      showSnackbar(text: e.toString(), seconds: 10);
+      errorFunction();
+    }
+  }
 }
