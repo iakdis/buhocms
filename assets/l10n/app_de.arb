@@ -402,6 +402,7 @@
     "tooltipHorizontalRule": "Horizontale Linie",
     "dismiss": "Schließen",
     "currentSSG": "Aktueller SSG: {ssg}",
+    "themesAvailableFor": "Unterstützt: {ssg}",
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",

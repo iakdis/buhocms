@@ -9,6 +9,7 @@ import 'package:window_manager/window_manager.dart';
 import '../i18n/l10n.dart';
 import '../provider/app/theme_provider.dart';
 import '../ssg/hugo.dart';
+import '../ssg/ssg.dart';
 import '../utils/preferences.dart';
 import 'home_page.dart';
 
@@ -215,14 +216,21 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
   }
 
   Widget _themePageButtons() {
+    final ssg = SSGTypes.values.byName(Preferences.getSSG());
     final theme = Hugo.getHugoTheme();
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ElevatedButton(
-          onPressed: () =>
-              openHugoThemes(context: context, setState: () => setState(() {})),
-          child: Text(Localization.appLocalizations().hugoThemes),
+        Tooltip(
+          message: ssg != SSGTypes.hugo
+              ? Localization.appLocalizations().themesAvailableFor('Hugo')
+              : '',
+          child: ElevatedButton(
+            onPressed: ssg == SSGTypes.hugo
+                ? () => openHugoThemes(context: context)
+                : null,
+            child: Text(Localization.appLocalizations().hugoThemes),
+          ),
         ),
         const SizedBox(height: 24.0),
         Text(

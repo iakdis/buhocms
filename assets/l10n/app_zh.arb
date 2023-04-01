@@ -403,6 +403,7 @@
     "tooltipHorizontalRule": "横向规则",
     "dismiss": "关闭",
     "currentSSG": "现任SSG： {ssg}",
+    "themesAvailableFor": "支持： {ssg}",
 
     "settings": "设置",
     "appSettings": "应用设置",

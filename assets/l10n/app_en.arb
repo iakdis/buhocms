@@ -412,6 +412,12 @@
          "ssg": { "type": "String" }
       }
     },
+    "themesAvailableFor": "Supported: {ssg}",
+    "@themesAvailableFor": {
+      "placeholders": {
+         "ssg": { "type": "String" }
+      }
+    },
 
     "settings": "Settings",
     "appSettings": "APP SETTINGS",

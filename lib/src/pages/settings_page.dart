@@ -4,6 +4,7 @@ import 'package:buhocms/src/app.dart';
 import 'package:buhocms/src/provider/app/locale_provider.dart';
 import 'package:buhocms/src/provider/navigation/navigation_provider.dart';
 import 'package:buhocms/src/ssg/edit_frontmatter.dart';
+import 'package:buhocms/src/ssg/ssg.dart';
 import 'package:buhocms/src/utils/preferences.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -205,20 +206,26 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _hugoThemeTile() {
+    final ssg = SSGTypes.values.byName(Preferences.getSSG());
     final theme =
         Hugo.getHugoTheme().isEmpty ? 'N/A' : '"${Hugo.getHugoTheme()}"';
-    return Consumer<NavigationProvider>(builder: (context, _, __) {
-      return ListTile(
-        title: Text(Localization.appLocalizations().hugoThemes),
-        subtitle: Text(
-          Localization.appLocalizations().currentHugoThemes(theme),
-        ),
-        trailing: ElevatedButton(
-          onPressed: () => openHugoThemes(context: context),
+    return ListTile(
+      title: Text(Localization.appLocalizations().hugoThemes),
+      subtitle: Text(
+        Localization.appLocalizations().currentHugoThemes(theme),
+      ),
+      trailing: Tooltip(
+        message: ssg != SSGTypes.hugo
+            ? Localization.appLocalizations().themesAvailableFor('Hugo')
+            : '',
+        child: ElevatedButton(
+          onPressed: ssg == SSGTypes.hugo
+              ? () => openHugoThemes(context: context)
+              : null,
           child: Text(Localization.appLocalizations().hugoThemes),
         ),
-      );
-    });
+      ),
+    );
   }
 
   Widget _themeTile() {
@@ -417,7 +424,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LocaleProvider>(builder: (_, __, ___) {
+    return Consumer2<LocaleProvider, NavigationProvider>(
+        builder: (_, __, ___, ____) {
       return WillPopScope(
         onWillPop: (() async => true),
         child: Scaffold(
