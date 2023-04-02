@@ -207,7 +207,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           ),
           const MenuDivider(),
           MenuButton(
-            onPressed: () => openHugoSite(context: context),
+            onPressed: () => openWebsite(context: context),
             icon: const Icon(Icons.folder_open),
             text: menuButtonText(Localization.appLocalizations().openSite),
             shortcut:
@@ -215,7 +215,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
             shortcutText: 'Ctrl+O',
           ),
           MenuButton(
-            onPressed: () => createHugoSite(context: context),
+            onPressed: () => createWebsite(context: context),
             icon: const Icon(Icons.create_new_folder),
             text: menuButtonText(Localization.appLocalizations().createSite),
             shortcut: const SingleActivator(LogicalKeyboardKey.keyN,
@@ -246,7 +246,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
                 SSG.getSSGName(SSGTypes.values.byName(Preferences.getSSG())))),
           ),
           MenuButton(
-            onPressed: () => openHugoPublicFolder(),
+            onPressed: () => openBuildFolder(),
             icon: const Icon(Icons.folder_open),
             text:
                 menuButtonText(Localization.appLocalizations().openBuildFolder),

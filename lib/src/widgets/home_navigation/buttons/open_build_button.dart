@@ -44,7 +44,7 @@ class OpenBuildButton extends StatelessWidget {
                 ],
               ),
             ),
-            onTap: () => openHugoPublicFolder()),
+            onTap: () => openBuildFolder()),
       );
     });
   }

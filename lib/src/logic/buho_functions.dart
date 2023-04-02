@@ -189,13 +189,13 @@ Future<void> revertFileAndFrontmatter({required BuildContext context}) async {
       .setSavedTextFrontmatter(fileNavigationProvider.frontMatterText);
 }
 
-void openHugoSite({required BuildContext context, Function? setState}) {
+void openWebsite({required BuildContext context, Function? setState}) {
   Navigator.push(
           context, MaterialPageRoute(builder: (context) => const OpenWebsite()))
       .then((value) => setState?.call());
 }
 
-void createHugoSite({required BuildContext context, Function? setState}) {
+void createWebsite({required BuildContext context, Function? setState}) {
   Navigator.push(context,
           MaterialPageRoute(builder: (context) => const CreateWebsite()))
       .then((value) => setState?.call());
@@ -238,7 +238,7 @@ void buildWebsite({required BuildContext context}) async {
       context: context, ssg: SSGTypes.values.byName(Preferences.getSSG()));
 }
 
-void openHugoPublicFolder() =>
+void openBuildFolder() =>
     SSG.openSSGBuildFolder(ssg: SSGTypes.values.byName(Preferences.getSSG()));
 
 void exit({

@@ -186,7 +186,7 @@ class _SettingsPageState extends State<SettingsPage> {
           Localization.appLocalizations().currentSitePath(sitePath),
         ),
         trailing: ElevatedButton(
-            onPressed: () => openHugoSite(context: context),
+            onPressed: () => openWebsite(context: context),
             child: Text(Localization.appLocalizations().openSite)),
       );
     });
@@ -199,7 +199,7 @@ class _SettingsPageState extends State<SettingsPage> {
         Localization.appLocalizations().createSite_Description,
       ),
       trailing: ElevatedButton(
-        onPressed: () => createHugoSite(context: context),
+        onPressed: () => createWebsite(context: context),
         child: Text(Localization.appLocalizations().createSite),
       ),
     );

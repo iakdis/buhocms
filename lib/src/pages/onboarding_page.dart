@@ -82,7 +82,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
     super.dispose();
   }
 
-  Widget _hugoSitePage() {
+  Widget _websitePage() {
     return Container(
       padding: const EdgeInsets.all(24.0),
       color: Colors.lightBlue.shade100,
@@ -92,14 +92,14 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         crossAxisAlignment: WrapCrossAlignment.center,
         runSpacing: 64.0,
         children: [
-          _hugoPageInfo(),
-          _hugoSitePageButtons(),
+          _websitePageInfo(),
+          _websitePageButtons(),
         ],
       ),
     );
   }
 
-  Widget _hugoPageInfo() {
+  Widget _websitePageInfo() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -140,19 +140,19 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
     );
   }
 
-  Widget _hugoSitePageButtons() {
+  Widget _websitePageButtons() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton(
           onPressed: () =>
-              createHugoSite(context: context, setState: () => setState(() {})),
+              createWebsite(context: context, setState: () => setState(() {})),
           child: Text(Localization.appLocalizations().createSite),
         ),
         const SizedBox(height: 24.0),
         ElevatedButton(
           onPressed: () =>
-              openHugoSite(context: context, setState: () => setState(() {})),
+              openWebsite(context: context, setState: () => setState(() {})),
           child: Text(Localization.appLocalizations().openSite),
         ),
         const SizedBox(height: 48.0),
@@ -427,7 +427,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
                   });
                 },
                 children: [
-                  _scrollableChild(_hugoSitePage()),
+                  _scrollableChild(_websitePage()),
                   _scrollableChild(_themePage()),
                   _scrollableChild(_welcomePageInfo()),
                 ],

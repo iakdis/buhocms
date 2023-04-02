@@ -20,7 +20,7 @@ class AddFrontmatterButton extends StatefulWidget {
 
 class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
   void _addFrontMatter(
-      {required String hugoFrontmatter, required FrontmatterType type}) {
+      {required String frontmatter, required FrontmatterType type}) {
     final fileNavigationProvider =
         Provider.of<FileNavigationProvider>(context, listen: false);
     String? newLine;
@@ -28,20 +28,20 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
 
     switch (type) {
       case FrontmatterType.typeString:
-        newLine = '$hugoFrontmatter: "Text"';
+        newLine = '$frontmatter: "Text"';
         break;
       case FrontmatterType.typeBool:
-        newLine = '$hugoFrontmatter: false';
+        newLine = '$frontmatter: false';
         break;
       case FrontmatterType.typeDate:
-        newLine = '$hugoFrontmatter: ${dateFormatter.format(DateTime.now())}';
+        newLine = '$frontmatter: ${dateFormatter.format(DateTime.now())}';
         break;
       case FrontmatterType.typeList:
-        newLine = '$hugoFrontmatter: []';
+        newLine = '$frontmatter: []';
         break;
     }
 
-    print('New Line: <$newLine> with frontmatter <$hugoFrontmatter>');
+    print('New Line: <$newLine> with frontmatter <$frontmatter>');
     var oldFrontmatterText = fileNavigationProvider.frontMatterText;
     var contains = oldFrontmatterText.contains('---');
     if (!contains) oldFrontmatterText = '---\n';
@@ -50,15 +50,15 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
 
     showSnackbar(
-      text: Localization.appLocalizations().addedFrontmatter(
-          '"$hugoFrontmatter"', '"${type.name.substring(4)}"'),
+      text: Localization.appLocalizations()
+          .addedFrontmatter('"$frontmatter"', '"${type.name.substring(4)}"'),
       seconds: 4,
     );
   }
 
   void _add(MapEntry<String, FrontmatterType>? option) {
     _addFrontMatter(
-      hugoFrontmatter: option?.key ?? 'unknown',
+      frontmatter: option?.key ?? 'unknown',
       type: option?.value ?? FrontmatterType.typeString,
     );
     save(

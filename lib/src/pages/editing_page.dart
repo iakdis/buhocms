@@ -108,7 +108,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
   }
 
   Future<void> updateFrontmatterWidgets() async {
-    print('Hugo widgets update!');
+    print('Frontmatter widgets update!');
     final editingProvider = context.read<EditingProvider>();
 
     await fileNavigationProvider.setInitialTexts();
