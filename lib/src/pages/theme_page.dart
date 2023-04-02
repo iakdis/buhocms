@@ -112,7 +112,7 @@ class _ThemePageState extends State<ThemePage> {
         setState(() {});
       },
       showErrorSnackbar: false,
-      ssg: SSGTypes.values.byName(Preferences.getSSG()),
+      ssg: SSG.getSSGType(Preferences.getSSG()),
     );
   }
 

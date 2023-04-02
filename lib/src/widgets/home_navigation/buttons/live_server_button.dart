@@ -23,8 +23,7 @@ class LiveServerButton extends StatelessWidget {
                 ? () => startLiveServer(context: context)
                 : () => stopSSGServer(
                     context: context,
-                    ssg: SSG.getSSGName(
-                        SSGTypes.values.byName(Preferences.getSSG()))),
+                    ssg: SSG.getSSGName(SSG.getSSGType(Preferences.getSSG()))),
             child: Padding(
               padding: isExtended
                   ? const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0)

@@ -12,7 +12,7 @@ class SSGIcon extends StatelessWidget {
   Widget ssgIcon(BuildContext context) {
     final ssg = context.watch<SSGProvider>().ssg;
     final tooltip = Localization.appLocalizations()
-        .currentSSG(SSG.getSSGName(SSGTypes.values.byName(ssg)));
+        .currentSSG(SSG.getSSGName(SSG.getSSGType(ssg)));
 
     return Tooltip(
       message: tooltip,

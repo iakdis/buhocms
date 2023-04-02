@@ -23,8 +23,7 @@ class ParentFolderButton extends StatelessWidget {
     context.watch<SSGProvider>();
 
     final contentFolder = SSG.getSSGContentFolder(
-        ssg: SSGTypes.values.byName(Preferences.getSSG()),
-        pathSeparator: false);
+        ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
     var savePath = Preferences.getCurrentPath();
     if (savePath.endsWith(Platform.pathSeparator)) {
       savePath = savePath.substring(0, savePath.length - 1);

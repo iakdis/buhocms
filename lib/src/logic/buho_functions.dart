@@ -57,7 +57,7 @@ void addFile({
         context: context,
         mounted: mounted,
         path: path ?? Preferences.getCurrentPath(),
-        ssg: SSGTypes.values.byName(Preferences.getSSG()));
+        ssg: SSG.getSSGType(Preferences.getSSG()));
 
 void addFolder({
   required BuildContext context,
@@ -209,7 +209,7 @@ void openHugoThemes({required BuildContext context, Function? setState}) {
 
 void startLiveServer({required BuildContext context}) =>
     SSG.startSSGServerDialog(
-        context: context, ssg: SSGTypes.values.byName(Preferences.getSSG()));
+        context: context, ssg: SSG.getSSGType(Preferences.getSSG()));
 
 void stopSSGServer({
   required BuildContext context,
@@ -231,15 +231,15 @@ void stopSSGServer({
 }
 
 void openLocalhost() =>
-    SSG.openSSGLiveServer(ssg: SSGTypes.values.byName(Preferences.getSSG()));
+    SSG.openSSGLiveServer(ssg: SSG.getSSGType(Preferences.getSSG()));
 
 void buildWebsite({required BuildContext context}) async {
   SSG.buildSSGWebsiteDialog(
-      context: context, ssg: SSGTypes.values.byName(Preferences.getSSG()));
+      context: context, ssg: SSG.getSSGType(Preferences.getSSG()));
 }
 
 void openBuildFolder() =>
-    SSG.openSSGBuildFolder(ssg: SSGTypes.values.byName(Preferences.getSSG()));
+    SSG.openSSGBuildFolder(ssg: SSG.getSSGType(Preferences.getSSG()));
 
 void exit({
   required BuildContext context,

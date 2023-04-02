@@ -25,8 +25,7 @@ class AddFolder {
 
   void _newFolderDialog({required String path}) async {
     final contentFolder = SSG.getSSGContentFolder(
-        ssg: SSGTypes.values.byName(Preferences.getSSG()),
-        pathSeparator: false);
+        ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
     folderNameController.text = folderName;
     var allFolders = await getAllDirectories();
     if (mounted) {

@@ -48,7 +48,7 @@ Future<List<Directory>> getAllDirectories({BuildContext? context}) async {
   List<Directory> directories = [];
 
   final contentFolder = SSG.getSSGContentFolder(
-      ssg: SSGTypes.values.byName(Preferences.getSSG()), pathSeparator: false);
+      ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
   Directory fileDirectory = Directory(Preferences.getCurrentPath()
       .substring(0, Preferences.getCurrentPath().indexOf(contentFolder)));
 
@@ -76,7 +76,7 @@ Future<List<File>> getAllFiles({BuildContext? context}) async {
   List<File> files = [];
 
   final contentFolder = SSG.getSSGContentFolder(
-      ssg: SSGTypes.values.byName(Preferences.getSSG()), pathSeparator: false);
+      ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
   Directory fileDirectory = Directory(Preferences.getCurrentPath().substring(
       0,
       Preferences.getCurrentPath().indexOf(contentFolder) +

@@ -206,7 +206,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _hugoThemeTile() {
-    final ssg = SSGTypes.values.byName(Preferences.getSSG());
+    final ssg = SSG.getSSGType(Preferences.getSSG());
     final theme =
         Hugo.getHugoTheme().isEmpty ? 'N/A' : '"${Hugo.getHugoTheme()}"';
     return ListTile(

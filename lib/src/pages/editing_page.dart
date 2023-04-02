@@ -638,8 +638,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
 
   Widget _openInFolderButton({required String path}) {
     final contentFolder = SSG.getSSGContentFolder(
-        ssg: SSGTypes.values.byName(Preferences.getSSG()),
-        pathSeparator: false);
+        ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
     return TextButton.icon(
       onPressed: () =>
           openCurrentPathInFolder(path: path, keepPathTrailing: false),

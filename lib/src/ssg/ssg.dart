@@ -26,11 +26,10 @@ enum SSGTypes {
 }
 
 class SSG {
-  static Future<void> setSSG(SSGTypes ssg) async {
-    await Preferences.setSSG(ssg.name);
-  }
   static SSGTypes getSSGType(String ssg) => SSGTypes.values.byName(ssg);
 
+  static Future<void> setSSG(SSGTypes ssg) async =>
+      await Preferences.setSSG(ssg.name);
 
   static String getSSGContentFolder({
     required SSGTypes ssg,
@@ -161,7 +160,7 @@ class SSG {
     checkProgramInstalled(
       context: context,
       executable: executable,
-      ssg: SSGTypes.values.byName(Preferences.getSSG()),
+      ssg: SSG.getSSGType(Preferences.getSSG()),
     );
 
     runTerminalCommand(
@@ -255,7 +254,7 @@ class SSG {
     checkProgramInstalled(
       context: context,
       executable: executable,
-      ssg: SSGTypes.values.byName(Preferences.getSSG()),
+      ssg: SSG.getSSGType(Preferences.getSSG()),
     );
 
     shellProvider.updateController();
@@ -309,8 +308,7 @@ class SSG {
       String name = defaultName;
 
       final contentFolder = getSSGContentFolder(
-          ssg: SSGTypes.values.byName(Preferences.getSSG()),
-          pathSeparator: false);
+          ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
       nameController.text = name;
       var allFiles = await getAllFiles();
       if (mounted) {
@@ -472,7 +470,7 @@ class SSG {
         checkProgramInstalled(
           context: context,
           executable: 'hugo',
-          ssg: SSGTypes.values.byName(Preferences.getSSG()),
+          ssg: SSG.getSSGType(Preferences.getSSG()),
         );
 
         await runTerminalCommand(

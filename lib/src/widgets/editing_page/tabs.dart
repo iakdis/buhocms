@@ -146,8 +146,7 @@ class _TabState extends State<Tab> {
         Provider.of<UnsavedTextProvider>(context, listen: false);
     final editingPageKey = context.read<EditingProvider>().editingPageKey;
     final contentFolder = SSG.getSSGContentFolder(
-        ssg: SSGTypes.values.byName(Preferences.getSSG()),
-        pathSeparator: false);
+        ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
 
     return CustomTooltip(
       message: widget.title.substring(widget.title.indexOf(contentFolder)),

@@ -31,7 +31,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
   String ssgInstalledText = '';
 
   String sitePath = Preferences.getSitePath() ?? '';
-  SSGTypes ssg = SSGTypes.values.byName(Preferences.getSSG());
+  SSGTypes ssg = SSG.getSSGType(Preferences.getSSG());
   String path = '';
   bool sitePathError = false;
   TextEditingController textController = TextEditingController();
@@ -67,7 +67,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
     await Preferences.setSitePath(
         selectedDirectory ?? Preferences.getSitePath() ?? '');
     final contentFolder = SSG.getSSGContentFolder(
-        ssg: SSGTypes.values.byName(Preferences.getSSG()), pathSeparator: true);
+        ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: true);
     await Preferences.setCurrentPath(
         '${Preferences.getSitePath()}$contentFolder');
 
@@ -205,8 +205,8 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                   if (mounted) {
                     stopSSGServer(
                         context: context,
-                        ssg: SSG.getSSGName(
-                            SSGTypes.values.byName(Preferences.getSSG())),
+                        ssg: SSG
+                            .getSSGName(SSG.getSSGType(Preferences.getSSG())),
                         snackbar: false);
 
                     Navigator.pop(context);

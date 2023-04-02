@@ -177,8 +177,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
       return Consumer2<NavigationSizeProvider, FileNavigationProvider>(builder:
           (context, navigationSizeProvider, fileNavigationProvider, _) {
         final contentFolder = SSG.getSSGContentFolder(
-            ssg: SSGTypes.values.byName(Preferences.getSSG()),
-            pathSeparator: false);
+            ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
         final savePath = Preferences.getCurrentPath();
 
         final windowWidth = MediaQuery.of(context).size.width;

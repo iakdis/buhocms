@@ -26,7 +26,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
   bool canContinue = false;
 
   String sitePath = Preferences.getSitePath() ?? '';
-  SSGTypes ssg = SSGTypes.values.byName(Preferences.getSSG());
+  SSGTypes ssg = SSG.getSSGType(Preferences.getSSG());
   bool sitePathError = false;
   TextEditingController textController = TextEditingController();
 
@@ -56,7 +56,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
     await Preferences.setSitePath(
         selectedDirectory ?? Preferences.getSitePath() ?? '');
     final contentFolder = SSG.getSSGContentFolder(
-        ssg: SSGTypes.values.byName(Preferences.getSSG()), pathSeparator: true);
+        ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: true);
     await Preferences.setCurrentPath(
         '${Preferences.getSitePath()}$contentFolder');
 

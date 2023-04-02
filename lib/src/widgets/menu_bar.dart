@@ -232,8 +232,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           MenuButton(
             onPressed: () => stopSSGServer(
                 context: context,
-                ssg: SSG
-                    .getSSGName(SSGTypes.values.byName(Preferences.getSSG()))),
+                ssg: SSG.getSSGName(SSG.getSSGType(Preferences.getSSG()))),
             icon: const Icon(Icons.stop_circle_outlined),
             text:
                 menuButtonText(Localization.appLocalizations().stopLiveServer),
@@ -243,7 +242,7 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
             onPressed: () => buildWebsite(context: context),
             icon: const Icon(Icons.web),
             text: menuButtonText(Localization.appLocalizations().buildWebsite(
-                SSG.getSSGName(SSGTypes.values.byName(Preferences.getSSG())))),
+                SSG.getSSGName(SSG.getSSGType(Preferences.getSSG())))),
           ),
           MenuButton(
             onPressed: () => openBuildFolder(),

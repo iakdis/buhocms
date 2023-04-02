@@ -216,7 +216,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
   }
 
   Widget _themePageButtons() {
-    final ssg = SSGTypes.values.byName(Preferences.getSSG());
+    final ssg = SSG.getSSGType(Preferences.getSSG());
     final theme = Hugo.getHugoTheme();
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
