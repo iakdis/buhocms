@@ -204,7 +204,10 @@ class _CreateWebsiteState extends State<CreateWebsite> {
 
                   if (mounted) {
                     stopSSGServer(
-                        context: context, ssg: 'Hugo', snackbar: false);
+                        context: context,
+                        ssg: SSG.getSSGName(
+                            SSGTypes.values.byName(Preferences.getSSG())),
+                        snackbar: false);
 
                     Navigator.pop(context);
                     Navigator.pop(context);

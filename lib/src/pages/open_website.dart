@@ -71,7 +71,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
   }
 
   void open({required String sitePath}) {
-    stopSSGServer(context: context, ssg: 'Hugo', snackbar: false);
+    stopSSGServer(context: context, ssg: SSG.getSSGName(ssg), snackbar: false);
 
     Preferences.clearPreferencesSite();
     Preferences.setOnBoardingComplete(true);

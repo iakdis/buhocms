@@ -1,17 +1,16 @@
+import 'package:buhocms/src/logic/buho_functions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../i18n/l10n.dart';
-import '../../../logic/buho_functions.dart';
+import '../../../ssg/ssg.dart';
+import '../../../utils/preferences.dart';
 
-class OpenLocalhostButton extends StatelessWidget {
-  const OpenLocalhostButton({
-    super.key,
-    required this.isExtended,
-  });
+class BuildWebsiteButton extends StatelessWidget {
+  const BuildWebsiteButton({super.key, required this.isExtended});
 
   final bool isExtended;
 
-  Widget openLocalhostButton() {
+  Widget buildWebsiteButton() {
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -27,7 +26,7 @@ class OpenLocalhostButton extends StatelessWidget {
                   : MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.open_in_new,
+                  Icons.web,
                   size: 32.0,
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
@@ -38,7 +37,9 @@ class OpenLocalhostButton extends StatelessWidget {
                       SizedBox(
                         width: constraints.maxWidth - 80,
                         child: Text(
-                          Localization.appLocalizations().openLiveServer,
+                          Localization.appLocalizations().buildWebsite(
+                              SSG.getSSGName(SSGTypes.values
+                                  .byName(Preferences.getSSG()))),
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
@@ -47,12 +48,12 @@ class OpenLocalhostButton extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () => openLocalhost(),
+          onTap: () => buildWebsite(context: context),
         ),
       );
     });
   }
 
   @override
-  Widget build(BuildContext context) => openLocalhostButton();
+  Widget build(BuildContext context) => buildWebsiteButton();
 }

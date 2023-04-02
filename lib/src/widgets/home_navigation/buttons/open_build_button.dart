@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../../../i18n/l10n.dart';
 
-class OpenPublicButton extends StatelessWidget {
-  const OpenPublicButton({
-    super.key,
-    required this.isExtended,
-  });
+class OpenBuildButton extends StatelessWidget {
+  const OpenBuildButton({super.key, required this.isExtended});
 
   final bool isExtended;
 
-  Widget openLocalhostButton() {
+  Widget openBuildButton() {
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -53,5 +50,5 @@ class OpenPublicButton extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => openLocalhostButton();
+  Widget build(BuildContext context) => openBuildButton();
 }

@@ -1,19 +1,18 @@
 import 'package:buhocms/src/provider/app/shell_provider.dart';
+import 'package:buhocms/src/utils/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../i18n/l10n.dart';
 import '../../../logic/buho_functions.dart';
+import '../../../ssg/ssg.dart';
 
-class HugoServerButton extends StatelessWidget {
-  const HugoServerButton({
-    super.key,
-    required this.isExtended,
-  });
+class LiveServerButton extends StatelessWidget {
+  const LiveServerButton({super.key, required this.isExtended});
 
   final bool isExtended;
 
-  Widget hugoServerButton() {
+  Widget liveServerButton() {
     return Consumer<ShellProvider>(builder: (context, shellProvider, _) {
       return LayoutBuilder(builder: (context, constraints) {
         return Material(
@@ -22,7 +21,10 @@ class HugoServerButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
             onTap: shellProvider.shellActive == false
                 ? () => startLiveServer(context: context)
-                : () => stopSSGServer(context: context, ssg: 'Hugo'),
+                : () => stopSSGServer(
+                    context: context,
+                    ssg: SSG.getSSGName(
+                        SSGTypes.values.byName(Preferences.getSSG()))),
             child: Padding(
               padding: isExtended
                   ? const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0)
@@ -66,5 +68,5 @@ class HugoServerButton extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => hugoServerButton();
+  Widget build(BuildContext context) => liveServerButton();
 }

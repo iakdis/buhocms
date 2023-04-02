@@ -3,11 +3,11 @@ import 'package:buhocms/src/provider/app/shell_provider.dart';
 import 'package:buhocms/src/utils/globals.dart';
 import 'package:buhocms/src/utils/preferences.dart';
 import 'package:buhocms/src/widgets/home_navigation/buttons/gui_mode_button.dart';
-import 'package:buhocms/src/widgets/home_navigation/buttons/hugo_public_button.dart';
-import 'package:buhocms/src/widgets/home_navigation/buttons/hugo_server_button.dart';
+import 'package:buhocms/src/widgets/home_navigation/buttons/build_website_button.dart';
+import 'package:buhocms/src/widgets/home_navigation/buttons/live_server_button.dart';
 import 'package:buhocms/src/widgets/home_navigation/buttons/navigation_button.dart';
-import 'package:buhocms/src/widgets/home_navigation/buttons/open_localhost_button.dart';
-import 'package:buhocms/src/widgets/home_navigation/buttons/open_public_button.dart';
+import 'package:buhocms/src/widgets/home_navigation/buttons/open_server_button.dart';
+import 'package:buhocms/src/widgets/home_navigation/buttons/open_build_button.dart';
 import 'package:buhocms/src/widgets/tooltip.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -176,14 +176,14 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                       : Localization.appLocalizations()
                                           .startLiveServer,
                                   child:
-                                      HugoServerButton(isExtended: isExtended),
+                                      LiveServerButton(isExtended: isExtended),
                                 ),
                                 CustomTooltip(
                                   message: SSG.getSSGLiveServer(
                                       ssg: SSGTypes.values
                                           .byName(Preferences.getSSG())),
-                                  child: OpenLocalhostButton(
-                                      isExtended: isExtended),
+                                  child:
+                                      OpenServerButton(isExtended: isExtended),
                                 ),
                                 divider(),
                                 CustomTooltip(
@@ -191,15 +191,15 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                       .buildWebsite(SSG.getSSGName(SSGTypes
                                           .values
                                           .byName(Preferences.getSSG()))),
-                                  child:
-                                      HugoBuildButton(isExtended: isExtended),
+                                  child: BuildWebsiteButton(
+                                      isExtended: isExtended),
                                 ),
                                 CustomTooltip(
                                   message: SSG.getSSGBuildFolder(
                                       ssg: SSGTypes.values
                                           .byName(Preferences.getSSG())),
                                   child:
-                                      OpenPublicButton(isExtended: isExtended),
+                                      OpenBuildButton(isExtended: isExtended),
                                 ),
                                 divider(),
                                 CustomTooltip(

@@ -1,19 +1,14 @@
-import 'package:buhocms/src/logic/buho_functions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../i18n/l10n.dart';
-import '../../../ssg/ssg.dart';
-import '../../../utils/preferences.dart';
+import '../../../logic/buho_functions.dart';
 
-class HugoBuildButton extends StatelessWidget {
-  const HugoBuildButton({
-    super.key,
-    required this.isExtended,
-  });
+class OpenServerButton extends StatelessWidget {
+  const OpenServerButton({super.key, required this.isExtended});
 
   final bool isExtended;
 
-  Widget buildWebsiteButton() {
+  Widget openServerButton() {
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -29,7 +24,7 @@ class HugoBuildButton extends StatelessWidget {
                   : MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.web,
+                  Icons.open_in_new,
                   size: 32.0,
                   color: Theme.of(context).colorScheme.onSecondary,
                 ),
@@ -40,9 +35,7 @@ class HugoBuildButton extends StatelessWidget {
                       SizedBox(
                         width: constraints.maxWidth - 80,
                         child: Text(
-                          Localization.appLocalizations().buildWebsite(
-                              SSG.getSSGName(SSGTypes.values
-                                  .byName(Preferences.getSSG()))),
+                          Localization.appLocalizations().openLiveServer,
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
@@ -51,12 +44,12 @@ class HugoBuildButton extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () => buildWebsite(context: context),
+          onTap: () => openLocalhost(),
         ),
       );
     });
   }
 
   @override
-  Widget build(BuildContext context) => buildWebsiteButton();
+  Widget build(BuildContext context) => openServerButton();
 }
