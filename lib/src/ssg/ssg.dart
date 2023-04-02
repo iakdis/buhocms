@@ -29,6 +29,8 @@ class SSG {
   static Future<void> setSSG(SSGTypes ssg) async {
     await Preferences.setSSG(ssg.name);
   }
+  static SSGTypes getSSGType(String ssg) => SSGTypes.values.byName(ssg);
+
 
   static String getSSGContentFolder({
     required SSGTypes ssg,
