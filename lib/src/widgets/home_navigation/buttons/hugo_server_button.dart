@@ -21,7 +21,7 @@ class HugoServerButton extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(50),
             onTap: shellProvider.shellActive == false
-                ? () => startHugoServer(context: context)
+                ? () => startLiveServer(context: context)
                 : () => stopSSGServer(context: context, ssg: 'Hugo'),
             child: Padding(
               padding: isExtended
@@ -48,9 +48,9 @@ class HugoServerButton extends StatelessWidget {
                           child: Text(
                             shellProvider.shellActive == false
                                 ? Localization.appLocalizations()
-                                    .startHugoServer
+                                    .startLiveServer
                                 : Localization.appLocalizations()
-                                    .stopHugoServer,
+                                    .stopLiveServer,
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),

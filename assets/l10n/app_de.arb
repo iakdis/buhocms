@@ -2,30 +2,15 @@
     "aboutBuhoCMS": "Über BuhoCMS",
     "openSite": "Website öffnen",
     "currentSitePath": "Pfad der aktuellen Website: {path}",
-     "@currentSitePath": {
-      "placeholders": {
-         "path": { "type": "String" }
-      }
-    },
-    "createSite_Description": "Neue Hugo Webseite erstellen",
-    "hugoThemes": "Hugo Themen",
     "createSite": "Website erstellen",
+    "createSite_Description": "Neue Website erstellen",
+    "websiteThemes": "Website Themen",
     "currentHugoThemes": "Aktuelles Hugo-Thema: {theme}. Select or download a Hugo theme",
-     "@currentHugoThemes": {
-      "placeholders": {
-         "theme": { "type": "String" }
-      }
-    },
     "preferences": "Einstellungen",
     "preferences_Description": "Exportiere deine Einstellungen als Datei, lade aus einer Datei oder setze die Enstellungen for BuhoCMS zurück",
     "selectASavePath": "Wähle einen Speicherpfad",
     "overrideFile": "Datei überschreiben?",
     "overrideFile_Description": "Eine Datei mit dem Namen {file} existiert bereits in diesem Verzeichnis. Alte Datei überschreiben?",
-     "@overrideFile_Description": {
-      "placeholders": {
-         "file": { "type": "String" }
-      }
-    },
     "cancel": "Abbrechen",
     "yes": "Ja",
     "export": "Exportieren",
@@ -36,64 +21,25 @@
     "editingPage": "Bearbeitungsseite",
     "guiMode": "GUI-Modus",
     "textMode": "Text-Modus",
-    "stopHugoServer": "Hugo Server stoppen",
-    "startHugoServer": "Hugo Server starten",
-    "openHugoServer": "Hugo Server öffnen",
-    "buildHugoSite": "Hugo Website bauen",
-    "openPublicFolder": "Ordner \"public\" öffnen",
+    "stopLiveServer": "Live Server stoppen",
+    "startLiveServer": "Live Server starten",
+    "openLiveServer": "Live Server öffnen",
+    "buildWebsite": "{ssg} Website bauen",
+    "openBuildFolder": "Build Ordner öffnen",
     "sortBy": "Sortieren nach",
     "parentFolderButton_Toolip": "Zum übergeordneten Ordner wechseln. Aktuell: {path}",
-    "@parentFolderButton_Toolip": {
-     "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "newPost": "Neuer Artikel",
     "newFolder": "Neuer Ordner",
     "error_RenameDirectory": "Fehler: Konnte Ordner {oldPath} nicht nach {newPath} umbenennen da ein Ordner mit dem selben Namen in diesem Verzeichnis existiert",
-    "@error_RenameDirectory": {
-     "placeholders": {
-        "oldPath": { "type": "String" },
-        "newPath": { "type": "String" }
-      }
-    },
     "renamedDirectory": "Ordner {oldPath} nach {newPath} umbenannt",
-    "@renamedDirectory": {
-     "placeholders": {
-        "oldPath": { "type": "String" },
-        "newPath": { "type": "String" }
-      }
-    },
     "deleteFolder": "Ordner löschen",
     "deleteFolder_Description": "Bist du sicher, den Ordner zu löschen:\n",
     "deletedFolder": "Ordner {path} gelöscht",
-    "@deletedFolder": {
-     "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "error_RenameFile": "Fehler: Konnte die Datei {oldPath} nicht nach {newPath} umbenennen da ein Ordner mit dem selben Namen in diesem Verzeichnis existiert",
-    "@error_RenameFile": {
-     "placeholders": {
-        "oldPath": { "type": "String" },
-        "newPath": { "type": "String" }
-      }
-    },
     "renamedFile": "Datei {oldPath} nach {newPath} umbenannt",
-    "@renamedFile": {
-     "placeholders": {
-        "oldPath": { "type": "String" },
-        "newPath": { "type": "String" }
-      }
-    },
     "deleteFile": "Datei löschen",
     "deleteFile_Description": "Bist du sicher, die Datei zu löschen:\n",
     "deletedFile": "Datei {path} gelöscht",
-    "@deletedFile": {
-     "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "alreadyAtHighestLevel": "Bereits im höchsten Ordner; Kann keinen Ordner über \"{content}\" öffnen",
     "sortByName": "Nach Namen",
     "sortByNameReversed": "Nach Namen (umgekehrt)",
@@ -104,36 +50,13 @@
     "sortByType": "Nach Dateityp",
     "sortByTypeReversed": "Nach Dateityp (umgekehrt)",
     "postCreated": "Artikel {post} erstellt in Pfad {path}",
-    "@postCreated": {
-     "placeholders": {
-        "post": { "type": "String" },
-        "path": { "type": "String" }
-      }
-    },
     "createNewPostIn": "Neuen Artikel erstellen in:\n",
     "name": "Name: ",
     "cantBeEmpty": "Kann nicht leer sein",
     "error_fileAlreadyExists": "Datei mit dem Namen {name} existiert bereits im Ordner:\n{path}",
-    "@error_fileAlreadyExists": {
-     "placeholders": {
-        "name": { "type": "String" },
-        "path": { "type": "String" }
-      }
-    },
     "folderCreated": "Artikel {path} erstellt",
-    "@folderCreated": {
-     "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "createNewFolderIn": "Neuen Ordner erstellen in:\n",
     "error_folderAlreadyExists": "Ordner mit dem Namen {name} existiert bereits im Ordner:\n{path}",
-    "@error_folderAlreadyExists": {
-     "placeholders": {
-        "name": { "type": "String" },
-        "path": { "type": "String" }
-      }
-    },
     "rename": "Umbenennen",
     "openInFileExplorer": "Im Dateiordner öffnen",
     "delete": "Löschen",
@@ -149,70 +72,28 @@
     "reportIssue": "Fehler melden",
     "about": "Über",
     "error_DirectoryDoesNotExist": "Ordner {path} existiert nicht. Bitte wähle einen gültigen Pfad.",
-    "@error_DirectoryDoesNotExist": {
-      "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "error_DirectoryAlreadyExists": "Ein Verzeichnis mit dem Pfad {path} existiert bereits. Bitte benenne den existierenden Ordner um oder entferne ihn.",
-    "@error_DirectoryAlreadyExists": {
-      "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "back": "ZURÜCK",
     "next": "NÄCHSTE",
     "continue2": "WEITER",
     "create": "Erstellen",
     "chooseStaticSiteGenerator": "Static-Site-Generator auswählen",
     "checkSSGInstalled": "Überprüfen, ob {ssg} installiert ist",
-    "@checkSSGInstalled": {
-      "placeholders": {
-        "ssg": { "type": "String" }
-      }
-    },
     "executableNotFound": "{program} Executable-Datei nicht gefunden. Stelle bitte sicher, dass {program} korrekt installiert ist.",
-    "@executableNotFound": {
-      "placeholders": {
-        "program": { "type": "String" }
-      }
-    },
     "executableFoundIn": "{program} Executable-Datei gefunden in: {path}",
-    "@executableFoundIn": {
-      "placeholders": {
-        "program": { "type": "String" },
-        "path": { "type": "String" }
-      }
-    },
     "createLocation": "Speicherort",
     "choosePath": "Pfad auswählen",
     "websiteWillBeCreatedInFolder": "Die neue {ssg} Website wird im ausgewählten Ordner erstellt",
-    "@websiteWillBeCreatedInFolder": {
-      "placeholders": {
-        "ssg": { "type": "String" }
-      }
-    },
     "websitePath": "Pfad der Website",
     "siteName": "Name der Website",
     "finish": "Fertigstellen",
     "createWebsiteNamed": "{ssg} Website erstellen namens:\n",
-    "@createWebsiteNamed": {
-      "placeholders": {
-        "ssg": { "type": "String" }
-      }
-    },
     "insideFolder": "Im Ordner:\n",
     "open": "Open",
     "checkStaticSiteStructure": "Static-Site-Generator Struktur überprüfen",
     "checkStaticSiteStructure_Description": "Stelle sicher, dass dein Ordner der korrekten Static-Site-Generator Struktur entspricht. Weitere Informationen findest du in der jeweiligen Dokumentation.\n\nWenn du dir sicher sein willst, dass deine Website der richtigen Ordnerstruktur folgt, kannst du eine neue Website mit BuhoCMS erstellen.",
     "selectSiteFolder": "Websiteordner auswählen",
-    "openHugoSite": "Hugo Website öffnen:\n",
     "error_ThemeAlreadyExists": "Ein Thema mit dem Namen {theme} existiert bereits im Themenordner. Bitte benenne den existierenden Ordner um oder entferne ihn.",
-    "@error_ThemeAlreadyExists": {
-      "placeholders": {
-        "theme": { "type": "String" }
-      }
-    },
     "selectATheme": "Thema auswählen",
     "none": "Keine",
     "download": "Herunterladen",
@@ -223,42 +104,17 @@
     "themeRepository": "Themen-Repository",
     "successfullyDownloadedHugoTheme": "Erfolgreich Hugo-Thema heruntergeladen aus:\n",
     "nowSelectTheme": "\n\nNun kannst du das Thema {theme} in der Dropdown-Schaltfläche auswählen.",
-    "@nowSelectTheme": {
-      "placeholders": {
-        "theme": { "type": "String" }
-      }
-    },
     "rememberToVisitDocs": "Denke daran, die Dokumentation im Themen-Repository zu besuchen, um Details zur Implementierung der richtigen Konfigurationen zu erfahren.",
     "welcomeToBuhoCMS": "Willkommen bei BuhoCMS",
-    "welcomeToBuhoCMS_Description": "BuhoCMS ist ein lokales Content Management System für Hugo.\nErstelle oder öffne eine Website, installiere ein Thema, und beginne damit, neue Artikel zu erstellen.\n\nUm fortzufahren, erstelle oder öffne eine Hugo Seite.",
-    "hugoSiteSelected": "Ausgewählte Hugo Website: {path}",
-    "@hugoSiteSelected": {
-      "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
+    "welcomeToBuhoCMS_Description": "BuhoCMS ist ein lokales Content Management System für Hugo und Jekyll.\nErstelle oder öffne eine Website, installiere ein Thema, und beginne damit, neue Artikel zu erstellen.\n\nUm fortzufahren, erstelle oder öffne eine Website.",
+    "websiteSelected": "Ausgewählte Website: {path}",
     "themes": "Themen",
     "themes_Description": "Lade ein Hugo-Thema herunter und wähle es aus.\nDu kannst diesen Schritt auch überspringen ihn später in den Einstellungen beenden.",
     "hugoThemeSelected": "Ausgewähltes Hugo-Theme: {path}",
-    "@hugoThemeSelected": {
-      "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "allDone": "Das ist alles!",
     "allDone_Description": "Herzlichen Glückwunsch, du bist nun bereit, BuhoCMS zu benutzen!",
     "sitePath": "Websitepfad: {path}",
-    "@sitePath": {
-      "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "hugoTheme": "Hugo-Thema: {path}",
-    "@hugoTheme": {
-      "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "getStarted": "Loslegen",
     "revertChanges_Description": "Bist du sicher, die Änderungen in dieser Datei rückgängig zu machen? Alle ungespeicherten Änderungen nach der letzten Speicherung werden verloren.",
     "quitWithUnsaved": "Beenden mit ungespeicherten Änderungen",
@@ -277,62 +133,20 @@
     "addFrontmatter": "Front matter hinzufügen",
     "add": "Hinzufügen",
     "addedFrontmatterToList": "Front matter zur Liste mit Namen {name} und Typ {type} hinzugefügt",
-    "@addedFrontmatterToList": {
-     "placeholders": {
-        "name": { "type": "String" },
-        "type": { "type": "String" }
-      }
-    },
     "frontmatterName": "Front matter Name: ",
     "frontmatterType": "Front matter Typ: ",
     "error_FrontmatterAlreadyContains": "Liste beinhaltet bereits einen Front Matter Eintrag mit dem selben Namen!",
     "editFrontmatter": "Front matter bearbeiten",
     "editedFrontmatterToList": "Eintrag in Front matter Liste vom Namen {oldName} zu {newName} und Typ {oldType} zu {newType} bearbeitet",
-    "@editedFrontmatterToList": {
-     "placeholders": {
-        "oldName": { "type": "String" },
-        "newName": { "type": "String" },
-        "oldType": { "type": "String" },
-        "newType": { "type": "String" }
-      }
-    },
     "removedFrontmatterToList": "Front matter Eintrag aus Liste mit Namen {name} und Typ {type} entfernt",
-    "@removedFrontmatterToList": {
-     "placeholders": {
-        "name": { "type": "String" },
-        "type": { "type": "String" }
-      }
-    },
     "deleteFrontmatter": "Front matter löschen",
     "areYouSureDeleteFrontmatter": "Bist du sicher, das Front matter zu löschen:\n",
     "removedFrontmatter": "Front matter {name} mit Typ {type} entfernt",
-    "@removedFrontmatter": {
-     "placeholders": {
-        "name": { "type": "String" },
-        "type": { "type": "String" }
-      }
-    },
     "detect": "Erfassen",
-    "notFound_Description": "{name} nicht in der BuhoCMS Liste gefunden. Bitte erstelle das Feld mit seinem Namen und Typ in deiner BuhoCMS Front matter Liste (Einstellungen → Hugo Einstellungen → Front matter Liste bearbeiten) oder entferne den Eintrag aus dem Text",
-    "@notFound_Description": {
-     "placeholders": {
-        "name": { "type": "String" }
-      }
-    },
+    "notFound_Description": "{name} nicht in der BuhoCMS Liste gefunden. Bitte erstelle das Feld mit seinem Namen und Typ in deiner BuhoCMS Front matter Liste (Einstellungen → SSG Einstellungen → Front matter Liste bearbeiten) oder entferne den Eintrag aus dem Text",
     "restore": "Wiederherstellen",
     "error_executableNotFound": "Fehler: {program} Executable-Datei nicht gefunden beim Ausführen des Befehls {command}",
-    "@error_executableNotFound": {
-     "placeholders": {
-        "program": { "type": "String" },
-        "command": { "type": "String" }
-      }
-    },
     "removeTag": "Tag {tag} entfernen",
-    "@removeTag": {
-     "placeholders": {
-        "tag": { "type": "String" }
-      }
-    },
     "tag": "Tag",
     "createYourFirstPost": "Erstelle deinen ersten Artikel",
     "noFileSelected": "Keine Datei ausgewählt",
@@ -354,28 +168,12 @@
     "nothingToSave": "Nichts zu speichern",
     "fileRevertedSuccessfully": "Datei erfolgreich Rückgängig gemacht",
     "nothingToRevert": "Nichts zum Rückgängig machen",
-    "alreadyStartedAHugoServer": "Bereits einen Hugo Server gestartet",
-    "startedHugoServer": "Hugo server gestartet",
+    "alreadyStartedLiveServer": "Bereits einen Server gestartet",
+    "startedLiveServer": "Live server gestartet",
     "stoppedSSGServer": "{ssg} server gestoppt",
-    "@stoppedSSGServer": {
-     "placeholders": {
-        "ssg": { "type": "String" }
-      }
-    },
     "noSSGServerRunning": "Kein {ssg} Server ist gerade aktiv",
-    "@noSSGServerRunning": {
-     "placeholders": {
-        "ssg": { "type": "String" }
-      }
-    },
-    "builtHugoSite": "Hugo Website gebaut",
+    "builtWebsite": "{ssg} Website gebaut",
     "addedFrontmatter": "Front matter {name} mit Typ {type} hinzugefügt",
-    "@addedFrontmatter": {
-     "placeholders": {
-        "name": { "type": "String" },
-        "type": { "type": "String" }
-      }
-    },
     "terminal": "Kommandozeile",
     "command": "Befehl:",
     "flags": "Optionen:",
@@ -407,7 +205,7 @@
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",
     "site": "WEBSITE",
-    "hugoSettings": "HUGO EINSTELLUNGEN",
+    "ssgSettings": "SSG EINSTELLUNGEN",
 
     "language": "Sprache",
     "language_description": "Sprache von BuhoCMS ändern",
@@ -422,10 +220,5 @@
     "more": "MEHR",
     "less": "WENIGER ANZEIGEN",
     "version": "Version {versionNumber}",
-    "@version": {
-      "placeholders": {
-         "versionNumber": { "type": "String" }
-      }
-    },
     "license": "Der Quellcode ist unter der GPLv3 lizenziert und auf GitHub (https://github.com/iakmds/buhocms) verfügbar. Wenn du einen Fehler melden, eine Funktion vorschlagen oder etwas verbessern möchtest, öffne gerne ein \"Issue\" auf GitHub. Danke!"
 }

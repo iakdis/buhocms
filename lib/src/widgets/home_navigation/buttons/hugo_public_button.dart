@@ -2,6 +2,8 @@ import 'package:buhocms/src/logic/buho_functions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../i18n/l10n.dart';
+import '../../../ssg/ssg.dart';
+import '../../../utils/preferences.dart';
 
 class HugoBuildButton extends StatelessWidget {
   const HugoBuildButton({
@@ -11,7 +13,7 @@ class HugoBuildButton extends StatelessWidget {
 
   final bool isExtended;
 
-  Widget buildHugoSiteButton() {
+  Widget buildWebsiteButton() {
     return LayoutBuilder(builder: (context, constraints) {
       return Material(
         color: Colors.transparent,
@@ -38,7 +40,9 @@ class HugoBuildButton extends StatelessWidget {
                       SizedBox(
                         width: constraints.maxWidth - 80,
                         child: Text(
-                          Localization.appLocalizations().buildHugoSite,
+                          Localization.appLocalizations().buildWebsite(
+                              SSG.getSSGName(SSGTypes.values
+                                  .byName(Preferences.getSSG()))),
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
@@ -47,12 +51,12 @@ class HugoBuildButton extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () => buildHugoSite(context: context),
+          onTap: () => buildWebsite(context: context),
         ),
       );
     });
   }
 
   @override
-  Widget build(BuildContext context) => buildHugoSiteButton();
+  Widget build(BuildContext context) => buildWebsiteButton();
 }

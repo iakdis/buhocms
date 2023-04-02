@@ -38,7 +38,7 @@ class OpenLocalhostButton extends StatelessWidget {
                       SizedBox(
                         width: constraints.maxWidth - 80,
                         child: Text(
-                          Localization.appLocalizations().openHugoServer,
+                          Localization.appLocalizations().openLiveServer,
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),

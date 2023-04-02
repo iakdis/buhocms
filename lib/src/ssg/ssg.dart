@@ -109,7 +109,7 @@ class SSG {
         return StatefulBuilder(builder: (context, setState) {
           return CommandDialog(
             title: Text(
-              Localization.appLocalizations().buildHugoSite,
+              Localization.appLocalizations().buildWebsite(SSG.getSSGName(ssg)),
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
             icon: Icons.web,
@@ -168,7 +168,7 @@ class SSG {
       executable: executable,
       flags: commandFlags,
       successFunction: () => showSnackbar(
-        text: Localization.appLocalizations().builtHugoSite,
+        text: Localization.appLocalizations().builtWebsite(getSSGName(ssg)),
         seconds: 4,
       ),
     );
@@ -203,7 +203,7 @@ class SSG {
         return StatefulBuilder(builder: (context, setState) {
           return CommandDialog(
             title: Text(
-              Localization.appLocalizations().startHugoServer,
+              Localization.appLocalizations().startLiveServer,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
             icon: Icons.miscellaneous_services,
@@ -268,8 +268,8 @@ class SSG {
       flags: commandFlags,
       snackbarFunction: () => showSnackbar(
         text: shellProvider.shellActive == true
-            ? Localization.appLocalizations().alreadyStartedAHugoServer
-            : Localization.appLocalizations().startedHugoServer,
+            ? Localization.appLocalizations().alreadyStartedLiveServer
+            : Localization.appLocalizations().startedLiveServer,
         seconds: 4,
       ),
     );

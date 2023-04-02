@@ -38,7 +38,7 @@ class OpenPublicButton extends StatelessWidget {
                         SizedBox(
                           width: constraints.maxWidth - 80,
                           child: Text(
-                            Localization.appLocalizations().openPublicFolder,
+                            Localization.appLocalizations().openBuildFolder,
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),

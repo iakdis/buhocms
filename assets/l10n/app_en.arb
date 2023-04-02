@@ -8,14 +8,28 @@
       }
     },
     "createSite": "Create website",
-    "createSite_Description": "Create a new Hugo website",
-    "hugoThemes": "Hugo themes",
+    "createSite_Description": "Create a new website",
+    "websiteThemes": "Website themes",
     "currentHugoThemes": "Current Hugo theme: {theme}. Select or download a Hugo theme",
      "@currentHugoThemes": {
       "placeholders": {
          "theme": { "type": "String" }
       }
     },
+    "successfullyDownloadedHugoTheme": "Successfully downloaded Hugo theme from:\n",
+    "hugoThemeSelected": "Hugo theme selected: {path}",
+    "@hugoThemeSelected": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "hugoTheme": "Hugo theme: {path}",
+    "@hugoTheme": {
+      "placeholders": {
+        "path": { "type": "String" }
+      }
+    },
+    "themes_Description": "Download and select a Hugo theme.\nYou can also skip this step and do it later via Settings.",
     "preferences": "Preferences",
     "preferences_Description": "Export your preferences to a file, load from a file or reset the preferences for BuhoCMS",
     "selectASavePath": "Select a save path",
@@ -36,11 +50,16 @@
     "editingPage": "Editing Page",
     "guiMode": "GUI Mode",
     "textMode": "Text Mode",
-    "stopHugoServer": "Stop Hugo server",
-    "startHugoServer": "Start Hugo server",
-    "openHugoServer": "Open Hugo server",
-    "buildHugoSite": "Build Hugo website",
-    "openPublicFolder": "Open \"public\" folder",
+    "stopLiveServer": "Stop live server",
+    "startLiveServer": "Start live server",
+    "openLiveServer": "Open live server",
+    "buildWebsite": "Build {ssg} website",
+    "@buildWebsite": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
+    "openBuildFolder": "Open build folder",
     "sortBy": "Sort by",
     "parentFolderButton_Toolip": "Go to parent folder. Current: {path}",
     "@parentFolderButton_Toolip": {
@@ -211,7 +230,6 @@
     "checkStaticSiteStructure": "Check static site generator structure",
     "checkStaticSiteStructure_Description": "Make sure your folder follows the correct static site generator structure. Please refer to the specific documentation for more details.\n\nIf you want to be sure your website follows the correct folder structure, feel free to create a new website with BuhoCMS.",
     "selectSiteFolder": "Select website folder",
-    "openHugoSite": "Open Hugo website:\n",
     "error_ThemeAlreadyExists": "A theme folder with the name {theme} already exists inside the themes folder. Please rename or remove the existing folder.",
     "@error_ThemeAlreadyExists": {
       "placeholders": {
@@ -226,7 +244,6 @@
     "downloadTheme": "Download theme",
     "repositoryInvalidURL": "Invalid URL",
     "themeRepository": "Theme repository",
-    "successfullyDownloadedHugoTheme": "Successfully downloaded Hugo theme from:\n",
     "nowSelectTheme": "\n\nYou can now select the theme {theme} in the Dropdown button.",
     "@nowSelectTheme": {
       "placeholders": {
@@ -235,31 +252,18 @@
     },
     "rememberToVisitDocs": "Remember to visit the documentation in the themes repository for details on implementing the correct configurations.",
     "welcomeToBuhoCMS": "Welcome to BuhoCMS",
-    "welcomeToBuhoCMS_Description": "BuhoCMS is a local Content Management System for Hugo.\nCreate or open a website, install a theme, and start creating new posts.\n\nTo proceed, create or open a Hugo website.",
-    "hugoSiteSelected": "Hugo website selected: {path}",
-    "@hugoSiteSelected": {
+    "welcomeToBuhoCMS_Description": "BuhoCMS is a local Content Management System for Hugo and Jekyll.\nCreate or open a website, install a theme, and start creating new posts.\n\nTo proceed, create or open a website.",
+    "websiteSelected": "Website selected: {path}",
+    "@websiteSelected": {
       "placeholders": {
         "path": { "type": "String" }
       }
     },
     "themes": "Themes",
-    "themes_Description": "Download and select a Hugo theme.\nYou can also skip this step and do it later via Settings.",
-    "hugoThemeSelected": "Hugo theme selected: {path}",
-    "@hugoThemeSelected": {
-      "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
     "allDone": "All done!",
     "allDone_Description": "Congratulations, you are ready to use BuhoCMS!",
     "sitePath": "Website path: {path}",
     "@sitePath": {
-      "placeholders": {
-        "path": { "type": "String" }
-      }
-    },
-    "hugoTheme": "Hugo theme: {path}",
-    "@hugoTheme": {
       "placeholders": {
         "path": { "type": "String" }
       }
@@ -318,7 +322,7 @@
       }
     },
     "detect": "Detect",
-    "notFound_Description": "{name} not found in the BuhoCMS list. Please create the field with its name in your BuhoCMS Front matter list (Settings → Hugo Settings → Edit Front matter list) or remove it from the source text",
+    "notFound_Description": "{name} not found in the BuhoCMS list. Please create the field with its name in your BuhoCMS Front matter list (Settings → SSG Settings → Edit Front matter list) or remove it from the source text",
     "@notFound_Description": {
      "placeholders": {
         "name": { "type": "String" }
@@ -359,8 +363,8 @@
     "nothingToSave": "Nothing to save",
     "fileRevertedSuccessfully": "File reverted successfully",
     "nothingToRevert": "Nothing to revert",
-    "alreadyStartedAHugoServer": "Already started a Hugo server",
-    "startedHugoServer": "Started Hugo server",
+    "alreadyStartedLiveServer": "Already started live server",
+    "startedLiveServer": "Started live server",
     "stoppedSSGServer": "Stopped {ssg} Server",
     "@stoppedSSGServer": {
      "placeholders": {
@@ -373,7 +377,12 @@
         "ssg": { "type": "String" }
       }
     },
-    "builtHugoSite": "Built Hugo site",
+    "builtWebsite": "Built {ssg} website",
+    "@builtWebsite": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
     "addedFrontmatter": "Added Front matter {name} with type {type}",
     "@addedFrontmatter": {
      "placeholders": {
@@ -422,7 +431,7 @@
     "settings": "Settings",
     "appSettings": "APP SETTINGS",
     "site": "WEBSITE",
-    "hugoSettings": "HUGO SETTINGS",
+    "ssgSettings": "SSG SETTINGS",
 
     "language": "Language",
     "language_description": "Change the language of BuhoCMS",

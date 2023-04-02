@@ -207,7 +207,7 @@ void openHugoThemes({required BuildContext context, Function? setState}) {
       .then((value) => setState?.call());
 }
 
-void startHugoServer({required BuildContext context}) =>
+void startLiveServer({required BuildContext context}) =>
     SSG.startSSGServerDialog(
         context: context, ssg: SSGTypes.values.byName(Preferences.getSSG()));
 
@@ -233,7 +233,7 @@ void stopSSGServer({
 void openLocalhost() =>
     SSG.openSSGLiveServer(ssg: SSGTypes.values.byName(Preferences.getSSG()));
 
-void buildHugoSite({required BuildContext context}) async {
+void buildWebsite({required BuildContext context}) async {
   SSG.buildSSGWebsiteDialog(
       context: context, ssg: SSGTypes.values.byName(Preferences.getSSG()));
 }

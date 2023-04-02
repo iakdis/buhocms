@@ -8,6 +8,7 @@ import 'package:window_manager/window_manager.dart';
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../provider/navigation/navigation_provider.dart';
+import '../ssg/ssg.dart';
 import '../utils/preferences.dart';
 
 class MenuButton extends MenuEntry {
@@ -223,28 +224,29 @@ class _CustomMenuBarState extends State<CustomMenuBar> {
           ),
           const MenuDivider(),
           MenuButton(
-            onPressed: () => startHugoServer(context: context),
+            onPressed: () => startLiveServer(context: context),
             icon: const Icon(Icons.miscellaneous_services_rounded),
             text:
-                menuButtonText(Localization.appLocalizations().startHugoServer),
+                menuButtonText(Localization.appLocalizations().startLiveServer),
           ),
           MenuButton(
             onPressed: () => stopSSGServer(context: context, ssg: 'Hugo'),
             icon: const Icon(Icons.stop_circle_outlined),
             text:
-                menuButtonText(Localization.appLocalizations().stopHugoServer),
+                menuButtonText(Localization.appLocalizations().stopLiveServer),
           ),
           const MenuDivider(),
           MenuButton(
-            onPressed: () => buildHugoSite(context: context),
+            onPressed: () => buildWebsite(context: context),
             icon: const Icon(Icons.web),
-            text: menuButtonText(Localization.appLocalizations().buildHugoSite),
+            text: menuButtonText(Localization.appLocalizations().buildWebsite(
+                SSG.getSSGName(SSGTypes.values.byName(Preferences.getSSG())))),
           ),
           MenuButton(
             onPressed: () => openHugoPublicFolder(),
             icon: const Icon(Icons.folder_open),
-            text: menuButtonText(
-                Localization.appLocalizations().openPublicFolder),
+            text:
+                menuButtonText(Localization.appLocalizations().openBuildFolder),
           ),
           const MenuDivider(),
           MenuButton(

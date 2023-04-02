@@ -159,9 +159,9 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
         Text(
           Preferences.getSitePath() == null ||
                   (Preferences.getSitePath()?.isEmpty ?? false)
-              ? Localization.appLocalizations().hugoSiteSelected('N/A')
+              ? Localization.appLocalizations().websiteSelected('N/A')
               : Localization.appLocalizations()
-                  .hugoSiteSelected('\n"${Preferences.getSitePath()}"'),
+                  .websiteSelected('\n"${Preferences.getSitePath()}"'),
           style: textStyle,
         ),
       ],
@@ -229,7 +229,7 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
             onPressed: ssg == SSGTypes.hugo
                 ? () => openHugoThemes(context: context)
                 : null,
-            child: Text(Localization.appLocalizations().hugoThemes),
+            child: Text(Localization.appLocalizations().websiteThemes),
           ),
         ),
         const SizedBox(height: 24.0),

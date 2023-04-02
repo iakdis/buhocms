@@ -172,9 +172,9 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                               .shellActive ==
                                           true
                                       ? Localization.appLocalizations()
-                                          .stopHugoServer
+                                          .stopLiveServer
                                       : Localization.appLocalizations()
-                                          .startHugoServer,
+                                          .startLiveServer,
                                   child:
                                       HugoServerButton(isExtended: isExtended),
                                 ),
@@ -188,7 +188,9 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                 divider(),
                                 CustomTooltip(
                                   message: Localization.appLocalizations()
-                                      .buildHugoSite,
+                                      .buildWebsite(SSG.getSSGName(SSGTypes
+                                          .values
+                                          .byName(Preferences.getSSG()))),
                                   child:
                                       HugoBuildButton(isExtended: isExtended),
                                 ),

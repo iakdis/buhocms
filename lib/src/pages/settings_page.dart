@@ -210,7 +210,7 @@ class _SettingsPageState extends State<SettingsPage> {
     final theme =
         Hugo.getHugoTheme().isEmpty ? 'N/A' : '"${Hugo.getHugoTheme()}"';
     return ListTile(
-      title: Text(Localization.appLocalizations().hugoThemes),
+      title: Text(Localization.appLocalizations().websiteThemes),
       subtitle: Text(
         Localization.appLocalizations().currentHugoThemes(theme),
       ),
@@ -222,7 +222,7 @@ class _SettingsPageState extends State<SettingsPage> {
           onPressed: ssg == SSGTypes.hugo
               ? () => openHugoThemes(context: context)
               : null,
-          child: Text(Localization.appLocalizations().hugoThemes),
+          child: Text(Localization.appLocalizations().websiteThemes),
         ),
       ),
     );
@@ -448,7 +448,7 @@ class _SettingsPageState extends State<SettingsPage> {
               const Divider(),
               _hugoThemeTile(),
               const Divider(),
-              _headingTile(Localization.appLocalizations().hugoSettings),
+              _headingTile(Localization.appLocalizations().ssgSettings),
               _editFrontmatterListTile(),
               // const Divider(),
               // _showExperimentalTile(),

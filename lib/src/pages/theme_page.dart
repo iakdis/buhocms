@@ -356,7 +356,7 @@ class _ThemePageState extends State<ThemePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(Localization.appLocalizations().hugoThemes),
+        title: Text(Localization.appLocalizations().websiteThemes),
       ),
       body: SingleChildScrollView(
         child: Padding(
