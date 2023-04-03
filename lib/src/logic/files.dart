@@ -10,6 +10,17 @@ import '../ssg/ssg.dart';
 import '../utils/preferences.dart';
 import '../widgets/file_navigation/buttons/sort_button.dart';
 
+bool isHidden(FileSystemEntity entity) {
+  final websitePath = Preferences.getSitePath() ?? '';
+  final path = entity.path.substring(
+      websitePath.length,
+      entity.path.length -
+          ((entity is File)
+              ? entity.path.split(Platform.pathSeparator).last.length
+              : 0));
+  return path.contains('.');
+}
+
 Future<void> openInFolder(
     {required String path, required bool keepPathTrailing}) async {
   keepPathTrailing
@@ -87,9 +98,7 @@ Future<List<File>> getAllFiles({BuildContext? context}) async {
   final subscription =
       fileDirectory.list(recursive: true, followLinks: false).listen(
     (FileSystemEntity entity) {
-      if (entity is File) {
-        files.add(entity);
-      }
+      if (entity is File && !isHidden(entity)) files.add(entity);
     },
   );
 
@@ -109,7 +118,7 @@ Future<List<FileSystemEntity>> getAllFilesAndDirectoriesInDirectory(
   final subscription =
       fileDirectory.list(recursive: recursive, followLinks: false).listen(
     (FileSystemEntity entity) {
-      filesAndDirectories.add(entity);
+      if (!isHidden(entity)) filesAndDirectories.add(entity);
     },
   );
 
