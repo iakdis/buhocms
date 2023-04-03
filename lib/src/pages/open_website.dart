@@ -26,7 +26,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
   bool canContinue = false;
 
   String sitePath = Preferences.getSitePath() ?? '';
-  SSGTypes ssg = SSG.getSSGType(Preferences.getSSG());
+  SSGTypes currentSSG = SSG.getSSGType(Preferences.getSSG());
   bool sitePathError = false;
   TextEditingController textController = TextEditingController();
 
@@ -70,7 +70,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
     });
   }
 
-  void open({required String sitePath}) {
+  void open({required String sitePath, required SSGTypes ssg}) {
     stopSSGServer(context: context, ssg: SSG.getSSGName(ssg), snackbar: false);
 
     Preferences.clearPreferencesSite();
@@ -81,15 +81,15 @@ class _OpenWebsiteState extends State<OpenWebsite> {
         SSG.getSSGContentFolder(ssg: ssg, pathSeparator: true);
     Preferences.setCurrentPath('${Preferences.getSitePath()}$contentFolder');
     final recentPaths = Preferences.getRecentSitePaths();
+    final entries = recentPaths.entries.toList();
+    final keys = recentPaths.keys.toList();
 
-    if (recentPaths.contains(sitePath)) {
+    if (keys.contains(sitePath)) {
       for (var i = 0; i < recentPaths.length; i++) {
-        if (recentPaths[i] == sitePath) {
-          recentPaths.removeAt(i);
-        }
+        if (keys[i] == sitePath) entries.removeAt(i);
       }
     }
-    Preferences.setRecentSitePaths(recentPaths..insert(0, sitePath));
+    Preferences.setRecentSitePaths({sitePath: ssg}..addAll(recentPaths));
 
     context.read<SSGProvider>().setSSG(ssg.name);
 
@@ -126,7 +126,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
             );
             return;
           }
-          open(sitePath: sitePath);
+          open(sitePath: sitePath, ssg: currentSSG);
         }
       },
       onStepCancel: () {
@@ -167,27 +167,23 @@ class _OpenWebsiteState extends State<OpenWebsite> {
             children: [
               Column(
                 children: [
-                  SvgPicture.asset(
-                    'assets/images/${SSG.getSSGName(ssg).toLowerCase()}.svg',
-                    width: 64,
-                    height: 64,
-                    colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.primary,
-                      BlendMode.srcIn,
-                    ),
+                  svg(
+                    path:
+                        'assets/images/${SSG.getSSGName(currentSSG).toLowerCase()}.svg',
+                    size: 64,
                     semanticsLabel: Localization.appLocalizations()
-                        .currentSSG(SSG.getSSGName(ssg)),
+                        .currentSSG(SSG.getSSGName(currentSSG)),
                   ),
                   const SizedBox(height: 32),
                   DropdownButton<SSGTypes>(
-                    value: ssg,
+                    value: currentSSG,
                     items: SSGTypes.values
                         .map((e) => DropdownMenuItem(
                             value: e, child: Text(SSG.getSSGName(e))))
                         .toList(),
                     onChanged: (option) async {
                       if (option == null) return;
-                      ssg = option;
+                      currentSSG = option;
                       setState(() {});
                     },
                   ),
@@ -253,23 +249,86 @@ class _OpenWebsiteState extends State<OpenWebsite> {
     );
   }
 
+  Widget svg({
+    required String path,
+    required double size,
+    required String semanticsLabel,
+  }) =>
+      SvgPicture.asset(
+        path,
+        width: size,
+        height: size,
+        colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.primary, BlendMode.srcIn),
+        semanticsLabel: semanticsLabel,
+      );
+
   Widget recentSitePathTile({required String text, required int index}) {
+    final recentPaths = Preferences.getRecentSitePaths();
+    final ssg = recentPaths.entries.toList()[index].value;
+
     return Material(
       child: InkWell(
-        onTap: () => open(sitePath: text),
+        onTap: () => open(sitePath: text, ssg: ssg),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+          padding: const EdgeInsets.fromLTRB(4.0, 4.0, 16.0, 4.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Flexible(child: Text(text, style: const TextStyle(fontSize: 16))),
+              Row(
+                children: [
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton<SSGTypes>(
+                      icon: Container(),
+                      value: ssg,
+                      items: SSGTypes.values
+                          .map((e) => DropdownMenuItem(
+                                value: e,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Tooltip(
+                                    message: SSG.getSSGName(e),
+                                    child: svg(
+                                      path:
+                                          'assets/images/${SSG.getSSGName(e).toLowerCase()}.svg',
+                                      size: 32,
+                                      semanticsLabel:
+                                          Localization.appLocalizations()
+                                              .currentSSG(SSG.getSSGName(e)),
+                                    ),
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      onChanged: (option) async {
+                        if (option == null) return;
+                        final newRecentPaths = recentPaths;
+
+                        newRecentPaths[
+                            recentPaths.entries.toList()[index].key] = option;
+                        Preferences.setRecentSitePaths(newRecentPaths);
+                        setState(() {});
+                      },
+                      borderRadius: BorderRadius.circular(4.0),
+                    ),
+                  ),
+                  const SizedBox(width: 8.0),
+                  Text(text, style: const TextStyle(fontSize: 16)),
+                ],
+              ),
               IconButton(
                 tooltip: Localization.appLocalizations().remove,
                 splashRadius: 20,
                 constraints: const BoxConstraints(minHeight: 48),
                 onPressed: () {
-                  Preferences.setRecentSitePaths(
-                      Preferences.getRecentSitePaths()..removeAt(index));
+                  final entries = recentPaths.entries.toList();
+                  final newMap = <String, SSGTypes>{};
+
+                  entries.removeAt(index);
+                  for (final e in entries) {
+                    newMap.addEntries([e]);
+                  }
+                  Preferences.setRecentSitePaths(newMap);
                   setState(() {});
                 },
                 icon: const Icon(Icons.close),
@@ -305,8 +364,9 @@ class _OpenWebsiteState extends State<OpenWebsite> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                for (var i = 0; i < paths.length; i++)
-                  recentSitePathTile(text: paths[i], index: i),
+                for (var i = 0; i < paths.entries.length; i++)
+                  recentSitePathTile(
+                      text: paths.entries.toList()[i].key, index: i),
               ],
             ),
           ),

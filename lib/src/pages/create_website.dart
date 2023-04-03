@@ -188,15 +188,16 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                       '${Preferences.getSitePath()}$contentFolder');
 
                   final recentPaths = Preferences.getRecentSitePaths();
-                  if (recentPaths.contains(sitePath)) {
+                  final entries = recentPaths.entries.toList();
+                  final keys = recentPaths.keys.toList();
+
+                  if (keys.contains(sitePath)) {
                     for (var i = 0; i < recentPaths.length; i++) {
-                      if (recentPaths[i] == sitePath) {
-                        recentPaths.removeAt(i);
-                      }
+                      if (keys[i] == sitePath) entries.removeAt(i);
                     }
                   }
                   Preferences.setRecentSitePaths(
-                      recentPaths..insert(0, finalSitePath));
+                      {finalSitePath: ssg}..addAll(recentPaths));
 
                   context.read<SSGProvider>().setSSG(ssg.name);
 

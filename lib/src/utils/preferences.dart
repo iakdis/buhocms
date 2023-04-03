@@ -21,7 +21,7 @@ class Preferences {
       const MapEntry(prefOnboardingCompleted, false),
       MapEntry(prefSSG, SSGTypes.hugo.name),
       const MapEntry(prefSitePath, null),
-      const MapEntry(prefRecentSitePaths, null),
+      const MapEntry(prefRecentSitePaths, {}),
       const MapEntry(prefCurrentPath, ''),
       const MapEntry(prefCurrentFile, null),
       const MapEntry(prefIsGUIMode, true),
@@ -157,15 +157,23 @@ class Preferences {
   static String getSSG() => getPreferencesEntry(prefSSG);
 
   //Recently opened site paths
-  static Future<void> setRecentSitePaths(List paths) async {
-    String listToStr = json.encode(paths);
-    await setPreferences(prefRecentSitePaths, listToStr);
+  static Future<void> setRecentSitePaths(Map<String, SSGTypes> paths) async {
+    Map<String, String> addListWithTypesStrings = {};
+    addListWithTypesStrings
+        .addEntries(paths.entries.map((e) => MapEntry(e.key, e.value.name)));
+
+    String mapToStr = json.encode(addListWithTypesStrings);
+    await setPreferences(prefRecentSitePaths, mapToStr);
   }
 
-  static List getRecentSitePaths() {
-    List strToList = json
-        .decode(getPreferencesEntry(prefRecentSitePaths) ?? json.encode([]));
-    return strToList;
+  static Map<String, SSGTypes> getRecentSitePaths() {
+    Map strToMap = json.decode(getPreferencesEntry(prefRecentSitePaths) ?? {});
+
+    Map<String, SSGTypes> fromStringsToType = {};
+    fromStringsToType.addEntries(strToMap.entries
+        .map((e) => MapEntry(e.key, SSGTypes.values.byName(e.value))));
+
+    return fromStringsToType;
   }
 
   //Save Path
