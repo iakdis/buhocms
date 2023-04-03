@@ -198,16 +198,19 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
     final fileNavigationProvider =
         Provider.of<FileNavigationProvider>(context, listen: false);
 
-    final oldText = frontMatterController.text;
-    final newText = frontMatterControllerUnsaved.text;
+    final String newText;
 
-    final yaml = loadYaml(widget.source) as YamlMap;
+    final source = widget.source;
+    final yaml = loadYaml(source) as YamlMap;
     final frontmatterKey = yaml.entries.first.key.toString();
 
     final oldFrontmatterText = fileNavigationProvider.frontMatterText;
+    newText = source.contains('"')
+        ? '"${frontMatterControllerUnsaved.text}"'
+        : frontMatterControllerUnsaved.text;
     final newFrontmatterText = oldFrontmatterText.replaceFirst(
-      '$frontmatterKey: "$oldText"',
-      '$frontmatterKey: "$newText"',
+      source,
+      '$frontmatterKey: $newText',
     );
 
     fileNavigationProvider.setFrontMatterText(newFrontmatterText);
