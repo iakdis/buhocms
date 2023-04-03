@@ -245,17 +245,16 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
         Provider.of<FileNavigationProvider>(context, listen: false);
 
     DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
-    final oldDate = date ?? DateTime(2000);
     final newDate = unsavedDate ?? DateTime(2000);
-    final formattedOldDate = dateFormatter.format(oldDate);
     final formattedNewDate = dateFormatter.format(newDate);
 
-    final yaml = loadYaml(widget.source) as YamlMap;
+    final source = widget.source;
+    final yaml = loadYaml(source) as YamlMap;
     final frontmatterKey = yaml.entries.first.key.toString();
 
     final oldFrontmatterText = fileNavigationProvider.frontMatterText;
     final newFrontmatterText = oldFrontmatterText.replaceFirst(
-      '$frontmatterKey: $formattedOldDate',
+      source,
       '$frontmatterKey: $formattedNewDate',
     );
 
