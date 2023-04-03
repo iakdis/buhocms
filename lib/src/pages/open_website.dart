@@ -264,6 +264,7 @@ class _OpenWebsiteState extends State<OpenWebsite> {
             children: [
               Flexible(child: Text(text, style: const TextStyle(fontSize: 16))),
               IconButton(
+                tooltip: Localization.appLocalizations().remove,
                 splashRadius: 20,
                 constraints: const BoxConstraints(minHeight: 48),
                 onPressed: () {
