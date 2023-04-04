@@ -33,7 +33,7 @@ dependencies:
   convert: ^3.1.1
   dropdown_search: ^5.0.3
   file_picker: ^5.2.0
-  flex_color_scheme: ^6.1.1
+  flex_color_scheme: ^7.0.0
   flutter:
     sdk: flutter
   flutter_localizations:
