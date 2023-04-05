@@ -9,7 +9,7 @@ GEM_URL = 'https://rubygems.org/gems/%s'
 def get_file_hash(file)
   puts file
   sha256 = Digest::SHA256.file "vendor/cache/#{file}"
-  [sha256.hexdigest]
+  sha256.hexdigest
 end
 
 params = { source: nil, out: 'rubygems.json' }
