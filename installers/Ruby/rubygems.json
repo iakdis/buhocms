@@ -1,0 +1,242 @@
+{
+  "name": "rubygems",
+  "buildsystem": "simple",
+  "build-commands": [
+    "bundle install --local"
+  ],
+  "sources": [
+    "source.json",
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/ffi-1.15.5.gem",
+      "sha256": [
+        "6f2ed2fa68047962d6072b964420cba91d82ce6fa8ee251950c17fca6af3c2a0"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/public_suffix-5.0.1.gem",
+      "sha256": [
+        "65603917ff4ecb32f499f42c14951aeed2380054fa7fc51758fc0a8d455fe043"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/addressable-2.8.3.gem",
+      "sha256": [
+        "e3eebf83efd3da4a6b0895efb436e1b8d73d8a6c0dc165b823a97f5aaedcc4b1"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/concurrent-ruby-1.2.2.gem",
+      "sha256": [
+        "3879119b8b75e3b62616acc256c64a134d0b0a7a9a3fcba5a233025bcde22c4f"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/rb-fsevent-0.11.2.gem",
+      "sha256": [
+        "43900b972e7301d6570f64b850a5aa67833ee7d87b458ee92805d56b7318aefe"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/webrick-1.8.1.gem",
+      "sha256": [
+        "19411ec6912911fd3df13559110127ea2badd0c035f7762873f58afc803e158f"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/jekyll-4.3.2.gem",
+      "sha256": [
+        "5d336d3e9eeaed7e69cf8b938da02bb72ae3afb226208df514036d69654f7771"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/listen-3.8.0.gem",
+      "sha256": [
+        "9679040ac6e7845ad9f19cf59ecde60861c78e2fae57a5c20fe35e94959b2f8f"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/kramdown-2.4.0.gem",
+      "sha256": [
+        "b62e5bcbd6ea20c7a6730ebbb2a107237856e14f29cebf5b10c876cc1a2481c5"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/em-websocket-0.5.3.gem",
+      "sha256": [
+        "f56a92bde4e6cb879256d58ee31f124181f68f8887bd14d53d5d9a292758c6a8"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/pathutil-0.16.2.gem",
+      "sha256": [
+        "e43b74365631cab4f6d5e4228f812927efc9cb2c71e62976edcb252ee948d589"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/jekyll-sass-converter-3.0.0.gem",
+      "sha256": [
+        "e2e7674f186e906b9d99b8066e13f9b4d5cb9f806d36f7bc8cf2610053d8c902"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/forwardable-extended-2.6.0.gem",
+      "sha256": [
+        "1bec948c469bbddfadeb3bd90eb8c85f6e627a412a3e852acfd7eaedbac3ec97"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/http_parser.rb-0.8.0.gem",
+      "sha256": [
+        "5a0932f1fa82ce08a8516a2685d5a86031c000560f89946913c555a0697544be"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/sass-embedded-1.60.0-x86_64-linux-gnu.gem",
+      "sha256": [
+        "b6b978d510693a63176d360b5a606f788343295d66c0e579cbf2de284ab86d24"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/rb-inotify-0.10.1.gem",
+      "sha256": [
+        "050062d4f31d307cca52c3f6a7f4b946df8de25fc4bd373e1a5142e41034a7ca"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/google-protobuf-3.22.2-x86_64-linux.gem",
+      "sha256": [
+        "8fd16e0115d01209494767b6182c2a9f5d257d5f3c495c513762555a46f1ab88"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/safe_yaml-1.0.5.gem",
+      "sha256": [
+        "a6ac2d64b7eb027bdeeca1851fe7e7af0d668e133e8a88066a0c6f7087d9f848"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/eventmachine-1.2.7.gem",
+      "sha256": [
+        "994016e42aa041477ba9cff45cbe50de2047f25dd418eba003e84f0d16560972"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/terminal-table-3.0.2.gem",
+      "sha256": [
+        "f951b6af5f3e00203fb290a669e0a85c5dd5b051b3b023392ccfd67ba5abae91"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/kramdown-parser-gfm-1.1.0.gem",
+      "sha256": [
+        "fb39745516427d2988543bf01fc4cf0ab1149476382393e0e9c48592f6581729"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/jekyll-watch-2.2.1.gem",
+      "sha256": [
+        "bc44ed43f5e0a552836245a54dbff3ea7421ecc2856707e8a1ee203a8387a7e1"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/liquid-4.0.4.gem",
+      "sha256": [
+        "4fcfebb1a045e47918388dbb7a0925e7c3893e58d2bd6c3b3c73ec17a2d8fdb3"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/unicode-display_width-2.4.2.gem",
+      "sha256": [
+        "6a10205d1a19ca790c4e53064ba93f09d9eb234bf6bd135d9deb6001c21428be"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/mercenary-0.4.0.gem",
+      "sha256": [
+        "b25a1e4a59adca88665e08e24acf0af30da5b5d859f7d8f38fba52c28f405138"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/rouge-4.1.0.gem",
+      "sha256": [
+        "0f6fc19a0d66db782f6fa67f56356af4ef001cd43bbd8ad5aa798a081de4dd10"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/colorator-1.1.0.gem",
+      "sha256": [
+        "e2f85daf57af47d740db2a32191d1bdfb0f6503a0dfbc8327d0c9154d5ddfc38"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/i18n-1.12.0.gem",
+      "sha256": [
+        "91e3cc1b97616d308707eedee413d82ee021d751c918661fb82152793e64aced"
+      ],
+      "dest": "vendor/cache"
+    },
+    {
+      "type": "file",
+      "url": "https://rubygems.org/gems/rexml-3.2.5.gem",
+      "sha256": [
+        "a33c3bf95fda7983ec7f05054f3a985af41dbc25a0339843bd2479e93cabb123"
+      ],
+      "dest": "vendor/cache"
+    }
+  ]
+}
