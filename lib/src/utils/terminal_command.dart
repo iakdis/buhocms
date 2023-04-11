@@ -97,6 +97,18 @@ void runTerminalCommandServer({
   });
 
   try {
+    final flatpak = await isFlatpak();
+    if (flatpak) {
+      final home = Platform.environment['HOME'];
+      final path = Platform.environment['PATH'];
+      flags.insert(0, executable);
+      flags.insert(0, '--env=DEBIAN_DISABLE_RUBYGEMS_INTEGRATION=1'); // Jekyll
+      flags.insert(0, '--env=PATH=$home/gems/bin:$path'); // Jekyll
+      flags.insert(0, '--env=GEM_HOME=$home/gems'); // Jekyll
+      flags.insert(0, '--host');
+      executable = 'flatpak-spawn';
+    }
+
     await shell.run('$executable ${flags.join(' ')}');
   } catch (e) {
     if (e.toString() != 'ShellException(Killed by framework)') {
