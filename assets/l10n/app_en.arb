@@ -427,6 +427,13 @@
          "ssg": { "type": "String" }
       }
     },
+    "flatpakPermission": "No Flatpak permission",
+    "flatpakPermission_Description": "In order to run programs on the host system, BuhoCMS requires the permission \"--talk-name=org.freedesktop.Flatpak\". To give the permission, run the following command in your Terminal:\n\n{command}",
+    "@flatpakPermission_Description": {
+      "placeholders": {
+         "command": { "type": "String" }
+      }
+    },
 
     "settings": "Settings",
     "appSettings": "APP SETTINGS",

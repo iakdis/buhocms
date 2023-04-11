@@ -201,6 +201,8 @@
     "dismiss": "Schließen",
     "currentSSG": "Aktueller SSG: {ssg}",
     "themesAvailableFor": "Unterstützt: {ssg}",
+    "flatpakPermission": "Keine Flatpak Berechtigung",
+    "flatpakPermission_Description": "Um Programme auf dem Hostsystem ausführen zu können, benötigt BuhoCMS die Berechtigung \"--talk-name=org.freedesktop.Flatpak\". Um diese Berechtigung zu erteilen, führe den folgenden Befehl in deinem Terminal aus:\n\n{command}",
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",

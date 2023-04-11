@@ -202,6 +202,8 @@
     "dismiss": "关闭",
     "currentSSG": "现任SSG： {ssg}",
     "themesAvailableFor": "支持： {ssg}",
+    "flatpakPermission": "没有Flatpak许可",
+    "flatpakPermission_Description": "为了在主机系统上运行程序，BuhoCMS需要 \"--talk-name=org.freedesktop.Flatpak\"权限。要给予这个权限，在你的终端运行以下命令：\n\n{command}",
 
     "settings": "设置",
     "appSettings": "应用设置",
