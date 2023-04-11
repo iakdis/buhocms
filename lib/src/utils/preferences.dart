@@ -167,7 +167,9 @@ class Preferences {
   }
 
   static Map<String, SSGTypes> getRecentSitePaths() {
-    Map strToMap = json.decode(getPreferencesEntry(prefRecentSitePaths) ?? {});
+    final recentPaths =
+        json.decode(getPreferencesEntry(prefRecentSitePaths)) ?? {};
+    Map strToMap = recentPaths is List ? {} : recentPaths;
 
     Map<String, SSGTypes> fromStringsToType = {};
     fromStringsToType.addEntries(strToMap.entries
