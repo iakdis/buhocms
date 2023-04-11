@@ -469,11 +469,11 @@ class SSG {
         final allFlags = 'new $finalPathAndName $flags';
         checkProgramInstalled(
           context: context,
-          executable: 'hugo',
+          executable: executable,
           ssg: SSG.getSSGType(Preferences.getSSG()),
         );
 
-        await runTerminalCommand(
+        runTerminalCommand(
           context: context,
           workingDirectory: Preferences.getSitePath(),
           executable: executable,
