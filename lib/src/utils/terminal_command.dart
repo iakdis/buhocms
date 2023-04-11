@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:process_run/shell_run.dart';
 import 'package:provider/provider.dart';
 
+import 'is_flatpak.dart';
+
 Future<void> runTerminalCommand({
   required BuildContext context,
   required String? workingDirectory,
@@ -22,6 +24,16 @@ Future<void> runTerminalCommand({
 
   final home = Platform.environment['HOME'];
   final path = Platform.environment['PATH'];
+
+  final flatpak = await isFlatpak();
+  if (flatpak) {
+    flags.insert(0, executable);
+    flags.insert(0, '--env=DEBIAN_DISABLE_RUBYGEMS_INTEGRATION=1'); // Jekyll
+    flags.insert(0, '--env=PATH=$home/gems/bin:$path'); // Jekyll
+    flags.insert(0, '--env=GEM_HOME=$home/gems'); // Jekyll
+    flags.insert(0, '--host');
+    executable = 'flatpak-spawn';
+  }
 
   final result = await Process.run(
     executable,
