@@ -99,7 +99,7 @@ class SSG {
         exampleFlags = '--buildDrafts';
         break;
       case SSGTypes.jekyll:
-        command = 'jekyll build';
+        command = 'bundle exec jekyll build';
         exampleFlags = '--drafts';
         break;
     }
@@ -152,8 +152,8 @@ class SSG {
         commandFlags = flags.split(' ');
         break;
       case SSGTypes.jekyll:
-        executable = 'jekyll';
-        commandFlags = 'build $flags'.split(' ');
+        executable = 'bundle';
+        commandFlags = 'exec jekyll build $flags'.split(' ');
         break;
     }
 
