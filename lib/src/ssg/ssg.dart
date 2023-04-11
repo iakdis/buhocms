@@ -328,7 +328,7 @@ class SSG {
               }
             }
 
-            return StatefulBuilder(builder: (_, setState) {
+            return StatefulBuilder(builder: (context, setState) {
               return CommandDialog(
                 title: SelectableText.rich(TextSpan(
                     text: Localization.appLocalizations().createNewPostIn,
@@ -484,7 +484,7 @@ class SSG {
       case SSGTypes.jekyll:
         final fileName = '$path${Platform.pathSeparator}$name.md';
         try {
-          await File(fileName).create();
+          File(fileName).create();
         } catch (e) {
           showSnackbar(text: 'Exception: $e', seconds: 10);
         }
@@ -493,7 +493,7 @@ class SSG {
     }
 
     // Close dialog
-    if (mounted) Navigator.pop(context);
+    Navigator.pop(context);
 
     // Set File index
     var allFiles = await getAllFiles();
