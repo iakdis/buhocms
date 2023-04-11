@@ -169,6 +169,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
 
                   SSG.createSSGWebsite(
                     context: context,
+                    mounted: mounted,
                     ssg: ssg,
                     sitePath: sitePath,
                     siteName: siteName,

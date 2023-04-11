@@ -524,6 +524,7 @@ class SSG {
 
   static Future<void> createSSGWebsite({
     required BuildContext context,
+    required bool mounted,
     required SSGTypes ssg,
     required String sitePath,
     required String siteName,
@@ -538,23 +539,23 @@ class SSG {
         if (flags.isNotEmpty) allFlags += ' $flags';
         break;
       case SSGTypes.jekyll:
-        executable = 'jekyll';
+        // Try to use scheme /home/user/gems/bin/jekyll, otherwise 'jekyll'
+        executable = await checkProgramInstalled(
+            context: context, executable: 'jekyll', ssg: ssg);
+        executable ??= 'jekyll';
         allFlags = 'new $siteName';
         if (flags.isNotEmpty) allFlags += ' $flags';
         break;
     }
 
-    checkProgramInstalled(
-      context: context,
-      executable: getSSGExecutable(ssg),
-      ssg: ssg,
-    );
-    await runTerminalCommand(
-      context: context,
-      workingDirectory: sitePath,
-      executable: executable,
-      flags: allFlags.split(' '),
-    );
+    if (mounted) {
+      await runTerminalCommand(
+        context: context,
+        workingDirectory: sitePath,
+        executable: executable,
+        flags: allFlags.split(' '),
+      );
+    }
   }
 
   static String getCreateSiteSSGPrefix(SSGTypes ssg) {
