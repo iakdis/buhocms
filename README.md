@@ -106,7 +106,7 @@ BuhoCMS is currently in Alpha. While most things should work as expected, bugs :
 
 ### Windows
 
-Download and execute the [BuhoCMS-Windows.exe](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Windows.exe) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page.
+Download and execute the [BuhoCMS-Windows.exe](https://github.com/iakmds/buhocms/releases) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page.
 
 ### macOS
 
@@ -130,15 +130,15 @@ To install BuhoCMS as a **Flatpak**, head over to Flathub. In order to run execu
 
 <br>
 
-To install BuhoCMS as an **AppImage**, download the [BuhoCMS-Linux.AppImage](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.AppImage) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page, make it executable and run it. For better desktop integration consider using [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher).
+To install BuhoCMS as an **AppImage**, download the [BuhoCMS-Linux.AppImage](https://github.com/iakmds/buhocms/releases) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page, make it executable and run it. For better desktop integration consider using [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher).
 
 [<img src=".github/appimage-badge.svg"
     alt="Download as an AppImage"
-    height="80">](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.AppImage)
+    height="80">](https://github.com/iakmds/buhocms/releases)
 
 <br>
 
-To install BuhoCMS as a **.deb** package, download the [BuhoCMS-Linux.deb](https://github.com/iakmds/buhocms/releases/latest/download/BuhoCMS-Linux.deb) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page and install it.
+To install BuhoCMS as a **.deb** package, download the [BuhoCMS-Linux.deb](https://github.com/iakmds/buhocms/releases) file from the GitHub [releases](https://github.com/iakmds/buhocms/releases) page and install it.
 
 # Features
 
