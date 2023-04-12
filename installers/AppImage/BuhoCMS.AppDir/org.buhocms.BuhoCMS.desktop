@@ -4,7 +4,7 @@ X-AppImage-Version=0.6.0
 Type=Application
 
 Name=BuhoCMS
-Comment=A local CMS for Hugo static sites
+Comment=A local CMS for Hugo and Jekyll static sites
 Categories=Office;
 Icon=buhocms
 

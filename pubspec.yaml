@@ -1,5 +1,5 @@
 name: buhocms
-description: A free and open source local CMS for Hugo static sites
+description: A free and open source local CMS for Hugo and Jekyll static sites
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

@@ -3,7 +3,7 @@
   <id>org.buhocms.BuhoCMS</id>
   
   <name>BuhoCMS</name>
-  <summary>A local CMS for Hugo static sites</summary>
+  <summary>A local CMS for Hugo and Jekyll static sites</summary>
   
   <metadata_license>CC-BY-4.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
