@@ -56,6 +56,20 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.6.0" date="2023-04-12">
+      <description>
+        <p>Release 0.6.0 of BuhoCMS</p>
+        <ul>
+	       <li>FLATPAK: The Hugo and Git executables will be removed from the Flatpak. This results in a smaller app size, but you will need to give permission to run the executables on your host system via: flatpak --user override org.buhocms.BuhoCMS --talk-name=org.freedesktop.Flatpak</li>
+          <li>Jekyll is now supported! You can now choose between Hugo and Jekyll</li>
+          <li>Fix changing language not updating the settings page</li>
+          <li>Set newly created website as most recent website</li>
+          <li>Remove empty space between menu bar and submenus</li>
+          <li>Make Snackbar text selectable</li>
+          <li>Various other improvements, bug fixes and localization changes</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.5.0" date="2023-03-23">
       <description>
         <p>Release 0.5.0 of BuhoCMS</p>

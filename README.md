@@ -1,6 +1,6 @@
 
-## 🌟 New release: v0.5.0 🌟
-### Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.5.0)!
+## 🌟 New release: v0.6.0 🌟
+### Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.6.0)!
 
 <br>
 
@@ -122,7 +122,7 @@ Supported | Planned
 
 <br>
 
-To install BuhoCMS as a **Flatpak**, head over to Flathub:
+To install BuhoCMS as a **Flatpak**, head over to Flathub. In order to run executable commands on your host system, you need to give the following permission in your Terminal: `flatpak --user override org.buhocms.BuhoCMS --talk-name=org.freedesktop.Flatpak`
 
 [<img src="https://flathub.org/assets/badges/flathub-badge-en.png"
     alt="Download on Flathub"
@@ -214,7 +214,8 @@ Feel free to send in a [pull request](https://github.com/iakmds/buhocms/pulls)! 
   - [ ] [Git-submodules](https://gohugo.io/getting-started/quick-start/#explanation-of-commands) for themes support
 
 **Project:**
-  - [ ] [Jekyll](https://jekyllrb.com/) support
+  - [ ] Support more static site generators
+    - [x] [Jekyll](https://jekyllrb.com/) support (v.0.6.0)
   - [ ] More supported languages (See [#translating](#translating) above)
   - [ ] [Your features](https://github.com/iakmds/buhocms/issues)
 
