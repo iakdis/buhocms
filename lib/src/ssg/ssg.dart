@@ -473,7 +473,7 @@ class SSG {
           ssg: SSG.getSSGType(Preferences.getSSG()),
         );
 
-        runTerminalCommand(
+        await runTerminalCommand(
           context: context,
           workingDirectory: Preferences.getSitePath(),
           executable: executable,
@@ -484,7 +484,7 @@ class SSG {
       case SSGTypes.jekyll:
         final fileName = '$path${Platform.pathSeparator}$name.md';
         try {
-          File(fileName).create();
+          await File(fileName).create();
         } catch (e) {
           showSnackbar(text: 'Exception: $e', seconds: 10);
         }
@@ -493,7 +493,7 @@ class SSG {
     }
 
     // Close dialog
-    Navigator.pop(context);
+    if (mounted) Navigator.pop(context);
 
     // Set File index
     var allFiles = await getAllFiles();
