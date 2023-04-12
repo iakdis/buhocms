@@ -319,7 +319,7 @@ void about({required BuildContext context}) {
     context: context,
     applicationName: 'BuhoCMS',
     applicationVersion: Localization.appLocalizations().version(
-      '0.5.0 Alpha',
+      '0.6.0 Alpha',
     ), //TODO update version number
     applicationIcon: const Image(
       image: AssetImage('assets/images/icon.png'),
