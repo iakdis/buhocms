@@ -7,6 +7,7 @@ import 'package:buhocms/src/provider/editing/unsaved_text_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:window_manager/window_manager.dart';
 
 import '../i18n/l10n.dart';
 import '../pages/create_website.dart';
@@ -334,4 +335,15 @@ void about({required BuildContext context}) {
       ),
     ],
   );
+}
+
+void fullScreen(WindowManager windowManager) async {
+  final isFullScreen = await windowManager.isFullScreen();
+  if (!isFullScreen) {
+    await windowManager.setFullScreen(true);
+    showSnackbar(
+        text: Localization.appLocalizations().fullScreenInfo, seconds: 3);
+  } else {
+    await windowManager.setFullScreen(false);
+  }
 }
