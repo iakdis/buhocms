@@ -237,6 +237,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
+  menu_bar:
+    dependency: "direct main"
+    description:
+      name: menu_bar
+      sha256: "80c472e51279f0283c87f3673678bc56f10a091af68eb730f096ae8df97e6639"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
   meta:
     dependency: transitive
     description:

@@ -42,6 +42,7 @@ dependencies:
   flutter_svg: ^2.0.4
   intl: ^0.17.0
   markdown_toolbar: ^0.4.0
+  menu_bar: ^0.5.0
   process_run: ^0.12.3+2
   provider: ^6.0.3
   shared_preferences: ^2.0.15
