@@ -54,7 +54,7 @@ fi
 if [ -f $APPIMAGETOOL ]; then
     ./$APPIMAGETOOL $APPDIR
 
-    # If the build was successfull, rename the AppImage
+    # If the build was successful, rename the AppImage
     if [ -f "$OUTPUT" ]; then
         mv $OUTPUT $FINAL
     fi

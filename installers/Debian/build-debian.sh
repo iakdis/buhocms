@@ -54,7 +54,7 @@ cd ../../..
 # Build Debian package
 dpkg-deb --build BuhoCMS
 
-# If the build was successfull, rename the .deb file
+# If the build was successful, rename the .deb file
 if [ -f "$OUTPUT" ]; then
     mv $OUTPUT $FINAL
 fi
