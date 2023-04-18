@@ -6,6 +6,7 @@ import 'package:buhocms/src/widgets/home_navigation/home_navigation.dart';
 import 'package:buhocms/src/pages/editing_page.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:flutter/material.dart';
+import 'package:menu_bar/menu_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -84,8 +85,22 @@ class _HomePageState extends State<HomePage> with WindowListener {
 
     final windowWidth = MediaQuery.of(context).size.width;
 
-    return CustomMenuBar(
-      close: windowManager.destroy,
+    return MenuBarWidget(
+      barButtons: getMenuBarMenus(
+          context: context, mounted: mounted, close: windowManager.destroy),
+      barStyle: const MenuStyle(
+        padding: MaterialStatePropertyAll(EdgeInsets.zero),
+        backgroundColor: MaterialStatePropertyAll(Color(0xFF2b2b2b)),
+        maximumSize: MaterialStatePropertyAll(Size(double.infinity, 28.0)),
+      ),
+      barButtonStyle: const ButtonStyle(
+        padding:
+            MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 6.0)),
+        minimumSize: MaterialStatePropertyAll(Size(0.0, 32.0)),
+      ),
+      menuButtonStyle: const ButtonStyle(
+        minimumSize: MaterialStatePropertyAll(Size.fromHeight(28.0)),
+      ),
       child: ContextMenuOverlay(
         child: GestureDetector(
           onTapDown: (_) => focusNodePage.requestFocus(),
