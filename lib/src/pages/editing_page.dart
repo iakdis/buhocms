@@ -20,6 +20,7 @@ import '../provider/navigation/navigation_size_provider.dart';
 import '../provider/editing/unsaved_text_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
+import '../widgets/shortcuts.dart';
 import '../widgets/tooltip.dart';
 
 class EditingPage extends StatefulWidget {
@@ -49,6 +50,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
   static const double textFieldMinHeight = 100.0;
   Color? textFieldHandleColor;
   GlobalKey textFieldKey = GlobalKey();
+  ShortcutRegistryEntry? _shortcutsEntry;
 
   @override
   void initState() {
@@ -75,6 +77,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     windowManager.removeListener(this);
     fileNavigationProvider.controller.removeListener(addListenerContent);
     focusNodeTextField.dispose();
+
+    _shortcutsEntry?.dispose();
 
     super.dispose();
   }
@@ -492,6 +496,10 @@ class EditingPageState extends State<EditingPage> with WindowListener {
               ),
             Consumer<FileNavigationProvider>(
               builder: (context, value, _) {
+                _shortcutsEntry?.dispose();
+                _shortcutsEntry = ShortcutRegistry.of(context)
+                    .addAll(markdownToolbarShortcuts(context));
+
                 return MarkdownToolbar(
                   key: context.watch<EditingProvider>().markdownToolbarKey,
                   useIncludedTextField: false,
