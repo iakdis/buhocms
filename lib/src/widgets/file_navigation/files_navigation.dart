@@ -34,8 +34,6 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
   final ScrollController _listScrollController = ScrollController();
   Map<String, int> fileButtonsMap = {};
 
-  bool isExtended = false;
-
   double lastWidth = 64;
 
   double top = 0;
@@ -52,7 +50,10 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
       notify: false,
     );
     lastWidth = Preferences.getFileNavigationSize();
-    isExtended = navigationSizeProvider.fileNavigationWidth > 64 ? true : false;
+    navigationSizeProvider.setIsExtendedFileNav(
+      navigationSizeProvider.fileNavigationWidth > 64 ? true : false,
+      notify: false,
+    );
 
     super.initState();
   }
@@ -61,7 +62,9 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
     final navigationSizeProvider =
         Provider.of<NavigationSizeProvider>(context, listen: false);
     return Align(
-      alignment: isExtended ? Alignment.centerRight : Alignment.center,
+      alignment: navigationSizeProvider.isExtendedFileNav
+          ? Alignment.centerRight
+          : Alignment.center,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -69,17 +72,19 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
           child: RotatedBox(
             quarterTurns: 3,
             child: Icon(
-              isExtended ? Icons.expand_less : Icons.expand_more,
+              navigationSizeProvider.isExtendedFileNav
+                  ? Icons.expand_less
+                  : Icons.expand_more,
               size: 48.0,
               color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
           onTap: () => setState(() {
-            if (isExtended) {
-              isExtended = false;
+            if (navigationSizeProvider.isExtendedFileNav) {
+              navigationSizeProvider.setIsExtendedFileNav(false);
               navigationSizeProvider.setFileNavigationWidth(64);
             } else {
-              isExtended = true;
+              navigationSizeProvider.setIsExtendedFileNav(true);
               navigationSizeProvider
                   .setFileNavigationWidth(lastWidth > 200 ? lastWidth : 200);
             }
@@ -93,7 +98,8 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
 
   void setStateCallback() => setState(() {});
 
-  Widget _listFilesAndDirectories() {
+  Widget _listFilesAndDirectories(
+      NavigationSizeProvider navigationSizeProvider) {
     print(Preferences.getCurrentPath());
     var savePath = Preferences.getCurrentPath();
     fileButtonsMap.clear();
@@ -122,7 +128,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                           '${snapshot.data?[index].path.split(Platform.pathSeparator).last}',
                       index: index,
                       path: snapshot.data?[index].path ?? 'No file path found',
-                      isExtended: isExtended,
+                      isExtended: navigationSizeProvider.isExtendedFileNav,
                       setStateCallback: setStateCallback,
                       insideFolder: false,
                     ),
@@ -155,7 +161,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                               : path,
                       index: finalIndex,
                       path: snapshot.data?[index].path ?? 'No file path found',
-                      isExtended: isExtended,
+                      isExtended: navigationSizeProvider.isExtendedFileNav,
                       insideFolder: false,
                       setStateCallback: setStateCallback,
                     ),
@@ -202,7 +208,7 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
         return Stack(
           children: [
             Container(
-              width: isExtended
+              width: navigationSizeProvider.isExtendedFileNav
                   ? finalSize > 64
                       ? finalSize
                       : 200
@@ -248,7 +254,8 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                               message: Localization.appLocalizations().sortBy,
                               child: SortButton(
                                   setStateCallback: setStateCallback,
-                                  isExtended: isExtended),
+                                  isExtended:
+                                      navigationSizeProvider.isExtendedFileNav),
                             ),
                             Divider(
                                 color:
@@ -259,7 +266,8 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                                       savePath.indexOf(contentFolder))),
                               child: ParentFolderButton(
                                   setStateCallback: setStateCallback,
-                                  isExtended: isExtended),
+                                  isExtended:
+                                      navigationSizeProvider.isExtendedFileNav),
                             ),
                             SizedBox(
                               height: constraints.maxHeight > mobileWidth
@@ -272,7 +280,8 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                                   controller: _listScrollController,
                                   child: Consumer<NavigationProvider>(
                                       builder: (_, __, ___) {
-                                    return _listFilesAndDirectories();
+                                    return _listFilesAndDirectories(
+                                        navigationSizeProvider);
                                   }),
                                 ),
                               ),
@@ -283,7 +292,9 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                             CustomTooltip(
                               message: Localization.appLocalizations().newPost,
                               child: CreateNewButton(
-                                  mounted: mounted, isExtended: isExtended),
+                                  mounted: mounted,
+                                  isExtended:
+                                      navigationSizeProvider.isExtendedFileNav),
                             ),
                           ],
                         ),
@@ -314,10 +325,10 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                       if (dx > 3.0) {
                         navigationSizeProvider.setFileNavigationWidth(
                             newWidth > 200 ? newWidth : 200);
-                        isExtended = true;
+                        navigationSizeProvider.setIsExtendedFileNav(true);
                       } else {
                         navigationSizeProvider.setFileNavigationWidth(64);
-                        isExtended = false;
+                        navigationSizeProvider.setIsExtendedFileNav(false);
                       }
                     }
                   }

@@ -26,8 +26,6 @@ class HomeNavigationDrawer extends StatefulWidget {
 }
 
 class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
-  bool isExtended = false;
-
   double lastWidth = 64;
 
   double top = 0;
@@ -42,7 +40,10 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
       notify: false,
     );
     lastWidth = Preferences.getNavigationSize();
-    isExtended = navigationSizeProvider.navigationWidth > 64 ? true : false;
+    navigationSizeProvider.setIsExtendedNav(
+      navigationSizeProvider.navigationWidth > 64 ? true : false,
+      notify: false,
+    );
 
     super.initState();
   }
@@ -80,7 +81,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
               //duration: const Duration(milliseconds: 250),
               //curve: Curves.easeInOut,
               //width: isExtended ? 256 : 64.0,
-              width: isExtended
+              width: navigationSizeProvider.isExtendedNav
                   ? finalSize > 64
                       ? finalSize
                       : 200
@@ -101,9 +102,10 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                             Column(
                               children: [
                                 Align(
-                                  alignment: isExtended
-                                      ? Alignment.centerRight
-                                      : Alignment.center,
+                                  alignment:
+                                      navigationSizeProvider.isExtendedNav
+                                          ? Alignment.centerRight
+                                          : Alignment.center,
                                   child: Material(
                                     color: Colors.transparent,
                                     child: InkWell(
@@ -111,7 +113,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                       child: RotatedBox(
                                         quarterTurns: 3,
                                         child: Icon(
-                                          isExtended
+                                          navigationSizeProvider.isExtendedNav
                                               ? Icons.expand_less
                                               : Icons.expand_more,
                                           size: 48.0,
@@ -121,12 +123,15 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                         ),
                                       ),
                                       onTap: () => setState(() {
-                                        if (isExtended) {
-                                          isExtended = false;
+                                        if (navigationSizeProvider
+                                            .isExtendedNav) {
+                                          navigationSizeProvider
+                                              .setIsExtendedNav(false);
                                           navigationSizeProvider
                                               .setNavigationWidth(64);
                                         } else {
-                                          isExtended = true;
+                                          navigationSizeProvider
+                                              .setIsExtendedNav(true);
                                           navigationSizeProvider
                                               .setNavigationWidth(
                                                   lastWidth > 200
@@ -145,7 +150,8 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                   message: Localization.appLocalizations()
                                       .editingPage,
                                   child: NavigationButton(
-                                    isExtended: isExtended,
+                                    isExtended:
+                                        navigationSizeProvider.isExtendedNav,
                                     icon: Icons.edit,
                                     iconUnselected: Icons.edit_outlined,
                                     buttonText: Localization.appLocalizations()
@@ -158,13 +164,17 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                   message:
                                       Localization.appLocalizations().guiMode,
                                   child: GUIModeButton(
-                                      isExtended: isExtended, isGUIMode: true),
+                                      isExtended:
+                                          navigationSizeProvider.isExtendedNav,
+                                      isGUIMode: true),
                                 ),
                                 CustomTooltip(
                                   message:
                                       Localization.appLocalizations().textMode,
                                   child: GUIModeButton(
-                                      isExtended: isExtended, isGUIMode: false),
+                                      isExtended:
+                                          navigationSizeProvider.isExtendedNav,
+                                      isGUIMode: false),
                                 ),
                                 divider(),
                                 CustomTooltip(
@@ -175,15 +185,17 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                           .stopLiveServer
                                       : Localization.appLocalizations()
                                           .startLiveServer,
-                                  child:
-                                      LiveServerButton(isExtended: isExtended),
+                                  child: LiveServerButton(
+                                      isExtended:
+                                          navigationSizeProvider.isExtendedNav),
                                 ),
                                 CustomTooltip(
                                   message: SSG.getSSGLiveServer(
                                       ssg: SSGTypes.values
                                           .byName(Preferences.getSSG())),
-                                  child:
-                                      OpenServerButton(isExtended: isExtended),
+                                  child: OpenServerButton(
+                                      isExtended:
+                                          navigationSizeProvider.isExtendedNav),
                                 ),
                                 divider(),
                                 CustomTooltip(
@@ -192,14 +204,16 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                           .values
                                           .byName(Preferences.getSSG()))),
                                   child: BuildWebsiteButton(
-                                      isExtended: isExtended),
+                                      isExtended:
+                                          navigationSizeProvider.isExtendedNav),
                                 ),
                                 CustomTooltip(
                                   message: SSG.getSSGBuildFolder(
                                       ssg: SSGTypes.values
                                           .byName(Preferences.getSSG())),
-                                  child:
-                                      OpenBuildButton(isExtended: isExtended),
+                                  child: OpenBuildButton(
+                                      isExtended:
+                                          navigationSizeProvider.isExtendedNav),
                                 ),
                                 divider(),
                                 CustomTooltip(
@@ -211,7 +225,8 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                           : Localization.appLocalizations()
                                               .showTerminalOutput,
                                   child: TerminalOutputButton(
-                                      isExtended: isExtended),
+                                      isExtended:
+                                          navigationSizeProvider.isExtendedNav),
                                 ),
                               ],
                             ),
@@ -222,7 +237,8 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                   message:
                                       Localization.appLocalizations().settings,
                                   child: NavigationButton(
-                                    isExtended: isExtended,
+                                    isExtended:
+                                        navigationSizeProvider.isExtendedNav,
                                     icon: Icons.settings,
                                     iconUnselected: Icons.settings_outlined,
                                     buttonText: Localization.appLocalizations()
@@ -260,10 +276,10 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                       if (dx > 3.0) {
                         navigationSizeProvider.setNavigationWidth(
                             newWidth > 200 ? newWidth : 200);
-                        isExtended = true;
+                        navigationSizeProvider.setIsExtendedNav(true);
                       } else {
                         navigationSizeProvider.setNavigationWidth(64);
-                        isExtended = false;
+                        navigationSizeProvider.setIsExtendedNav(false);
                       }
                     }
                   }
