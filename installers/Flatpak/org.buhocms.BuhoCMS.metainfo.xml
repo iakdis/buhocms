@@ -56,6 +56,15 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.6.1" date="2023-04-19">
+      <description>
+        <p>Release 0.6.1 of BuhoCMS</p>
+        <ul>
+	       <li>Fix: Open website showing grey screen</li>
+          <li>Fix: Importing preferences not updating navigation bars</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.0" date="2023-04-12">
       <description>
         <p>Release 0.6.0 of BuhoCMS</p>
