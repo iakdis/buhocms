@@ -169,7 +169,7 @@ class Preferences {
   static Map<String, SSGTypes> getRecentSitePaths() {
     final recentPaths =
         json.decode('${getPreferencesEntry(prefRecentSitePaths)}');
-    Map strToMap = recentPaths is List ? {} : recentPaths;
+    Map strToMap = recentPaths is Map ? recentPaths : {};
 
     Map<String, SSGTypes> fromStringsToType = {};
     fromStringsToType.addEntries(strToMap.entries
