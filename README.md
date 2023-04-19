@@ -1,6 +1,6 @@
 
-## 🌟 New release: v0.6.0 🌟
-### <a href="https://jekyllrb.com/">Jekyll</a> is now supported! Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.6.0)!
+## 🌟 New release: v0.6.1 🌟
+### Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.6.1)!
 
 <br>
 
