@@ -452,10 +452,9 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
   }
 
   void _removeFrontMatter() {
-    final fileNavigationProvider =
-        Provider.of<FileNavigationProvider>(context, listen: false);
-
-    var allLines = fileNavigationProvider.frontMatterText.split('\n');
+    final frontmatterProvider = context.read<FrontmatterProvider>();
+    final key = frontmatterProvider.frontmatterLines[widget.index].key;
+    final value = frontmatterProvider.frontmatterLines[widget.index].value;
 
     showDialog(
       context: context,
@@ -468,7 +467,7 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
               text: Localization.appLocalizations().areYouSureDeleteFrontmatter,
               children: <TextSpan>[
                 TextSpan(
-                  text: allLines[widget.index + 1],
+                  text: '$key: $value',
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -482,10 +481,7 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
           ),
           TextButton(
             onPressed: () {
-              allLines.removeAt(widget.index + 1);
-              final newFrontmatterText = allLines.join('\n');
-
-              fileNavigationProvider.setFrontMatterText(newFrontmatterText);
+              frontmatterProvider.removeAt(widget.index);
 
               showSnackbar(
                 text: Localization.appLocalizations().removedFrontmatter(
