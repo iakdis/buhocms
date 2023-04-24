@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:buhocms/src/provider/editing/frontmatter_provider.dart';
 import 'package:buhocms/src/provider/navigation/file_navigation_provider.dart';
 import 'package:buhocms/src/ssg/frontmatter.dart';
 import 'package:buhocms/src/utils/globals.dart';
 import 'package:buhocms/src/widgets/custom_appbar.dart';
+import 'package:buhocms/src/widgets/snackbar.dart';
+import 'package:yaml/yaml.dart';
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
 import '../ssg/add_frontmatter.dart';
@@ -114,6 +117,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
   Future<void> updateFrontmatterWidgets() async {
     print('Frontmatter widgets update!');
     final editingProvider = context.read<EditingProvider>();
+    final frontmatterProvider = context.read<FrontmatterProvider>();
 
     await fileNavigationProvider.setInitialTexts();
 
@@ -167,12 +171,24 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       ..removeAt(0)
       ..removeAt(finalLines.length - 1);
 
-    for (var index = 0; index < finalLines.length; index++) {
+    var yaml = YamlMap();
+    try {
+      yaml = loadYaml(finalLines.join('\n')) as YamlMap;
+    } catch (e) {
+      showSnackbar(text: e.toString(), seconds: 10);
+    }
+
+    frontmatterProvider.set(yaml.entries.toList());
+
+    for (var index = 0; index < yaml.entries.length; index++) {
       editingProvider.setFrontmatterKeys(editingProvider.frontmatterKeys
         ..add(GlobalKey<FrontmatterWidgetState>()));
 
+      final entry = yaml.entries.toList()[index];
+      final entryAsYaml = '${entry.key}: ${entry.value}';
+
       frontmatterWidgets.add(FrontmatterWidget(
-        source: finalLines[index],
+        source: entryAsYaml,
         index: index,
         key: editingProvider.frontmatterKeys[index],
       ));
