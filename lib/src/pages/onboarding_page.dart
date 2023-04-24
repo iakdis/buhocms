@@ -3,6 +3,7 @@ import 'package:buhocms/src/widgets/buttons/language_dropdown.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -114,14 +115,22 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
           ),
         ),
         const SizedBox(height: 8.0),
-        Text(
-          'Alpha (0.6.1)', // TODO update version number
-          style: TextStyle(
-            color: Colors.teal.shade800,
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        FutureBuilder(
+            future: PackageInfo.fromPlatform(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Text(
+                  'Alpha (${snapshot.data!.version})', // TODO remove Alpha once ready
+                  style: TextStyle(
+                    color: Colors.teal.shade800,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              } else {
+                return Container();
+              }
+            }),
         const SizedBox(height: 24.0),
         Icon(
           Icons.web,
