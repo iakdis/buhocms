@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:buhocms/src/provider/editing/frontmatter_provider.dart';
 import 'package:buhocms/src/provider/editing/unsaved_text_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -160,6 +161,33 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
     }
   }
 
+  void _saveFrontmatter({required String newValue}) {
+    final fileNavigationProvider = context.read<FileNavigationProvider>();
+    final frontmatterProvider = context.read<FrontmatterProvider>();
+
+    final yaml = loadYaml(widget.source) as YamlMap;
+    final frontmatterKey = yaml.entries.first.key.toString();
+
+    final String newFrontmatterText;
+
+    final newFrontmatterMap = <MapEntry>[];
+    final yamlEntries = frontmatterProvider.frontmatterLines;
+
+    for (var i = 0; i < yamlEntries.length; i++) {
+      final mapEntryToAdd = yamlEntries[i].key == frontmatterKey
+          ? MapEntry(frontmatterKey, newValue)
+          : yamlEntries[i];
+
+      newFrontmatterMap.add(mapEntryToAdd);
+    }
+    final finalFrontmatterLines =
+        newFrontmatterMap.map((e) => '${e.key}: ${e.value}').toList();
+    newFrontmatterText = '---\n${finalFrontmatterLines.join('\n')}\n---';
+
+    frontmatterProvider.set(newFrontmatterMap);
+    fileNavigationProvider.setFrontMatterText(newFrontmatterText);
+  }
+
   Widget _textWidget(String source) {
     final yaml = loadYaml(source) as YamlMap;
     var key = yaml.entries.first.key.toString();
@@ -195,70 +223,27 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
   }
 
   void _textSave() {
-    final fileNavigationProvider =
-        Provider.of<FileNavigationProvider>(context, listen: false);
-
-    final String newText;
-
-    final source = widget.source;
-    final yaml = loadYaml(source) as YamlMap;
-    final frontmatterKey = yaml.entries.first.key.toString();
-
-    final oldFrontmatterText = fileNavigationProvider.frontMatterText;
-    newText = source.contains('"')
+    final newValue = widget.source.contains('"')
         ? '"${frontMatterControllerUnsaved.text}"'
         : frontMatterControllerUnsaved.text;
-    final newFrontmatterText = oldFrontmatterText.replaceFirst(
-      source,
-      '$frontmatterKey: $newText',
-    );
-
-    fileNavigationProvider.setFrontMatterText(newFrontmatterText);
+    _saveFrontmatter(newValue: newValue);
 
     setState(
         () => frontMatterController.text = frontMatterControllerUnsaved.text);
   }
 
   void _boolSave() {
-    final fileNavigationProvider =
-        Provider.of<FileNavigationProvider>(context, listen: false);
-
-    final oldChecked = isChecked.toString();
-    final newChecked = unsavedIsChecked.toString();
-
-    final yaml = loadYaml(widget.source) as YamlMap;
-    final frontmatterKey = yaml.entries.first.key.toString();
-
-    final oldFrontmatterText = fileNavigationProvider.frontMatterText;
-    final newFrontmatterText = oldFrontmatterText.replaceFirst(
-      '$frontmatterKey: $oldChecked',
-      '$frontmatterKey: $newChecked',
-    );
-
-    fileNavigationProvider.setFrontMatterText(newFrontmatterText);
+    final newValue = unsavedIsChecked.toString();
+    _saveFrontmatter(newValue: newValue);
 
     setState(() => isChecked = unsavedIsChecked);
   }
 
   void _dateSave() {
-    final fileNavigationProvider =
-        Provider.of<FileNavigationProvider>(context, listen: false);
-
     DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
-    final newDate = unsavedDate ?? DateTime(2000);
-    final formattedNewDate = dateFormatter.format(newDate);
-
-    final source = widget.source;
-    final yaml = loadYaml(source) as YamlMap;
-    final frontmatterKey = yaml.entries.first.key.toString();
-
-    final oldFrontmatterText = fileNavigationProvider.frontMatterText;
-    final newFrontmatterText = oldFrontmatterText.replaceFirst(
-      source,
-      '$frontmatterKey: $formattedNewDate',
-    );
-
-    fileNavigationProvider.setFrontMatterText(newFrontmatterText);
+    final newDate = unsavedDate ?? DateTime.now();
+    final newValue = dateFormatter.format(newDate);
+    _saveFrontmatter(newValue: newValue);
 
     setState(() => date = unsavedDate);
   }
@@ -452,36 +437,11 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
   }
 
   void _listSave() {
-    final fileNavigationProvider =
-        Provider.of<FileNavigationProvider>(context, listen: false);
+    final newValue = [...unsavedList.map((e) => '"$e"')];
+    _saveFrontmatter(newValue: newValue.toString());
 
-    final newList = [...unsavedList.map((e) => '"$e"')];
-
-    final yaml = loadYaml(widget.source) as YamlMap;
-    final frontmatterKey = yaml.entries.first.key;
-
-    var oldFrontmatterText = fileNavigationProvider.frontMatterText.split('\n')
-      ..removeAt(0) // Remove "---""
-      ..removeLast(); // Remove "---"
-
-    var newFrontmatterText = oldFrontmatterText;
-
-    for (var i = 0; i < oldFrontmatterText.length; i++) {
-      final yaml = loadYaml(oldFrontmatterText[i]) as YamlMap;
-      if (yaml.entries.first.key == frontmatterKey) {
-        newFrontmatterText[i] = '$frontmatterKey: $newList';
-      }
-    }
-
-    newFrontmatterText
-      ..insert(0, '---') // Add "---"
-      ..insert(newFrontmatterText.length, '---'); // Add "---"
-
-    fileNavigationProvider.setFrontMatterText(newFrontmatterText.join('\n'));
-
-    setState(() {
-      frontMatterController.text = frontMatterControllerUnsaved.text;
-    });
+    setState(
+        () => frontMatterController.text = frontMatterControllerUnsaved.text);
   }
 
   void _listRestore() {
