@@ -367,6 +367,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
   }
 
   Widget guiFrontmatter({required List<String> finalLines}) {
+    final frontmatterProvider = context.read<FrontmatterProvider>();
+
     return Consumer<UnsavedTextProvider>(builder: (_, __, ___) {
       return ReorderableListView(
         shrinkWrap: true,
@@ -374,14 +376,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         onReorder: (oldIndex, newIndex) {
           if (newIndex > oldIndex) newIndex--;
 
-          final finalLine = finalLines.removeAt(oldIndex);
-          finalLines.insert(newIndex, finalLine);
-          var newLines = [for (var v in finalLines) v];
-          newLines.insert(0, '---');
-          newLines.insert(finalLines.length + 1, '---');
-          var newFinalLines = newLines.join('\n');
-
-          fileNavigationProvider.setFrontMatterText(newFinalLines);
+          final removedEntry = frontmatterProvider.removeAt(oldIndex);
+          frontmatterProvider.insert(newIndex, removedEntry);
 
           final oldFrontmatterWidget = frontmatterWidgets.removeAt(oldIndex);
           frontmatterWidgets.insert(newIndex, oldFrontmatterWidget);
