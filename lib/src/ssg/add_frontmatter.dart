@@ -1,3 +1,4 @@
+import 'package:buhocms/src/provider/editing/frontmatter_provider.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -5,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
-import '../provider/navigation/file_navigation_provider.dart';
 import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
 import '../widgets/snackbar.dart';
@@ -21,33 +21,27 @@ class AddFrontmatterButton extends StatefulWidget {
 class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
   void _addFrontMatter(
       {required String frontmatter, required FrontmatterType type}) {
-    final fileNavigationProvider =
-        Provider.of<FileNavigationProvider>(context, listen: false);
-    String? newLine;
+    final frontmatterProvider = context.read<FrontmatterProvider>();
+
+    String? newValue;
     final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
 
     switch (type) {
       case FrontmatterType.typeString:
-        newLine = '$frontmatter: "Text"';
+        newValue = '"Text"';
         break;
       case FrontmatterType.typeBool:
-        newLine = '$frontmatter: false';
+        newValue = 'false';
         break;
       case FrontmatterType.typeDate:
-        newLine = '$frontmatter: ${dateFormatter.format(DateTime.now())}';
+        newValue = dateFormatter.format(DateTime.now());
         break;
       case FrontmatterType.typeList:
-        newLine = '$frontmatter: []';
+        newValue = '[]';
         break;
     }
 
-    print('New Line: <$newLine> with frontmatter <$frontmatter>');
-    var oldFrontmatterText = fileNavigationProvider.frontMatterText;
-    var contains = oldFrontmatterText.contains('---');
-    if (!contains) oldFrontmatterText = '---\n';
-    final newFrontmatterText =
-        '${oldFrontmatterText.substring(0, oldFrontmatterText.length - (contains ? 3 : 0))}$newLine\n---';
-    fileNavigationProvider.setFrontMatterText(newFrontmatterText);
+    frontmatterProvider.add(MapEntry(frontmatter, newValue));
 
     showSnackbar(
       text: Localization.appLocalizations()
