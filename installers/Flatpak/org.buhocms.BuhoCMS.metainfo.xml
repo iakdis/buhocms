@@ -56,6 +56,15 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.6.2" date="2023-04-24">
+      <description>
+        <p>Release 0.6.2 of BuhoCMS</p>
+        <ul>
+	       <li>Fix: Exception when having a multiline value in front matter</li>
+          <li>Other: Improved front matter saving logic</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.1" date="2023-04-19">
       <description>
         <p>Release 0.6.1 of BuhoCMS</p>
