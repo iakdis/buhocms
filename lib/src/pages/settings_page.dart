@@ -95,7 +95,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return ListTile(
       leading: const Icon(Icons.info),
       title: Text(Localization.appLocalizations().aboutBuhoCMS),
-      onTap: () => about(context: context),
+      onTap: () => about(context: context, mounted: mounted),
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:buhocms/src/pages/theme_page.dart';
 import 'package:buhocms/src/provider/app/shell_provider.dart';
 import 'package:buhocms/src/provider/editing/unsaved_text_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
@@ -315,26 +316,30 @@ void reportIssue() async {
   }
 }
 
-void about({required BuildContext context}) {
-  showAboutDialog(
-    context: context,
-    applicationName: 'BuhoCMS',
-    applicationVersion: Localization.appLocalizations().version(
-      '0.6.1 Alpha',
-    ), //TODO update version number
-    applicationIcon: const Image(
-      image: AssetImage('assets/images/icon.png'),
-      width: 64,
-      height: 64,
-    ),
-    applicationLegalese: 'GNU Public License v3',
-    children: [
-      SizedBox(
-        width: 500,
-        child: SelectableText(Localization.appLocalizations().license),
+void about({required BuildContext context, required bool mounted}) async {
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+  if (mounted) {
+    showAboutDialog(
+      context: context,
+      applicationName: 'BuhoCMS',
+      applicationVersion: Localization.appLocalizations().version(
+        '${packageInfo.version} Alpha', //TODO remove Alpha once ready
       ),
-    ],
-  );
+      applicationIcon: const Image(
+        image: AssetImage('assets/images/icon.png'),
+        width: 64,
+        height: 64,
+      ),
+      applicationLegalese: 'GNU Public License v3',
+      children: [
+        SizedBox(
+          width: 500,
+          child: SelectableText(Localization.appLocalizations().license),
+        ),
+      ],
+    );
+  }
 }
 
 void fullScreen(WindowManager windowManager) async {

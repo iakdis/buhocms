@@ -212,7 +212,7 @@ List<BarButton> getMenuBarMenus({
           ),
           const MenuDivider(),
           MenuButton(
-            onTap: () => about(context: context),
+            onTap: () => about(context: context, mounted: mounted),
             icon: const Icon(Icons.info),
             text: menuButtonText(Localization.appLocalizations().about),
           ),
