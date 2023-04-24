@@ -237,6 +237,7 @@ Package | Use case
 [intl](https://pub.dev/packages/intl) | Localization
 [markdown_toolbar](https://pub.dev/packages/markdown_toolbar) | Markdown Toolbar
 [menu_bar](https://pub.dev/packages/menu_bar) | Menu Bar
+[package_info_plus](https://pub.dev/packages/package_info_plus) | Display the programs version number
 [process_run](https://pub.dev/packages/process_run) | Run terminal commands
 [provider](https://pub.dev/packages/provider) | State management for localization, themes, navigation, etc.
 [shared_preferences](https://pub.dev/packages/shared_preferences) | Saving local app data, including settings
