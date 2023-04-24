@@ -41,11 +41,11 @@ Future<Map<String, FrontmatterType>> automaticallyDetectFrontmatter() async {
     }
 
     // Detect type for each key
+    final yaml = loadYaml(frontmatterLines.join('\n')) as YamlMap;
     final keySet = <String>{};
-    for (var i = 0; i < frontmatterLines.length; i++) {
-      final yaml = loadYaml(frontmatterLines[i]) as YamlMap;
-      final key = yaml.entries.first.key.toString();
-      final value = yaml.entries.first.value;
+    for (var i = 0; i < yaml.entries.length; i++) {
+      final key = yaml.entries.toList()[i].key;
+      final value = yaml.entries.toList()[i].value;
 
       if (value is bool) {
         if (!keySet.contains(key)) {
