@@ -102,7 +102,7 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
     final entry = yaml.entries.first.value;
     if (entry is List) {
       if (entry.isNotEmpty && entry[0].isNotEmpty) {
-        list.addAll(entry.map((e) => e));
+        list.addAll(entry.map((e) => e.toString()));
       }
     }
 
