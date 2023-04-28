@@ -585,12 +585,12 @@ class SSG {
     }
   }
 
-  static String getSSGExecutable(SSGTypes ssg) {
+  static List<String> getSSGExecutable(SSGTypes ssg) {
     switch (ssg) {
       case SSGTypes.hugo:
-        return 'hugo';
+        return ['hugo'];
       case SSGTypes.jekyll:
-        return 'jekyll';
+        return ['jekyll'];
     }
   }
 }

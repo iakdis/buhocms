@@ -82,28 +82,36 @@ class _CreateWebsiteState extends State<CreateWebsite> {
   }
 
   void checkExecutableInstalled() {
-    checkProgramInstalled(
-      context: context,
-      executable: SSG.getSSGExecutable(ssg),
-      notFound: () {
-        ssgInstalled = false;
-        if (mounted) {
-          ssgInstalledText = Localization.appLocalizations()
-              .executableNotFound(SSG.getSSGName(ssg));
-        }
-        setState(() {});
-      },
-      found: (finalExecutable) {
-        ssgInstalled = true;
-        if (mounted) {
-          ssgInstalledText = Localization.appLocalizations()
-              .executableFoundIn(SSG.getSSGName(ssg), finalExecutable);
-        }
-        setState(() {});
-      },
-      showErrorSnackbar: false,
-      ssg: ssg,
-    );
+    final length = SSG.getSSGExecutable(ssg).length;
+    ssgInstalledText = '';
+
+    for (var i = 0; i < length; i++) {
+      checkProgramInstalled(
+        context: context,
+        executable: SSG.getSSGExecutable(ssg)[i],
+        notFound: () {
+          ssgInstalled = false;
+          if (mounted) {
+            ssgInstalledText += Localization.appLocalizations()
+                .executableNotFound(SSG.getSSGExecutable(ssg)[i]);
+            if (i < length - 1) ssgInstalledText += '\n';
+          }
+          setState(() {});
+        },
+        found: (finalExecutable) {
+          ssgInstalled = true;
+          if (mounted) {
+            ssgInstalledText += Localization.appLocalizations()
+                .executableFoundIn(
+                    SSG.getSSGExecutable(ssg)[i], finalExecutable);
+            if (i < length - 1) ssgInstalledText += '\n';
+          }
+          setState(() {});
+        },
+        showErrorSnackbar: false,
+        ssg: ssg,
+      );
+    }
   }
 
   void onChangedText({
