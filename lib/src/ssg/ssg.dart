@@ -530,6 +530,16 @@ class SSG {
     required String siteName,
     required String flags,
   }) async {
+    runCommand(BuildContext context, String executable, String allFlags,
+        String sitePath) {
+      runTerminalCommand(
+        context: context,
+        workingDirectory: sitePath,
+        executable: executable,
+        flags: allFlags.split(' '),
+      );
+    }
+
     String? executable;
     String allFlags = '';
     switch (ssg) {
@@ -537,6 +547,8 @@ class SSG {
         executable = 'hugo';
         allFlags = 'new site $siteName';
         if (flags.isNotEmpty) allFlags += ' $flags';
+
+        runCommand(context, executable, allFlags, sitePath);
         break;
       case SSGTypes.jekyll:
         // Try to use scheme /home/user/gems/bin/jekyll, otherwise 'jekyll'
@@ -545,16 +557,12 @@ class SSG {
         executable ??= 'jekyll';
         allFlags = 'new $siteName';
         if (flags.isNotEmpty) allFlags += ' $flags';
-        break;
-    }
 
-    if (mounted) {
-      await runTerminalCommand(
-        context: context,
-        workingDirectory: sitePath,
-        executable: executable,
-        flags: allFlags.split(' '),
-      );
+        if (mounted) {
+          runCommand(context, executable, allFlags, sitePath);
+        }
+        break;
+
     }
   }
 
