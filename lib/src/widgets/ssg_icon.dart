@@ -17,7 +17,7 @@ class SSGIcon extends StatelessWidget {
     return Tooltip(
       message: tooltip,
       child: SvgPicture.asset(
-        'assets/images/${ssg.toLowerCase()}.svg',
+        'assets/images/${SSG.getSSGName(SSG.getSSGType(ssg)).toLowerCase()}.svg',
         width: 28,
         height: 28,
         colorFilter: ColorFilter.mode(
