@@ -41,7 +41,14 @@ Future<Map<String, FrontmatterType>> automaticallyDetectFrontmatter() async {
     }
 
     // Detect type for each key
-    final yaml = loadYaml(frontmatterLines.join('\n')) as YamlMap;
+    var yaml = YamlMap();
+    try {
+      if (frontmatterLines.isNotEmpty) {
+        yaml = loadYaml(frontmatterLines.join('\n')) as YamlMap;
+      }
+    } catch (e) {
+      showSnackbar(text: e.toString(), seconds: 10);
+    }
     final keySet = <String>{};
     for (var i = 0; i < yaml.entries.length; i++) {
       final key = yaml.entries.toList()[i].key;
@@ -231,7 +238,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
               children: [
                 Column(
                   children: [
-                    Text(
+                    SelectableText(
                       Localization.appLocalizations().editFrontmatterList,
                       style: const TextStyle(
                           fontSize: 24, fontWeight: FontWeight.w500),
@@ -239,7 +246,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                     const SizedBox(height: 16.0),
                     SizedBox(
                       width: 512.0,
-                      child: Text(Localization.appLocalizations()
+                      child: SelectableText(Localization.appLocalizations()
                           .editFrontmatterList_Description),
                     ),
                     const SizedBox(height: 16.0),
@@ -294,6 +301,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                                             checkUnsavedBeforeFunction(
                                               context: context,
                                               function: () => _edit(items[i],
+                                                  context: context,
                                                   setStateFunction:
                                                       setStateFunction),
                                             );
@@ -342,6 +350,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                         checkUnsavedBeforeFunction(
                           context: context,
                           function: () => addNewFrontMatterTypes(
+                              context: context,
                               setStateFunction: setStateFunction),
                         );
                       },
@@ -376,8 +385,12 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
     //addNewFrontMatterTypes
   }
 
-  void addNewFrontMatterTypes({required Function setStateFunction}) {
+  void addNewFrontMatterTypes({
+    required BuildContext context,
+    required Function setStateFunction,
+  }) {
     showEditDialog(
+      context: context,
       title: Localization.appLocalizations().addNewEntry,
       okText: Localization.appLocalizations().add,
       checkAlreadyContains: true,
@@ -412,6 +425,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
   }
 
   void showEditDialog({
+    required BuildContext context,
     required String title,
     required String okText,
     required Function onPressed,
@@ -449,7 +463,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
               children: [
                 Column(
                   children: [
-                    const Icon(Icons.dashboard_customize, size: 64.0),
+                    const Icon(Icons.edit, size: 64.0),
                     const SizedBox(height: 16.0),
                     SelectableText(
                       title,
@@ -459,67 +473,64 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                   ],
                 ),
                 const SizedBox(height: 32.0),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(Localization.appLocalizations().name,
-                        style: textStyle),
-                    ConstrainedBox(
-                      constraints:
-                          const BoxConstraints(minWidth: 200, maxWidth: 300),
-                      child: IntrinsicWidth(
-                        child: TextField(
-                          controller: nameController,
-                          focusNode: nameFocusNode,
-                          onChanged: (value) {
-                            setState(() {
-                              name = value;
-                              empty = name.isEmpty;
-                              if (checkAlreadyContains || oldName != name) {
-                                alreadyContains =
-                                    frontMatterAddList.containsKey(name);
-                              } else {
-                                alreadyContains = false;
-                              }
-                            });
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'title',
-                            errorText: empty
-                                ? Localization.appLocalizations().cantBeEmpty
-                                : alreadyContains
-                                    ? Localization.appLocalizations()
-                                        .error_FrontmatterAlreadyContains
-                                    : null,
-                            errorMaxLines: 5,
-                          ),
-                        ),
+                ConstrainedBox(
+                  constraints:
+                      const BoxConstraints(minWidth: 200, maxWidth: 300),
+                  child: IntrinsicWidth(
+                    child: TextField(
+                      controller: nameController,
+                      focusNode: nameFocusNode,
+                      onChanged: (value) {
+                        setState(() {
+                          name = value;
+                          empty = name.isEmpty;
+                          if (checkAlreadyContains || oldName != name) {
+                            alreadyContains =
+                                frontMatterAddList.containsKey(name);
+                          } else {
+                            alreadyContains = false;
+                          }
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'title',
+                        icon: SelectableText(
+                            Localization.appLocalizations().name,
+                            style: textStyle),
+                        errorText: empty
+                            ? Localization.appLocalizations().cantBeEmpty
+                            : alreadyContains
+                                ? Localization.appLocalizations()
+                                    .error_FrontmatterAlreadyContains
+                                : null,
+                        errorMaxLines: 5,
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 const SizedBox(height: 16.0),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                Row(
                   children: [
-                    Text(Localization.appLocalizations().type,
+                    SelectableText(Localization.appLocalizations().type,
                         style: textStyle),
-                    DropdownButton(
-                      value: type,
-                      items: FrontmatterType.values.map((element) {
-                        return DropdownMenuItem(
-                          value: element,
-                          child: Text(element.name.substring(4)),
-                        );
-                      }).toList(),
-                      onChanged: (option) async {
-                        setState(() {
-                          type = option ?? FrontmatterType.typeString;
-                        });
-                        //
-                      },
+                    const SizedBox(width: 16.0),
+                    Expanded(
+                      child: DropdownButton(
+                        isExpanded: true,
+                        value: type,
+                        items: FrontmatterType.values.map((element) {
+                          return DropdownMenuItem(
+                            value: element,
+                            child: Text(element.name.substring(4)),
+                          );
+                        }).toList(),
+                        onChanged: (option) async {
+                          setState(() {
+                            type = option ?? FrontmatterType.typeString;
+                          });
+                          //
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -551,11 +562,13 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
 
   void _edit(
     MapEntry<String, FrontmatterType> element, {
+    required BuildContext context,
     required Function setStateFunction,
   }) {
     var oldName = element.key;
     var oldType = element.value;
     showEditDialog(
+      context: context,
       title: Localization.appLocalizations().editFrontmatter,
       okText: Localization.appLocalizations().save,
       customName: oldName,

@@ -413,11 +413,17 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _editFrontmatterListTile() {
     return Consumer<NavigationProvider>(builder: (context, _, __) {
       return ListTile(
-        title: Text(Localization.appLocalizations().editFrontmatterList),
+        title: Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Text(Localization.appLocalizations().editFrontmatterList),
+            const EditFrontmatterListButton(),
+          ],
+        ),
         subtitle: Text(
           Localization.appLocalizations().editFrontmatterList_Description,
         ),
-        trailing: const EditFrontmatterListButton(),
       );
     });
   }
