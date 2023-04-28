@@ -463,7 +463,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(Localization.appLocalizations().frontmatterName,
+                    Text(Localization.appLocalizations().name,
                         style: textStyle),
                     ConstrainedBox(
                       constraints:
@@ -504,7 +504,7 @@ class _EditFrontmatterListButtonState extends State<EditFrontmatterListButton> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(Localization.appLocalizations().frontmatterType,
+                    Text(Localization.appLocalizations().type,
                         style: textStyle),
                     DropdownButton(
                       value: type,

@@ -136,6 +136,7 @@
     },
     "createNewPostIn": "Create new post in:\n",
     "name": "Name: ",
+    "type": "Type: ",
     "cantBeEmpty": "Can't be empty",
     "error_fileAlreadyExists": "File with name {name} already exists in folder:\n{path}",
     "@error_fileAlreadyExists": {
@@ -292,8 +293,6 @@
         "type": { "type": "String" }
       }
     },
-    "frontmatterName": "Front matter name: ",
-    "frontmatterType": "Front matter type: ",
     "error_FrontmatterAlreadyContains": "List already contains a Front Matter item with the same name!",
     "editFrontmatter": "Edit Front matter",
     "editedFrontmatterToList": "Edited Front matter in list from name {oldName} to {newName} and type {oldType} to {newType}",
