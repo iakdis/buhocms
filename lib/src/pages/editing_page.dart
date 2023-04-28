@@ -173,7 +173,9 @@ class EditingPageState extends State<EditingPage> with WindowListener {
 
     var yaml = YamlMap();
     try {
-      yaml = loadYaml(finalLines.join('\n')) as YamlMap;
+      if (finalLines.isNotEmpty) {
+        yaml = loadYaml(finalLines.join('\n')) as YamlMap;
+      }
     } catch (e) {
       showSnackbar(text: e.toString(), seconds: 10);
     }
