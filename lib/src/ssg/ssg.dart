@@ -483,6 +483,8 @@ class SSG {
         break;
       case SSGTypes.jekyll:
         final fileName = '$path${Platform.pathSeparator}$name.md';
+        if (!await Directory(path).exists()) await Directory(path).create();
+
         try {
           await File(fileName).create();
         } catch (e) {
