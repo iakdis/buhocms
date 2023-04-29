@@ -192,7 +192,7 @@ Feel free to send in a [pull request](https://github.com/iakmds/buhocms/pulls)! 
 
 **Windows** executable: Run the following command in your terminal on a Windows machine: `flutter build windows` – the output file will be generated at `buhocms\build\windows\runner\Release\buhocms.exe`.
 
-**Linux** executable: Run the following command in your terminal: `flutter build linux` – the output files, including the executable, will be generated at`buhocms/build/linux/x64/release/bundle`.
+**Linux** executable: Run the following command in your terminal: `flutter build linux` – the output files, including the executable, will be generated at `buhocms/build/linux/x64/release/bundle`.
 
 # Roadmap
 
