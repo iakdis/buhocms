@@ -50,6 +50,103 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
 
   Widget divider() => Divider(color: Theme.of(context).colorScheme.onSecondary);
 
+  List<Widget> navigationBarWidgets(
+          {required NavigationSizeProvider navigationSizeProvider}) =>
+      [
+        Align(
+          alignment: navigationSizeProvider.isExtendedNav
+              ? Alignment.centerRight
+              : Alignment.center,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(50),
+              child: RotatedBox(
+                quarterTurns: 3,
+                child: Icon(
+                  navigationSizeProvider.isExtendedNav
+                      ? Icons.expand_less
+                      : Icons.expand_more,
+                  size: 48.0,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+              ),
+              onTap: () => setState(() {
+                if (navigationSizeProvider.isExtendedNav) {
+                  navigationSizeProvider.setIsExtendedNav(false);
+                  navigationSizeProvider.setNavigationWidth(64);
+                } else {
+                  navigationSizeProvider.setIsExtendedNav(true);
+                  navigationSizeProvider
+                      .setNavigationWidth(lastWidth > 200 ? lastWidth : 200);
+                }
+                Preferences.setNavigationSize(
+                    navigationSizeProvider.navigationWidth);
+              }),
+            ),
+          ),
+        ),
+        divider(),
+        CustomTooltip(
+          message: Localization.appLocalizations().editingPage,
+          child: NavigationButton(
+            isExtended: navigationSizeProvider.isExtendedNav,
+            icon: Icons.edit,
+            iconUnselected: Icons.edit_outlined,
+            buttonText: Localization.appLocalizations().editingPage,
+            index: 0,
+          ),
+        ),
+        divider(),
+        CustomTooltip(
+          message: Localization.appLocalizations().guiMode,
+          child: GUIModeButton(
+              isExtended: navigationSizeProvider.isExtendedNav,
+              isGUIMode: true),
+        ),
+        CustomTooltip(
+          message: Localization.appLocalizations().textMode,
+          child: GUIModeButton(
+              isExtended: navigationSizeProvider.isExtendedNav,
+              isGUIMode: false),
+        ),
+        divider(),
+        CustomTooltip(
+          message: Provider.of<ShellProvider>(context).shellActive == true
+              ? Localization.appLocalizations().stopLiveServer
+              : Localization.appLocalizations().startLiveServer,
+          child: LiveServerButton(
+              isExtended: navigationSizeProvider.isExtendedNav),
+        ),
+        CustomTooltip(
+          message: SSG.getSSGLiveServer(
+              ssg: SSGTypes.values.byName(Preferences.getSSG())),
+          child: OpenServerButton(
+              isExtended: navigationSizeProvider.isExtendedNav),
+        ),
+        divider(),
+        CustomTooltip(
+          message: Localization.appLocalizations().buildWebsite(
+              SSG.getSSGName(SSGTypes.values.byName(Preferences.getSSG()))),
+          child: BuildWebsiteButton(
+              isExtended: navigationSizeProvider.isExtendedNav),
+        ),
+        CustomTooltip(
+          message: SSG.getSSGBuildFolder(
+              ssg: SSGTypes.values.byName(Preferences.getSSG())),
+          child:
+              OpenBuildButton(isExtended: navigationSizeProvider.isExtendedNav),
+        ),
+        divider(),
+        CustomTooltip(
+          message: Provider.of<OutputProvider>(context).showOutput
+              ? Localization.appLocalizations().hideTerminalOutput
+              : Localization.appLocalizations().showTerminalOutput,
+          child: TerminalOutputButton(
+              isExtended: navigationSizeProvider.isExtendedNav),
+        ),
+      ];
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -100,135 +197,9 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
-                              children: [
-                                Align(
-                                  alignment:
-                                      navigationSizeProvider.isExtendedNav
-                                          ? Alignment.centerRight
-                                          : Alignment.center,
-                                  child: Material(
-                                    color: Colors.transparent,
-                                    child: InkWell(
-                                      borderRadius: BorderRadius.circular(50),
-                                      child: RotatedBox(
-                                        quarterTurns: 3,
-                                        child: Icon(
-                                          navigationSizeProvider.isExtendedNav
-                                              ? Icons.expand_less
-                                              : Icons.expand_more,
-                                          size: 48.0,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSecondary,
-                                        ),
-                                      ),
-                                      onTap: () => setState(() {
-                                        if (navigationSizeProvider
-                                            .isExtendedNav) {
-                                          navigationSizeProvider
-                                              .setIsExtendedNav(false);
-                                          navigationSizeProvider
-                                              .setNavigationWidth(64);
-                                        } else {
-                                          navigationSizeProvider
-                                              .setIsExtendedNav(true);
-                                          navigationSizeProvider
-                                              .setNavigationWidth(
-                                                  lastWidth > 200
-                                                      ? lastWidth
-                                                      : 200);
-                                        }
-                                        Preferences.setNavigationSize(
-                                            navigationSizeProvider
-                                                .navigationWidth);
-                                      }),
-                                    ),
-                                  ),
-                                ),
-                                divider(),
-                                CustomTooltip(
-                                  message: Localization.appLocalizations()
-                                      .editingPage,
-                                  child: NavigationButton(
-                                    isExtended:
-                                        navigationSizeProvider.isExtendedNav,
-                                    icon: Icons.edit,
-                                    iconUnselected: Icons.edit_outlined,
-                                    buttonText: Localization.appLocalizations()
-                                        .editingPage,
-                                    index: 0,
-                                  ),
-                                ),
-                                divider(),
-                                CustomTooltip(
-                                  message:
-                                      Localization.appLocalizations().guiMode,
-                                  child: GUIModeButton(
-                                      isExtended:
-                                          navigationSizeProvider.isExtendedNav,
-                                      isGUIMode: true),
-                                ),
-                                CustomTooltip(
-                                  message:
-                                      Localization.appLocalizations().textMode,
-                                  child: GUIModeButton(
-                                      isExtended:
-                                          navigationSizeProvider.isExtendedNav,
-                                      isGUIMode: false),
-                                ),
-                                divider(),
-                                CustomTooltip(
-                                  message: Provider.of<ShellProvider>(context)
-                                              .shellActive ==
-                                          true
-                                      ? Localization.appLocalizations()
-                                          .stopLiveServer
-                                      : Localization.appLocalizations()
-                                          .startLiveServer,
-                                  child: LiveServerButton(
-                                      isExtended:
-                                          navigationSizeProvider.isExtendedNav),
-                                ),
-                                CustomTooltip(
-                                  message: SSG.getSSGLiveServer(
-                                      ssg: SSGTypes.values
-                                          .byName(Preferences.getSSG())),
-                                  child: OpenServerButton(
-                                      isExtended:
-                                          navigationSizeProvider.isExtendedNav),
-                                ),
-                                divider(),
-                                CustomTooltip(
-                                  message: Localization.appLocalizations()
-                                      .buildWebsite(SSG.getSSGName(SSGTypes
-                                          .values
-                                          .byName(Preferences.getSSG()))),
-                                  child: BuildWebsiteButton(
-                                      isExtended:
-                                          navigationSizeProvider.isExtendedNav),
-                                ),
-                                CustomTooltip(
-                                  message: SSG.getSSGBuildFolder(
-                                      ssg: SSGTypes.values
-                                          .byName(Preferences.getSSG())),
-                                  child: OpenBuildButton(
-                                      isExtended:
-                                          navigationSizeProvider.isExtendedNav),
-                                ),
-                                divider(),
-                                CustomTooltip(
-                                  message:
-                                      Provider.of<OutputProvider>(context)
-                                              .showOutput
-                                          ? Localization.appLocalizations()
-                                              .hideTerminalOutput
-                                          : Localization.appLocalizations()
-                                              .showTerminalOutput,
-                                  child: TerminalOutputButton(
-                                      isExtended:
-                                          navigationSizeProvider.isExtendedNav),
-                                ),
-                              ],
+                              children: navigationBarWidgets(
+                                  navigationSizeProvider:
+                                      navigationSizeProvider),
                             ),
                             Column(
                               children: [
