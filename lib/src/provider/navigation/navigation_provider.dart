@@ -1,17 +1,34 @@
 import 'package:buhocms/src/utils/preferences.dart';
 import 'package:flutter/material.dart';
 
-class NavigationProvider extends ChangeNotifier {
-  int? _navigationIndex;
+enum NavigationPage {
+  editing,
+  settings,
+}
 
-  int? get navigationIndex {
-    _navigationIndex = Preferences.getPageIndex();
-    return _navigationIndex;
+class NavigationProvider extends ChangeNotifier {
+  NavigationPage? _navigationPage;
+
+  NavigationPage? get navigationPage {
+    _navigationPage = Preferences.getPageIndex();
+    return _navigationPage;
   }
 
-  void setNavigationIndex(int index) {
-    Preferences.setPageIndex(index);
-    _navigationIndex = index;
+  void setNavigationPage(NavigationPage page) {
+    Preferences.setPageIndex(page);
+    _navigationPage = page;
+    notifyListeners();
+  }
+
+  void setEditingPage() {
+    Preferences.setPageIndex(NavigationPage.editing);
+    _navigationPage = NavigationPage.editing;
+    notifyListeners();
+  }
+
+  void setSettingsPage() {
+    Preferences.setPageIndex(NavigationPage.settings);
+    _navigationPage = NavigationPage.settings;
     notifyListeners();
   }
 

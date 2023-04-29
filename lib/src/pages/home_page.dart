@@ -68,11 +68,11 @@ class _HomePageState extends State<HomePage> with WindowListener {
     );
   }
 
-  Widget buildPages({required int index}) {
-    switch (index) {
-      case 0:
+  Widget buildPages({required NavigationPage page}) {
+    switch (page) {
+      case NavigationPage.editing:
         return _editingPage();
-      case 1:
+      case NavigationPage.settings:
         return const SettingsPage();
       default:
         return _editingPage();
@@ -115,11 +115,10 @@ class _HomePageState extends State<HomePage> with WindowListener {
                           const FilesNavigationDrawer(),
                           Expanded(
                             child: Consumer<NavigationProvider>(
-                              builder: (_, navigationProvider, __) {
-                                return buildPages(
-                                    index: navigationProvider.navigationIndex ??
-                                        0);
-                              },
+                              builder: (_, navigationProvider, __) =>
+                                  buildPages(
+                                      page: navigationProvider.navigationPage ??
+                                          NavigationPage.editing),
                             ),
                           ),
                         ],
@@ -130,10 +129,9 @@ class _HomePageState extends State<HomePage> with WindowListener {
                       Padding(
                         padding: const EdgeInsets.only(left: 128.0),
                         child: Consumer<NavigationProvider>(
-                          builder: (_, navigationProvider, __) {
-                            return buildPages(
-                                index: navigationProvider.navigationIndex ?? 0);
-                          },
+                          builder: (_, navigationProvider, __) => buildPages(
+                              page: navigationProvider.navigationPage ??
+                                  NavigationPage.editing),
                         ),
                       ),
                       Row(

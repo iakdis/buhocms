@@ -113,7 +113,7 @@ class _FileButtonState extends State<FileButton> {
       if (tabsProvider.tabs[i].value == widget.index) {
         tabIndex = i;
         tabsProvider.removeTab(tabIndex,
-            navIndex: navigationProvider.navigationIndex ?? 0);
+            page: navigationProvider.navigationPage ?? NavigationPage.editing);
       }
     }
 
@@ -135,7 +135,7 @@ class _FileButtonState extends State<FileButton> {
         Provider.of<FileNavigationProvider>(context, listen: false);
     final navigationProvider =
         Provider.of<NavigationProvider>(context, listen: false);
-    if ((navigationProvider.navigationIndex ?? 0) > 0) return;
+    if (navigationProvider.navigationPage == NavigationPage.settings) return;
     final tabsProvider = Provider.of<TabsProvider>(context, listen: false);
     tabsProvider.scrollToTab(
         fileNavigationIndex: fileNavigationProvider.fileNavigationIndex);
@@ -247,7 +247,8 @@ class _FileButtonState extends State<FileButton> {
                 for (var i = 0; i < tabsProvider.tabs.length; i++) {
                   if (tabsProvider.tabs[i].value == widget.index) {
                     tabsProvider.removeTab(i,
-                        navIndex: navigationProvider.navigationIndex ?? 0);
+                        page: navigationProvider.navigationPage ??
+                            NavigationPage.editing);
                   }
                 }
               },

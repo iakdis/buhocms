@@ -111,7 +111,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
 
       fileNavigationProvider.setFileNavigationIndex(-1);
       await fileNavigationProvider.setInitialTexts();
-      navigationProvider.setNavigationIndex(0);
+      navigationProvider.setEditingPage();
     }
   }
 
@@ -177,7 +177,7 @@ class _DirectoryButtonState extends State<DirectoryButton> {
 
                   fileNavigationProvider.setFileNavigationIndex(-1);
                   await fileNavigationProvider.setInitialTexts();
-                  navigationProvider.setNavigationIndex(0);
+                  navigationProvider.setEditingPage();
                 }
               },
               child: Text(Localization.appLocalizations().yes),

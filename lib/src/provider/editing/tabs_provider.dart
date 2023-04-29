@@ -2,6 +2,7 @@ import 'package:buhocms/src/utils/preferences.dart';
 import 'package:flutter/material.dart';
 
 import '../../logic/files.dart';
+import '../navigation/navigation_provider.dart';
 
 const tabWidth = 180.0;
 
@@ -51,13 +52,14 @@ class TabsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeTab(int index, {int navIndex = 0}) async {
+  void removeTab(int index,
+      {NavigationPage page = NavigationPage.editing}) async {
     var tabs = _tabs;
     tabs.removeAt(index);
 
     await setTabs(tabs, updateFiles: true);
 
-    if ((navIndex) == 0) scrollToTabIndex(tabIndex: index - 1);
+    if (page == NavigationPage.editing) scrollToTabIndex(tabIndex: index - 1);
 
     notifyListeners();
   }

@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../i18n/l10n.dart';
+import '../../provider/navigation/navigation_provider.dart';
 import '../../provider/navigation/navigation_size_provider.dart';
 import '../../ssg/ssg.dart';
 import '../resize_bar.dart';
@@ -94,7 +95,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
             icon: Icons.edit,
             iconUnselected: Icons.edit_outlined,
             buttonText: Localization.appLocalizations().editingPage,
-            index: 0,
+            page: NavigationPage.editing,
           ),
         ),
         divider(),
@@ -214,7 +215,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                     iconUnselected: Icons.settings_outlined,
                                     buttonText: Localization.appLocalizations()
                                         .settings,
-                                    index: 1,
+                                    page: NavigationPage.settings,
                                   ),
                                 ),
                               ],

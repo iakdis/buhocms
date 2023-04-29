@@ -5,6 +5,7 @@ import 'package:buhocms/src/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../provider/navigation/navigation_provider.dart';
 import '../ssg/frontmatter.dart';
 import '../widgets/file_navigation/buttons/sort_button.dart';
 
@@ -14,7 +15,7 @@ class Preferences {
       const MapEntry(prefLanguage, ''),
       MapEntry(prefThemeMode, ThemeMode.system.name),
       const MapEntry(prefColorScheme, 27),
-      const MapEntry(prefPageIndex, 0),
+      MapEntry(prefPageIndex, NavigationPage.editing.index),
       const MapEntry(prefCurrentFileIndex, -1),
       const MapEntry(prefNavigationSize, 64.0),
       const MapEntry(prefFileNavigationSize, 64.0),
@@ -120,9 +121,10 @@ class Preferences {
   static int getColorSchemeIndex() => getPreferencesEntry(prefColorScheme);
 
   //Page Index
-  static Future<void> setPageIndex(int index) async =>
-      await setPreferences(prefPageIndex, index);
-  static int getPageIndex() => getPreferencesEntry(prefPageIndex);
+  static Future<void> setPageIndex(NavigationPage page) async =>
+      await setPreferences(prefPageIndex, page.index);
+  static NavigationPage getPageIndex() =>
+      NavigationPage.values.elementAt(getPreferencesEntry(prefPageIndex));
 
   //File Index
   static Future<void> setFileIndex(int index) async =>

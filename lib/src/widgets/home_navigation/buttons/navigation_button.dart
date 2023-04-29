@@ -11,14 +11,14 @@ class NavigationButton extends StatelessWidget {
     required this.icon,
     required this.iconUnselected,
     required this.buttonText,
-    required this.index,
+    required this.page,
   });
 
   final bool isExtended;
   final IconData icon;
   final IconData iconUnselected;
   final String buttonText;
-  final int index;
+  final NavigationPage page;
 
   Widget navigationButton() {
     return LayoutBuilder(builder: (context, constraints) {
@@ -28,7 +28,7 @@ class NavigationButton extends StatelessWidget {
             builder: (context, navigationProvider, _) {
           return InkWell(
             borderRadius: BorderRadius.circular(50),
-            onTap: index == navigationProvider.navigationIndex
+            onTap: page == navigationProvider.navigationPage
                 ? null
                 : () {
                     checkUnsavedBeforeFunction(
@@ -37,7 +37,7 @@ class NavigationButton extends StatelessWidget {
                           final navigationProvider =
                               Provider.of<NavigationProvider>(context,
                                   listen: false);
-                          navigationProvider.setNavigationIndex(index);
+                          navigationProvider.setNavigationPage(page);
                         });
                   },
             child: Padding(
@@ -52,7 +52,7 @@ class NavigationButton extends StatelessWidget {
                   Icon(
                     icon,
                     size: 32.0,
-                    color: index == navigationProvider.navigationIndex
+                    color: page == navigationProvider.navigationPage
                         ? Theme.of(context).colorScheme.primaryContainer
                         : Theme.of(context).colorScheme.onPrimary,
                   ),
@@ -67,8 +67,7 @@ class NavigationButton extends StatelessWidget {
                             return Text(
                               buttonText,
                               style: TextStyle(
-                                color: index ==
-                                        navigationProvider.navigationIndex
+                                color: page == navigationProvider.navigationPage
                                     ? Theme.of(context)
                                         .colorScheme
                                         .primaryContainer
@@ -81,7 +80,7 @@ class NavigationButton extends StatelessWidget {
                     ),
                 ],
               ),
-            ), //this.index = index),
+            ),
           );
         }),
       );
