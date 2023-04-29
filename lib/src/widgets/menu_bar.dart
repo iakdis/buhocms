@@ -140,6 +140,17 @@ List<BarButton> getMenuBarMenus({
       submenu: SubMenu(
         menuItems: [
           MenuButton(
+            onTap: () => context.read<NavigationProvider>().setEditingPage(),
+            icon: const Icon(Icons.edit),
+            text: menuButtonText(Localization.appLocalizations().editingPage),
+          ),
+          MenuButton(
+            onTap: () => context.read<NavigationProvider>().setSettingsPage(),
+            icon: const Icon(Icons.settings),
+            text: menuButtonText(Localization.appLocalizations().settings),
+          ),
+          const MenuDivider(),
+          MenuButton(
             onTap: () => refreshFiles(context: context),
             icon: const Icon(Icons.refresh),
             text: menuButtonText(Localization.appLocalizations().refreshFiles),
