@@ -245,56 +245,71 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                         constraints: BoxConstraints(
                             minHeight: constraints.maxHeight - 10.0),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            _expandButton(),
-                            Divider(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary),
-                            CustomTooltip(
-                              message: Localization.appLocalizations().sortBy,
-                              child: SortButton(
-                                  setStateCallback: setStateCallback,
-                                  isExtended:
-                                      navigationSizeProvider.isExtendedFileNav),
-                            ),
-                            Divider(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary),
-                            CustomTooltip(
-                              message: Localization.appLocalizations()
-                                  .parentFolderButton_Toolip(savePath.substring(
-                                      savePath.indexOf(contentFolder))),
-                              child: ParentFolderButton(
-                                  setStateCallback: setStateCallback,
-                                  isExtended:
-                                      navigationSizeProvider.isExtendedFileNav),
-                            ),
-                            SizedBox(
-                              height: constraints.maxHeight > mobileWidth
-                                  ? constraints.maxHeight - 250
-                                  : 250,
-                              child: Scrollbar(
-                                controller: _listScrollController,
-                                thumbVisibility: true,
-                                child: SingleChildScrollView(
-                                  controller: _listScrollController,
-                                  child: Consumer<NavigationProvider>(
-                                      builder: (_, __, ___) {
-                                    return _listFilesAndDirectories(
-                                        navigationSizeProvider);
-                                  }),
+                            Column(
+                              children: [
+                                _expandButton(),
+                                Divider(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary),
+                                CustomTooltip(
+                                  message:
+                                      Localization.appLocalizations().sortBy,
+                                  child: SortButton(
+                                      setStateCallback: setStateCallback,
+                                      isExtended: navigationSizeProvider
+                                          .isExtendedFileNav),
                                 ),
-                              ),
+                                Divider(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary),
+                                CustomTooltip(
+                                  message: Localization.appLocalizations()
+                                      .parentFolderButton_Toolip(
+                                          savePath.substring(
+                                              savePath.indexOf(contentFolder))),
+                                  child: ParentFolderButton(
+                                      setStateCallback: setStateCallback,
+                                      isExtended: navigationSizeProvider
+                                          .isExtendedFileNav),
+                                ),
+                                SizedBox(
+                                  height: constraints.maxHeight > mobileWidth
+                                      ? constraints.maxHeight - 250
+                                      : 250,
+                                  child: Scrollbar(
+                                    controller: _listScrollController,
+                                    thumbVisibility: true,
+                                    child: SingleChildScrollView(
+                                      controller: _listScrollController,
+                                      child: Consumer<NavigationProvider>(
+                                          builder: (_, __, ___) {
+                                        return _listFilesAndDirectories(
+                                            navigationSizeProvider);
+                                      }),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Divider(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary),
-                            CustomTooltip(
-                              message: Localization.appLocalizations().newPost,
-                              child: CreateNewButton(
-                                  mounted: mounted,
-                                  isExtended:
-                                      navigationSizeProvider.isExtendedFileNav),
+                            Column(
+                              children: [
+                                Divider(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary),
+                                CustomTooltip(
+                                  message:
+                                      Localization.appLocalizations().newPost,
+                                  child: CreateNewButton(
+                                      mounted: mounted,
+                                      isExtended: navigationSizeProvider
+                                          .isExtendedFileNav),
+                                ),
+                              ],
                             ),
                           ],
                         ),

@@ -24,4 +24,4 @@ const String prefDraggableMode = 'draggableMode';
 const String prefTabs = 'tabs';
 
 // Layout
-const int mobileWidth = 600;
+const int mobileWidth = 900;
