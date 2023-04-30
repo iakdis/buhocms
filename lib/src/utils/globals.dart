@@ -16,6 +16,7 @@ const String prefIsFrontmatterGUIMode = 'isFrontmatterGUIMode';
 const String prefSortMode = 'sortMode';
 
 const String prefFrontMatterAddList = 'frontMatterAddList';
+const String prefSSGContentList = 'SSGContentList';
 const String prefNavigationSize = 'navigationSize';
 const String prefFileNavigationSize = 'fileNavigationSize';
 

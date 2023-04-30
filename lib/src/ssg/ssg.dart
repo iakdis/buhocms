@@ -31,22 +31,22 @@ class SSG {
   static Future<void> setSSG(SSGTypes ssg) async =>
       await Preferences.setSSG(ssg.name);
 
+  static Map<String, String> defaultSSGContentList() {
+    return {
+      SSGTypes.hugo.name: 'content',
+      SSGTypes.jekyll.name: '_posts',
+      SSGTypes.eleventy.name: 'posts',
+    };
+  }
+
   static String getSSGContentFolder({
     required SSGTypes ssg,
     required bool pathSeparator,
   }) {
-    String folder;
+    final contentSSGList = Preferences.getSSGContentList();
 
-    switch (ssg) {
-      case SSGTypes.hugo:
-        folder = 'content';
-        if (pathSeparator) folder = '${Platform.pathSeparator}$folder';
-        break;
-      case SSGTypes.jekyll:
-        folder = '_posts';
-        if (pathSeparator) folder = '${Platform.pathSeparator}$folder';
-        break;
-    }
+    var folder = contentSSGList[ssg] ?? 'content';
+    if (pathSeparator) folder = '${Platform.pathSeparator}$folder';
 
     return folder;
   }

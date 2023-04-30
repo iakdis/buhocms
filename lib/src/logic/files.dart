@@ -12,12 +12,17 @@ import '../widgets/file_navigation/buttons/sort_button.dart';
 
 bool isHidden(FileSystemEntity entity) {
   final websitePath = Preferences.getSitePath() ?? '';
-  final path = entity.path.substring(
-      websitePath.length,
-      entity.path.length -
-          ((entity is File)
-              ? entity.path.split(Platform.pathSeparator).last.length
-              : 0));
+  String path = '';
+  try {
+    path = entity.path.substring(
+        websitePath.length,
+        entity.path.length -
+            ((entity is File)
+                ? entity.path.split(Platform.pathSeparator).last.length
+                : 0));
+  } catch (e) {
+    print('Exception: $e');
+  }
   return path.contains('.');
 }
 

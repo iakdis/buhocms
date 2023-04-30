@@ -244,6 +244,32 @@ class Preferences {
     return fromStringsToType;
   }
 
+  //SSG Content folder list
+  static Future<void> setSSGContentList(
+      Map<SSGTypes, String> frontMatterAddList) async {
+    Map<String, String> addListWithTypesStrings = {};
+    addListWithTypesStrings.addEntries(
+        frontMatterAddList.entries.map((e) => MapEntry(e.key.name, e.value)));
+
+    String mapToStr = json.encode(addListWithTypesStrings);
+    await setPreferences(prefSSGContentList, mapToStr);
+  }
+
+  static Map<SSGTypes, String> getSSGContentList() {
+    Map<String, String> defaultStringsAndTypesStrings = {
+      ...SSG.defaultSSGContentList()
+    };
+
+    Map strToMap = json.decode(getPreferencesEntry(prefSSGContentList) ??
+        json.encode(defaultStringsAndTypesStrings));
+
+    Map<SSGTypes, String> fromStringsToType = {};
+    fromStringsToType.addEntries(strToMap.entries
+        .map((e) => MapEntry(SSGTypes.values.byName(e.key), e.value)));
+
+    return fromStringsToType;
+  }
+
   //Tabs
   static Future<void> setTabs(List<MapEntry<String, int>> tabs) async {
     Map<String, int> tabsMap = {};

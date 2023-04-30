@@ -270,7 +270,10 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                                   message: Localization.appLocalizations()
                                       .parentFolderButton_Toolip(
                                           savePath.substring(
-                                              savePath.indexOf(contentFolder))),
+                                              !savePath.contains(contentFolder)
+                                                  ? 0
+                                                  : savePath
+                                                      .indexOf(contentFolder))),
                                   child: ParentFolderButton(
                                       setStateCallback: setStateCallback,
                                       isExtended: navigationSizeProvider
