@@ -267,77 +267,61 @@ class _OpenWebsiteState extends State<OpenWebsite> {
     final recentPaths = Preferences.getRecentSitePaths();
     final ssg = recentPaths.entries.toList()[index].value;
 
-    return Material(
-      child: InkWell(
-        onTap: () => open(sitePath: text, ssg: ssg),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(4.0, 4.0, 16.0, 4.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton<SSGTypes>(
-                      icon: Container(),
-                      value: ssg,
-                      items: SSGTypes.values
-                          .map((e) => DropdownMenuItem(
-                                value: e,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Tooltip(
-                                    message: SSG.getSSGName(e),
-                                    child: svg(
-                                      path:
-                                          'assets/images/${SSG.getSSGName(e).toLowerCase()}.svg',
-                                      size: 32,
-                                      semanticsLabel:
-                                          Localization.appLocalizations()
-                                              .currentSSG(SSG.getSSGName(e)),
-                                    ),
-                                  ),
-                                ),
-                              ))
-                          .toList(),
-                      onChanged: (option) async {
-                        if (option == null) return;
-                        final newRecentPaths = recentPaths;
-
-                        newRecentPaths[
-                            recentPaths.entries.toList()[index].key] = option;
-                        Preferences.setRecentSitePaths(newRecentPaths);
-                        setState(() {});
-                      },
-                      borderRadius: BorderRadius.circular(4.0),
+    return ListTile(
+      contentPadding: const EdgeInsets.fromLTRB(4.0, 4.0, 16.0, 4.0),
+      onTap: () => open(sitePath: text, ssg: ssg),
+      title: Text(text, style: const TextStyle(fontSize: 16)),
+      leading: DropdownButtonHideUnderline(
+        child: DropdownButton<SSGTypes>(
+          icon: Container(),
+          value: ssg,
+          items: SSGTypes.values
+              .map((e) => DropdownMenuItem(
+                    value: e,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Tooltip(
+                        message: SSG.getSSGName(e),
+                        child: svg(
+                          path:
+                              'assets/images/${SSG.getSSGName(e).toLowerCase()}.svg',
+                          size: 32,
+                          semanticsLabel: Localization.appLocalizations()
+                              .currentSSG(SSG.getSSGName(e)),
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8.0),
-                  Text(text, style: const TextStyle(fontSize: 16)),
-                ],
-              ),
-              IconButton(
-                tooltip: Localization.appLocalizations().remove,
-                splashRadius: 20,
-                constraints: const BoxConstraints(minHeight: 48),
-                onPressed: () {
-                  final entries = recentPaths.entries.toList();
-                  final newMap = <String, SSGTypes>{};
+                  ))
+              .toList(),
+          onChanged: (option) async {
+            if (option == null) return;
+            final newRecentPaths = recentPaths;
 
-                  entries.removeAt(index);
-                  for (final e in entries) {
-                    newMap.addEntries([e]);
-                  }
-                  Preferences.setRecentSitePaths(newMap);
-                  setState(() {});
-                },
-                icon: const Icon(Icons.close),
-                padding: EdgeInsets.zero,
-                iconSize: 20,
-              ),
-            ],
-          ),
+            newRecentPaths[recentPaths.entries.toList()[index].key] = option;
+            Preferences.setRecentSitePaths(newRecentPaths);
+            setState(() {});
+          },
+          borderRadius: BorderRadius.circular(4.0),
         ),
+      ),
+      trailing: IconButton(
+        tooltip: Localization.appLocalizations().remove,
+        splashRadius: 20,
+        constraints: const BoxConstraints(minHeight: 48),
+        onPressed: () {
+          final entries = recentPaths.entries.toList();
+          final newMap = <String, SSGTypes>{};
+
+          entries.removeAt(index);
+          for (final e in entries) {
+            newMap.addEntries([e]);
+          }
+          Preferences.setRecentSitePaths(newMap);
+          setState(() {});
+        },
+        icon: const Icon(Icons.close),
+        padding: EdgeInsets.zero,
+        iconSize: 20,
       ),
     );
   }
