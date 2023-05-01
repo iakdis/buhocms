@@ -177,6 +177,63 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
     );
   }
 
+  List<Widget> fileNavigationWidgets({
+    required NavigationSizeProvider navigationSizeProvider,
+    required String savePath,
+    required String contentFolder,
+    required BoxConstraints constraints,
+  }) {
+    return [
+      Column(
+        children: [
+          _expandButton(),
+          Divider(color: Theme.of(context).colorScheme.onSecondary),
+          CustomTooltip(
+            message: Localization.appLocalizations().sortBy,
+            child: SortButton(
+                setStateCallback: setStateCallback,
+                isExtended: navigationSizeProvider.isExtendedFileNav),
+          ),
+          Divider(color: Theme.of(context).colorScheme.onSecondary),
+          CustomTooltip(
+            message: Localization.appLocalizations().parentFolderButton_Toolip(
+                savePath.substring(!savePath.contains(contentFolder)
+                    ? 0
+                    : savePath.indexOf(contentFolder))),
+            child: ParentFolderButton(
+                setStateCallback: setStateCallback,
+                isExtended: navigationSizeProvider.isExtendedFileNav),
+          ),
+          SizedBox(
+            height:
+                constraints.maxHeight > 600 ? constraints.maxHeight - 250 : 350,
+            child: Scrollbar(
+              controller: _listScrollController,
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                controller: _listScrollController,
+                child: Consumer<NavigationProvider>(builder: (_, __, ___) {
+                  return _listFilesAndDirectories(navigationSizeProvider);
+                }),
+              ),
+            ),
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          Divider(color: Theme.of(context).colorScheme.onSecondary),
+          CustomTooltip(
+            message: Localization.appLocalizations().newPost,
+            child: CreateNewButton(
+                mounted: mounted,
+                isExtended: navigationSizeProvider.isExtendedFileNav),
+          ),
+        ],
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -246,75 +303,12 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
                             minHeight: constraints.maxHeight - 10.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                _expandButton(),
-                                Divider(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
-                                CustomTooltip(
-                                  message:
-                                      Localization.appLocalizations().sortBy,
-                                  child: SortButton(
-                                      setStateCallback: setStateCallback,
-                                      isExtended: navigationSizeProvider
-                                          .isExtendedFileNav),
-                                ),
-                                Divider(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
-                                CustomTooltip(
-                                  message: Localization.appLocalizations()
-                                      .parentFolderButton_Toolip(
-                                          savePath.substring(
-                                              !savePath.contains(contentFolder)
-                                                  ? 0
-                                                  : savePath
-                                                      .indexOf(contentFolder))),
-                                  child: ParentFolderButton(
-                                      setStateCallback: setStateCallback,
-                                      isExtended: navigationSizeProvider
-                                          .isExtendedFileNav),
-                                ),
-                                SizedBox(
-                                  height: constraints.maxHeight > mobileWidth
-                                      ? constraints.maxHeight - 250
-                                      : 250,
-                                  child: Scrollbar(
-                                    controller: _listScrollController,
-                                    thumbVisibility: true,
-                                    child: SingleChildScrollView(
-                                      controller: _listScrollController,
-                                      child: Consumer<NavigationProvider>(
-                                          builder: (_, __, ___) {
-                                        return _listFilesAndDirectories(
-                                            navigationSizeProvider);
-                                      }),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Divider(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary),
-                                CustomTooltip(
-                                  message:
-                                      Localization.appLocalizations().newPost,
-                                  child: CreateNewButton(
-                                      mounted: mounted,
-                                      isExtended: navigationSizeProvider
-                                          .isExtendedFileNav),
-                                ),
-                              ],
-                            ),
-                          ],
+                          children: fileNavigationWidgets(
+                            navigationSizeProvider: navigationSizeProvider,
+                            savePath: savePath,
+                            contentFolder: contentFolder,
+                            constraints: constraints,
+                          ),
                         ),
                       ),
                     ),
