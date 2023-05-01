@@ -453,17 +453,8 @@ class SSG {
     // Create post
     switch (ssg) {
       case SSGTypes.hugo:
-        var afterContent = '';
-        var finalPathAndName = '';
-        afterContent =
-            path.substring(path.indexOf(contentFolder) + contentFolder.length);
-
-        if (afterContent.isNotEmpty) {
-          afterContent = afterContent.replaceAll(Platform.pathSeparator, '');
-          finalPathAndName = '$afterContent${Platform.pathSeparator}$name.md';
-        } else {
-          finalPathAndName = '$name.md';
-        }
+        final finalPathAndName =
+            '$contentFolder${Platform.pathSeparator}$name.md';
 
         const executable = 'hugo';
         final allFlags = 'new $finalPathAndName $flags';
@@ -519,7 +510,7 @@ class SSG {
     tabs.add(MapEntry(finalPath, fileNavigationProvider.fileNavigationIndex));
     await tabsProvider.setTabs(tabs, updateFiles: true);
 
-    if ((navigationProvider.navigationIndex ?? 0) > 0) return;
+    if (navigationProvider.navigationPage == NavigationPage.settings) return;
     tabsProvider.scrollToTab(
         fileNavigationIndex: fileNavigationProvider.fileNavigationIndex);
   }

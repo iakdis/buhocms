@@ -73,7 +73,12 @@ class ParentFolderButton extends StatelessWidget {
             ),
           ),
           onTap: () {
-            if (savePathSplit.contains(contentFolder)) {
+            final websitePathToCheck =
+                '${Preferences.getSitePath()}${Platform.pathSeparator}$contentFolder';
+            final newPath = savePath.substring(
+                0, savePath.length - savePathSplit.length - 1);
+
+            if (!newPath.contains(websitePathToCheck)) {
               showSnackbar(
                 text: Localization.appLocalizations()
                     .alreadyAtHighestLevel(contentFolder),

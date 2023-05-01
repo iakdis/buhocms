@@ -203,6 +203,13 @@
     "themesAvailableFor": "支持： {ssg}",
     "flatpakPermission": "没有Flatpak许可",
     "flatpakPermission_Description": "为了在主机系统上运行程序，BuhoCMS需要 \"--talk-name=org.freedesktop.Flatpak\"权限。要给予这个权限，在你的终端运行以下命令：\n\n{command}",
+    "changedContentFolderTo": "将{ssg}内容文件夹从{oldFolder}改为{newFolder}。",
+    "resetSSGContent": "将{ssg}内容文件夹重置为默认",
+    "resetSSGContent_description": "你确定你想把{ssg}内容文件夹重置为默认文件夹，\"{defaultFolder}\"？",
+    "changeSSGContent": "更改内容文件夹",
+    "changeSSGContent_description": "改变特定静态网站生成器的内容文件夹。它可以在任何时候被重置为BuhoCMS设置的各自默认文件夹。",
+    "resetSSG": "重置 {ssg}",
+    "contentFolderSSG": "{ssg}内容文件夹",
 
     "settings": "设置",
     "appSettings": "应用设置",

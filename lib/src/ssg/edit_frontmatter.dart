@@ -13,7 +13,12 @@ Future<Map<String, FrontmatterType>> automaticallyDetectFrontmatter() async {
   final typeMap = <String, FrontmatterType>{};
 
   for (var i = 0; i < getFiles.length; i++) {
-    final allLines = getFiles[i].readAsLinesSync();
+    List<String> allLines = [];
+    try {
+      allLines = getFiles[i].readAsLinesSync();
+    } catch (e) {
+      print('Exception: $e');
+    }
     final frontmatterLines = <String>[];
 
     var start = 0;

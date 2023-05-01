@@ -433,6 +433,41 @@
          "command": { "type": "String" }
       }
     },
+    "changedContentFolderTo": "Changed {ssg} content folder from {oldFolder} to {newFolder}",
+    "@changedContentFolderTo": {
+     "placeholders": {
+        "ssg": { "type": "String" },
+        "oldFolder": { "type": "String" },
+        "newFolder": { "type": "String" }
+      }
+    },
+    "resetSSGContent": "Reset {ssg} content folder to default",
+    "@resetSSGContent": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
+    "resetSSGContent_description": "Are you sure you want to reset the {ssg} content folder to the default folder \"{defaultFolder}\"?",
+    "@resetSSGContent_description": {
+     "placeholders": {
+        "ssg": { "type": "String" },
+        "defaultFolder": { "type": "String" }
+      }
+    },
+    "changeSSGContent": "Change content folders",
+    "changeSSGContent_description": "Change the content folders of a specific static site generator. It can be reset to the respective default folder set by BuhoCMS at any time.",
+    "resetSSG": "Reset {ssg}",
+    "@resetSSG": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
+    "contentFolderSSG": "{ssg} content folder",
+    "@contentFolderSSG": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
 
     "settings": "Settings",
     "appSettings": "APP SETTINGS",

@@ -202,6 +202,13 @@
     "themesAvailableFor": "Unterstützt: {ssg}",
     "flatpakPermission": "Keine Flatpak Berechtigung",
     "flatpakPermission_Description": "Um Programme auf dem Hostsystem ausführen zu können, benötigt BuhoCMS die Berechtigung \"--talk-name=org.freedesktop.Flatpak\". Um diese Berechtigung zu erteilen, führe den folgenden Befehl in deinem Terminal aus:\n\n{command}",
+    "changedContentFolderTo": "{ssg} Content-Ordner von {oldFolder} zu {newFolder} geändert",
+    "resetSSGContent": "{ssg} Content-Ordner zum Standard zurücksetzen",
+    "resetSSGContent_description": "Bist du sicher, den {ssg} Content-Ordner zum Standard Ordner \"{defaultFolder}\" zurückzusetzen?",
+    "changeSSGContent": "Content-Ordner ändern",
+    "changeSSGContent_description": "Ändere den Content-Ordner eines bestimmten Static-Site-Generators. Er kann zu jeder Zeit zum jeweiligen Standard Ordner, der in BuhoCMS gilt, zurückgesetzt werden.",
+    "resetSSG": "{ssg} zurücksetzen",
+    "contentFolderSSG": "{ssg} Content-Ordner",
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",

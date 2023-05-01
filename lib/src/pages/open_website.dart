@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../i18n/l10n.dart';
 import '../provider/app/shell_provider.dart';
+import '../provider/navigation/file_navigation_provider.dart';
 import '../provider/navigation/navigation_provider.dart';
 import '../ssg/ssg.dart';
 import '../utils/preferences.dart';
@@ -96,8 +97,8 @@ class _OpenWebsiteState extends State<OpenWebsite> {
     Provider.of<ShellProvider>(context, listen: false).updateShell();
 
     Navigator.of(context).pop();
-    Provider.of<NavigationProvider>(context, listen: false)
-        .notifyAllListeners();
+    context.read<NavigationProvider>().notifyAllListeners();
+    context.read<FileNavigationProvider>().notifyAllListeners();
   }
 
   Widget stepper() {

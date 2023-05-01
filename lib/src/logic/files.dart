@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:buhocms/src/provider/editing/editing_provider.dart';
+import 'package:buhocms/src/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,7 +22,7 @@ bool isHidden(FileSystemEntity entity) {
                 ? entity.path.split(Platform.pathSeparator).last.length
                 : 0));
   } catch (e) {
-    print('Exception: $e');
+    showSnackbar(text: 'Exception: $e', seconds: 5);
   }
   return path.contains('.');
 }
@@ -94,9 +95,7 @@ Future<List<File>> getAllFiles({BuildContext? context}) async {
   final contentFolder = SSG.getSSGContentFolder(
       ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
   Directory fileDirectory = Directory(Preferences.getCurrentPath().substring(
-      0,
-      Preferences.getCurrentPath().indexOf(contentFolder) +
-          contentFolder.length));
+      0, Preferences.getCurrentPath().length - contentFolder.length));
 
   if (!fileDirectory.existsSync()) return [];
 

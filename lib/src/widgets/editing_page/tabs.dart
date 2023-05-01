@@ -149,7 +149,9 @@ class _TabState extends State<Tab> {
         ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
 
     return CustomTooltip(
-      message: widget.title.substring(widget.title.indexOf(contentFolder)),
+      message: widget.title.substring(widget.title.contains(contentFolder)
+          ? widget.title.indexOf(contentFolder)
+          : 0),
       child: ReorderableDragStartListener(
         index: widget.index,
         child: GestureDetector(

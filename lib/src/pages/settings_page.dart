@@ -4,6 +4,7 @@ import 'package:buhocms/src/app.dart';
 import 'package:buhocms/src/provider/app/locale_provider.dart';
 import 'package:buhocms/src/provider/navigation/navigation_provider.dart';
 import 'package:buhocms/src/ssg/edit_frontmatter.dart';
+import 'package:buhocms/src/ssg/edit_ssg.dart';
 import 'package:buhocms/src/ssg/ssg.dart';
 import 'package:buhocms/src/utils/preferences.dart';
 import 'package:file_picker/file_picker.dart';
@@ -428,6 +429,24 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
+  Widget _changeSSGContentTile() {
+    return Consumer<NavigationProvider>(builder: (context, _, __) {
+      return ListTile(
+        title: Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Text(Localization.appLocalizations().changeSSGContent),
+            const EditSSGButton(),
+          ],
+        ),
+        subtitle: Text(
+          Localization.appLocalizations().changeSSGContent_description,
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer2<LocaleProvider, NavigationProvider>(
@@ -455,6 +474,8 @@ class _SettingsPageState extends State<SettingsPage> {
               _hugoThemeTile(),
               const Divider(),
               _headingTile(Localization.appLocalizations().ssgSettings),
+              _changeSSGContentTile(),
+              const Divider(),
               _editFrontmatterListTile(),
               // const Divider(),
               // _showExperimentalTile(),

@@ -92,4 +92,6 @@ class FileNavigationProvider extends ChangeNotifier {
   void addListenerController(Function() function) {
     _controller.addListener(function);
   }
+
+  void notifyAllListeners() => notifyListeners();
 }
