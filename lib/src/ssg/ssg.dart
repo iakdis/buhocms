@@ -23,6 +23,7 @@ import '../widgets/snackbar.dart';
 enum SSGTypes {
   hugo,
   jekyll,
+  eleventy,
 }
 
 class SSG {
@@ -60,6 +61,8 @@ class SSG {
         return '$websitePath${Platform.pathSeparator}public';
       case SSGTypes.jekyll:
         return '$websitePath${Platform.pathSeparator}_site';
+      case SSGTypes.eleventy:
+        return '$websitePath${Platform.pathSeparator}_site';
     }
   }
 
@@ -75,6 +78,8 @@ class SSG {
         return 'http://localhost:1313';
       case SSGTypes.jekyll:
         return 'http://localhost:4000';
+      case SSGTypes.eleventy:
+        return 'http://localhost:8080';
     }
   }
 
@@ -101,6 +106,10 @@ class SSG {
       case SSGTypes.jekyll:
         command = 'bundle exec jekyll build';
         exampleFlags = '--drafts';
+        break;
+      case SSGTypes.eleventy:
+        command = 'npx';
+        exampleFlags = '--help';
         break;
     }
 
@@ -155,6 +164,11 @@ class SSG {
         executable = 'bundle';
         commandFlags = 'exec jekyll build $flags'.split(' ');
         break;
+      case SSGTypes.eleventy:
+        executable = 'npx';
+        commandFlags =
+            '@11ty/eleventy${flags.isNotEmpty ? " $flags" : ""}'.split(' ');
+        break;
     }
 
     checkProgramInstalled(
@@ -195,6 +209,10 @@ class SSG {
       case SSGTypes.jekyll:
         command = 'bundle exec jekyll serve';
         exampleFlags = '--livereload';
+        break;
+      case SSGTypes.eleventy:
+        command = 'npx @11ty/eleventy --serve';
+        exampleFlags = '--help';
         break;
     }
 
@@ -249,6 +267,10 @@ class SSG {
         executable = 'bundle';
         commandFlags = 'exec jekyll serve $flags'.split(' ');
         break;
+      case SSGTypes.eleventy:
+        executable = 'npx';
+        commandFlags = '@11ty/eleventy --serve $flags'.split(' ');
+        break;
     }
     final shellProvider = context.read<ShellProvider>();
     checkProgramInstalled(
@@ -297,6 +319,11 @@ class SSG {
         case SSGTypes.jekyll:
           final date = DateFormat('yyyy-MM-dd').format(DateTime.now());
           defaultName = '$date-my-new-post';
+          showTerminal = false;
+          canOverride = false;
+          break;
+        case SSGTypes.eleventy:
+          defaultName = 'my-post';
           showTerminal = false;
           canOverride = false;
           break;
@@ -483,6 +510,17 @@ class SSG {
         }
         successFunction();
         break;
+      case SSGTypes.eleventy:
+        final fileName = '$path${Platform.pathSeparator}$name.md';
+        if (!await Directory(path).exists()) await Directory(path).create();
+
+        try {
+          await File(fileName).create();
+        } catch (e) {
+          showSnackbar(text: 'Exception: $e', seconds: 10);
+        }
+        successFunction();
+        break;
     }
 
     // Close dialog
@@ -555,7 +593,26 @@ class SSG {
           runCommand(context, executable, allFlags, sitePath);
         }
         break;
+      case SSGTypes.eleventy:
+        executable = 'mkdir';
+        allFlags = siteName;
 
+        runCommand(context, executable, allFlags, sitePath);
+
+        executable = 'npm';
+        allFlags = 'init -y';
+        if (flags.isNotEmpty) allFlags += ' $flags';
+
+        runCommand(context, executable, allFlags,
+            '$sitePath${Platform.pathSeparator}$siteName');
+
+        executable = 'npm';
+        allFlags = 'install @11ty/eleventy --save-dev';
+        if (flags.isNotEmpty) allFlags += ' $flags';
+
+        runCommand(context, executable, allFlags,
+            '$sitePath${Platform.pathSeparator}$siteName');
+        break;
     }
   }
 
@@ -565,6 +622,8 @@ class SSG {
         return 'hugo new site ';
       case SSGTypes.jekyll:
         return 'jekyll new ';
+      case SSGTypes.eleventy:
+        return 'npm install @11ty/eleventy --save-dev ';
     }
   }
 
@@ -574,6 +633,8 @@ class SSG {
         return '"hugo new site my-website"';
       case SSGTypes.jekyll:
         return '"jekyll new myblog"';
+      case SSGTypes.eleventy:
+        return 'npm install @11ty/eleventy --save-dev my-blog';
     }
   }
 
@@ -583,6 +644,8 @@ class SSG {
         return 'Hugo';
       case SSGTypes.jekyll:
         return 'Jekyll';
+      case SSGTypes.eleventy:
+        return '11ty';
     }
   }
 
@@ -592,6 +655,8 @@ class SSG {
         return ['hugo'];
       case SSGTypes.jekyll:
         return ['jekyll'];
+      case SSGTypes.eleventy:
+        return ['npm', 'npx'];
     }
   }
 }

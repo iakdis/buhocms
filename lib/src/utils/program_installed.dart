@@ -29,6 +29,7 @@ Future<String?> checkProgramInstalled({
     switch (ssg) {
       case SSGTypes.hugo:
       case SSGTypes.jekyll:
+      case SSGTypes.eleventy:
         final flatpak = await isFlatpak();
         if (flatpak) {
           final flags = <String>[];

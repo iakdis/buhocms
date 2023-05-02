@@ -669,7 +669,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         color: Theme.of(context).colorScheme.onBackground,
       ),
       label: Text(
-        path.substring(path.indexOf(contentFolder)),
+        path.substring(
+            path.contains(contentFolder) ? path.indexOf(contentFolder) : 0),
         style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
       ),
     );
