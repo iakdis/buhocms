@@ -1,4 +1,5 @@
 import 'package:buhocms/src/provider/editing/frontmatter_provider.dart';
+import 'package:buhocms/src/provider/navigation/file_navigation_provider.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -22,6 +23,7 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
   void _addFrontMatter(
       {required String frontmatter, required FrontmatterType type}) {
     final frontmatterProvider = context.read<FrontmatterProvider>();
+    final fileNavigationProvider = context.read<FileNavigationProvider>();
 
     String? newValue;
     final DateFormat dateFormatter = DateFormat('yyyy-MM-dd');
@@ -41,7 +43,15 @@ class _AddFrontmatterButtonState extends State<AddFrontmatterButton> {
         break;
     }
 
-    frontmatterProvider.add(MapEntry(frontmatter, newValue));
+    final frontmatterLines = frontmatterProvider.frontmatterLines;
+    frontmatterLines.add(MapEntry(frontmatter, newValue));
+
+    final finalFrontmatterLines =
+        frontmatterLines.map((e) => '${e.key}: ${e.value}').toList();
+    final newFrontmatterText = '---\n${finalFrontmatterLines.join('\n')}\n---';
+
+    frontmatterProvider.set(frontmatterLines);
+    fileNavigationProvider.setFrontMatterText(newFrontmatterText);
 
     showSnackbar(
       text: Localization.appLocalizations()

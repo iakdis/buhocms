@@ -7,8 +7,6 @@ class FrontmatterProvider extends ChangeNotifier {
   void set(List<MapEntry> newFrontmatterLines) =>
       _frontmatterLines = newFrontmatterLines;
 
-  void add(MapEntry<dynamic, dynamic> value) => _frontmatterLines.add(value);
-
   void insert(int index, MapEntry<dynamic, dynamic> element) =>
       _frontmatterLines.insert(index, element);
 
