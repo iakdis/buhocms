@@ -56,6 +56,18 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.7.0" date="2023-05-03">
+      <description>
+        <p>Release 0.7.0 of BuhoCMS</p>
+        <ul>
+	       <li>New: Add 11ty support</li>
+          <li>New: Change SSG specific content folder inside BuhoCMS</li>
+          <li>New: Add editing and settings page buttons to the menu bar</li>
+          <li>Fix: Add front matter when having 0 entries</li>
+          <li>Various other improvements, bug fixes and localization changes</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.2" date="2023-04-24">
       <description>
         <p>Release 0.6.2 of BuhoCMS</p>

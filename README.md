@@ -1,6 +1,6 @@
 
-## 🌟 New release: v0.6.2 🌟
-### Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.6.2)!
+## 🌟 New release: v0.7.0 🌟
+### Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.7.0)!
 
 <br>
 
@@ -215,7 +215,8 @@ Feel free to send in a [pull request](https://github.com/iakmds/buhocms/pulls)! 
 
 **Project:**
   - [ ] Support more static site generators
-    - [x] [Jekyll](https://jekyllrb.com/) support (v.0.6.0)
+    - [x] [Jekyll](https://jekyllrb.com/) support (v0.6.0)
+    - [x] [11ty](https://11ty.dev/) support (v0.7.0)
   - [ ] More supported languages (See [#translating](#translating) above)
   - [ ] [Your features](https://github.com/iakmds/buhocms/issues)
 
