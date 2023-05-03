@@ -3,7 +3,7 @@ Version=1.0
 Type=Application
 
 Name=BuhoCMS
-Comment=A local CMS for Hugo and Jekyll static sites
+Comment=A local CMS for static site generators
 Categories=Office;
 Icon=/usr/share/icons/buhocms.svg
 

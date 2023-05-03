@@ -107,7 +107,7 @@
     "nowSelectTheme": "\n\nNun kannst du das Thema {theme} in der Dropdown-Schaltfläche auswählen.",
     "rememberToVisitDocs": "Denke daran, die Dokumentation im Themen-Repository zu besuchen, um Details zur Implementierung der richtigen Konfigurationen zu erfahren.",
     "welcomeToBuhoCMS": "Willkommen bei BuhoCMS",
-    "welcomeToBuhoCMS_Description": "BuhoCMS ist ein lokales Content Management System für Hugo und Jekyll.\nErstelle oder öffne eine Website, installiere ein Thema, und beginne damit, neue Artikel zu erstellen.\n\nUm fortzufahren, erstelle oder öffne eine Website.",
+    "welcomeToBuhoCMS_Description": "BuhoCMS ist ein lokales Content Management System für Static-Site-Generatoren.\nErstelle oder öffne eine Website, installiere ein Thema, und beginne damit, neue Artikel zu erstellen.\n\nUm fortzufahren, erstelle oder öffne eine Website.",
     "websiteSelected": "Ausgewählte Website: {path}",
     "themes": "Themen",
     "themes_Description": "Lade ein Hugo-Thema herunter und wähle es aus.\nDu kannst diesen Schritt auch überspringen ihn später in den Einstellungen beenden.",

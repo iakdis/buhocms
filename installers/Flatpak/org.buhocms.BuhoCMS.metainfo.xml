@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>org.buhocms.BuhoCMS</id>
   <name>BuhoCMS</name>
-  <summary>A local CMS for Hugo and Jekyll static sites</summary>
+  <summary>A local CMS for static site generators</summary>
   <developer_name>iakmds</developer_name>
   
   <metadata_license>CC0-1.0</metadata_license>
@@ -15,13 +15,13 @@
 	
   <description>
     <p>
-      BuhoCMS is a local Content Management System for static site generators like Hugo and Jekyll.
+      BuhoCMS is a local Content Management System for static site generators.
     </p>
     <p>
-      See BuhoCMS as a GUI for static site generators (currently Hugo and Jekyll). Easily create or open a website, choose your theme and add your first posts. With BuhoCMS, adding and editing content is as easy as a few clicks. No more terminal commands, folder hunting or manual Front matter edits!
+      See BuhoCMS as a GUI for static site generators. Easily create or open a website, choose your theme and add your first posts. With BuhoCMS, adding and editing content is as easy as a few clicks. No more terminal commands, folder hunting or manual Front matter edits!
     </p>
     <ul>
-        <li>SSGs supported: Hugo and Jekyll</li>
+        <li>SSGs supported: Hugo, Jekyll, 11ty</li>
         <li>Create or open a site</li>
         <li>Install themes for your site</li>
         <li>Add new posts and edit your Markdown content and Front matter with ease</li>
@@ -30,7 +30,7 @@
         <li>Front matter: Graphical User Interface (GUI) for each field like a Text field, Switch, Date picker, Tag editor, and more</li>
         <li>Switch between GUI and raw text mode</li>
         <li>Start, open and stop your local server with a click</li>
-        <li>Build your final site and open its &quot;public&quot; folder</li>
+        <li>Build your final website and open its folder</li>
         <li>Privacy: BuhoCMS is a local program with no internet connection required – no ads, no tracking</li>
         <li>Free and open source: Licensed under the GPLv3</li>
         <li>Themes: Material Design with multiple color themes, both light and dark</li>

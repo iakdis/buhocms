@@ -5,4 +5,4 @@ Essential: no
 Priority: optional
 Depends: libgtk-3-0,libblkid1,liblzma5
 Maintainer: iakmds <andreas[at]iakmds[dot]com>
-Description: A local CMS for Hugo and Jekyll static sites
+Description: A local CMS for static site generators

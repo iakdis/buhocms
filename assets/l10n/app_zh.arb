@@ -108,7 +108,7 @@
     "nowSelectTheme": "\n\n现在, 你可以在左侧的下拉按钮中选择主题 {theme} 了\n\n↖ 点击左上角的返回以继续",
     "rememberToVisitDocs": "记得查看主题文档以了解正确配置主题的一些细节",
     "welcomeToBuhoCMS": "欢迎来到 BuhoCMS",
-    "welcomeToBuhoCMS_Description": "BuhoCMS是Hugo和Jekyll的本地内容管理系统\n你可以用它创建或打开一个网站，安装主题并开始创建新帖子\n\n继续创建或打开网站 →",
+    "welcomeToBuhoCMS_Description": "BuhoCMS是静态网站生成器的本地内容管理系统\n你可以用它创建或打开一个网站，安装主题并开始创建新帖子\n\n继续创建或打开网站 →",
     "websiteSelected": "选择网站：{path}",
     "themes": "主题",
     "themes_Description": "下载并选择一个Hugo主题\n你也可以跳过这一步，稍后通过设置选择主题。",

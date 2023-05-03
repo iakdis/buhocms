@@ -36,7 +36,7 @@
 </p>
 
 <h1 align="center">BuhoCMS</h1>
-<p align="center">A free and open source local CMS for <a href="https://gohugo.io/">Hugo</a> and <a href="https://jekyllrb.com/">Jekyll</a> static sites written in Flutter and Dart licensed under the <a href="LICENSE">GPLv3</a></p>
+<p align="center">A free and open source local CMS for static site generators written in Flutter and Dart licensed under the <a href="LICENSE">GPLv3</a></p>
 
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
@@ -72,7 +72,7 @@
 
 # What is BuhoCMS?
 
-BuhoCMS is a **local Content Management System** for **static site generators** like [Hugo](https://gohugo.io/) and [Jekyll](https://jekyllrb.com/) (support for others is planned for the future). 
+BuhoCMS is a **local Content Management System** for **static site generators** ([list of supported SSGs](#features)). 
 
 See BuhoCMS as a **GUI for static site generators**. Easily **create or open a website**, **choose your theme** and **add your first posts**. With BuhoCMS, adding and editing content is as easy as a few clicks. No more terminal commands, folder hunting or manual Front matter edits 🥳
 
@@ -80,12 +80,12 @@ See BuhoCMS as a **GUI for static site generators**. Easily **create or open a w
 
 BuhoCMS is made for... you 😃
 
-...that is, everyone using Hugo or Jekyll as a static site generator who wants an **easy to use**, **graphical way** to **edit content**, so that you can make the best use out of the power of a static site generator: *Creating and editing content.*
+...that is, everyone using a static site generator who wants an **easy to use**, **graphical way** to **edit content**, so that you can make the best use out of the power of a static site generator: *Creating and editing content.*
 
 BuhoCMS is for you if you land in at least one of the following categories:
 
-- You **already have a Hugo or Jekyll site** and want to easily edit your content from now on
-- You want to **create a new Hugo or Jekyll site from zero** with a graphical user interface
+- You **already have a static site** from a supported SSG and want to easily edit your content from now on
+- You want to **create a new static site from zero** with a graphical user interface
 - You are a **beginner** looking for a **simple way to begin your journey** in using static site generators
 
 ## :warning: Alpha warning
@@ -142,7 +142,10 @@ To install BuhoCMS as a **.deb** package, download the [BuhoCMS-Linux.deb](https
 
 # Features
 
-- **SSGs supported**: [Hugo](https://gohugo.io/) and [Jekyll](https://jekyllrb.com/)
+- **SSGs supported**: 
+  - [Hugo](https://gohugo.io/)
+  - [Jekyll](https://jekyllrb.com/) 
+  - [11ty](https://11ty.dev/)
 - **Create** or **open** a site
 - **Install themes** for your site
 - **Add new posts** and **edit** your Markdown content and Front matter with ease
