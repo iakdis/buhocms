@@ -23,8 +23,6 @@ class _TerminalOutputDrawerState extends State<TerminalOutputDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    final headerText = Localization.appLocalizations().terminalOutput;
-
     return LayoutBuilder(
       builder: (context, constraints) {
         return Consumer<OutputProvider>(
@@ -97,10 +95,13 @@ class _TerminalOutputDrawerState extends State<TerminalOutputDrawer> {
                                       ),
                                       Flexible(
                                         child: Tooltip(
-                                          message: headerText,
+                                          message:
+                                              Localization.appLocalizations()
+                                                  .terminalOutput,
                                           child: Text(
-                                            headerText.replaceAll(
-                                                '', '\u{200B}'),
+                                            Localization.appLocalizations()
+                                                .terminalOutput
+                                                .replaceAll('', '\u{200B}'),
                                             style: const TextStyle(
                                               color: Colors.white,
                                               overflow: TextOverflow.ellipsis,
