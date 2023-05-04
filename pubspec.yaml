@@ -44,7 +44,7 @@ dependencies:
   markdown_toolbar: ^0.4.0
   menu_bar: ^0.5.0
   package_info_plus: ^3.1.0
-  process_run: ^0.12.3+2
+  process_run: ^0.13.0
   provider: ^6.0.3
   shared_preferences: ^2.0.15
   smooth_page_indicator: ^1.0.0+2
