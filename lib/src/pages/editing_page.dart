@@ -180,6 +180,19 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       showSnackbar(text: e.toString(), seconds: 10);
     }
 
+    var finalYaml = {};
+    for (var i = 0; i < finalLines.length; i++) {
+      var character = '';
+      if (finalLines[i].contains('"')) character = '"';
+      if (finalLines[i].contains("'")) character = "'";
+
+      finalYaml.addEntries([
+        MapEntry(yaml.keys.elementAt(i),
+            '$character${yaml.values.elementAt(i)}$character')
+      ]);
+    }
+    yaml = YamlMap.wrap(finalYaml);
+
     frontmatterProvider.set(yaml.entries.toList());
 
     for (var index = 0; index < yaml.entries.length; index++) {

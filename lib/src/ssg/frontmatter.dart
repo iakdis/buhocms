@@ -223,9 +223,11 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
   }
 
   void _textSave() {
-    final newValue = widget.source.contains('"')
-        ? '"${frontMatterControllerUnsaved.text}"'
-        : frontMatterControllerUnsaved.text;
+    var character = '';
+    if (widget.source.contains('"')) character = '"';
+    if (widget.source.contains("'")) character = "'";
+
+    final newValue = '$character${frontMatterControllerUnsaved.text}$character';
     _saveFrontmatter(newValue: newValue);
 
     setState(
