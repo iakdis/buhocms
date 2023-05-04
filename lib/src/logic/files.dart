@@ -94,8 +94,8 @@ Future<List<File>> getAllFiles({BuildContext? context}) async {
 
   final contentFolder = SSG.getSSGContentFolder(
       ssg: SSG.getSSGType(Preferences.getSSG()), pathSeparator: false);
-  Directory fileDirectory = Directory(Preferences.getCurrentPath().substring(
-      0, Preferences.getCurrentPath().length - contentFolder.length));
+  Directory fileDirectory = Directory(
+      '${Preferences.getSitePath()}${Platform.pathSeparator}$contentFolder');
 
   if (!fileDirectory.existsSync()) return [];
 
