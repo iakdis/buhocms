@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "BuhoCMS"
-#define MyAppVersion "0.7.0"
+#define MyAppVersion "0.7.1"
 #define MyAppPublisher "buhocms.org"
 #define MyAppURL "https://buhocms.org/"
 #define MyAppExeName "buhocms.exe"

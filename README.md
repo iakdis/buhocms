@@ -1,6 +1,6 @@
 
-## 🌟 New release: v0.7.0 🌟
-### Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.7.0)!
+## 🌟 New release: v0.7.1 🌟
+### Take a look at all the changes [here](https://github.com/iakmds/buhocms/releases/tag/v0.7.1)!
 
 <br>
 

@@ -56,6 +56,18 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.7.1" date="2023-05-04">
+      <description>
+        <p>Release 0.7.1 of BuhoCMS</p>
+        <ul>
+	       <li>Fix: Opening files inside folders not working</li>
+          <li>Fix: Not creating Hugo post correctly inside folders</li>
+          <li>Fix: If existent in front matter, use single/double quotes when saving value</li>
+          <li>Localization: Fix title in terminal output window not updating</li>
+          <li>Various other improvements, bug fixes and localization changes</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.0" date="2023-05-03">
       <description>
         <p>Release 0.7.0 of BuhoCMS</p>
