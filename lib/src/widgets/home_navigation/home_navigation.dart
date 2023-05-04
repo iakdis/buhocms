@@ -90,7 +90,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
         divider(),
         CustomTooltip(
           message: Localization.appLocalizations().editingPage,
-          child: NavigationButton(
+          child: HomeNavigationButton(
             isExtended: navigationSizeProvider.isExtendedNav,
             icon: Icons.edit,
             iconUnselected: Icons.edit_outlined,
@@ -208,7 +208,7 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
                                 CustomTooltip(
                                   message:
                                       Localization.appLocalizations().settings,
-                                  child: NavigationButton(
+                                  child: HomeNavigationButton(
                                     isExtended:
                                         navigationSizeProvider.isExtendedNav,
                                     icon: Icons.settings,
