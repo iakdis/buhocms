@@ -480,8 +480,10 @@ class SSG {
     // Create post
     switch (ssg) {
       case SSGTypes.hugo:
+        final afterContent =
+            path.substring(path.indexOf(contentFolder) + contentFolder.length);
         final finalPathAndName =
-            '$contentFolder${Platform.pathSeparator}$name.md';
+            '$contentFolder$afterContent${Platform.pathSeparator}$name.md';
 
         const executable = 'hugo';
         final allFlags = 'new $finalPathAndName $flags';
