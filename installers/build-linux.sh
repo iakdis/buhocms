@@ -14,3 +14,6 @@ cd Debian
 ./build-debian.sh
 ./remove-old-debian.sh
 cd ..
+
+# Package Linux portable
+./build-linux-portable.sh
