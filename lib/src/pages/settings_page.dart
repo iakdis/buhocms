@@ -327,46 +327,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     );
                     if (outputFile == null) return;
 
-                    if (File(outputFile).existsSync()) {
-                      if (mounted) {
-                        await showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(
-                                  Localization.appLocalizations().overrideFile),
-                              content: Text(
-                                Localization.appLocalizations()
-                                    .overrideFile_Description(outputFile
-                                        .split(Platform.pathSeparator)
-                                        .last),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: Text(
-                                      Localization.appLocalizations().cancel),
-                                ),
-                                TextButton(
-                                  onPressed: () async {
-                                    final file =
-                                        await File(outputFile).create();
-                                    await file.writeAsString(
-                                        Preferences.getAllPreferences());
-                                    if (mounted) Navigator.pop(context);
-                                  },
-                                  child:
-                                      Text(Localization.appLocalizations().yes),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    } else {
-                      final file = await File(outputFile).create();
-                      await file.writeAsString(Preferences.getAllPreferences());
-                    }
+                    final file = await File(outputFile).create();
+                    await file.writeAsString(Preferences.getAllPreferences());
                   },
                   child: Text(Localization.appLocalizations().export),
                 ),

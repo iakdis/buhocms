@@ -9,8 +9,6 @@
     "preferences": "Einstellungen",
     "preferences_Description": "Exportiere deine Einstellungen als Datei, lade aus einer Datei oder setze die Enstellungen for BuhoCMS zurück",
     "selectASavePath": "Wähle einen Speicherpfad",
-    "overrideFile": "Datei überschreiben?",
-    "overrideFile_Description": "Eine Datei mit dem Namen {file} existiert bereits in diesem Verzeichnis. Alte Datei überschreiben?",
     "cancel": "Abbrechen",
     "yes": "Ja",
     "export": "Exportieren",

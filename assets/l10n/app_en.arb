@@ -33,13 +33,6 @@
     "preferences": "Preferences",
     "preferences_Description": "Export your preferences to a file, load from a file or reset the preferences for BuhoCMS",
     "selectASavePath": "Select a save path",
-    "overrideFile": "Override file?",
-    "overrideFile_Description": "A file named {file} already exists in this directory. Override the old file?",
-     "@overrideFile_Description": {
-      "placeholders": {
-         "file": { "type": "String" }
-      }
-    },
     "cancel": "Cancel",
     "yes": "Yes",
     "export": "Export",

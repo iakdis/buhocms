@@ -9,8 +9,6 @@
     "preferences": "首选项",
     "preferences_Description": "将你的偏好设置导出至文件，从文件中加载或重新设定BuhoCMS的偏好设置。",
     "selectASavePath": "选择一个保存路径",
-    "overrideFile": "覆盖文件？",
-    "overrideFile_Description": "这个目录中已经存在一个名为 {file} 的文件，要覆盖旧文件吗？",
     "cancel": "取消",
     "yes": "确认",
     "export": "导出",
