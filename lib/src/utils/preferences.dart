@@ -17,8 +17,8 @@ class Preferences {
       const MapEntry(prefColorScheme, 27),
       MapEntry(prefPageIndex, NavigationPage.editing.index),
       const MapEntry(prefCurrentFileIndex, -1),
-      const MapEntry(prefNavigationSize, 64.0),
-      const MapEntry(prefFileNavigationSize, 64.0),
+      const MapEntry(prefNavigationSize, 64),
+      const MapEntry(prefFileNavigationSize, 64),
       const MapEntry(prefOnboardingCompleted, false),
       MapEntry(prefSSG, SSGTypes.hugo.name),
       const MapEntry(prefSitePath, null),
@@ -132,15 +132,20 @@ class Preferences {
   static int getFileIndex() => getPreferencesEntry(prefCurrentFileIndex);
 
   //Navigation Panel Size
-  static Future<void> setNavigationSize(double index) async =>
+  static Future<void> setNavigationSize(int index) async =>
       await setPreferences(prefNavigationSize, index);
-  static double getNavigationSize() => getPreferencesEntry(prefNavigationSize);
+  static int getNavigationSize() =>
+      getPreferencesEntry(prefNavigationSize) is double
+          ? (getPreferencesEntry(prefNavigationSize) as double).toInt()
+          : getPreferencesEntry(prefNavigationSize);
 
   //File Navigation Panel Size
-  static Future<void> setFileNavigationSize(double index) async =>
+  static Future<void> setFileNavigationSize(int index) async =>
       await setPreferences(prefFileNavigationSize, index);
-  static double getFileNavigationSize() =>
-      getPreferencesEntry(prefFileNavigationSize);
+  static int getFileNavigationSize() =>
+      getPreferencesEntry(prefFileNavigationSize) is double
+          ? (getPreferencesEntry(prefFileNavigationSize) as double).toInt()
+          : getPreferencesEntry(prefFileNavigationSize);
 
   //Onboarding
   static Future<void> setOnBoardingComplete(bool complete) async =>

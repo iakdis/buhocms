@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 
 class NavigationSizeProvider extends ChangeNotifier {
-  double _navigationWidth = 64;
-  double _fileNavigationWidth = 64;
+  int _navigationWidth = 64;
+  int _fileNavigationWidth = 64;
   bool _isExtendedNav = false;
   bool _isExtendedFileNav = false;
 
-  double get navigationWidth {
-    return _navigationWidth;
-  }
-
-  double get fileNavigationWidth {
-    return _fileNavigationWidth;
-  }
+  int get navigationWidth => _navigationWidth;
+  int get fileNavigationWidth => _fileNavigationWidth;
 
   bool get isExtendedNav => _isExtendedNav;
   bool get isExtendedFileNav => _isExtendedFileNav;
 
-  void setNavigationWidth(double width, {bool notify = true}) {
+  void setNavigationWidth(int width, {bool notify = true}) {
     _navigationWidth = width;
     if (notify) notifyListeners();
   }
 
-  void setFileNavigationWidth(double width, {bool notify = true}) {
+  void setFileNavigationWidth(int width, {bool notify = true}) {
     _fileNavigationWidth = width;
     if (notify) notifyListeners();
   }

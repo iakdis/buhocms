@@ -27,10 +27,10 @@ class HomeNavigationDrawer extends StatefulWidget {
 }
 
 class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
-  double lastWidth = 64;
+  int lastWidth = 64;
 
-  double top = 0;
-  double left = 0;
+  int top = 0;
+  int left = 0;
 
   @override
   void initState() {
@@ -162,11 +162,11 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
         var finalSize = navigationSize;
         if (editingPageSize < 250 || windowWidth < mobileWidth) {
           if (navigationSize > 64) {
-            finalSize = 200.0;
+            finalSize = 200;
             lastWidth = 200;
             navigationSizeProvider.setNavigationWidth(200, notify: false);
           } else {
-            finalSize = 64.0;
+            finalSize = 64;
           }
         } else {
           finalSize = navigationSize;
@@ -179,11 +179,12 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
               //duration: const Duration(milliseconds: 250),
               //curve: Curves.easeInOut,
               //width: isExtended ? 256 : 64.0,
-              width: navigationSizeProvider.isExtendedNav
-                  ? finalSize > 64
-                      ? finalSize
-                      : 200
-                  : 64.0,
+              width: (navigationSizeProvider.isExtendedNav
+                      ? finalSize > 64
+                          ? finalSize
+                          : 200
+                      : 64)
+                  .toDouble(),
               color: Theme.of(context).colorScheme.primary,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(4.0, 4.0, 6.0, 6.0),
@@ -235,7 +236,8 @@ class _HomeNavigationDrawerState extends State<HomeNavigationDrawer> {
               child: ResizeBar(
                 maxHeight: constraints.maxHeight,
                 onDrag: (dx, dy) {
-                  var newWidth = navigationSizeProvider.navigationWidth + dx;
+                  var newWidth = navigationSizeProvider.navigationWidth +
+                      (dx as double).toInt();
                   lastWidth = newWidth;
 
                   if (windowWidth > mobileWidth &&

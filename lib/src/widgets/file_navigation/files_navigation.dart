@@ -34,10 +34,10 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
   final ScrollController _listScrollController = ScrollController();
   Map<String, int> fileButtonsMap = {};
 
-  double lastWidth = 64;
+  int lastWidth = 64;
 
-  double top = 0;
-  double left = 0;
+  int top = 0;
+  int left = 0;
 
   final TextStyle textStyle = const TextStyle(fontSize: 16);
 
@@ -252,11 +252,11 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
         var finalSize = fileNavigationSize;
         if (editingPageSize < 250 || windowWidth < mobileWidth) {
           if (fileNavigationSize > 64) {
-            finalSize = 200.0;
+            finalSize = 200;
             lastWidth = 200;
             navigationSizeProvider.setFileNavigationWidth(200, notify: false);
           } else {
-            finalSize = 64.0;
+            finalSize = 64;
           }
         } else {
           finalSize = fileNavigationSize;
@@ -265,11 +265,12 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
         return Stack(
           children: [
             Container(
-              width: navigationSizeProvider.isExtendedFileNav
-                  ? finalSize > 64
-                      ? finalSize
-                      : 200
-                  : 64.0,
+              width: (navigationSizeProvider.isExtendedFileNav
+                      ? finalSize > 64
+                          ? finalSize
+                          : 200
+                      : 64)
+                  .toDouble(),
               color: Theme.of(context).colorScheme.secondary,
               child: ContextMenuRegion(
                 contextMenu: GenericContextMenu(
@@ -323,8 +324,8 @@ class _FilesNavigationDrawerState extends State<FilesNavigationDrawer>
               child: ResizeBar(
                 maxHeight: constraints.maxHeight,
                 onDrag: (dx, dy) {
-                  var newWidth =
-                      navigationSizeProvider.fileNavigationWidth + dx;
+                  var newWidth = navigationSizeProvider.fileNavigationWidth +
+                      (dx as double).toInt();
                   lastWidth = newWidth;
 
                   if (windowWidth > mobileWidth &&
