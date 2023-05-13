@@ -201,27 +201,6 @@ class _DirectoryButtonState extends State<DirectoryButton> {
               child: CustomTooltip(
                 message: widget.path,
                 child: GestureDetector(
-                  onSecondaryTap: () {
-                    context.contextMenuOverlay.show(
-                      folderContextMenus(
-                        context: context,
-                        addFile: ContextMenuButtonConfig(
-                            Localization.appLocalizations().newPost,
-                            icon: const Icon(Icons.post_add, size: 20),
-                            onPressed: () => addFile(
-                                context: context,
-                                mounted: mounted,
-                                path: widget.path)),
-                        addFolder: AddFolder(context, mounted)
-                            .addFolderContextMenu(savePath: widget.path),
-                        rename: () => _rename(),
-                        openInFolder: () => openInFolder(
-                            path: widget.path, keepPathTrailing: false),
-                        delete: () => _delete(),
-                      ),
-                    );
-                    focusNodeButton.requestFocus();
-                  },
                   child: Shortcuts(
                     shortcuts: const <SingleActivator, Intent>{
                       SingleActivator(LogicalKeyboardKey.f2): RenameIntent(),
@@ -246,6 +225,28 @@ class _DirectoryButtonState extends State<DirectoryButton> {
                           onTap: () {
                             Preferences.setCurrentPath(widget.path);
                             widget.setStateCallback();
+                          },
+                          onSecondaryTap: () {
+                            context.contextMenuOverlay.show(
+                              folderContextMenus(
+                                context: context,
+                                addFile: ContextMenuButtonConfig(
+                                    Localization.appLocalizations().newPost,
+                                    icon: const Icon(Icons.post_add, size: 20),
+                                    onPressed: () => addFile(
+                                        context: context,
+                                        mounted: mounted,
+                                        path: widget.path)),
+                                addFolder: AddFolder(context, mounted)
+                                    .addFolderContextMenu(
+                                        savePath: widget.path),
+                                rename: () => _rename(),
+                                openInFolder: () => openInFolder(
+                                    path: widget.path, keepPathTrailing: false),
+                                delete: () => _delete(),
+                              ),
+                            );
+                            focusNodeButton.requestFocus();
                           },
                           borderRadius: BorderRadius.circular(50),
                           child: Padding(

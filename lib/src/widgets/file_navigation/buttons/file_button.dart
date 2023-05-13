@@ -273,19 +273,6 @@ class _FileButtonState extends State<FileButton> {
           child: Consumer<FileNavigationProvider>(
               builder: (context, fileNavigationProvider, _) {
             return GestureDetector(
-              onSecondaryTap: () {
-                context.contextMenuOverlay.show(
-                  fileContextMenus(
-                    context: context,
-                    open: () => _open(),
-                    rename: () => _rename(),
-                    openInFolder: () => openInFolder(
-                        path: widget.path, keepPathTrailing: false),
-                    delete: () => _delete(),
-                  ),
-                );
-                focusNodeButton.requestFocus();
-              },
               onTertiaryTapDown: (details) => _open(),
               child: Shortcuts(
                 shortcuts: const <SingleActivator, Intent>{
@@ -315,6 +302,19 @@ class _FileButtonState extends State<FileButton> {
                               focusNodeButton.requestFocus();
                             }
                           : () => _open(),
+                      onSecondaryTap: () {
+                        context.contextMenuOverlay.show(
+                          fileContextMenus(
+                            context: context,
+                            open: () => _open(),
+                            rename: () => _rename(),
+                            openInFolder: () => openInFolder(
+                                path: widget.path, keepPathTrailing: false),
+                            delete: () => _delete(),
+                          ),
+                        );
+                        focusNodeButton.requestFocus();
+                      },
                       child: Padding(
                         padding: widget.isExtended
                             ? const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0)
