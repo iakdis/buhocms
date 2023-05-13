@@ -118,7 +118,7 @@ class AddFolder {
                                 if (empty) return;
 
                                 var finalPath =
-                                    '${Preferences.getCurrentPath()}${Platform.pathSeparator}$folderName';
+                                    '$path${Platform.pathSeparator}$folderName';
 
                                 showSnackbar(
                                   text: Localization.appLocalizations()
