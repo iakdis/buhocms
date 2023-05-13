@@ -466,6 +466,8 @@
     "appSettings": "APP SETTINGS",
     "site": "WEBSITE",
     "ssgSettings": "SSG SETTINGS",
+    "duplicate": "Duplicate",
+    "duplicate_description": "The YAML contains a duplicate entry. Make sure there are no duplicates in the text",
 
     "language": "Language",
     "language_description": "Change the language of BuhoCMS",

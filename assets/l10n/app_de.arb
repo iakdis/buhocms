@@ -207,6 +207,8 @@
     "changeSSGContent_description": "Ändere den Content-Ordner eines bestimmten Static-Site-Generators. Er kann zu jeder Zeit zum jeweiligen Standard Ordner, der in BuhoCMS gilt, zurückgesetzt werden.",
     "resetSSG": "{ssg} zurücksetzen",
     "contentFolderSSG": "{ssg} Content-Ordner",
+    "duplicate": "Duplikat",
+    "duplicate_description": "Das YAML beinhaltet einen doppelten Eintrag. Stelle sicher, dass keine Duplikate im Text vorhanden sind",
 
     "settings": "Einstellungen",
     "appSettings": "APP EINSTELLUNGEN",

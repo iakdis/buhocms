@@ -208,6 +208,8 @@
     "changeSSGContent_description": "改变特定静态网站生成器的内容文件夹。它可以在任何时候被重置为BuhoCMS设置的各自默认文件夹。",
     "resetSSG": "重置 {ssg}",
     "contentFolderSSG": "{ssg}内容文件夹",
+    "duplicate": "重复的",
+    "duplicate_description": "YAML 包含一个重复的条目。确保文本中没有重复的内容",
 
     "settings": "设置",
     "appSettings": "应用设置",

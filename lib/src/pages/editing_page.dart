@@ -42,7 +42,7 @@ class EditingPage extends StatefulWidget {
 
 class EditingPageState extends State<EditingPage> with WindowListener {
   late final FocusNode focusNodeTextField;
-  List<FrontmatterWidget> frontmatterWidgets = [];
+  List<Widget> frontmatterWidgets = [];
   bool frontmatterVisible = true;
   bool editTextVisible = true;
   bool draggableFrontMatter = false;
@@ -177,6 +177,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         yaml = loadYaml(finalLines.join('\n')) as YamlMap;
       }
     } catch (e) {
+      frontmatterWidgets.add(duplicateWidget());
       showSnackbar(text: e.toString(), seconds: 10);
     }
 
@@ -186,10 +187,12 @@ class EditingPageState extends State<EditingPage> with WindowListener {
       if (finalLines[i].contains('"')) character = '"';
       if (finalLines[i].contains("'")) character = "'";
 
-      finalYaml.addEntries([
-        MapEntry(yaml.keys.elementAt(i),
-            '$character${yaml.values.elementAt(i)}$character')
-      ]);
+      if (yaml.isNotEmpty) {
+        finalYaml.addEntries([
+          MapEntry(yaml.keys.elementAt(i),
+              '$character${yaml.values.elementAt(i)}$character')
+        ]);
+      }
     }
     yaml = YamlMap.wrap(finalYaml);
 
@@ -208,6 +211,22 @@ class EditingPageState extends State<EditingPage> with WindowListener {
         key: editingProvider.frontmatterKeys[index],
       ));
     }
+  }
+
+  Widget duplicateWidget() {
+    return ListTile(
+      leading: TextButton.icon(
+        onPressed: () => checkUnsavedBeforeFunction(
+            context: context,
+            function: () => setState(() => editingProvider
+                .setFrontmatterGUIMode(!editingProvider.isFrontmatterGUIMode))),
+        icon: const Icon(Icons.error),
+        label: Text(Localization.appLocalizations().duplicate),
+      ),
+      title:
+          SelectableText(Localization.appLocalizations().duplicate_description),
+      contentPadding: EdgeInsets.zero,
+    );
   }
 
   void addListenerContent() {
