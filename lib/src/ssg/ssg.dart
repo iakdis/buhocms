@@ -563,9 +563,9 @@ class SSG {
     required String siteName,
     required String flags,
   }) async {
-    runCommand(BuildContext context, String executable, String allFlags,
-        String sitePath) {
-      runTerminalCommand(
+    Future<void> runCommand(BuildContext context, String executable,
+        String allFlags, String sitePath) async {
+      await runTerminalCommand(
         context: context,
         workingDirectory: sitePath,
         executable: executable,
@@ -581,7 +581,7 @@ class SSG {
         allFlags = 'new site $siteName';
         if (flags.isNotEmpty) allFlags += ' $flags';
 
-        runCommand(context, executable, allFlags, sitePath);
+        await runCommand(context, executable, allFlags, sitePath);
         break;
       case SSGTypes.jekyll:
         // Try to use scheme /home/user/gems/bin/jekyll, otherwise 'jekyll'
@@ -592,7 +592,7 @@ class SSG {
         if (flags.isNotEmpty) allFlags += ' $flags';
 
         if (mounted) {
-          runCommand(context, executable, allFlags, sitePath);
+          await runCommand(context, executable, allFlags, sitePath);
         }
         break;
       case SSGTypes.eleventy:
@@ -612,7 +612,7 @@ class SSG {
         allFlags = 'install @11ty/eleventy --save-dev';
         if (flags.isNotEmpty) allFlags += ' $flags';
 
-        runCommand(context, executable, allFlags,
+        await runCommand(context, executable, allFlags,
             '$sitePath${Platform.pathSeparator}$siteName');
         break;
     }

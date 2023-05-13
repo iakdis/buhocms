@@ -39,6 +39,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
   String siteName = '';
   bool siteNameError = false;
   bool directoryAlreadyExists = false;
+  bool showCircularIndicator = false;
 
   @override
   void initState() {
@@ -169,13 +170,14 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                 path = '$sitePath${Platform.pathSeparator}$siteName';
                 var flags = '';
 
-                create() async {
+                create(Function setState) async {
                   path = '$sitePath${Platform.pathSeparator}$siteName';
 
-                  final shellProvider =
-                      Provider.of<ShellProvider>(context, listen: false);
+                  final shellProvider = context.read<ShellProvider>();
+                  final ssgProvider = context.read<SSGProvider>();
 
-                  SSG.createSSGWebsite(
+                  setState(() => showCircularIndicator = true);
+                  await SSG.createSSGWebsite(
                     context: context,
                     mounted: mounted,
                     ssg: ssg,
@@ -183,6 +185,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                     siteName: siteName,
                     flags: flags,
                   );
+                  setState(() => showCircularIndicator = false);
 
                   Preferences.clearPreferencesSite();
                   Preferences.setOnBoardingComplete(true);
@@ -208,7 +211,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                   Preferences.setRecentSitePaths(
                       {finalSitePath: ssg}..addAll(recentPaths));
 
-                  context.read<SSGProvider>().setSSG(ssg.name);
+                  ssgProvider.setSSG(ssg.name);
 
                   shellProvider.updateShell();
 
@@ -228,6 +231,7 @@ class _CreateWebsiteState extends State<CreateWebsite> {
 
                 await showDialog(
                   context: context,
+                  barrierDismissible: false,
                   builder: (context) {
                     directoryAlreadyExists = Directory(path).existsSync();
 
@@ -256,8 +260,12 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                         expansionIcon: Icons.terminal,
                         expansionTitle:
                             Localization.appLocalizations().terminal,
-                        yes: () => create(),
-                        dialogChildren: const [],
+                        yes: () => create(setState),
+                        disableNavigation: showCircularIndicator,
+                        dialogChildren: [
+                          if (showCircularIndicator)
+                            const CircularProgressIndicator(),
+                        ],
                         expansionChildren: [
                           CustomTextField(
                             leading:

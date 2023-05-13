@@ -12,6 +12,7 @@ class CommandDialog extends StatefulWidget {
     required this.yes,
     required this.dialogChildren,
     required this.expansionChildren,
+    this.disableNavigation = false,
   });
 
   final Widget title;
@@ -21,6 +22,7 @@ class CommandDialog extends StatefulWidget {
   final Function? yes;
   final List<Widget> dialogChildren;
   final List<Widget>? expansionChildren;
+  final bool disableNavigation;
 
   @override
   State<CommandDialog> createState() => _CommandDialogState();
@@ -39,7 +41,6 @@ class _CommandDialogState extends State<CommandDialog> {
           ],
         ),
         const SizedBox(height: 32.0),
-        Column(children: widget.dialogChildren),
         if (widget.expansionChildren != null) const SizedBox(height: 8.0),
         if (widget.expansionChildren != null)
           ExpansionTile(
@@ -50,16 +51,21 @@ class _CommandDialogState extends State<CommandDialog> {
             childrenPadding: const EdgeInsets.only(top: 8.0),
             children: widget.expansionChildren!,
           ),
+        if (widget.dialogChildren.isNotEmpty) const SizedBox(height: 32),
+        Column(children: widget.dialogChildren),
         const SizedBox(height: 64),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: widget.disableNavigation
+                  ? null
+                  : () => Navigator.pop(context),
               child: Text(Localization.appLocalizations().cancel),
             ),
             TextButton(
-              onPressed: () => widget.yes?.call(),
+              onPressed:
+                  widget.disableNavigation ? null : () => widget.yes?.call(),
               child: Text(Localization.appLocalizations().yes),
             ),
           ],
