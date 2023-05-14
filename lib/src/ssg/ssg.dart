@@ -359,17 +359,20 @@ class SSG {
               return CommandDialog(
                 title: SizedBox(
                   width: 300,
-                  child: SelectableText.rich(TextSpan(
-                      text: Localization.appLocalizations().createNewPostIn,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w500),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: path.substring(path.indexOf(contentFolder)),
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary),
-                        ),
-                      ])),
+                  child: SelectableText.rich(
+                    textAlign: TextAlign.center,
+                    TextSpan(
+                        text: Localization.appLocalizations().createNewPostIn,
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w500),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: path.substring(path.indexOf(contentFolder)),
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary),
+                          ),
+                        ]),
+                  ),
                 ),
                 icon: Icons.note_add,
                 expansionIcon: Icons.terminal,

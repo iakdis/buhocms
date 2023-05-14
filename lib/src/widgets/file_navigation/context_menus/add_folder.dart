@@ -58,22 +58,26 @@ class AddFolder {
                       const SizedBox(height: 16.0),
                       SizedBox(
                         width: 300,
-                        child: SelectableText.rich(TextSpan(
-                            text: Localization.appLocalizations()
-                                .createNewFolderIn,
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: path.substring(
-                                    path.contains(contentFolder)
-                                        ? path.indexOf(contentFolder)
-                                        : 0),
-                                style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary),
-                              ),
-                            ])),
+                        child: SelectableText.rich(
+                          textAlign: TextAlign.center,
+                          TextSpan(
+                              text: Localization.appLocalizations()
+                                  .createNewFolderIn,
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w500),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: path.substring(
+                                      path.contains(contentFolder)
+                                          ? path.indexOf(contentFolder)
+                                          : 0),
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                ),
+                              ]),
+                        ),
                       ),
                     ],
                   ),
