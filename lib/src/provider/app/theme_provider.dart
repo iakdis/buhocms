@@ -36,6 +36,11 @@ class Themes {
 
   int? colorSchemeIndex;
 
+  AppBarTheme appBarTheme = const AppBarTheme(
+    toolbarHeight: 46,
+    titleSpacing: 0,
+  );
+
   ThemeData lightTheme() {
     return FlexThemeData.light(
       onPrimary: Colors.white,
@@ -43,10 +48,7 @@ class Themes {
       onTertiary: Colors.white,
       scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
     ).copyWith(
-      appBarTheme: const AppBarTheme(
-        toolbarHeight: 46,
-        titleSpacing: 0,
-      ),
+      appBarTheme: appBarTheme,
     );
   }
 
@@ -76,10 +78,7 @@ class Themes {
       scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
       background: const Color(0xFF212121),
     ).copyWith(
-      appBarTheme: const AppBarTheme(
-        toolbarHeight: 46,
-        titleSpacing: 0,
-      ),
+      appBarTheme: appBarTheme,
       textButtonTheme: const TextButtonThemeData(
         style: ButtonStyle(
           foregroundColor: MaterialStatePropertyAll(Colors.white),
