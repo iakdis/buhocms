@@ -552,6 +552,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
                   controller: value.controller,
                   focusNode: focusNodeTextField,
                   flipCollapseButtonIcon: true,
+                  borderRadius: const BorderRadius.all(Radius.circular(4.0)),
                   width: 45,
                   height: 30,
                   iconSize: 22,
