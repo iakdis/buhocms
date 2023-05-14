@@ -331,6 +331,7 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     required bool visible,
   }) {
     return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.end,
       spacing: 4.0,
       runSpacing: 4.0,
       children: [
