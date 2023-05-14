@@ -184,8 +184,8 @@ class EditingPageState extends State<EditingPage> with WindowListener {
     var finalYaml = {};
     for (var i = 0; i < finalLines.length; i++) {
       var character = '';
-      if (finalLines[i].contains('"')) character = '"';
-      if (finalLines[i].contains("'")) character = "'";
+      if (finalLines[i].startsWith('"')) character = '"';
+      if (finalLines[i].startsWith("'")) character = "'";
 
       if (yaml.isNotEmpty) {
         finalYaml.addEntries([
