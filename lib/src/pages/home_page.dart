@@ -134,8 +134,8 @@ class _HomePageState extends State<HomePage> with WindowListener {
                                   NavigationPage.editing),
                         ),
                       ),
-                      Row(
-                        children: const [
+                      const Row(
+                        children: [
                           HomeNavigationDrawer(),
                           FilesNavigationDrawer(),
                         ],
