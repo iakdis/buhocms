@@ -262,10 +262,10 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                             Localization.appLocalizations().terminal,
                         yes: () => create(setState),
                         disableNavigation: showCircularIndicator,
-                        dialogChildren: [
-                          if (showCircularIndicator)
-                            const CircularProgressIndicator(),
-                        ],
+                        dialogChildren: const [],
+                        progressIndicator: showCircularIndicator
+                            ? const CircularProgressIndicator()
+                            : null,
                         expansionChildren: [
                           CustomTextField(
                             leading:

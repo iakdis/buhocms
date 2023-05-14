@@ -12,6 +12,7 @@ class CommandDialog extends StatefulWidget {
     required this.yes,
     required this.dialogChildren,
     required this.expansionChildren,
+    this.progressIndicator,
     this.disableNavigation = false,
   });
 
@@ -22,6 +23,7 @@ class CommandDialog extends StatefulWidget {
   final Function? yes;
   final List<Widget> dialogChildren;
   final List<Widget>? expansionChildren;
+  final Widget? progressIndicator;
   final bool disableNavigation;
 
   @override
@@ -41,7 +43,8 @@ class _CommandDialogState extends State<CommandDialog> {
           ],
         ),
         const SizedBox(height: 32.0),
-        if (widget.expansionChildren != null) const SizedBox(height: 8.0),
+        Column(children: widget.dialogChildren),
+        if (widget.expansionChildren != null) const SizedBox(height: 16.0),
         if (widget.expansionChildren != null)
           ExpansionTile(
             maintainState: true,
@@ -51,8 +54,8 @@ class _CommandDialogState extends State<CommandDialog> {
             childrenPadding: const EdgeInsets.only(top: 8.0),
             children: widget.expansionChildren!,
           ),
-        if (widget.dialogChildren.isNotEmpty) const SizedBox(height: 32),
-        Column(children: widget.dialogChildren),
+        if (widget.progressIndicator != null) const SizedBox(height: 32),
+        Center(child: widget.progressIndicator),
         const SizedBox(height: 64),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
