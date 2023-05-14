@@ -33,6 +33,7 @@ class CommandDialog extends StatefulWidget {
 class _CommandDialogState extends State<CommandDialog> {
   Widget commandDialog() {
     return SimpleDialog(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       contentPadding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 12.0),
       children: [
         Column(
