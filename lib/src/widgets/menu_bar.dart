@@ -19,14 +19,28 @@ List<BarButton> getMenuBarMenus({
     return Text(
       text,
       style: const TextStyle(
-          color: Color(0xFFE9E9E9), fontWeight: FontWeight.normal),
+        color: Color(0xFFE9E9E9),
+        fontWeight: FontWeight.normal,
+        fontSize: 14.0,
+      ),
     );
   }
 
   Text menuButtonText(String text) {
     return Text(
       text,
-      style: const TextStyle(fontWeight: FontWeight.normal),
+      style: const TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 14.0,
+      ),
+    );
+  }
+
+  TextStyle shortcutStyle() {
+    return const TextStyle(
+      fontWeight: FontWeight.normal,
+      color: Colors.grey,
+      fontSize: 14.0,
     );
   }
 
@@ -42,6 +56,7 @@ List<BarButton> getMenuBarMenus({
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyS, control: true),
             shortcutText: 'Ctrl+S',
+            shortcutStyle: shortcutStyle(),
           ),
           MenuButton(
             onTap: () => revert(context: context, mounted: mounted),
@@ -50,6 +65,7 @@ List<BarButton> getMenuBarMenus({
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyU, control: true),
             shortcutText: 'Ctrl+U',
+            shortcutStyle: shortcutStyle(),
           ),
           const MenuDivider(),
           MenuButton(
@@ -62,6 +78,7 @@ List<BarButton> getMenuBarMenus({
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyN, control: true),
             shortcutText: 'Ctrl+N',
+            shortcutStyle: shortcutStyle(),
           ),
           MenuButton(
             onTap: () => addFolder(
@@ -83,6 +100,7 @@ List<BarButton> getMenuBarMenus({
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyO, control: true),
             shortcutText: 'Ctrl+O',
+            shortcutStyle: shortcutStyle(),
           ),
           MenuButton(
             onTap: () => createWebsite(context: context),
@@ -91,6 +109,7 @@ List<BarButton> getMenuBarMenus({
             shortcut: const SingleActivator(LogicalKeyboardKey.keyN,
                 shift: true, control: true),
             shortcutText: 'Ctrl+Shift+N',
+            shortcutStyle: shortcutStyle(),
           ),
           const MenuDivider(),
           MenuButton(
@@ -129,6 +148,7 @@ List<BarButton> getMenuBarMenus({
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyQ, control: true),
             shortcutText: 'Ctrl+Q',
+            shortcutStyle: shortcutStyle(),
             text: menuButtonText(Localization.appLocalizations().exit),
             icon: const Icon(Icons.exit_to_app),
           ),
@@ -157,6 +177,7 @@ List<BarButton> getMenuBarMenus({
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyR, control: true),
             shortcutText: 'Ctrl+R',
+            shortcutStyle: shortcutStyle(),
           ),
           MenuButton(
             onTap: () => openCurrentPathInFolder(
@@ -176,6 +197,7 @@ List<BarButton> getMenuBarMenus({
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyG, control: true),
             shortcutText: 'Ctrl+G',
+            shortcutStyle: shortcutStyle(),
           ),
           MenuButton(
             onTap: () => setGUIMode(
@@ -187,6 +209,7 @@ List<BarButton> getMenuBarMenus({
             shortcut:
                 const SingleActivator(LogicalKeyboardKey.keyT, control: true),
             shortcutText: 'Ctrl+T',
+            shortcutStyle: shortcutStyle(),
           ),
           const MenuDivider(),
           MenuButton(
@@ -195,6 +218,7 @@ List<BarButton> getMenuBarMenus({
             text: menuButtonText(Localization.appLocalizations().fullScreen),
             shortcut: const SingleActivator(LogicalKeyboardKey.f11),
             shortcutText: 'F11',
+            shortcutStyle: shortcutStyle(),
           ),
           MenuButton(
             onTap: () async => await windowManager.setFullScreen(false),
@@ -203,6 +227,7 @@ List<BarButton> getMenuBarMenus({
                 menuButtonText(Localization.appLocalizations().exitFullScreen),
             shortcut: const SingleActivator(LogicalKeyboardKey.escape),
             shortcutText: 'ESC',
+            shortcutStyle: shortcutStyle(),
           ),
         ],
       ),

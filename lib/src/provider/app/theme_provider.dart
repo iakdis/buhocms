@@ -36,6 +36,12 @@ class Themes {
 
   int? colorSchemeIndex;
 
+  MenuThemeData menuTheme = const MenuThemeData(
+    style: MenuStyle(
+      padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 16.0)),
+    ),
+  );
+
   AppBarTheme appBarTheme = const AppBarTheme(
     toolbarHeight: 46,
     titleSpacing: 0,
@@ -48,6 +54,7 @@ class Themes {
       onTertiary: Colors.white,
       scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
     ).copyWith(
+      menuTheme: menuTheme,
       appBarTheme: appBarTheme,
     );
   }
@@ -78,6 +85,7 @@ class Themes {
       scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
       background: const Color(0xFF212121),
     ).copyWith(
+      menuTheme: menuTheme,
       appBarTheme: appBarTheme,
       textButtonTheme: const TextButtonThemeData(
         style: ButtonStyle(

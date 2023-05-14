@@ -99,7 +99,9 @@ class _HomePageState extends State<HomePage> with WindowListener {
         minimumSize: MaterialStatePropertyAll(Size(0.0, 32.0)),
       ),
       menuButtonStyle: const ButtonStyle(
-        minimumSize: MaterialStatePropertyAll(Size.fromHeight(28.0)),
+        minimumSize: MaterialStatePropertyAll(Size.fromHeight(36.0)),
+        padding: MaterialStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0)),
       ),
       child: ContextMenuOverlay(
         child: GestureDetector(

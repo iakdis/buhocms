@@ -257,10 +257,10 @@ packages:
     dependency: "direct main"
     description:
       name: menu_bar
-      sha256: "80c472e51279f0283c87f3673678bc56f10a091af68eb730f096ae8df97e6639"
+      sha256: "63251bf7eac8ccb724646a8d84f60c222ba47373a85bbde6ad312e5521c8f9f8"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.0"
+    version: "0.5.1"
   meta:
     dependency: transitive
     description:
@@ -542,10 +542,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "22f8db4a72be26e9e3a4aa3f194b1f7afbc76d20ec141f84be1d787db2155cbd"
+      sha256: "7aac14be5f4731b923cc697ae2d42043945076cd0dbb8806baecc92c1dc88891"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.31"
+    version: "6.0.33"
   url_launcher_ios:
     dependency: transitive
     description:
