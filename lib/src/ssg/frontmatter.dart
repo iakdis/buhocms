@@ -327,6 +327,7 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
 
   Widget _listChip(String label) {
     return InputChip(
+      shape: const StadiumBorder(),
       deleteIcon: const Icon(Icons.cancel, size: 20),
       deleteIconColor: Theme.of(context).colorScheme.onPrimary,
       deleteButtonTooltipMessage:
@@ -365,7 +366,10 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
                       focusNode: listFocusNode,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        prefixIcon: const Icon(Icons.tag),
+                        prefixIcon: const Icon(
+                          Icons.tag,
+                          color: Colors.grey,
+                        ),
                         hintText: Localization.appLocalizations().tag,
                       ),
                       autovalidateMode: AutovalidateMode.always,
@@ -410,7 +414,15 @@ class FrontmatterWidgetState extends State<FrontmatterWidget> {
                       listFocusNode.requestFocus();
                     },
                     style: const ButtonStyle(
-                        fixedSize: MaterialStatePropertyAll(Size(50, 50))),
+                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      )),
+                      fixedSize: MaterialStatePropertyAll(Size(56, 56)),
+                      padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                    ),
                     child: const Icon(Icons.add),
                   ),
                 ],
