@@ -307,7 +307,10 @@ class _OpenWebsiteState extends State<OpenWebsite> {
       ),
       trailing: IconButton(
         tooltip: Localization.appLocalizations().remove,
-        splashRadius: 20,
+        style: const ButtonStyle(
+          padding: MaterialStatePropertyAll(EdgeInsets.all(10.0)),
+          shape: MaterialStatePropertyAll(CircleBorder()),
+        ),
         constraints: const BoxConstraints(minHeight: 48),
         onPressed: () {
           final entries = recentPaths.entries.toList();

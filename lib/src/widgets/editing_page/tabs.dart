@@ -220,7 +220,11 @@ class _TabState extends State<Tab> {
                           widget.fileIndex ==
                               fileNavigationProvider.fileNavigationIndex
                       ? IconButton(
-                          splashRadius: 12,
+                          style: const ButtonStyle(
+                            padding:
+                                MaterialStatePropertyAll(EdgeInsets.all(6.0)),
+                            shape: MaterialStatePropertyAll(CircleBorder()),
+                          ),
                           constraints: const BoxConstraints(minHeight: 48),
                           onPressed: () => _removeTab(),
                           icon: Icon(

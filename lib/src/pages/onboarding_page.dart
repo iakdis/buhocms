@@ -323,8 +323,8 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
   }
 
   Widget _welcomePageBottomButton() {
-    return TextButton(
-      style: TextButton.styleFrom(
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
         backgroundColor: Colors.teal.shade800,
@@ -413,37 +413,34 @@ class _OnboardingPageState extends State<OnboardingPage> with WindowListener {
       child: GestureDetector(
         onTapDown: (details) => unfocusAndRestore(),
         child: Scaffold(
-          body: Container(
-            padding: const EdgeInsets.only(bottom: 80.0),
-            child: ScrollConfiguration(
-              behavior: ScrollConfiguration.of(context).copyWith(
-                dragDevices: {
-                  PointerDeviceKind.mouse,
-                  PointerDeviceKind.touch,
-                },
-              ),
-              child: PageView(
-                physics: nextEnabled()
-                    ? const ScrollPhysics()
-                    : const NeverScrollableScrollPhysics(),
-                controller: controller,
-                onPageChanged: (index) {
-                  setState(() {
-                    isLastPage = index == 2;
-                    currentPage = index;
+          body: ScrollConfiguration(
+            behavior: ScrollConfiguration.of(context).copyWith(
+              dragDevices: {
+                PointerDeviceKind.mouse,
+                PointerDeviceKind.touch,
+              },
+            ),
+            child: PageView(
+              physics: nextEnabled()
+                  ? const ScrollPhysics()
+                  : const NeverScrollableScrollPhysics(),
+              controller: controller,
+              onPageChanged: (index) {
+                setState(() {
+                  isLastPage = index == 2;
+                  currentPage = index;
 
-                    unfocusAndRestore();
-                  });
-                },
-                children: [
-                  _scrollableChild(_websitePage()),
-                  _scrollableChild(_themePage()),
-                  _scrollableChild(_welcomePageInfo()),
-                ],
-              ),
+                  unfocusAndRestore();
+                });
+              },
+              children: [
+                _scrollableChild(_websitePage()),
+                _scrollableChild(_themePage()),
+                _scrollableChild(_welcomePageInfo()),
+              ],
             ),
           ),
-          bottomSheet:
+          bottomNavigationBar:
               isLastPage ? _welcomePageBottomButton() : _bottomPageIndicator(),
         ),
       ),

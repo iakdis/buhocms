@@ -42,56 +42,72 @@ class Themes {
     ),
   );
 
-  AppBarTheme appBarTheme = const AppBarTheme(
-    toolbarHeight: 46,
-    titleSpacing: 0,
-  );
+  AppBarTheme appBarTheme(FlexScheme scheme) => AppBarTheme(
+        color: FlexThemeData.light(scheme: scheme).primaryColor,
+        foregroundColor:
+            FlexThemeData.light(scheme: scheme).colorScheme.onPrimary,
+        toolbarHeight: 46,
+        titleSpacing: 0,
+        titleTextStyle: const TextStyle(fontSize: 20),
+      );
+
+  TextButtonThemeData textButtonTheme(FlexScheme scheme, {bool dark = false}) =>
+      TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: dark
+              ? FlexThemeData.dark(scheme: scheme).colorScheme.onBackground
+              : FlexThemeData.light(scheme: scheme).colorScheme.primary,
+        ),
+      );
+
+  ElevatedButtonThemeData elevatedButtonTheme(FlexScheme scheme) =>
+      ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: FlexThemeData.light(scheme: scheme).primaryColor,
+          foregroundColor:
+              FlexThemeData.light(scheme: scheme).colorScheme.onPrimary,
+        ),
+      );
 
   ThemeData lightTheme() {
+    final scheme = FlexScheme.values.elementAt(colorSchemeIndex ?? 0);
     return FlexThemeData.light(
+      useMaterial3: true,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onTertiary: Colors.white,
-      scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
+      scheme: scheme,
     ).copyWith(
       menuTheme: menuTheme,
-      appBarTheme: appBarTheme,
+      appBarTheme: appBarTheme(scheme),
+      textButtonTheme: textButtonTheme(scheme),
+      elevatedButtonTheme: elevatedButtonTheme(scheme),
     );
   }
 
   ThemeData darkTheme() {
+    final scheme = FlexScheme.values.elementAt(colorSchemeIndex ?? 0);
     return FlexThemeData.dark(
-      primary: FlexThemeData.light(
-        scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
-      ).primaryColor,
-      secondary: FlexThemeData.light(
-        scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
-      ).colorScheme.secondary,
-      tertiary: FlexThemeData.light(
-        scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
-      ).colorScheme.tertiary,
-      primaryContainer: FlexThemeData.light(
-        scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
-      ).colorScheme.primaryContainer,
-      secondaryContainer: FlexThemeData.light(
-        scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
-      ).colorScheme.secondaryContainer,
-      tertiaryContainer: FlexThemeData.light(
-        scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
-      ).colorScheme.tertiaryContainer,
+      useMaterial3: true,
+      primary: FlexThemeData.light(scheme: scheme).primaryColor,
+      secondary: FlexThemeData.light(scheme: scheme).colorScheme.secondary,
+      tertiary: FlexThemeData.light(scheme: scheme).colorScheme.tertiary,
+      primaryContainer:
+          FlexThemeData.light(scheme: scheme).colorScheme.primaryContainer,
+      secondaryContainer:
+          FlexThemeData.light(scheme: scheme).colorScheme.secondaryContainer,
+      tertiaryContainer:
+          FlexThemeData.light(scheme: scheme).colorScheme.tertiaryContainer,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onTertiary: Colors.white,
-      scheme: FlexScheme.values.elementAt(colorSchemeIndex ?? 0),
-      background: const Color(0xFF212121),
+      scheme: scheme,
+      scaffoldBackground: const Color(0xFF262626),
     ).copyWith(
       menuTheme: menuTheme,
-      appBarTheme: appBarTheme,
-      textButtonTheme: const TextButtonThemeData(
-        style: ButtonStyle(
-          foregroundColor: MaterialStatePropertyAll(Colors.white),
-        ),
-      ),
+      appBarTheme: appBarTheme(scheme),
+      textButtonTheme: textButtonTheme(scheme, dark: true),
+      elevatedButtonTheme: elevatedButtonTheme(scheme),
     );
   }
 }
