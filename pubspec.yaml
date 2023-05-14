@@ -41,7 +41,7 @@ dependencies:
   flutter_markdown: ^0.6.12
   flutter_svg: ^2.0.4
   intl: ^0.18.0
-  markdown_toolbar: ^0.4.0
+  markdown_toolbar: ^0.5.0
   menu_bar: ^0.5.0
   package_info_plus: ^4.0.0
   process_run: ^0.13.0

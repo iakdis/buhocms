@@ -233,10 +233,10 @@ packages:
     dependency: "direct main"
     description:
       name: markdown_toolbar
-      sha256: "2ddef74cfe0320bb1f435f1a58c999d72c239dbc4133f50ed321d410c416295b"
+      sha256: "5f4e2548afe96cc2ccdad22da87d380e4726d2d3385ddbb7035aa94daf9a4d47"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.0"
+    version: "0.5.0"
   matcher:
     dependency: transitive
     description:
@@ -257,10 +257,10 @@ packages:
     dependency: "direct main"
     description:
       name: menu_bar
-      sha256: "63251bf7eac8ccb724646a8d84f60c222ba47373a85bbde6ad312e5521c8f9f8"
+      sha256: b1caf86fed56a566f26ce04f744febb3747f980723991fb2bed6f249d5e00408
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1"
+    version: "0.5.2"
   meta:
     dependency: transitive
     description:
