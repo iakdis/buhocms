@@ -56,20 +56,25 @@ class AddFolder {
                     children: [
                       const Icon(Icons.create_new_folder, size: 64.0),
                       const SizedBox(height: 16.0),
-                      SelectableText.rich(TextSpan(
-                          text:
-                              Localization.appLocalizations().createNewFolderIn,
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: path.substring(path.contains(contentFolder)
-                                  ? path.indexOf(contentFolder)
-                                  : 0),
-                              style: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary),
-                            ),
-                          ])),
+                      SizedBox(
+                        width: 300,
+                        child: SelectableText.rich(TextSpan(
+                            text: Localization.appLocalizations()
+                                .createNewFolderIn,
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w500),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: path.substring(
+                                    path.contains(contentFolder)
+                                        ? path.indexOf(contentFolder)
+                                        : 0),
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                              ),
+                            ])),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 32.0),
