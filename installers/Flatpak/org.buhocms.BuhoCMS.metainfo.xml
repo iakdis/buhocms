@@ -56,6 +56,21 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.8.0" date="2023-05-15">
+      <description>
+        <p>Release 0.8.0 of BuhoCMS</p>
+        <ul>
+	       <li>New: Change theme to Material 3</li>
+          <li>Fix: Add correct folder path on right click menu when creating new folder</li>
+          <li>UX: Show progress indicator when creating website</li>
+          <li>UX: Improve error notice when having a front matter duplicate</li>
+          <li>UX: Do not show custom duplicate file dialog when exporting the preferences, use native instead</li>
+          <li>UI: Text field/Markdown viewer ratio to 3/2 from 1/2</li>
+          <li>UI: Use minimum width in the "Add file" and "Add folder" dialog</li>
+          <li>Code: Use int for navigation and file navigation bar width instead of double</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.1" date="2023-05-04">
       <description>
         <p>Release 0.7.1 of BuhoCMS</p>
