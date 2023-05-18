@@ -241,7 +241,7 @@ class _TabState extends State<Tab> {
                           padding: EdgeInsets.zero,
                           iconSize: 16,
                         )
-                      : const SizedBox(width: 16, height: 16),
+                      : const SizedBox(width: 28, height: 28),
                   const SizedBox(width: 8),
                 ],
               ),
