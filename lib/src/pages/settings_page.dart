@@ -4,7 +4,7 @@ import 'package:buhocms/src/app.dart';
 import 'package:buhocms/src/provider/app/locale_provider.dart';
 import 'package:buhocms/src/provider/navigation/navigation_provider.dart';
 import 'package:buhocms/src/ssg/edit_frontmatter.dart';
-import 'package:buhocms/src/ssg/edit_ssg.dart';
+import 'package:buhocms/src/ssg/edit_ssg_content.dart';
 import 'package:buhocms/src/ssg/ssg.dart';
 import 'package:buhocms/src/utils/preferences.dart';
 import 'package:file_picker/file_picker.dart';
@@ -399,7 +399,7 @@ class _SettingsPageState extends State<SettingsPage> {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             Text(Localization.appLocalizations().changeSSGContent),
-            const EditSSGButton(),
+            const EditSSGContentButton(),
           ],
         ),
         subtitle: Text(

@@ -13,14 +13,14 @@ import '../utils/preferences.dart';
 import '../utils/unsaved_check.dart';
 import 'frontmatter.dart';
 
-class EditSSGButton extends StatefulWidget {
-  const EditSSGButton({Key? key}) : super(key: key);
+class EditSSGContentButton extends StatefulWidget {
+  const EditSSGContentButton({Key? key}) : super(key: key);
 
   @override
-  State<EditSSGButton> createState() => _EditSSGButtonState();
+  State<EditSSGContentButton> createState() => _EditSSGContentButtonState();
 }
 
-class _EditSSGButtonState extends State<EditSSGButton> {
+class _EditSSGContentButtonState extends State<EditSSGContentButton> {
   String text = '';
   String textOld = '';
   FrontmatterType type = FrontmatterType.typeString;
