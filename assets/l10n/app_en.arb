@@ -189,9 +189,10 @@
         "ssg": { "type": "String" }
       }
     },
-    "executableNotFound": "{program} executable not found. Please make sure that {program} is installed correctly.",
+    "executableNotFound": "{executable} executable not found. Please make sure that {program} is installed correctly.",
     "@executableNotFound": {
       "placeholders": {
+        "executable": { "type": "String" },
         "program": { "type": "String" }
       }
     },
@@ -461,6 +462,21 @@
         "ssg": { "type": "String" }
       }
     },
+    "setCustomSSGExecutables": "Set custom executables",
+    "setCustomSSGExecutables_description": "Set custom executables of a specific static site generator. It can be disabled to continue being automatically detected by BuhoCMS at any time.",
+    "customSSGExecutables": "Custom {ssg} executables",
+    "@customSSGExecutables": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
+    "autoSSGExecutables": "Auto detect {ssg} executables",
+    "@autoSSGExecutables": {
+     "placeholders": {
+        "ssg": { "type": "String" }
+      }
+    },
+    "selectExecutable": "Select executable path",
 
     "settings": "Settings",
     "appSettings": "APP SETTINGS",
