@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:buhocms/src/provider/app/shell_provider.dart';
+import 'package:buhocms/src/ssg/edit_ssg_executables.dart';
 import 'package:buhocms/src/ssg/ssg.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +95,8 @@ class _CreateWebsiteState extends State<CreateWebsite> {
           ssgInstalled = false;
           if (mounted) {
             ssgInstalledText += Localization.appLocalizations()
-                .executableNotFound(SSG.getSSGExecutable(ssg)[i]);
+                .executableNotFound(SSG.getSSGExecutable(ssg)[i],
+                    SSG.getSSGExecutable(ssg, skipCustom: true)[i]);
             if (i < length - 1) ssgInstalledText += '\n';
           }
           setState(() {});
@@ -389,10 +391,18 @@ class _CreateWebsiteState extends State<CreateWebsite> {
                         color: Theme.of(context).colorScheme.primary,
                       ),
                       const SizedBox(height: 32),
-                      ElevatedButton(
-                        onPressed: () => checkExecutableInstalled(),
-                        child: Text(Localization.appLocalizations()
-                            .checkSSGInstalled(SSG.getSSGName(ssg))),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () => checkExecutableInstalled(),
+                            child: Text(Localization.appLocalizations()
+                                .checkSSGInstalled(SSG.getSSGName(ssg))),
+                          ),
+                          if (ssgInstalled == false)
+                            const EditSSGExecutablesButton(),
+                        ],
                       ),
                       const SizedBox(height: 16),
                       Text(ssgInstalledText),

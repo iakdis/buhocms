@@ -17,9 +17,6 @@ Future<String?> checkProgramInstalled({
   bool showErrorSnackbar = true,
 }) async {
   var finalExecutable = '';
-  final errorText = Localization.appLocalizations().error_executableNotFound(
-      '${executable[0].toUpperCase()}${executable.substring(1)}',
-      '"$executable"');
 
   if (Platform.isWindows) {
     await which(executable).then((value) {
@@ -52,9 +49,18 @@ Future<String?> checkProgramInstalled({
           }
           finalExecutable = (result.stdout as String).trim();
         } else {
-          await which(executable).then((value) {
-            finalExecutable = value ?? '';
-          }).catchError((object) async {});
+          final flags = <String>[];
+          if (ssg == SSGTypes.jekyll) {
+            final home = Platform.environment['HOME'];
+            final path = Platform.environment['PATH'];
+            flags.insert(
+                0, '--env=DEBIAN_DISABLE_RUBYGEMS_INTEGRATION=1'); // Jekyll
+            flags.insert(0, '--env=PATH=$home/gems/bin:$path'); // Jekyll
+            flags.insert(0, '--env=GEM_HOME=$home/gems'); // Jekyll
+          }
+          flags.insert(0, executable);
+          final result = await Process.run('which', flags, runInShell: true);
+          finalExecutable = (result.stdout as String).trim();
         }
         break;
     }
@@ -63,6 +69,10 @@ Future<String?> checkProgramInstalled({
   if (finalExecutable.isEmpty) {
     notFound?.call();
     if (showErrorSnackbar) {
+      final errorText = Localization.appLocalizations()
+          .error_executableNotFound(
+              '${executable[0].toUpperCase()}${executable.substring(1)}',
+              '"$executable"');
       showSnackbar(
         text: errorText,
         seconds: 5,

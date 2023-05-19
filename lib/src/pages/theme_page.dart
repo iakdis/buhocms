@@ -99,7 +99,7 @@ class _ThemePageState extends State<ThemePage> {
         gitInstalled = false;
         if (mounted) {
           gitInstalledText =
-              Localization.appLocalizations().executableNotFound('Git');
+              Localization.appLocalizations().executableNotFound('git', 'Git');
         }
         setState(() {});
       },
