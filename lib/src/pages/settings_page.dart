@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 
 import '../i18n/l10n.dart';
 import '../logic/buho_functions.dart';
+import '../ssg/edit_ssg_executables.dart';
 import '../ssg/hugo.dart';
 import '../widgets/buttons/language_dropdown.dart';
 import '../widgets/custom_appbar.dart';
@@ -409,6 +410,22 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
+  Widget _customSSGExecutablesTile() {
+    return ListTile(
+      title: Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          Text(Localization.appLocalizations().setCustomSSGExecutables),
+          const EditSSGExecutablesButton(),
+        ],
+      ),
+      subtitle: Text(
+        Localization.appLocalizations().setCustomSSGExecutables_description,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer2<LocaleProvider, NavigationProvider>(
@@ -436,6 +453,8 @@ class _SettingsPageState extends State<SettingsPage> {
               _hugoThemeTile(),
               const Divider(),
               _headingTile(Localization.appLocalizations().ssgSettings),
+              _customSSGExecutablesTile(),
+              const Divider(),
               _changeSSGContentTile(),
               const Divider(),
               _editFrontmatterListTile(),

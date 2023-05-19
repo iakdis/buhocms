@@ -30,6 +30,10 @@ class Preferences {
       MapEntry(prefSortMode, SortMode.name.name),
       MapEntry(
           prefFrontMatterAddList, json.encode(defaultFrontMatterAddList())),
+      MapEntry(prefUseCustomExecutables,
+          json.encode(defaultUseCustomExecutableList())),
+      MapEntry(
+          prefSSGExecutablesList, json.encode(defaultSSGExecutablesList())),
       const MapEntry(prefDraggableMode, false),
       const MapEntry(prefTabs, null),
     ]);
@@ -245,6 +249,75 @@ class Preferences {
     Map<String, FrontmatterType> fromStringsToType = {};
     fromStringsToType.addEntries(strToMap.entries
         .map((e) => MapEntry(e.key, FrontmatterType.values.byName(e.value))));
+
+    return fromStringsToType;
+  }
+
+  //Custom executables
+  static Future<void> setUseCustomExecutables(
+      Map<SSGTypes, bool> customList) async {
+    Map<String, bool> addListWithTypesStrings = {};
+    addListWithTypesStrings.addEntries(
+        customList.entries.map((e) => MapEntry(e.key.name, e.value)));
+
+    String mapToStr = json.encode(addListWithTypesStrings);
+    await setPreferences(prefUseCustomExecutables, mapToStr);
+  }
+
+  static Map<String, bool> defaultUseCustomExecutableList() {
+    Map<String, bool> defaultMap = {};
+    for (var i = 0; i < SSGTypes.values.length; i++) {
+      defaultMap.addEntries([MapEntry(SSGTypes.values[i].name, false)]);
+    }
+    return defaultMap;
+  }
+
+  static Map<SSGTypes, bool> getUseCustomExecutables() {
+    Map strToMap = json.decode(getPreferencesEntry(prefUseCustomExecutables) ??
+        json.encode(defaultUseCustomExecutableList()
+            .map((key, value) => MapEntry(key, value))));
+
+    Map<SSGTypes, bool> fromStringsToType = {};
+    fromStringsToType.addEntries(strToMap.entries
+        .map((e) => MapEntry(SSGTypes.values.byName(e.key), e.value)));
+
+    return fromStringsToType;
+  }
+
+  //SSG Executables list
+  static Future<void> setSSGExecutablesList(
+      Map<SSGTypes, List<String>> frontMatterAddList) async {
+    Map<String, List<String>> addListWithTypesStrings = {};
+    addListWithTypesStrings.addEntries(
+        frontMatterAddList.entries.map((e) => MapEntry(e.key.name, e.value)));
+
+    String mapToStr = json.encode(addListWithTypesStrings);
+    await setPreferences(prefSSGExecutablesList, mapToStr);
+  }
+
+  static Map<String, List<String>> defaultSSGExecutablesList() {
+    Map<String, List<String>> defaultMap = {};
+    for (var i = 0; i < SSGTypes.values.length; i++) {
+      final textList = <String>[];
+      for (var j = 0;
+          j < SSG.getSSGExecutable(SSGTypes.values[i], skipCustom: true).length;
+          j++) {
+        textList.add('');
+      }
+      defaultMap.addEntries([MapEntry(SSGTypes.values[i].name, textList)]);
+    }
+    return defaultMap;
+  }
+
+  static Map<SSGTypes, List<String>> getSSGExecutablesList() {
+    Map strToMap = json.decode(getPreferencesEntry(prefSSGExecutablesList) ??
+        json.encode(defaultSSGExecutablesList()
+            .map((key, value) => MapEntry(key, value))));
+
+    Map<SSGTypes, List<String>> fromStringsToType = {};
+    fromStringsToType.addEntries(strToMap.entries.map((e) => MapEntry(
+        SSGTypes.values.byName(e.key),
+        (e.value as List).map((e) => e.toString()).toList())));
 
     return fromStringsToType;
   }

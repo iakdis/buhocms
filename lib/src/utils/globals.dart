@@ -17,6 +17,8 @@ const String prefSortMode = 'sortMode';
 
 const String prefFrontMatterAddList = 'frontMatterAddList';
 const String prefSSGContentList = 'SSGContentList';
+const String prefSSGExecutablesList = 'SSGExecutablesList';
+const String prefUseCustomExecutables = 'useCustomExecutables';
 const String prefNavigationSize = 'navigationSize';
 const String prefFileNavigationSize = 'fileNavigationSize';
 

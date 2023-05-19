@@ -100,15 +100,15 @@ class SSG {
 
     switch (ssg) {
       case SSGTypes.hugo:
-        command = 'hugo';
+        command = getSSGExecutable(ssg)[0];
         exampleFlags = '--buildDrafts';
         break;
       case SSGTypes.jekyll:
-        command = 'bundle exec jekyll build';
+        command = 'bundle exec ${getSSGExecutable(ssg)[0]} build';
         exampleFlags = '--drafts';
         break;
       case SSGTypes.eleventy:
-        command = 'npx';
+        command = getSSGExecutable(ssg)[1];
         exampleFlags = '--help';
         break;
     }
@@ -157,15 +157,16 @@ class SSG {
     final List<String> commandFlags;
     switch (ssg) {
       case SSGTypes.hugo:
-        executable = 'hugo';
+        executable = getSSGExecutable(ssg)[0];
         commandFlags = flags.split(' ');
         break;
       case SSGTypes.jekyll:
         executable = 'bundle';
-        commandFlags = 'exec jekyll build $flags'.split(' ');
+        commandFlags =
+            'exec ${getSSGExecutable(ssg)[0]} build $flags'.split(' ');
         break;
       case SSGTypes.eleventy:
-        executable = 'npx';
+        executable = getSSGExecutable(ssg)[1];
         commandFlags =
             '@11ty/eleventy${flags.isNotEmpty ? " $flags" : ""}'.split(' ');
         break;
@@ -203,15 +204,15 @@ class SSG {
 
     switch (ssg) {
       case SSGTypes.hugo:
-        command = 'hugo server';
+        command = '${getSSGExecutable(ssg)[0]} server';
         exampleFlags = '--theme hugo-PaperMod';
         break;
       case SSGTypes.jekyll:
-        command = 'bundle exec jekyll serve';
+        command = 'bundle exec ${getSSGExecutable(ssg)[0]} serve';
         exampleFlags = '--livereload';
         break;
       case SSGTypes.eleventy:
-        command = 'npx @11ty/eleventy --serve';
+        command = '${getSSGExecutable(ssg)[1]} @11ty/eleventy --serve';
         exampleFlags = '--help';
         break;
     }
@@ -260,15 +261,16 @@ class SSG {
     final List<String> commandFlags;
     switch (ssg) {
       case SSGTypes.hugo:
-        executable = 'hugo';
+        executable = getSSGExecutable(ssg)[0];
         commandFlags = 'server $flags'.split(' ');
         break;
       case SSGTypes.jekyll:
         executable = 'bundle';
-        commandFlags = 'exec jekyll serve $flags'.split(' ');
+        commandFlags =
+            'exec ${getSSGExecutable(ssg)[0]} serve $flags'.split(' ');
         break;
       case SSGTypes.eleventy:
-        executable = 'npx';
+        executable = getSSGExecutable(ssg)[1];
         commandFlags = '@11ty/eleventy --serve $flags'.split(' ');
         break;
     }
@@ -440,8 +442,9 @@ class SSG {
                               fileAlreadyExists = false;
                             });
                           },
-                          prefixText: 'hugo new ',
-                          helperText: '"hugo new $defaultName"',
+                          prefixText: '${getSSGExecutable(ssg)[0]} new ',
+                          helperText:
+                              '"${getSSGExecutable(ssg)[0]} new $defaultName"',
                         ),
                         const SizedBox(height: 12),
                         CustomTextField(
@@ -491,7 +494,7 @@ class SSG {
         final finalPathAndName =
             '$contentFolder$afterContent${Platform.pathSeparator}$name.md';
 
-        const executable = 'hugo';
+        final executable = getSSGExecutable(ssg)[0];
         final allFlags = 'new $finalPathAndName $flags';
         checkProgramInstalled(
           context: context,
@@ -583,7 +586,7 @@ class SSG {
     String allFlags = '';
     switch (ssg) {
       case SSGTypes.hugo:
-        executable = 'hugo';
+        executable = getSSGExecutable(ssg)[0];
         allFlags = 'new site $siteName';
         if (flags.isNotEmpty) allFlags += ' $flags';
 
@@ -592,8 +595,8 @@ class SSG {
       case SSGTypes.jekyll:
         // Try to use scheme /home/user/gems/bin/jekyll, otherwise 'jekyll'
         executable = await checkProgramInstalled(
-            context: context, executable: 'jekyll', ssg: ssg);
-        executable ??= 'jekyll';
+            context: context, executable: getSSGExecutable(ssg)[0], ssg: ssg);
+        executable ??= getSSGExecutable(ssg)[0];
         allFlags = 'new $siteName';
         if (flags.isNotEmpty) allFlags += ' $flags';
 
@@ -607,14 +610,14 @@ class SSG {
 
         runCommand(context, executable, allFlags, sitePath);
 
-        executable = 'npm';
+        executable = getSSGExecutable(ssg)[0];
         allFlags = 'init -y';
         if (flags.isNotEmpty) allFlags += ' $flags';
 
         runCommand(context, executable, allFlags,
             '$sitePath${Platform.pathSeparator}$siteName');
 
-        executable = 'npm';
+        executable = getSSGExecutable(ssg)[0];
         allFlags = 'install @11ty/eleventy --save-dev';
         if (flags.isNotEmpty) allFlags += ' $flags';
 
@@ -627,22 +630,22 @@ class SSG {
   static String getCreateSiteSSGPrefix(SSGTypes ssg) {
     switch (ssg) {
       case SSGTypes.hugo:
-        return 'hugo new site ';
+        return '${getSSGExecutable(ssg)[0]} new site ';
       case SSGTypes.jekyll:
-        return 'jekyll new ';
+        return '${getSSGExecutable(ssg)[0]} new ';
       case SSGTypes.eleventy:
-        return 'npm install @11ty/eleventy --save-dev ';
+        return '${getSSGExecutable(ssg)[0]} install @11ty/eleventy --save-dev ';
     }
   }
 
   static String getCreateSiteSSGHelper(SSGTypes ssg) {
     switch (ssg) {
       case SSGTypes.hugo:
-        return '"hugo new site my-website"';
+        return '"${getSSGExecutable(ssg)[0]} new site my-website"';
       case SSGTypes.jekyll:
-        return '"jekyll new myblog"';
+        return '"${getSSGExecutable(ssg)[0]} new myblog"';
       case SSGTypes.eleventy:
-        return 'npm install @11ty/eleventy --save-dev my-blog';
+        return '${getSSGExecutable(ssg)[0]} install @11ty/eleventy --save-dev my-blog';
     }
   }
 
@@ -657,14 +660,41 @@ class SSG {
     }
   }
 
-  static List<String> getSSGExecutable(SSGTypes ssg) {
-    switch (ssg) {
-      case SSGTypes.hugo:
-        return ['hugo'];
-      case SSGTypes.jekyll:
-        return ['jekyll'];
-      case SSGTypes.eleventy:
-        return ['npm', 'npx'];
+  static List<String> getSSGExecutable(SSGTypes ssg,
+      {bool skipCustom = false}) {
+    executables(SSGTypes ssg) {
+      switch (ssg) {
+        case SSGTypes.hugo:
+          return ['hugo'];
+        case SSGTypes.jekyll:
+          return ['jekyll'];
+        case SSGTypes.eleventy:
+          return ['npm', 'npx'];
+      }
+    }
+
+    if (skipCustom) {
+      return executables(ssg);
+    } else {
+      switch (ssg) {
+        case SSGTypes.hugo:
+          if (Preferences.getUseCustomExecutables()[SSGTypes.hugo] == true) {
+            return Preferences.getSSGExecutablesList()[SSGTypes.hugo]!;
+          }
+          break;
+        case SSGTypes.jekyll:
+          if (Preferences.getUseCustomExecutables()[SSGTypes.jekyll] == true) {
+            return Preferences.getSSGExecutablesList()[SSGTypes.jekyll]!;
+          }
+          break;
+        case SSGTypes.eleventy:
+          if (Preferences.getUseCustomExecutables()[SSGTypes.eleventy] ==
+              true) {
+            return Preferences.getSSGExecutablesList()[SSGTypes.eleventy]!;
+          }
+          break;
+      }
+      return executables(ssg);
     }
   }
 }
