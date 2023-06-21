@@ -1,0 +1,212 @@
+
+  # You can use permissions to modify the default permissions granted to the GITHUB_TOKEN, adding or removing access as required, so that you only allow the minimum required access. 
+  # Q: why not use matrix to build for multiple platforms? 
+  # A: We need to wait for each OS build to finish before we can create the release, so we can't run them in parallel.
+
+  # Artifacts allow you to persist data after a job has completed, and share that data with 
+  # another job in the same workflow. 
+  # An artifact is a file or collection of files produced during a workflow run.
+  # You can use the upload-artifact and download-artifact actions to share data between jobs in a workflow. 
+
+  name: Build cross-platform binaries
+
+  on:
+    push:
+      tags:
+        - 'v*.*.*'
+
+  env:
+    FLUTTER_VERSION: 3.7.12
+
+  # permissions:
+  #   contents: read
+
+  jobs:
+
+    job1_linux_build:
+      name: Create Deb and AppImage
+      runs-on: ubuntu-22.04
+      timeout-minutes: 30
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3
+          with:
+            fetch-depth: 0 # Fetch Git history for all tags and branches
+        - name: Setup Flutter
+          uses: subosito/flutter-action@v2
+          with:
+            channel: "stable"
+            flutter-version: ${{ env.FLUTTER_VERSION }}
+            cache: true
+            cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
+            cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
+            architecture: x64 # optional, x64 or arm64
+        - name: Run commands(Debian)
+          run: |
+
+            # Step 1: Display Flutter version
+            flutter --version
+
+            # Step 2: Update system packages
+            sudo apt-get update -y
+
+            # Step 3: Install flutter prerequisites
+            sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev
+            sudo apt-get install fuse libfuse2
+
+            # Load fuse kernel module
+            sudo modprobe -v fuse
+
+            # Add fuse group and user permissions
+            sudo addgroup fuse
+            sudo adduser $USER fuse
+
+            # Step 4: Run Flutter doctor
+            flutter doctor
+
+            # Step 5: Change directory to the 'installers' folder
+            cd ./installers
+
+            # Step 6: Run the 'build-linux.sh' script
+            bash build-linux.sh
+
+          working-directory: ${{ github.workspace }}
+        - name: Upload artifact deb
+          uses: actions/upload-artifact@v3
+          with:
+            name: deb
+            path: |
+              ${{ github.workspace }}/installers/*.deb
+        - name: Upload artifact AppImage
+          uses: actions/upload-artifact@v3
+          with:
+            name: appimage
+            path: |
+              ${{ github.workspace }}/installers/*.AppImage
+
+    job2_windows_build:
+      name: Create Windows exe
+      runs-on: windows-2022
+      timeout-minutes: 30
+      outputs:
+        version_str: ${{ steps.get-version.outputs.version_str }}
+        version_int: ${{ steps.get-version.outputs.version_int }}
+      defaults:
+        run:
+          shell: pwsh
+          working-directory: ${{ github.workspace }}
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        - uses: subosito/flutter-action@v2
+          with:
+            channel: "stable"
+            flutter-version: ${{ env.FLUTTER_VERSION }}
+            cache: true
+        - name: Build Windows
+          run: |
+            flutter doctor
+            flutter build windows
+        - name: Set variables for Buhocms version
+          id: get-version
+          run: |
+
+            # Step 1: Extract the latest git tag
+            $latestTag = git describe --tags --abbrev=0
+
+            # Step 2: Store the tag in a variable BuhocmsVersionStr
+            $BuhocmsVersionStr = $latestTag
+
+            # Step 3: Trim the first character from the left and store it in a variable BuhocmsVersionInt
+            $BuhocmsVersionInt = $BuhocmsVersionStr.Substring(1)
+
+            # Step 4: Export the variables to the PowerShell profile
+            $profilePath = $PROFILE.AllUsersCurrentHost
+            Add-Content -Path $profilePath -Value "`n# Custom variables for InnoSetup"
+            Add-Content -Path $profilePath -Value "Set-Variable -Name BuhocmsVersionStr -Value '$BuhocmsVersionStr' -Scope Global"
+            Add-Content -Path $profilePath -Value "Set-Variable -Name BuhocmsVersionInt -Value $BuhocmsVersionInt -Scope Global"
+
+            # Step 5: List PowerShell profile variables which start with 'Buhocms'
+            Get-Variable -Scope Global | Where-Object { $_.Name -like 'Buhocms*' } | Select-Object Name, Value
+
+            # Step 6: Set the output variable for use in other jobs
+            echo "version_int=$BuhocmsVersionInt" >> $env:GITHUB_OUTPUT
+            echo "version_str=$BuhocmsVersionStr" >> $env:GITHUB_OUTPUT
+            # Print contents of GITHUB_OUTPUT:
+            Get-Content -Path $env:GITHUB_OUTPUT
+
+        - name: Run Inno Setup
+          run: |
+
+            # Step 1: Get the variable values from the profile
+            $BuhocmsVersionStr = $global:BuhocmsVersionStr
+            $BuhocmsVersionInt = $global:BuhocmsVersionInt
+
+            # Step 2: Store InnoSetup script path in a variable
+            $scriptPath = "${{ github.workspace }}/installers/Windows/innosetupscript.iss"
+
+            # Step 3: Build the command line arguments for ISCC.exe
+            $arguments = "/DMyAppVersion=$BuhocmsVersionInt `"$scriptPath`""
+
+            # Step 4: Start InnoSetup with the specified arguments
+            Start-Process -FilePath "iscc" -ArgumentList $arguments -Wait
+ 
+        - name: Upload artifact exe
+          uses: actions/upload-artifact@v3
+          with:
+            name: exe
+            path: |
+              ${{ github.workspace }}/installers/*.exe
+     
+    job3_create_release:
+      name: Create draft release
+      needs: [job1_linux_build, job2_windows_build]
+      runs-on: ubuntu-22.04
+      timeout-minutes: 60
+      env:
+        BuhocmsVersionStr: ${{needs.job2_windows_build.outputs.version_str}}
+        BuhocmsVersionInt: ${{needs.job2_windows_build.outputs.version_int}}
+      steps:
+        - name: Download all workflow run artifacts
+          # You can also download all artifacts in a workflow run by not specifying a name.
+          # If you download all workflow run's artifacts, a directory for each artifact is created using its name.
+          uses: actions/download-artifact@v3
+          with:
+            path: ${{ github.workspace }}/all_installers
+        - name: Print artifact names
+          run: |
+
+            # Step 1: Navigate to the all_installers directory
+            cd /home/runner/work/buhocms/buhocms/all_installers
+
+            # Step 2: List files in the directory
+            ls -la
+
+            # Step 3: Recursively list all files in the directory
+            find . -type f
+
+            # Step 4: Change to the GitHub workspace folder and create release-assets directory
+            cd /home/runner/work/buhocms/buhocms
+            mkdir release-assets
+
+            # Step 5: Store the release assets path in a bash variable
+            release_assets_path=$(pwd)/release-assets
+
+            # Step 6: Move .exe file to the release-assets directory
+            mv /home/runner/work/buhocms/buhocms/all_installers/exe/*.exe "$release_assets_path"
+
+            # Step 7: Move and rename .appimage file
+            mv /home/runner/work/buhocms/buhocms/all_installers/appimage/BuhoCMS-Linux.AppImage "$release_assets_path/BuhoCMS-Linux-${BuhocmsVersionInt}.AppImage"
+
+            # Step 8: Move and rename .deb file
+            mv /home/runner/work/buhocms/buhocms/all_installers/deb/BuhoCMS-Linux.deb "$release_assets_path/BuhoCMS-Linux-${BuhocmsVersionInt}.deb"
+
+            # Step 9: Recursively list all files in the release-assets directory
+            find "$release_assets_path" -type f
+
+        - name: Create Release
+          uses: ncipollo/release-action@v1
+          with:
+            artifacts: "${{ github.workspace }}/release-assets/*.*"
+            draft: true
+            token: ${{ secrets.GH_PAT }}
