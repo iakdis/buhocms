@@ -2,7 +2,7 @@
 
 This is the source code of the website of BuhoCMS ([https://buhocms.org](https://buhocms.org)). It is built with Hugo, the homepage content was edited with BuhoCMS ✨
 
-![Website screenshot](.github/website.png)
+![Website screenshot](website.png)
 
 The website uses [Simple.css](https://simplecss.org/) as the underlying classless CSS framework (see [css/simple.css](static/css/simple.css)), with custom modifications made in the [css/style.css](static/css/style.css).
 
