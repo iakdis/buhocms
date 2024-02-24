@@ -1,0 +1,11 @@
+baseURL = "https://buhocms.org"
+title = "BuhoCMS - A local CMS for static site generators"
+languageCode = "en-us"
+disableKinds = ['taxonomy', 'term']
+
+[params]
+  description = "BuhoCMS is a free and open source local CMS for static site generators"
+  source = "https://github.com/iakmds/buhocms-website"
+  favicon = "img/favicon.ico"
+  version = "0.9.0"
+

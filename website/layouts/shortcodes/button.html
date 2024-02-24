@@ -1,0 +1,5 @@
+<a class="button" 
+href="{{ .Get "link" }}
+{{ if isset .Params "file" }}-{{ .Site.Params.version }}.{{ .Get "file" }}{{ end }}">
+{{ .Get "title" }}
+</a>
