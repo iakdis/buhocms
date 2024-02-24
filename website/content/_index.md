@@ -97,4 +97,4 @@ To install BuhoCMS as a **.deb** package, download the{{< versionlink link="http
 Check out the GitHub repository ([https://github.com/iakmds/buhocms](https://github.com/iakmds/buhocms)) for more information. The README includes a roadmap, information regarding contributing or bug reporting, and the packages used. Feel free to leave a star 🌟 if you enjoy the project!
 
 The code is licensed under the [GNU General Public License v3.0](https://github.com/iakmds/buhocms/blob/main/LICENSE) and available on [GitHub](https://github.com/iakmds/buhocms). 
-The source of this website can be found on [GitHub](https://github.com/iakmds/buhocms-website) too. Its content is licensed under the [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+The source of this website can be found on [GitHub](https://github.com/iakmds/buhocms/tree/main/website) too. Its content is licensed under the [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
